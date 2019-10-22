@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 exports.signup = (req, res) => {
@@ -20,5 +21,20 @@ exports.signup = (req, res) => {
                 return res.status(400).json({error: 'A user with that email is already registered.'});
             }
         }
+    });
+};
+
+exports.signin = (req, res) => {
+    const {email, password} = req.body;
+    User.findOne({email}, (err, user) => {
+        if(err || !user) {
+            return res.status(400).json({error: 'Could not sign user in.'});
+        }
+        if(!bcrypt.compareSync(password, user.password)) {
+            return res.status(401).json({error: 'Email and Password do not match.'});
+        }
+        const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET, {expiresIn: '60m'});
+        const {_id, email, first_name, last_name, role} = user;
+        return res.json({token, user: {_id, email, first_name, last_name, role}});
     });
 };

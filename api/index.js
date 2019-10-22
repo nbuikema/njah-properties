@@ -17,7 +17,7 @@ mongoose.connect(process.env.DATABASE, {
 app.use(bodyParser.json());
 app.use(expressValidator());
 
-app.use('/api', authRoutes);
+app.use('/api/auth', authRoutes);
 
 app.listen(3001, () => {
     console.log('server started on port 3000');
