@@ -52,11 +52,18 @@ exports.verifyToken = (req, res, next) => {
             if(err || !data) {
                 return res.status(403).json({error: 'You do not have access to do this.'});
             } else {
-                res.json({data: data});
+                req.user = data.user;
                 next();
             }
         });
     } else {
         return res.status(403).json({error: 'You do not have access to do this.'});
     }
+};
+
+exports.isAdmin = (req, res, next) => {
+    if(req.user.role === 0) {
+        return res.status(403).json({error: 'You do not have access to do this.'});
+    }
+    next();
 };
