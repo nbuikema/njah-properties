@@ -33,12 +33,30 @@ exports.signin = (req, res) => {
         if(!bcrypt.compareSync(password, user.password)) {
             return res.status(401).json({error: 'Email and Password do not match.'});
         }
-        jwt.sign({_id: user._id}, process.env.JWT_SECRET, {expiresIn: '60m'}, (err, token) => {
+        const {_id, email, first_name, last_name, role} = user;
+        jwt.sign({user: user}, process.env.JWT_SECRET, {expiresIn: '60m'}, (err, token) => {
             if(err || !token) {
                 return res.status(400).json({error: 'Could not sign user in.'});
             }
-            const {_id, email, first_name, last_name, role} = user;
-            return res.json({token, user: {_id, email, first_name, last_name, role}});
+            return res.json({token});
         })
     });
+};
+
+exports.verifyToken = (req, res, next) => {
+    const header = req.headers['authorization'];
+    if(typeof header !== 'undefined') {
+        const bearer = header.split(' ');
+        const token = bearer[1];
+        jwt.verify(token, process.env.JWT_SECRET, (err, data) => {
+            if(err || !data) {
+                return res.status(403).json({error: 'You do not have access to do this.'});
+            } else {
+                res.json({data: data});
+                next();
+            }
+        });
+    } else {
+        return res.status(403).json({error: 'You do not have access to do this.'});
+    }
 };
