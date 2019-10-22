@@ -33,8 +33,12 @@ exports.signin = (req, res) => {
         if(!bcrypt.compareSync(password, user.password)) {
             return res.status(401).json({error: 'Email and Password do not match.'});
         }
-        const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET, {expiresIn: '60m'});
-        const {_id, email, first_name, last_name, role} = user;
-        return res.json({token, user: {_id, email, first_name, last_name, role}});
+        jwt.sign({_id: user._id}, process.env.JWT_SECRET, {expiresIn: '60m'}, (err, token) => {
+            if(err || !token) {
+                return res.status(400).json({error: 'Could not sign user in.'});
+            }
+            const {_id, email, first_name, last_name, role} = user;
+            return res.json({token, user: {_id, email, first_name, last_name, role}});
+        })
     });
 };
