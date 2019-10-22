@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 require('dotenv').config();
+const authRoutes = require('./routes/auth');
 
 const app = express();
 mongoose.connect(process.env.DATABASE, {
@@ -11,10 +13,9 @@ mongoose.connect(process.env.DATABASE, {
 }).then(() => {
     console.log('database connected');
 });
+app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-    res.send('init');
-});
+app.use('/api', authRoutes);
 
 app.listen(3001, () => {
     console.log('server started on port 3000');
