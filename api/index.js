@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const expressValidator = require('express-validator');
 require('dotenv').config();
 const authRoutes = require('./routes/auth');
 
@@ -14,6 +15,7 @@ mongoose.connect(process.env.DATABASE, {
     console.log('database connected');
 });
 app.use(bodyParser.json());
+app.use(expressValidator());
 
 app.use('/api', authRoutes);
 
