@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
+const cors = require('cors');
 require('dotenv').config();
 const authRoutes = require('./routes/auth');
 
@@ -15,6 +16,7 @@ mongoose.connect(process.env.DATABASE, {
 });
 app.use(bodyParser.json());
 app.use(expressValidator());
+app.use(cors());
 
 app.use('/api/auth', authRoutes);
 
