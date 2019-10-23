@@ -43,7 +43,7 @@ exports.signin = (req, res) => {
     });
 };
 
-exports.verifyToken = (req, res, next) => {
+exports.isAuth = (req, res, next) => {
     const header = req.headers['authorization'];
     if(typeof header !== 'undefined') {
         const bearer = header.split(' ');

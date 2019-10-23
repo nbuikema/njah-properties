@@ -42,11 +42,37 @@ export const isAuth = () => {
         return false;
     }
     if(localStorage.getItem('jwt')) {
-        return JSON.parse(localStorage.getItem('jwt')).token;
+        return true;
     } else {
         return false;
     }
 }
+
+export const getToken = () => {
+    return JSON.parse(localStorage.getItem('jwt')).token;
+}
+
+export const signout = next => {
+    if(typeof window !== 'undefined') {
+        localStorage.removeItem('jwt');
+        next();
+        return fetch(`${API}/auth/signout`, {
+            method: 'GET'
+        }).then(response => {
+            
+        }).catch(err => {
+            console.log(err)
+        });
+    }
+};
+
+
+
+
+
+
+
+
 
 export const isAdmin = token => {
     return fetch(`${API}/auth/secret`, {
@@ -61,18 +87,4 @@ export const isAdmin = token => {
     }).catch(err => {
         console.log(err)
     });
-};
-
-export const signout = next => {
-    if(typeof window !== 'undefined') {
-        localStorage.removeItem('jwt');
-        next();
-        return fetch(`${API}/auth/signout`, {
-            method: 'GET'
-        }).then(response => {
-            
-        }).catch(err => {
-            console.log(err)
-        });
-    }
 };

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {isAdmin, isAuth} from './apiAuth';
+import {isAdmin, isAuth, getToken} from './apiAuth';
 
 const Secret = () => {
     const [secret, setSecret] = useState('');
@@ -7,7 +7,7 @@ const Secret = () => {
     const onSubmit = event => {
         event.preventDefault();
         if(isAuth()) {
-            isAdmin(isAuth()).then((data) => {
+            isAdmin(getToken()).then((data) => {
                 setSecret(data);
             });
         }
