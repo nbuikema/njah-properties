@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link, withRouter} from 'react-router-dom';
-import {isAuth, isAdmin, signout} from './auth/apiAuth';
+import {isAuth, signout} from './auth/apiAuth';
 
 const isActive = (history, path) => {
     if(history.location.pathname === path) {
@@ -10,7 +10,6 @@ const isActive = (history, path) => {
 
 const Navbar = ({history}) => (
     <div className='sticky-top'>
-        {console.log(isAuth())}
         <nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
             <div className='container'>
                 <ul className='navbar-nav mr-auto mt-lg-0'>
@@ -30,14 +29,16 @@ const Navbar = ({history}) => (
                                 Properties
                             </Link>
                         </li>
+                    {isAuth() ? (
                         <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
                             <Link className='nav-link' to='/secret' style={isActive(history, '/secret')}>
                                 Secret
                             </Link>
                         </li>
+                    ) : null}
                     </ul>
                     <div className='dropdown-divider'></div>
-                    {isAuth() === false ? (
+                    {!isAuth() ? (
                         <ul className='navbar-nav ml-auto mt-2 mt-lg-0'>
                             <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
                                 <Link className='nav-link' to='/signup' style={isActive(history, '/signup')}>
