@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Redirect} from 'react-router-dom';
 import {signin, authenticate} from './apiAuth';
 
 const Signin = () => {
@@ -43,11 +44,16 @@ const Signin = () => {
             </div>
         </form>
     );
+
+    const successRedirect = () => success ? (
+        <Redirect to='/' />
+    ) : null;
     
     return (
         <div className='container'>
             <h1>Sign In</h1>
             {signinForm()}
+            {successRedirect()}
         </div>
     );
 };

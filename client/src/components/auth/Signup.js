@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {signup} from './apiAuth';
+import {Redirect} from 'react-router-dom';
+import {signup, signin, authenticate} from './apiAuth';
 
 const Signup = () => {
     const [values, setValues] = useState({
@@ -27,15 +28,23 @@ const Signup = () => {
                 if(data.error) {
                     setValues({...values, error: data.error, success: false});
                 } else {
-                    setValues({
-                        ...values,
-                        first_name: '',
-                        last_name: '',
-                        email: '',
-                        password: '',
-                        confirm_password: '',
-                        error: '',
-                        success: true
+                    signin({email, password}).then(data => {
+                        if(data.error) {
+                            setValues({...values, error: data.error, success: false});
+                        } else {
+                            authenticate(data, () => {
+                                setValues({
+                                    ...values,
+                                    first_name: '',
+                                    last_name: '',
+                                    email: '',
+                                    password: '',
+                                    confirm_password: '',
+                                    error: '',
+                                    success: true
+                                });
+                            });
+                        }
                     });
                 }
             });
@@ -76,10 +85,15 @@ const Signup = () => {
         </form>
     );
 
+    const successRedirect = () => success ? (
+        <Redirect to='/' />
+    ) : null;
+
     return (
         <div className='container'>
             <h1>Sign Up</h1>
             {signupForm()}
+            {successRedirect()}
         </div>
     );
 };
