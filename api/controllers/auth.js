@@ -52,6 +52,7 @@ exports.verifyToken = (req, res, next) => {
             if(err || !data) {
                 return res.status(403).json({error: 'You do not have access to do this.'});
             } else {
+                data.user.password = undefined;
                 req.user = data.user;
                 next();
             }
