@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link, withRouter} from 'react-router-dom';
+import {isAuth, signout} from './auth/apiAuth';
 
 const isActive = (history, path) => {
     if(history.location.pathname === path) {
@@ -35,18 +36,28 @@ const Navbar = ({history}) => (
                         </li>
                     </ul>
                     <div className='dropdown-divider'></div>
-                    <ul className='navbar-nav ml-auto mt-2 mt-lg-0'>
-                        <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
-                            <Link className='nav-link' to='/signup' style={isActive(history, '/signup')}>
-                                Sign Up
-                            </Link>
-                        </li>
-                        <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
-                            <Link className='nav-link' to='/signin' style={isActive(history, '/signin')}>
-                                Sign In
-                            </Link>
-                        </li>
-                    </ul>
+                    {isAuth() === false ? (
+                        <ul className='navbar-nav ml-auto mt-2 mt-lg-0'>
+                            <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
+                                <Link className='nav-link' to='/signup' style={isActive(history, '/signup')}>
+                                    Sign Up
+                                </Link>
+                            </li>
+                            <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
+                                <Link className='nav-link' to='/signin' style={isActive(history, '/signin')}>
+                                    Sign In
+                                </Link>
+                            </li>
+                        </ul>
+                    ) : (
+                        <ul className='navbar-nav ml-auto mt-2 mt-lg-0'>
+                            <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
+                                <span className='nav-link' style={{cursor: 'pointer'}} onClick={() => signout(() => {history.push('/');})}>
+                                    Sign Out
+                                </span>
+                            </li>
+                        </ul>
+                    )}
                 </div>
             </div>
         </nav>

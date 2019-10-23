@@ -68,3 +68,8 @@ exports.isAdmin = (req, res, next) => {
     }
     next();
 };
+
+exports.signout = (req, res) => {
+    res.clearCookie('jwt');
+    res.json({message: 'User signed out.'});
+};

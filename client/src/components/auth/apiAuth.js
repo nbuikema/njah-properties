@@ -62,3 +62,17 @@ export const isAdmin = token => {
         console.log(err)
     });
 };
+
+export const signout = next => {
+    if(typeof window !== 'undefined') {
+        localStorage.removeItem('jwt');
+        next();
+        return fetch(`${API}/auth/signout`, {
+            method: 'GET'
+        }).then(response => {
+            
+        }).catch(err => {
+            console.log(err)
+        });
+    }
+};
