@@ -7,8 +7,7 @@ const {signupValidator} = require('../helpers/auth');
 router.post('/signup', signupValidator, signup);
 router.post('/signin', signin);
 router.get('/secret', verifyToken, isAdmin, (req, res) => {
-    console.log(req);
-    res.send('secret route!!');
+    return res.json({data: 'yes'});
 });
 
 module.exports = router;

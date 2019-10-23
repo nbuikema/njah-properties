@@ -28,6 +28,11 @@ const Navbar = ({history}) => (
                                 Properties
                             </Link>
                         </li>
+                        <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
+                            <Link className='nav-link' to='/secret' style={isActive(history, '/secret')}>
+                                Secret
+                            </Link>
+                        </li>
                     </ul>
                     <div className='dropdown-divider'></div>
                     <ul className='navbar-nav ml-auto mt-2 mt-lg-0'>

@@ -36,3 +36,29 @@ export const authenticate = (data, next) => {
         next();
     }
 };
+
+export const isAuth = () => {
+    if(typeof window === 'undefined') {
+        return false;
+    }
+    if(localStorage.getItem('jwt')) {
+        return JSON.parse(localStorage.getItem('jwt')).token;
+    } else {
+        return false;
+    }
+}
+
+export const isAdmin = token => {
+    return fetch(`${API}/auth/secret`, {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    }).then(response => {
+        return response.json();
+    }).catch(err => {
+        console.log(err)
+    });
+};
