@@ -48,10 +48,6 @@ export const isAuth = () => {
     }
 }
 
-export const getToken = () => {
-    return JSON.parse(localStorage.getItem('jwt')).token;
-}
-
 export const signout = next => {
     if(typeof window !== 'undefined') {
         localStorage.removeItem('jwt');
@@ -64,27 +60,4 @@ export const signout = next => {
             console.log(err)
         });
     }
-};
-
-
-
-
-
-
-
-
-
-export const isAdmin = token => {
-    return fetch(`${API}/auth/secret`, {
-        method: 'GET',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`
-        }
-    }).then(response => {
-        return response.json();
-    }).catch(err => {
-        console.log(err)
-    });
 };

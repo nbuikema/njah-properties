@@ -43,7 +43,7 @@ exports.signin = (req, res) => {
     });
 };
 
-exports.isAuth = (req, res, next) => {
+exports.verifyToken = (req, res, next) => {
     const header = req.headers['authorization'];
     if(typeof header !== 'undefined') {
         const bearer = header.split(' ');
@@ -52,9 +52,13 @@ exports.isAuth = (req, res, next) => {
             if(err || !data) {
                 return res.status(403).json({error: 'You do not have access to do this.'});
             } else {
-                data.user.password = undefined;
-                req.user = data.user;
-                next();
+                if(Date.now() >= data.exp * 1000) {
+                    return res.status(403).json({error: 'Your login has expired.'});
+                } else {
+                    data.user.password = undefined;
+                    req.user = data.user;
+                    next();
+                }
             }
         });
     } else {
