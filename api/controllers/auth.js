@@ -34,6 +34,7 @@ exports.signin = (req, res) => {
             return res.status(401).json({error: 'Email and Password do not match.'});
         }
         const {_id, email, first_name, last_name, role} = user;
+        user.password = undefined;
         jwt.sign({user: user}, process.env.JWT_SECRET, {expiresIn: '60m'}, (err, token) => {
             if(err || !token) {
                 return res.status(400).json({error: 'Could not sign user in.'});
@@ -43,7 +44,7 @@ exports.signin = (req, res) => {
     });
 };
 
-exports.verifyToken = (req, res, next) => {
+exports.isAuth = (req, res, next) => {
     const header = req.headers['authorization'];
     if(typeof header !== 'undefined') {
         const bearer = header.split(' ');
@@ -53,9 +54,9 @@ exports.verifyToken = (req, res, next) => {
                 return res.status(403).json({error: 'You do not have access to do this.'});
             } else {
                 if(Date.now() >= data.exp * 1000) {
+                    this.signout();
                     return res.status(403).json({error: 'Your login has expired.'});
                 } else {
-                    data.user.password = undefined;
                     req.user = data.user;
                     next();
                 }
@@ -68,7 +69,7 @@ exports.verifyToken = (req, res, next) => {
 
 exports.isAdmin = (req, res, next) => {
     if(req.user.role === 0) {
-        return res.status(403).json({error: 'You do not have access to do this.'});
+        return res.status(403).json({error: 'You must be an admin to do that.'});
     }
     next();
 };
