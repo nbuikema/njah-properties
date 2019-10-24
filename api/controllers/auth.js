@@ -39,7 +39,7 @@ exports.signin = (req, res) => {
             if(err || !token) {
                 return res.status(400).json({error: 'Could not sign user in.'});
             }
-            return res.json({token});
+            return res.json({token, user: user});
         })
     });
 };
@@ -53,13 +53,8 @@ exports.isAuth = (req, res, next) => {
             if(err || !data) {
                 return res.status(403).json({error: 'You do not have access to do this.'});
             } else {
-                if(Date.now() >= data.exp * 1000) {
-                    this.signout();
-                    return res.status(403).json({error: 'Your login has expired.'});
-                } else {
-                    req.user = data.user;
-                    next();
-                }
+                req.user = data.user;
+                next();
             }
         });
     } else {
