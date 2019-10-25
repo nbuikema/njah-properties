@@ -6,6 +6,7 @@ import UserInfo from './UserInfo';
 
 const UserDashboard = () => {
     const [dashboard, setDashboard] = useState('info');
+    const [sidebar, setSidebar] = useState(true);
     const [user, setUser] = useState({
         first_name: '',
         last_name: '',
@@ -47,9 +48,13 @@ const UserDashboard = () => {
         }
     };
 
+    const toggleSidebar = () => {
+        setSidebar(!sidebar);
+    };
+
     const showDashboard = () => (
         <div>
-            <div className="vertical-nav bg-white" id="sidebar">
+            <div className={`vertical-nav bg-white ${!sidebar && 'active'}`} id="sidebar">
                 <div className="py-4 px-3 mb-4 bg-light">
                     <div className="media d-flex align-items-center">
                     <div className="media-body">
@@ -81,8 +86,8 @@ const UserDashboard = () => {
                     </li>
                 </ul>
             </div>
-            <div className="page-content p-5" id="content">
-                <button id="sidebarCollapse" type="button" className="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i className="fa fa-bars mr-2"></i><small className="font-weight-bold">Toggle</small></button>
+            <div className={`page-content p-5 ${!sidebar && 'active'}`} id="content">
+                <button onClick={toggleSidebar} id="sidebarCollapse" type="button" className="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i className="fa fa-bars mr-2"></i><small className="font-weight-bold">Toggle</small></button>
 
                 {showSection()}
             </div>
