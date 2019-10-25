@@ -25,17 +25,10 @@ const Navbar = ({history}) => (
                 <div className='collapse navbar-collapse' id='navbarToggler'>
                     <ul className='navbar-nav mr-auto mt-2 mt-lg-0'>
                         <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
-                            <Link className='nav-link' to='/properties' style={isActive(history, '/products')}>
+                            <Link className='nav-link' to='/properties' style={isActive(history, '/properties')}>
                                 Properties
                             </Link>
                         </li>
-                    {isAuth() ? (
-                        <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
-                            <Link className='nav-link' to='/secret' style={isActive(history, '/secret')}>
-                                Secret
-                            </Link>
-                        </li>
-                    ) : null}
                     </ul>
                     <div className='dropdown-divider'></div>
                     {!isAuth() ? (
@@ -53,6 +46,13 @@ const Navbar = ({history}) => (
                         </ul>
                     ) : (
                         <ul className='navbar-nav ml-auto mt-2 mt-lg-0'>
+                            {isAuth() ? (
+                                <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
+                                    <Link className='nav-link' to='/dashboard' style={isActive(history, '/dashboard')}>
+                                        Dashboard
+                                    </Link>
+                                </li>
+                            ) : null}
                             <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
                                 <span className='nav-link' style={{cursor: 'pointer'}} onClick={() => signout(() => {history.push('/');})}>
                                     Sign Out

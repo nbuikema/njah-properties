@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Signup from './components/auth/Signup';
 import Signin from './components/auth/Signin';
+import UserDashboard from './components/users/UserDashboard';
 
 const App = () => {
     return (
@@ -16,6 +17,7 @@ const App = () => {
                     <Route path='/' exact component={Home} />
                     <Route path='/signup' exact component={Signup} />
                     <Route path='/signin' exact component={Signin} />
+                    <PrivateRoute path='/dashboard' exact component={UserDashboard} />
                 </Switch>
             </BrowserRouter>
         </div>
