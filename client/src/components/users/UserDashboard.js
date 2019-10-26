@@ -44,8 +44,14 @@ const UserDashboard = () => {
         switch(section) {
             case 'info':
                 return <UserInfo user={user} />;
-            case 'admin':
-                return <div>Admin Page</div>;
+            case 'maintenance':
+                return <div>Request Maintenance</div>;
+            case 'contact':
+                return <div>Contact Us</div>;
+            case 'manageresidents':
+                return <div>Manage Residents</div>;
+            case 'manageproperties':
+                return <div>Manage Properties</div>;
             default: 
                 return <UserInfo user={user} />;
         }
@@ -66,28 +72,55 @@ const UserDashboard = () => {
                     </div>
                     </div>
                 </div>
-
                 <p className="font-weight-bold px-3 small pb-4 mb-0">Main</p>
                 <ul className="nav flex-column bg-white mb-0">
                     <li className="nav-item">
                         <button className="nav-link text-dark font-italic bg-light" onClick={toggleSection('info')}>
                             <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
-                            Info
+                            My Info
                         </button>
                     </li>
                 </ul>
-
-                <br />
-
-                <p className="font-weight-bold px-3 small pb-4 mb-0">Admin</p>
-                <ul className="nav flex-column bg-white mb-0">
-                    <li className="nav-item">
-                        <button className="nav-link text-dark font-italic bg-light" onClick={toggleSection('admin')}>
-                            <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
-                            Manage Properties
-                        </button>
-                    </li>
-                </ul>
+                {role === 0 ? (
+                    <div>
+                        <br />
+                        <p className="font-weight-bold px-3 small pb-4 mb-0">Residents</p>
+                        <ul className="nav flex-column bg-white mb-0">
+                            <li className="nav-item">
+                                <button className="nav-link text-dark font-italic bg-light" onClick={toggleSection('maintenance')}>
+                                    <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                                    Maintenance Request
+                                </button>
+                            </li>
+                            <li className="nav-item">
+                                <button className="nav-link text-dark font-italic bg-light" onClick={toggleSection('contact')}>
+                                    <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                                    Contact Us
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                ) : null}
+                {role === 1 ? (
+                    <div>
+                        <br />
+                        <p className="font-weight-bold px-3 small pb-4 mb-0">Admin</p>
+                        <ul className="nav flex-column bg-white mb-0">
+                            <li className="nav-item">
+                                <button className="nav-link text-dark font-italic bg-light" onClick={toggleSection('manageresidents')}>
+                                    <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                                    Manage Residents
+                                </button>
+                            </li>
+                            <li className="nav-item">
+                                <button className="nav-link text-dark font-italic bg-light" onClick={toggleSection('manageproperties')}>
+                                    <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                                    Manage Properties
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                ) : null}
             </div>
             <div className={`page-content p-5 ${!sidebar && 'active'}`} id="content">
                 <button onClick={toggleSidebar} id="sidebarCollapse" type="button" className="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i className="fa fa-bars mr-2"></i><small className="font-weight-bold">Toggle</small></button>
