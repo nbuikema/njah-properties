@@ -39,7 +39,7 @@ exports.signin = (req, res) => {
             if(err || !token) {
                 return res.status(400).json({error: 'Could not sign user in.'});
             }
-            return res.json({token, user: user});
+            return res.json({token});
         })
     });
 };
