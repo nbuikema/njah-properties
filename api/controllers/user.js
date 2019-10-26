@@ -37,3 +37,16 @@ exports.updateUser = (req, res) => {
         }
     );
 };
+
+exports.deleteUser = (req, res) => {
+    User.findOneAndDelete(
+        {_id: req.selectedUser._id},
+        (err, user) => {
+            if(err) {
+                return res.status(400).json({error: 'User could not be deleted.'});
+            }
+            user.password = undefined;
+            return res.json(`User: "${user._id}" has been deleted.`);
+        }
+    );
+};
