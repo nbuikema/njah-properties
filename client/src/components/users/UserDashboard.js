@@ -5,7 +5,7 @@ import {isAuth} from '../auth/apiAuth';
 import UserInfo from './UserInfo';
 
 const UserDashboard = () => {
-    const [dashboard, setDashboard] = useState('info');
+    const [section, setSection] = useState('info');
     const [sidebar, setSidebar] = useState(true);
     const [user, setUser] = useState({
         first_name: '',
@@ -35,16 +35,19 @@ const UserDashboard = () => {
         getUser();
     }, [getUser]);
 
-    const setSection = section => event => {
+    const toggleSection = selected => event => {
         event.preventDefault();
-        setDashboard(`${section}`);
+        setSection(`${selected}`);
     };
 
     const showSection = () => {
-        if(dashboard === 'info') {
-            return <UserInfo user={user} />
-        } else if(dashboard ==='admin') {
-            return <div>Admin Page</div>
+        switch(section) {
+            case 'info':
+                return <UserInfo user={user} />;
+            case 'admin':
+                return <div>Admin Page</div>;
+            default: 
+                return <UserInfo user={user} />;
         }
     };
 
@@ -67,7 +70,7 @@ const UserDashboard = () => {
                 <p className="font-weight-bold px-3 small pb-4 mb-0">Main</p>
                 <ul className="nav flex-column bg-white mb-0">
                     <li className="nav-item">
-                        <button className="nav-link text-dark font-italic bg-light" onClick={setSection('info')}>
+                        <button className="nav-link text-dark font-italic bg-light" onClick={toggleSection('info')}>
                             <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
                             Info
                         </button>
@@ -79,7 +82,7 @@ const UserDashboard = () => {
                 <p className="font-weight-bold px-3 small pb-4 mb-0">Admin</p>
                 <ul className="nav flex-column bg-white mb-0">
                     <li className="nav-item">
-                        <button className="nav-link text-dark font-italic bg-light" onClick={setSection('admin')}>
+                        <button className="nav-link text-dark font-italic bg-light" onClick={toggleSection('admin')}>
                             <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
                             Manage Properties
                         </button>
