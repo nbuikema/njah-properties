@@ -5,7 +5,7 @@ exports.userById = (req, res, next, id) => {
         if(err || !user) {
             return res.status(400).json({error: 'User was not found.'});
         }
-        req.user = user;
+        req.selectedUser = user;
         next();
     });
 };
@@ -25,7 +25,7 @@ exports.readAllUsers = (req, res) => {
 
 exports.updateUser = (req, res) => {
     User.findOneAndUpdate(
-        {_id: req.user._id},
+        {_id: req.selectedUser._id},
         {$set: req.body},
         {new: true},
         (err, user) => {
