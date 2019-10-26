@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react';
-import {readAllUsers} from './apiUsers';
+import {readAllUsers, updateUser} from './apiUsers';
 import {isAuth} from '../auth/apiAuth';
 
 const ManageResidents = () => {
@@ -68,29 +68,70 @@ const ManageResidents = () => {
         </form>
     );
 
+    const changeUserInfo = selected => event => {
+        setSelectedUser({...selectedUser, [selected]: event.target.value});
+    };
+    
+    const updateUserClick = event => {
+        event.preventDefault();
+        updateUser(token, selectedUser).then(data => {
+            getAllUsers();
+        });
+    }
+
     const showSelectedUserInfo = () => (
-        <div>
-            <h6>User ID</h6>
-            <p>{selectedUser._id}</p>
-            <h6>First Name</h6>
-            <p>{selectedUser.first_name}</p>
-            <h6>Last Name</h6>
-            <p>{selectedUser.last_name}</p>
-            <h6>Email</h6>
-            <p>{selectedUser.email}</p>
-            <h6>Role</h6>
-            <p>{selectedUser.role === 1 && 'Admin'}{selectedUser.role === 0 && 'Resident'}</p>
-            <h6>Joined</h6>
-            <p>{selectedUser.createdAt}</p>
-            <h6>Last Updated</h6>
-            <p>{selectedUser.updatedAt}</p>
-            <button>Update User</button>
-            <button>Remove User</button>
-        </div>
+        <form>
+            <div className="form-group row">
+                <label htmlFor="id" className="col-sm-4 col-form-label">ID</label>
+                <div className="col-sm-8">
+                    <input type="text" readOnly className="form-control" id="id" value={`${selectedUser._id}`} />
+                </div>
+            </div>
+            <div className="form-group row">
+                <label htmlFor="first_name" className="col-sm-4 col-form-label">First Name</label>
+                <div className="col-sm-8">
+                    <input onChange={changeUserInfo('first_name')} type="text" className="form-control" id="first_name" value={`${selectedUser.first_name}`} />
+                </div>
+            </div>
+            <div className="form-group row">
+                <label htmlFor="last_name" className="col-sm-4 col-form-label">Last Name</label>
+                <div className="col-sm-8">
+                    <input onChange={changeUserInfo('last_name')} type="text" className="form-control" id="last_name" value={`${selectedUser.last_name}`} />
+                </div>
+            </div>
+            <div className="form-group row">
+                <label htmlFor="email" className="col-sm-4 col-form-label">Email</label>
+                <div className="col-sm-8">
+                    <input onChange={changeUserInfo('email')} type="email" className="form-control" id="email" value={`${selectedUser.email}`} />
+                </div>
+            </div>
+            <div className="form-group row">
+                <label htmlFor="role" className="col-sm-4 col-form-label">Role</label>
+                <div className="col-sm-8">
+                    <input onChange={changeUserInfo('role')} type="text" className="form-control" id="role" value={`${selectedUser.role}`} />
+                </div>
+            </div>
+            <div className="form-group row">
+                <label htmlFor="createdAt" className="col-sm-4 col-form-label">Registered</label>
+                <div className="col-sm-8">
+                    <input type="text" readOnly className="form-control" id="createdAt" value={`${selectedUser.createdAt}`} />
+                </div>
+            </div>
+            <div className="form-group row">
+                <label htmlFor="updatedAt" className="col-sm-4 col-form-label">Last Updated</label>
+                <div className="col-sm-8">
+                    <input type="text" readOnly className="form-control" id="updatedAt" value={`${selectedUser.updatedAt}`} />
+                </div>
+            </div>
+            <div className='text-center'>
+                <button onClick={updateUserClick} type='submit' className='btn btn-primary'>Update User</button>
+            </div>
+        </form>
     );
 
     return (
         <div>
+            <h1>Manage Users</h1>
             {showAllUsersDropdown()}
             {showSelectedUserInfo()}
         </div>
