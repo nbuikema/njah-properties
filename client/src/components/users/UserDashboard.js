@@ -3,6 +3,7 @@ import {readCurrentUser} from './apiUsers';
 import {isAuth} from '../auth/apiAuth';
 
 import UserInfo from './UserInfo';
+import ManageResidents from './ManageResidents';
 
 const UserDashboard = () => {
     const [section, setSection] = useState('info');
@@ -49,7 +50,7 @@ const UserDashboard = () => {
             case 'contact':
                 return <div>Contact Us</div>;
             case 'manageresidents':
-                return <div>Manage Residents</div>;
+                return <ManageResidents />;
             case 'manageproperties':
                 return <div>Manage Properties</div>;
             default: 
