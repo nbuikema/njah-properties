@@ -33,3 +33,12 @@ exports.createProperty = (req, res) => {
         return res.status(400).json({error: 'Property could not be created.'});
     });
 };
+
+exports.readAllProperties = (req, res) => {
+    Property.find().exec((err, properties) => {
+        if(err) {
+            return res.status(400).json({error: 'Could not find properties.'});
+        }
+        return res.json(properties);
+    });
+};
