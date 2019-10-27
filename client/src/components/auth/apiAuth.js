@@ -1,5 +1,5 @@
 const jwtDecode = require('jwt-decode');
-const API = 'http://localhost:3001/api';
+const API = process.env.REACT_APP_API_URL;
 
 export const signup = user => {
     return fetch(`${API}/auth/signup`, {

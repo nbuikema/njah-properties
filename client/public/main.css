@@ -47,3 +47,13 @@
         width: calc(100% - 17rem);
     }
 }
+
+#map {
+    position: fixed;
+    width: 100%;
+    height: calc(100vh - 60px);
+}
+
+.card {
+    width: 100%;
+}
