@@ -6,6 +6,6 @@ const {createProperty, readAllProperties, readPropertiesWithQuery} = require('..
 
 router.post('/create', createProperty);
 router.get('/read/all', readAllProperties);
-router.post('/read/query', readPropertiesWithQuery);
+router.get('/read/query', readPropertiesWithQuery);
 
 module.exports = router;
