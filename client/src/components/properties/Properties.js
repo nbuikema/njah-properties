@@ -2,9 +2,13 @@ import React, {useState, useEffect, useLayoutEffect} from 'react';
 import {readAllProperties} from './apiProperties';
 import ReactMapGL, {Marker} from 'react-map-gl';
 
+const street = 'mapbox://styles/nbuikema/ck29yonjr2o4i1clek9xxypis';
+const satellite = 'mapbox://styles/nbuikema/ck29ykm355ffd1cqvb26q1fjv';
+
 const Properties = () => {
     const [properties, setProperties] = useState([]);
     const [selected, setSelected] = useState(null);
+    const [mapType, setMapType] = useState(street)
     const [viewport, setViewport] = useState({
         longitude: -97.1331,
         latitude: 33.2148,
@@ -38,14 +42,24 @@ const Properties = () => {
     const changeSelected = id => event => {
         event.preventDefault();
         setSelected(id);
-    }
+    };
+
+    const changeMapType = event => {
+        event.preventDefault();
+        if(mapType === street) {
+            setMapType(satellite);
+        } else {
+            setMapType(street);
+        }
+    };
 
     return (
         <div>
             {useWindowSize()}
             <div className='row'>
                 <div className='col-8 p-0'>
-                    <ReactMapGL {...viewport} mapStyle='mapbox://styles/nbuikema/ck29yonjr2o4i1clek9xxypis' mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_KEY} onViewportChange={viewport => {setViewport(viewport)}}>
+                <button onClick={changeMapType}>{mapType === street ? 'Satellite View' : 'Street View'}</button>
+                    <ReactMapGL {...viewport} mapStyle={mapType} mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_KEY} onViewportChange={viewport => {setViewport(viewport)}}>
                         {!selected && properties.map(property => (
                             <Marker key={property._id} latitude={Number(property.lat)} longitude={Number(property.long)}>
                                 <button className='markerbtn' onClick={changeSelected(`${property._id}`)}>
@@ -67,9 +81,7 @@ const Properties = () => {
                     </ReactMapGL>
                 </div>
                 <div className='scrolly col-4 p-0'>
-                    <div>
-                        <button onClick={changeSelected(null)}>Reset Selected</button>
-                    </div>
+                    <button onClick={changeSelected(null)}>Reset Selected</button>
                     {!selected && properties.map(property => (
                         <div key={property._id} className="card">
                             <div className="card-body">
