@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useLayoutEffect} from 'react';
 import {readAllProperties} from './apiProperties';
 import ReactMapGL, {Marker} from 'react-map-gl';
 
@@ -12,6 +12,18 @@ const Properties = () => {
         height: 'calc(100vh - 60px)',
         zoom: 11
     });
+
+    const useWindowSize = () => {
+        const [size, setSize] = useState([0, 0]);
+        useLayoutEffect(() => {
+            function updateSize() {
+                setSize([window.innerWidth, window.innerHeight]);
+            }
+            window.addEventListener('resize', updateSize);
+            setViewport(viewport);
+            return () => window.removeEventListener('resize', updateSize);
+        }, []);
+    }
 
     const getAllProperties = () => {
         readAllProperties().then(data => {
@@ -30,6 +42,7 @@ const Properties = () => {
 
     return (
         <div>
+            {useWindowSize()}
             <div className='row'>
                 <div className='col-8 p-0'>
                     <ReactMapGL {...viewport} mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_KEY} onViewportChange={viewport => {setViewport(viewport)}}>
