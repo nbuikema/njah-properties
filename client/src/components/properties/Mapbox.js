@@ -18,11 +18,11 @@ const Mapbox = ({properties}) => {
 
     return (
         <Map style="mapbox://styles/mapbox/streets-v8" zoom={zoom} center={center} containerStyle={{position: "fixed", height: "100vh", width: "100%"}}>
-            <Layer type="symbol" id="marker" layout={layoutLayer} images={images}>
+            <Layer type="symbol" id="marker" layout={layoutLayer} images={images} onMouseEnter={() => {console.log('entered')}}>
                 {properties.map((property, i) => {
                     let coordinates = [Number(property.long), Number(property.lat)];
                     return (
-                        <Feature key={i} coordinates={coordinates} />
+                        <Feature key={i} coordinates={coordinates} onClick={() => {console.log(property._id)}} />
                     );
                 })}
             </Layer>
