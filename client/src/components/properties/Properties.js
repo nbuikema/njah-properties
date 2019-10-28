@@ -58,7 +58,8 @@ const Properties = () => {
             {useWindowSize()}
             <div className='row'>
                 <div className='col-8 p-0'>
-                <button onClick={changeMapType}>{mapType === street ? 'Satellite View' : 'Street View'}</button>
+                <button class='map-view' onClick={changeMapType}>{mapType === street ? 'Satellite View' : 'Street View'}</button>
+                <button class='map-reset' onClick={changeSelected(null)}>Reset Selected</button>
                     <ReactMapGL {...viewport} mapStyle={mapType} mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_KEY} onViewportChange={viewport => {setViewport(viewport)}}>
                         {!selected && properties.map(property => (
                             <Marker key={property._id} latitude={Number(property.lat)} longitude={Number(property.long)}>
@@ -81,7 +82,6 @@ const Properties = () => {
                     </ReactMapGL>
                 </div>
                 <div className='scrolly col-4 p-0'>
-                    <button onClick={changeSelected(null)}>Reset Selected</button>
                     {!selected && properties.map(property => (
                         <div key={property._id} className="card">
                             <div className="card-body">
