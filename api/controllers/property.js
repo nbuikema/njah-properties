@@ -45,30 +45,40 @@ exports.readAllProperties = (req, res) => {
 
 exports.readPropertiesWithQuery = (req, res) => {
     let query = {};
+    let sortBy = 'rent';
+    let order = 'desc';
     for(let param in req.query) {
         switch(param) {
             case 'priceMin':
                 if(!query['rent']) {
-                    query['rent'] = {$gte: req.query[param]};
+                    query['rent'] = {$gte: Number(req.query[param])};
                     break; 
                 } else {
-                    query['rent'].$gte = req.query[param];
+                    query['rent'].$gte = Number(req.query[param]);
                     break; 
                 }
             case 'priceMax':
                 if(!query['rent']) {
-                    query['rent'] = {$lte: req.query[param]};
+                    query['rent'] = {$lte: Number(req.query[param])};
                     break; 
                 } else {
-                    query['rent'].$lte = req.query[param];
+                    query['rent'].$lte = Number(req.query[param]);
                     break; 
                 }
+            case 'sortBy':
+                sortBy = req.query[param];
+                break;
+            case 'order':
+                order = req.query[param];
+                break;
             default:
                 return;
         }
     }
 
-    Property.find(query).exec((err, properties) => {
+    console.log(query);
+
+    Property.find(query).sort([[sortBy, order]]).exec((err, properties) => {
         if(err) {
             return res.status(400).json({error: 'Could not find properties.'});
         }
