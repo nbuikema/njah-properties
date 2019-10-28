@@ -31,53 +31,52 @@ const Properties = () => {
     return (
         <div>
             <div className='row'>
-                <div className='col-8 p-0 fixed'>
+                <div className='col-8 p-0'>
                     <ReactMapGL {...viewport} mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_KEY} onViewportChange={viewport => {setViewport(viewport)}}>
-                        {properties.map(property => (
+                        {!selected && properties.map(property => (
                             <Marker key={property._id} latitude={Number(property.lat)} longitude={Number(property.long)}>
-                                <button class='markerbtn' onClick={changeSelected(`${property._id}`)}>
-                                    <div class='marker'></div>
+                                <button className='markerbtn' onClick={changeSelected(`${property._id}`)}>
+                                    <div className='marker'></div>
                                 </button>
                             </Marker>
                         ))}
+                        {selected && properties.map(property => {
+                            if(selected === property._id) {
+                                return (
+                                    <Marker key={property._id} latitude={Number(property.lat)} longitude={Number(property.long)}>
+                                        <button className='markerbtn'>
+                                            <div className='marker'></div>
+                                        </button>
+                                    </Marker>
+                                );
+                            }
+                        })}
                     </ReactMapGL>
                 </div>
-                <div className='col-4 p-0'>
-                    <div className="card">
-                        <img src="..." className="card-img-top" alt="..." />
-                        <div className="card-body">
-                            <h5 className="card-title">Card title</h5>
-                            <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        </div>
+                <div className='scrolly col-4 p-0'>
+                    <div>
+                        <button onClick={changeSelected(null)}>Reset Selected</button>
                     </div>
-                    <div className="card">
-                        <img src="..." className="card-img-top" alt="..." />
-                        <div className="card-body">
-                            <h5 className="card-title">Card title</h5>
-                            <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    {!selected && properties.map(property => (
+                        <div key={property._id} className="card">
+                            <div className="card-body">
+                                <h5 className="card-title">{property.address}</h5>
+                                <p className="card-text">{property.city}, {property.state}, {property.zip}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div className="card">
-                        <img src="..." className="card-img-top" alt="..." />
-                        <div className="card-body">
-                            <h5 className="card-title">Card title</h5>
-                            <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        </div>
-                    </div>
-                    <div className="card">
-                        <img src="..." className="card-img-top" alt="..." />
-                        <div className="card-body">
-                            <h5 className="card-title">Card title</h5>
-                            <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        </div>
-                    </div>
-                    <div className="card">
-                        <img src="..." className="card-img-top" alt="..." />
-                        <div className="card-body">
-                            <h5 className="card-title">Card title</h5>
-                            <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        </div>
-                    </div>
+                    ))}
+                    {selected && properties.map(property => {
+                        if(selected === property._id) {
+                            return (
+                                <div key={property._id} className="card">
+                                    <div className="card-body">
+                                        <h5 className="card-title">{property.address}</h5>
+                                        <p className="card-text">{property.city}, {property.state}, {property.zip}</p>
+                                    </div>
+                                </div>
+                            );
+                        }
+                    })}
                 </div>
             </div>
         </div>

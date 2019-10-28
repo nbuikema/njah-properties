@@ -69,3 +69,8 @@
     width: 20px;
     height: 20px;
 }
+
+.scrolly {
+    max-height: calc(100vh - 60px);
+    overflow-y: scroll;
+}
