@@ -45,7 +45,7 @@ const Properties = () => {
             {useWindowSize()}
             <div className='row'>
                 <div className='col-8 p-0'>
-                    <ReactMapGL {...viewport} mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_KEY} onViewportChange={viewport => {setViewport(viewport)}}>
+                    <ReactMapGL {...viewport} mapStyle='mapbox://styles/nbuikema/ck29yonjr2o4i1clek9xxypis' mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_KEY} onViewportChange={viewport => {setViewport(viewport)}}>
                         {!selected && properties.map(property => (
                             <Marker key={property._id} latitude={Number(property.lat)} longitude={Number(property.long)}>
                                 <button className='markerbtn' onClick={changeSelected(`${property._id}`)}>
