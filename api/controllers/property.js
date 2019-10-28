@@ -42,3 +42,23 @@ exports.readAllProperties = (req, res) => {
         return res.json(properties);
     });
 };
+
+exports.readPropertiesWithQuery = (req, res) => {
+    let sortBy = req.body.sortBy ? req.body.sortBy : 'rent';
+    let order = req.body.order ? req.body.order : 'desc';
+
+    let query = Object.keys(req.query).reduce((mappedQuery, key) => {
+        let param = req.query[key];
+        if(param) {
+            mappedQuery[key] = param;
+        }
+        return mappedQuery;
+    }, {})
+
+    Property.find(query).sort([[sortBy, order]]).exec((err, properties) => {
+        if(err) {
+            return res.status(400).json({error: 'Could not find properties.'});
+        }
+        return res.json(properties);
+    });
+};
