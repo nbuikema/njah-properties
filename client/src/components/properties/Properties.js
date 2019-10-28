@@ -20,9 +20,9 @@ const Properties = () => {
                 setSize([window.innerWidth, window.innerHeight]);
             }
             window.addEventListener('resize', updateSize);
-            setViewport(viewport);
+            setViewport({...viewport, width: '100%', height: 'calc(100vh - 60px)'});
             return () => window.removeEventListener('resize', updateSize);
-        }, []);
+        }, [size]);
     }
 
     const getAllProperties = () => {
