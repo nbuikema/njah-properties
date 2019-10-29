@@ -143,7 +143,6 @@ const ManageResidents = () => {
                 <button onClick={updateUserClick} type='submit' className='btn btn-primary'>Update User</button>
                 <button onClick={deleteUserClick} className='btn btn-danger'>Delete User</button>
             </div>
-            
         </form>
     );
 

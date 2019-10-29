@@ -95,6 +95,7 @@ const Properties = () => {
                         if(selected === property._id) {
                             return (
                                 <div key={property._id} className="card">
+                                    {property.images.length > 0 && <img src={`${property.images[0].url}`} className="card-img-top" />}
                                     <div className="card-body">
                                         <h5 className="card-title">{property.address}</h5>
                                         <p className="card-text">{property.city}, {property.state}, {property.zip}</p>

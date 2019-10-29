@@ -4,6 +4,7 @@ import {isAuth} from '../auth/apiAuth';
 
 import UserInfo from './UserInfo';
 import ManageResidents from './ManageResidents';
+import ManageProperties from './ManageProperties';
 
 const UserDashboard = () => {
     const [section, setSection] = useState('info');
@@ -52,7 +53,7 @@ const UserDashboard = () => {
             case 'manageresidents':
                 return <ManageResidents />;
             case 'manageproperties':
-                return <div>Manage Properties</div>;
+                return <ManageProperties />;
             default: 
                 return <UserInfo user={user} />;
         }

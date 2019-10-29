@@ -61,3 +61,17 @@ export const deleteUser = (token, user) => {
         console.log(err)
     });
 };
+
+export const createProperty = property => {
+    return fetch(`${API}/property/create`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json'
+        },
+        body: property
+    }).then(response => {
+        return response.json();
+    }).catch(err => {
+        console.log(err);
+    });
+};
