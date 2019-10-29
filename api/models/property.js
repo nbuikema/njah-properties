@@ -22,6 +22,9 @@ const propertySchema = new mongoose.Schema(
             trim: true,
             required: true
         },
+        images: {
+            type: Array
+        },
         lat: {
             type: String,
             trim: true,

@@ -8,7 +8,15 @@ const options = {
 const geocoder = NodeGeocoder(options);
 
 exports.createProperty = (req, res) => {
+    const images = [];
+    req.files.forEach(image => {
+        let img = {};
+        img.url = image.url;
+        img.id = image.public_id;
+        images.push(img);
+    });
     const property = new Property(req.body);
+    property.images = images;
     const {address, city, state, zip} = property;
     geocoder.geocode(`${address}, ${city}, ${state}, ${zip}`).then(response => {
         property.lat = response[0].latitude;
