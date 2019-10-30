@@ -7,6 +7,16 @@ const options = {
 };
 const geocoder = NodeGeocoder(options);
 
+exports.propertyById = (req, res, next, id) => {
+    Property.findById(id).exec((err, property) => {
+        if(err || !property) {
+            return res.status(400).json({error: 'Property was not found.'});
+        }
+        req.selectedProperty = property;
+        next();
+    });
+};
+
 exports.createProperty = (req, res) => {
     const images = [];
     req.files.forEach(image => {
@@ -91,5 +101,14 @@ exports.readPropertiesWithQuery = (req, res) => {
             return res.status(400).json({error: 'Could not find properties.'});
         }
         return res.json(properties);
+    });
+};
+
+exports.readProperty = (req, res) => {
+    Property.find({_id: req.selectedProperty._id}).exec((err, property) => {
+        if(err) {
+            return res.status(400).json({error: 'Could not find property.'});
+        }
+        return res.json(property);
     });
 };

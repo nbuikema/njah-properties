@@ -18,10 +18,13 @@ const storage = cloudinaryStorage({
 const parser = multer({ storage: storage });
 
 const {isAuth, isAdmin} = require('../controllers/auth');
-const {createProperty, readAllProperties, readPropertiesWithQuery} = require('../controllers/property');
+const {propertyById, createProperty, readAllProperties, readPropertiesWithQuery, readProperty} = require('../controllers/property');
 
 router.post('/create', parser.array('photos', 12), createProperty);
 router.get('/read/all', readAllProperties);
 router.get('/read/query', readPropertiesWithQuery);
+router.get('/read/:propertyId', readProperty);
+
+router.param('propertyId', propertyById);
 
 module.exports = router;
