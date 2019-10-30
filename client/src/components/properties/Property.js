@@ -16,19 +16,6 @@ const Property = ({match}) => {
 
     const showImages = () => (
         <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
-            <ol className="carousel-indicators">
-                {property.images.map((image, i) => {
-                    return i === 0 ? (
-                        <li key={i} data-target="#carouselExampleIndicators" data-slide-to={i} className="active">
-                            <img src={`${image.url}`} className="d-block w-100" alt="..." />
-                        </li>
-                    ) : (
-                        <li key={i} data-target="#carouselExampleIndicators" data-slide-to={i}>
-                            <img src={`${image.url}`} className="d-block w-100" alt="..." />
-                        </li>
-                    );
-                })}
-            </ol>
             <div className="carousel-inner">
                 {property.images.map((image, i) => {
                     return i === 0 ? (
@@ -50,17 +37,37 @@ const Property = ({match}) => {
                 <span className="carousel-control-next-icon" aria-hidden="true"></span>
                 <span className="sr-only">Next</span>
             </a>
+            <ol className="carousel-indicators">
+                {property.images.map((image, i) => {
+                    return i === 0 ? (
+                        <li key={i} data-target="#carouselExampleIndicators" data-slide-to={i} className="active">
+                            <img src={`${image.url}`} className="d-block w-100" alt="..." />
+                        </li>
+                    ) : (
+                        <li key={i} data-target="#carouselExampleIndicators" data-slide-to={i}>
+                            <img src={`${image.url}`} className="d-block w-100" alt="..." />
+                        </li>
+                    );
+                })}
+            </ol>
         </div>
     );
 
     return (
-        <div>
+        <div className='container'>
+            <br />
             <div className='row'>
                 <div className='col-sm-12 col-md-8'>
                     {property._id && showImages()}
                 </div>
                 <div className='col-sm-12 col-md-4'>
-
+                    <h2>{property.address}</h2>
+                    <h4>{property.city}, {property.state}, {property.zip}</h4>
+                    <h6>Rent: $500</h6>
+                    <h6>Size: 700 Sq Ft</h6>
+                    <h6>Beds: 1</h6>
+                    <h6>Baths: 1</h6>
+                    <h6>Additional Info: This property has a great backyard.</h6>
                 </div>
             </div>
         </div>

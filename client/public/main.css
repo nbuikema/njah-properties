@@ -105,5 +105,17 @@
 }
 
 .carousel-item img {
-    height: calc(100vh - 60px)!important;
+    height: calc(80vh - 60px)!important;
+}
+
+.carousel-indicators {
+    position: relative;
+}
+
+.carousel-indicators li {
+    width: 100px;
+}
+
+.carousel-indicators li img {
+    height: 50px;
 }
