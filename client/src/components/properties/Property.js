@@ -6,7 +6,7 @@ const Property = ({match}) => {
 
     const getProperty = propertyId => {
         readProperty(propertyId).then(data => {
-            setProperty(data);
+            setProperty(data[0]);
         });
     };
 
@@ -14,9 +14,51 @@ const Property = ({match}) => {
         getProperty(match.params.propertyId);
     }, [match.params.propertyId]);
 
+    const showImages = () => (
+        <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
+            <ol className="carousel-indicators">
+                {property.images.map((image, i) => {
+                    return i === 0 ? (
+                        <li data-target="#carouselExampleIndicators" data-slide-to={i} className="active"></li>
+                    ) : (
+                        <li data-target="#carouselExampleIndicators" data-slide-to={i}></li>
+                    );
+                })}
+            </ol>
+            <div className="carousel-inner">
+                {property.images.map((image, i) => {
+                    return i === 0 ? (
+                        <div key={i} className="carousel-item active">
+                            <img src={`${image.url}`} className="d-block w-100" alt="..." />
+                        </div>
+                    ) : (
+                        <div key={i} className="carousel-item">
+                            <img src={`${image.url}`} className="d-block w-100" alt="..." />
+                        </div>
+                    );
+                })}
+            </div>
+            <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span className="sr-only">Previous</span>
+            </a>
+            <a className="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                <span className="sr-only">Next</span>
+            </a>
+        </div>
+    );
+
     return (
         <div>
-            {JSON.stringify(property)}
+            <div className='row'>
+                <div className='col-7'>
+                    {property._id && showImages()}
+                </div>
+                <div className='col-5'>
+                    
+                </div>
+            </div>
         </div>
     );
 }
