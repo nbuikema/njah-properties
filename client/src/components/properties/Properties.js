@@ -1,6 +1,9 @@
 import React, {useState, useEffect, useLayoutEffect} from 'react';
+import {Link} from 'react-router-dom';
 import {readAllProperties} from './apiProperties';
 import ReactMapGL, {Marker} from 'react-map-gl';
+
+import Property from './Property';
 
 const street = 'mapbox://styles/nbuikema/ck29yonjr2o4i1clek9xxypis';
 const satellite = 'mapbox://styles/nbuikema/ck29ykm355ffd1cqvb26q1fjv';
@@ -88,6 +91,7 @@ const Properties = () => {
                             <div className="card-body">
                                 <h5 className="card-title">{property.address}</h5>
                                 <p className="card-text">{property.city}, {property.state}, {property.zip}</p>
+                                <Link className='btn btn-primary' to={`/properties/${property._id}`}>More Info</Link>
                             </div>
                         </div>
                     ))}
