@@ -19,9 +19,13 @@ const Property = ({match}) => {
             <ol className="carousel-indicators">
                 {property.images.map((image, i) => {
                     return i === 0 ? (
-                        <li key={i} data-target="#carouselExampleIndicators" data-slide-to={i} className="active"></li>
+                        <li key={i} data-target="#carouselExampleIndicators" data-slide-to={i} className="active">
+                            <img src={`${image.url}`} className="d-block w-100" alt="..." />
+                        </li>
                     ) : (
-                        <li key={i} data-target="#carouselExampleIndicators" data-slide-to={i}></li>
+                        <li key={i} data-target="#carouselExampleIndicators" data-slide-to={i}>
+                            <img src={`${image.url}`} className="d-block w-100" alt="..." />
+                        </li>
                     );
                 })}
             </ol>
