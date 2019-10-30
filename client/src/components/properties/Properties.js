@@ -3,8 +3,6 @@ import {Link} from 'react-router-dom';
 import {readAllProperties} from './apiProperties';
 import ReactMapGL, {Marker} from 'react-map-gl';
 
-import Property from './Property';
-
 const street = 'mapbox://styles/nbuikema/ck29yonjr2o4i1clek9xxypis';
 const satellite = 'mapbox://styles/nbuikema/ck29ykm355ffd1cqvb26q1fjv';
 
@@ -87,7 +85,7 @@ const Properties = () => {
                 <div className='scrolly col-4 p-0'>
                     {!selected && properties.map(property => (
                         <div key={property._id} className="card">
-                            {property.images.length > 0 && <img src={`${property.images[0].url}`} className="card-img-top" />}
+                            {property.images.length > 0 && <img src={`${property.images[0].url}`} className="card-img-top" alt={`${property.address}`} />}
                             <div className="card-body">
                                 <h5 className="card-title">{property.address}</h5>
                                 <p className="card-text">{property.city}, {property.state}, {property.zip}</p>
@@ -99,7 +97,7 @@ const Properties = () => {
                         if(selected === property._id) {
                             return (
                                 <div key={property._id} className="card">
-                                    {property.images.length > 0 && <img src={`${property.images[0].url}`} className="card-img-top" />}
+                                    {property.images.length > 0 && <img src={`${property.images[0].url}`} className="card-img-top" alt={`${property.address}`} />}
                                     <div className="card-body">
                                         <h5 className="card-title">{property.address}</h5>
                                         <p className="card-text">{property.city}, {property.state}, {property.zip}</p>
