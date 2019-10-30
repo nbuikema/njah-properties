@@ -103,3 +103,7 @@
     right: 0;
     z-index: 1;
 }
+
+.carousel-item img {
+    height: calc(100vh - 60px)!important;
+}

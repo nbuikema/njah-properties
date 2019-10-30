@@ -19,9 +19,9 @@ const Property = ({match}) => {
             <ol className="carousel-indicators">
                 {property.images.map((image, i) => {
                     return i === 0 ? (
-                        <li data-target="#carouselExampleIndicators" data-slide-to={i} className="active"></li>
+                        <li key={i} data-target="#carouselExampleIndicators" data-slide-to={i} className="active"></li>
                     ) : (
-                        <li data-target="#carouselExampleIndicators" data-slide-to={i}></li>
+                        <li key={i} data-target="#carouselExampleIndicators" data-slide-to={i}></li>
                     );
                 })}
             </ol>
@@ -52,11 +52,11 @@ const Property = ({match}) => {
     return (
         <div>
             <div className='row'>
-                <div className='col-7'>
+                <div className='col-sm-12 col-md-8'>
                     {property._id && showImages()}
                 </div>
-                <div className='col-5'>
-                    
+                <div className='col-sm-12 col-md-4'>
+
                 </div>
             </div>
         </div>
