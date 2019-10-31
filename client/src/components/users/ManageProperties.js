@@ -8,16 +8,29 @@ const ManageProperties = () => {
         city: '',
         state: '',
         zip: '',
+        rent: 0,
+        size: 0,
+        beds: 0,
+        baths: 0,
+        info: '',
+        available: true,
         formData: new FormData()
     });
-    const {address, city, state, zip, formData} = newProperty;
+    const {address, city, state, zip, rent, size, beds, baths, info, available, formData} = newProperty;
 
     const changePropertyInfo = selected => event => {
-        const value = selected === 'photos' ? event.target.files[0] : event.target.value;
+        let value = selected === 'photos' ? event.target.files[0] : event.target.value;
         if(selected === 'photos') {
             setImages([...images, value]);
             formData.append(selected, value);
         } else {
+            if(selected === 'available') {
+                if(value === 'true') {
+                    value = true;
+                } else {
+                    value = false;
+                }
+            }
             setNewProperty({...newProperty, [selected]: value});
             formData.set(selected, value);
         }
@@ -65,6 +78,36 @@ const ManageProperties = () => {
                     <input onChange={changePropertyInfo('zip')} type="text" className="form-control" id="zip" value={`${zip}`} />
                 </div>
             </div>
+            <div className="form-group row">
+                <label htmlFor="rent" className="col-sm-4 col-form-label">Rent</label>
+                <div className="col-sm-8">
+                    <input onChange={changePropertyInfo('rent')} type="number" className="form-control" id="rent" value={`${rent}`} />
+                </div>
+            </div>
+            <div className="form-group row">
+                <label htmlFor="size" className="col-sm-4 col-form-label">Size (Sq Ft)</label>
+                <div className="col-sm-8">
+                    <input onChange={changePropertyInfo('size')} type="number" className="form-control" id="size" value={`${size}`} />
+                </div>
+            </div>
+            <div className="form-group row">
+                <label htmlFor="beds" className="col-sm-4 col-form-label">Beds</label>
+                <div className="col-sm-8">
+                    <input onChange={changePropertyInfo('beds')} type="number" className="form-control" id="beds" value={`${beds}`} />
+                </div>
+            </div>
+            <div className="form-group row">
+                <label htmlFor="baths" className="col-sm-4 col-form-label">Baths</label>
+                <div className="col-sm-8">
+                    <input onChange={changePropertyInfo('baths')} type="number" className="form-control" id="baths" value={`${baths}`} />
+                </div>
+            </div>
+            <div className="form-group row">
+                <label htmlFor="info" className="col-sm-4 col-form-label">Additional Info</label>
+                <div className="col-sm-8">
+                    <textarea onChange={changePropertyInfo('info')} className="form-control" id="info" rows='4' value={`${info}`}></textarea>
+                </div>
+            </div>
             {showImageField()}
             {images.length > 0 && showImageField()}
             {images.length > 1 && showImageField()}
@@ -75,6 +118,19 @@ const ManageProperties = () => {
             {images.length > 6 && showImageField()}
             {images.length > 7 && showImageField()}
             {images.length > 8 && showImageField()}
+            <div className="form-group row">
+                <label htmlFor="available" className="col-sm-4 col-form-label">Is this property currently available?</label>
+                <div className="col-sm-8">
+                    <div className="form-check form-check-inline">
+                        <input onChange={changePropertyInfo('available')} className="form-check-input" type="radio" name="available" id="availableyes" value="true" />
+                        <label className="form-check-label" htmlFor="availableyes">Yes</label>
+                    </div>
+                    <div className="form-check form-check-inline">
+                        <input onChange={changePropertyInfo('available')} className="form-check-input" type="radio" name="available" id="availableno" value="false" checked />
+                        <label className="form-check-label" htmlFor="availableno">No</label>
+                    </div>
+                </div>
+            </div>
             <div className='text-center'>
                 <button onClick={addProperty} type='submit' className='btn btn-primary'>Create Property</button>
             </div>

@@ -63,11 +63,14 @@ const Property = ({match}) => {
                 <div className='col-sm-12 col-md-4'>
                     <h2>{property.address}</h2>
                     <h4>{property.city}, {property.state}, {property.zip}</h4>
-                    <h6>Rent: $500</h6>
-                    <h6>Size: 700 Sq Ft</h6>
-                    <h6>Beds: 1</h6>
-                    <h6>Baths: 1</h6>
-                    <h6>Additional Info: This property has a great backyard.</h6>
+                    <hr />
+                    <h6>Rent: ${property.rent}</h6>
+                    <h6>Size: {property.size} Sq Ft</h6>
+                    <h6>Beds: {property.beds}</h6>
+                    <h6>Baths: {property.baths}</h6>
+                    <h6>Additional Info:</h6>
+                    <br />
+                    <h6>{property.info}</h6>
                 </div>
             </div>
         </div>

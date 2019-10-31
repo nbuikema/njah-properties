@@ -34,6 +34,30 @@ const propertySchema = new mongoose.Schema(
             type: String,
             trim: true,
             required: true
+        },
+        rent: {
+            type: Number,
+            required: true
+        },
+        size: {
+            type: Number,
+            required: true
+        },
+        beds: {
+            type: Number,
+            required: true
+        },
+        baths: {
+            type: Number,
+            required: true
+        },
+        info: {
+            type: String,
+            required: true
+        },
+        available: {
+            type: Boolean,
+            required: true
         }
     }, {timestamps: true}
 );
