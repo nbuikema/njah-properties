@@ -69,8 +69,7 @@ const Property = ({match}) => {
                     <h6>Beds: {property.beds}</h6>
                     <h6>Baths: {property.baths}</h6>
                     <h6>Additional Info:</h6>
-                    <br />
-                    <h6>{property.info}</h6>
+                    <p>{property.info}</p>
                 </div>
             </div>
         </div>

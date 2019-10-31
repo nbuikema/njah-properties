@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=ZCOOL+XiaoWei&display=swap');
+
 .navbar {
     height: 60px!important;
 }
@@ -123,4 +125,37 @@
 .row {
     margin-left: 0;
     margin-right: 0;
+}
+
+.home {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("./home.jpg");
+    background-size: cover;
+    background-position-y: 40%;
+    background-attachment: fixed;
+    opacity: 0.5;
+    z-index: -1;
+}
+
+.home-header {
+    font-family: 'ZCOOL XiaoWei', serif;
+    margin-top: calc(25vh - 60px);
+    z-index: 999;
+    color: black;
+    font-size: 7rem;
+    opacity: 1;
+}
+
+.home-header2 {
+    font-size: 4rem;
+    margin-top: 0;
+}
+
+.footer {
+    height: 60px;
+    background-color: black;
 }
