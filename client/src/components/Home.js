@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Footer from './Footer';
-
 const Home = () => (
     <div>
         <div className='home fixed'></div>
@@ -12,9 +10,6 @@ const Home = () => (
             <h2 className='home-header home-header2'>
                 <em>Welcome Home</em>
             </h2>
-        </div>
-        <div className='fixed-bottom'>
-            <Footer />
         </div>
     </div>
 );
