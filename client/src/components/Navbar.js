@@ -10,7 +10,7 @@ const isActive = (history, path) => {
 
 const Navbar = ({history}) => (
     <div className='sticky-top'>
-        <nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
+        <nav className='navbar navbar-expand-lg navbar-light bg-light'>
             <div className='container'>
                 <ul className='navbar-nav mr-auto mt-lg-0 d-block d-lg-none'>
                     <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
