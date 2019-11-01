@@ -103,7 +103,6 @@ const Properties = () => {
                 }
             }
         }
-        console.log(queryString);
         readPropertiesWithQuery(queryString).then(data => {
             if(data.length === 0) {
                 setFilters({
@@ -118,88 +117,108 @@ const Properties = () => {
         });
     };
 
+    const resetFilters = event => {
+        event.preventDefault();
+        setFilters({
+            rentMin: '',
+            rentMax: '',
+            beds: '',
+            baths: '',
+            sort: ''
+        });
+        setFilteredProperties([]);
+    };
+
     return (
         <div>
             {useWindowSize()}
-                <form>
-                    <div className='row'>
-                        <span class="my-auto col-auto">
-                            <h4 class="my-auto">Property Filters</h4>
-                        </span>
-                        <span class="form-group col-auto my-auto">
-                            <select onChange={changeFilters('rentMin')} id="rentMin" name="rentMin">
-                                <option value='' selected={filters.rentMin === ''}>Min Rent</option>
-                                <option value='100'>$100</option>
-                                <option value='200'>$200</option>
-                                <option value='300'>$300</option>
-                                <option value='400'>$400</option>
-                                <option value='500'>$500</option>
-                                <option value='600'>$600</option>
-                                <option value='700'>$700</option>
-                                <option value='800'>$800</option>
-                                <option value='900'>$900</option>
-                                <option value='1000'>$1000</option>
-                                <option value='1100'>$1100</option>
-                                <option value='1200'>$1200</option>
-                                <option value='1300'>$1300</option>
-                                <option value='1400'>$1400</option>
-                                <option value='1500'>$1500</option>
-                            </select>
-                        </span>
-                        <span class="form-group col-auto my-auto">
-                            <select onChange={changeFilters('rentMax')} id="rentMax" name="rentMax">
-                                <option value='' selected={filters.rentMax === ''}>Max Rent</option>
-                                <option value='100'>$100</option>
-                                <option value='200'>$200</option>
-                                <option value='300'>$300</option>
-                                <option value='400'>$400</option>
-                                <option value='500'>$500</option>
-                                <option value='600'>$600</option>
-                                <option value='700'>$700</option>
-                                <option value='800'>$800</option>
-                                <option value='900'>$900</option>
-                                <option value='1000'>$1000</option>
-                                <option value='1100'>$1100</option>
-                                <option value='1200'>$1200</option>
-                                <option value='1300'>$1300</option>
-                                <option value='1400'>$1400</option>
-                                <option value='1500'>$1500</option>
-                            </select>
-                        </span>
-                        <span class="form-group col-auto my-auto">
-                            <select onChange={changeFilters('beds')} id="beds" name="beds">
-                                <option value='' selected={filters.beds === ''}>Beds</option>
-                                <option value='1'>1</option>
-                                <option value='2'>2</option>
-                                <option value='3'>3</option>
-                                <option value='4'>4</option>
-                            </select>
-                        </span>
-                        <span class="form-group col-auto my-auto">
-                            <select onChange={changeFilters('baths')} id="baths" name="baths">
-                                <option value='' selected={filters.baths === ''}>Baths</option>
-                                <option value='1'>1</option>
-                                <option value='2'>2</option>
-                                <option value='3'>3</option>
-                                <option value='4'>4</option>
-                            </select>
-                        </span>
-                        <span class="form-group col-auto my-auto">
-                            <select onChange={changeFilters('sort')} id="sort" name="sort">
-                                <option value='' selected={filters.sort === ''}>Sort By</option>
-                                <option value='rent desc'>Rent (High to Low)</option>
-                                <option value='rent asc'>Rent (Low to High)</option>
-                                <option value='beds desc'>Beds (High to Low)</option>
-                                <option value='beds asc'>Beds (Low to High)</option>
-                            </select>
-                        </span>
-                        <span class="col-auto my-auto">
-                            <button onClick={submitFilters} class="btn btn-primary">Search Properties</button>
-                        </span>
-                    </div>
-                </form>
             <div className='row'>
                 <div className='col-sm-12 col-md-8 p-0 order-2 order-md-1'>
+                <button className="btn btn-primary toggleBtn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Toggle Filters
+                </button>
+                <div className="collapse" id="collapseExample">
+                    <form>
+                        <div>
+                            <div className="col-12 my-2">
+                                <h4>Property Filters</h4>
+                            </div>
+                            <div className="form-group col-12 mb-2">
+                                <select className="form-control" onChange={changeFilters('rentMin')} id="rentMin" name="rentMin">
+                                    <option value='' selected={filters.rentMin === ''}>Min Rent</option>
+                                    <option value='100'>$100</option>
+                                    <option value='200'>$200</option>
+                                    <option value='300'>$300</option>
+                                    <option value='400'>$400</option>
+                                    <option value='500'>$500</option>
+                                    <option value='600'>$600</option>
+                                    <option value='700'>$700</option>
+                                    <option value='800'>$800</option>
+                                    <option value='900'>$900</option>
+                                    <option value='1000'>$1000</option>
+                                    <option value='1100'>$1100</option>
+                                    <option value='1200'>$1200</option>
+                                    <option value='1300'>$1300</option>
+                                    <option value='1400'>$1400</option>
+                                    <option value='1500'>$1500</option>
+                                </select>
+                            </div>
+                            <div className="form-group col-12 mb-2">
+                                <select className="form-control" onChange={changeFilters('rentMax')} id="rentMax" name="rentMax">
+                                    <option value='' selected={filters.rentMax === ''}>Max Rent</option>
+                                    <option value='100'>$100</option>
+                                    <option value='200'>$200</option>
+                                    <option value='300'>$300</option>
+                                    <option value='400'>$400</option>
+                                    <option value='500'>$500</option>
+                                    <option value='600'>$600</option>
+                                    <option value='700'>$700</option>
+                                    <option value='800'>$800</option>
+                                    <option value='900'>$900</option>
+                                    <option value='1000'>$1000</option>
+                                    <option value='1100'>$1100</option>
+                                    <option value='1200'>$1200</option>
+                                    <option value='1300'>$1300</option>
+                                    <option value='1400'>$1400</option>
+                                    <option value='1500'>$1500</option>
+                                </select>
+                            </div>
+                            <div className="form-group col-12 mb-2">
+                                <select className="form-control" onChange={changeFilters('beds')} id="beds" name="beds">
+                                    <option value='' selected={filters.beds === ''}>Beds</option>
+                                    <option value='1'>1</option>
+                                    <option value='2'>2</option>
+                                    <option value='3'>3</option>
+                                    <option value='4'>4</option>
+                                </select>
+                            </div>
+                            <div className="form-group col-12 mb-2">
+                                <select className="form-control" onChange={changeFilters('baths')} id="baths" name="baths">
+                                    <option value='' selected={filters.baths === ''}>Baths</option>
+                                    <option value='1'>1</option>
+                                    <option value='2'>2</option>
+                                    <option value='3'>3</option>
+                                    <option value='4'>4</option>
+                                </select>
+                            </div>
+                            <div className="form-group col-12 mb-2">
+                                <select className="form-control" onChange={changeFilters('sort')} id="sort" name="sort">
+                                    <option value='' selected={filters.sort === ''}>Sort By</option>
+                                    <option value='rent desc'>Rent (High to Low)</option>
+                                    <option value='rent asc'>Rent (Low to High)</option>
+                                    <option value='beds desc'>Beds (High to Low)</option>
+                                    <option value='beds asc'>Beds (Low to High)</option>
+                                </select>
+                            </div>
+                            <div className="col-12 mb-2">
+                                <button onClick={submitFilters} className="btn btn-primary">Search Properties</button>
+                            </div>
+                            <div className="col-12 mb-2">
+                                <button onClick={resetFilters} className="btn btn-primary">Reset Filters</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
                 <button className='btn btn-primary map-view' onClick={changeMapType}>{mapType === street ? 'Satellite View' : 'Street View'}</button>
                 <button className='btn btn-primary map-reset' onClick={changeSelected(null)}>Reset Selected</button>
                     <ReactMapGL {...viewport} mapStyle={mapType} mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_KEY} onViewportChange={viewport => {setViewport(viewport)}}>

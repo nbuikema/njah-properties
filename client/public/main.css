@@ -94,8 +94,8 @@
 
 .map-view {
     position: absolute;
-    top: 0;
-    left: 0;
+    bottom: 20px;
+    right: 0;
     z-index: 1;
 }
 
@@ -158,4 +158,19 @@
 .footer {
     height: 60px;
     background-color: black;
+}
+
+#collapseExample {
+    position: absolute;
+    top: 38px;
+    left: 0;
+    z-index: 1;
+    background-color: white;
+}
+
+.toggleBtn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
 }
