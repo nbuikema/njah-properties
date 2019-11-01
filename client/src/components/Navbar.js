@@ -4,7 +4,7 @@ import {isAuth, signout} from './auth/apiAuth';
 
 const isActive = (history, path) => {
     if(history.location.pathname === path) {
-        return {borderBottom: '2px solid #FFFFFF'};
+        return {borderBottom: '2px solid #000000'};
     }
 }
 
