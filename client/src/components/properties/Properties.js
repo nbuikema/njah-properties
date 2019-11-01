@@ -107,6 +107,9 @@ const Properties = () => {
                                 <h5 className="card-title">{property.address}</h5>
                                 <p className="card-text">{property.city}, {property.state}, {property.zip}</p>
                                 <Link className='btn btn-primary' to={`/properties/${property._id}`}>More Info</Link>
+                                <button className='btn btn-secondary' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
+                                    Show on Map
+                                </button>
                             </div>
                         </div>
                     ))}
@@ -118,6 +121,12 @@ const Properties = () => {
                                     <div className="card-body">
                                         <h5 className="card-title">{property.address}</h5>
                                         <p className="card-text">{property.city}, {property.state}, {property.zip}</p>
+                                        <p className="card-text">Rent: ${property.rent}</p>
+                                        <p className="card-text">Size: {property.size} Sq Ft</p>
+                                        <p className="card-text">Beds: {property.beds}</p>
+                                        <p className="card-text">Baths: {property.baths}</p>
+                                        <p className="card-text">Additional Info: {property.info}</p>
+                                        <Link className='btn btn-primary' to={`/properties/${property._id}`}>More Info</Link>
                                     </div>
                                 </div>
                             );
