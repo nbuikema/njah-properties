@@ -34,6 +34,11 @@ const Navbar = ({history}) => (
                                 Properties
                             </Link>
                         </li>
+                        <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
+                            <Link className='nav-link' to='/contact' style={isActive(history, '/contact')}>
+                                Contact
+                            </Link>
+                        </li>
                     </ul>
                 </div>
                 <ul className='navbar-nav mx-auto mt-lg-0 d-none d-lg-block'>

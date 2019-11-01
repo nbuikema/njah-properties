@@ -4,6 +4,7 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import PrivateRoute from './components/auth/PrivateRoute';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
+import Contact from './components/Contact';
 import Properties from './components/properties/Properties';
 import Property from './components/properties/Property';
 import Signup from './components/auth/Signup';
@@ -17,6 +18,7 @@ const App = () => {
                 <Navbar />
                 <Switch>
                     <Route path='/' exact component={Home} />
+                    <Route path='/contact' exact component={Contact} />
                     <Route path='/properties' exact component={Properties} />
                     <Route path='/properties/:propertyId' exact component={Property} />
                     <Route path='/signup' exact component={Signup} />
