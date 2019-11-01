@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link, withRouter} from 'react-router-dom';
-import {isAuth, signout} from './auth/apiAuth';
+import {isAuth, signout} from '../auth/apiAuth';
 
 const isActive = (history, path) => {
     if(history.location.pathname === path) {

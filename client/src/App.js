@@ -2,9 +2,9 @@ import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
 import PrivateRoute from './components/auth/PrivateRoute';
-import Navbar from './components/Navbar';
-import Home from './components/Home';
-import Contact from './components/Contact';
+import Navbar from './components/core/Navbar';
+import Home from './components/core/Home';
+import Contact from './components/core/Contact';
 import Properties from './components/properties/Properties';
 import Property from './components/properties/Property';
 import Signup from './components/auth/Signup';
