@@ -67,7 +67,7 @@ exports.readPropertiesWithQuery = (req, res) => {
     let order = 'desc';
     for(let param in req.query) {
         switch(param) {
-            case 'priceMin':
+            case 'rentMin':
                 if(!query['rent']) {
                     query['rent'] = {$gte: Number(req.query[param])};
                     break; 
@@ -75,7 +75,7 @@ exports.readPropertiesWithQuery = (req, res) => {
                     query['rent'].$gte = Number(req.query[param]);
                     break; 
                 }
-            case 'priceMax':
+            case 'rentMax':
                 if(!query['rent']) {
                     query['rent'] = {$lte: Number(req.query[param])};
                     break; 

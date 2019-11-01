@@ -27,3 +27,17 @@ export const readProperty = id => {
         console.log(err);
     });
 };
+
+export const readPropertiesWithQuery = query => {
+    return fetch(`${API}/property/read/query?${query}`, {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }).then(response => {
+        return response.json();
+    }).catch(err => {
+        console.log(err);
+    });
+};
