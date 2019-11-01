@@ -129,6 +129,10 @@ const Properties = () => {
         setFilteredProperties([]);
     };
 
+    const zoomMap = direction => event => {
+        direction === 'in' ? setViewport({...viewport, zoom: (viewport.zoom + 1)}) : setViewport({...viewport, zoom: (viewport.zoom - 1)})
+    };
+
     return (
         <div>
             {useWindowSize()}
@@ -221,6 +225,8 @@ const Properties = () => {
                 </div>
                 <button className='btn btn-primary map-view' onClick={changeMapType}>{mapType === street ? 'Satellite View' : 'Street View'}</button>
                 <button className='btn btn-primary map-reset' onClick={changeSelected(null)}>Reset Selected</button>
+                <button className='btn btn-primary map-zoomIn' onClick={zoomMap('in')}>+</button>
+                <button className='btn btn-primary map-zoomOut' onClick={zoomMap('out')}>-</button>
                     <ReactMapGL {...viewport} mapStyle={mapType} mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_KEY} onViewportChange={viewport => {setViewport(viewport)}}>
                         {!selected && filteredProperties.length === 0 && properties.map(property => (
                             <Marker key={property._id} latitude={Number(property.lat)} longitude={Number(property.long)}>
