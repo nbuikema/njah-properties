@@ -40,9 +40,26 @@ const Properties = () => {
         getAllProperties();
     }, []);
 
-    const changeSelected = id => event => {
+    const changeSelected = (id, long, lat) => event => {
         event.preventDefault();
-        setSelected(id);
+        const numLong = Number(long);
+        const numLat = Number(lat);
+        setSelected(id, long, lat);
+        if(id) {
+            setViewport({
+                ...viewport,
+                longitude: numLong,
+                latitude: numLat,
+                zoom: 16
+            });
+        } else {
+            setViewport({
+                ...viewport, 
+                longitude: -97.1331,
+                latitude: 33.2148,
+                zoom: 11
+            });
+        }
     };
 
     const changeMapType = event => {
@@ -59,12 +76,12 @@ const Properties = () => {
             {useWindowSize()}
             <div className='row'>
                 <div className='col-sm-12 col-md-8 p-0 order-2 order-md-1'>
-                <button className='map-view' onClick={changeMapType}>{mapType === street ? 'Satellite View' : 'Street View'}</button>
-                <button className='map-reset' onClick={changeSelected(null)}>Reset Selected</button>
+                <button className='btn btn-primary map-view' onClick={changeMapType}>{mapType === street ? 'Satellite View' : 'Street View'}</button>
+                <button className='btn btn-primary map-reset' onClick={changeSelected(null)}>Reset Selected</button>
                     <ReactMapGL {...viewport} mapStyle={mapType} mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_KEY} onViewportChange={viewport => {setViewport(viewport)}}>
                         {!selected && properties.map(property => (
                             <Marker key={property._id} latitude={Number(property.lat)} longitude={Number(property.long)}>
-                                <button className='markerbtn' onClick={changeSelected(`${property._id}`)}>
+                                <button className='markerbtn' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
                                     <div className='marker'></div>
                                 </button>
                             </Marker>
