@@ -80,9 +80,8 @@ const Properties = () => {
                             <h4 class="my-auto">Property Filters</h4>
                         </span>
                         <span class="form-group col-auto my-auto">
-                            <label class="my-auto" for="inputState">Min Rent&nbsp;</label>
                             <select id="inputState">
-                                <option>0</option>
+                                <option>Min Rent</option>
                                 <option>100</option>
                                 <option>200</option>
                                 <option>300</option>
@@ -101,9 +100,8 @@ const Properties = () => {
                             </select>
                         </span>
                         <span class="form-group col-auto my-auto">
-                            <label class="my-auto" for="inputState">Max Rent&nbsp;</label>
                             <select id="inputState">
-                                <option>0</option>
+                                <option>Max Rent</option>
                                 <option>100</option>
                                 <option>200</option>
                                 <option>300</option>
@@ -122,9 +120,8 @@ const Properties = () => {
                             </select>
                         </span>
                         <span class="form-group col-auto my-auto">
-                            <label class="my-auto" for="inputState">Beds&nbsp;</label>
                             <select id="inputState">
-                                <option>0</option>
+                                <option>Beds</option>
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
@@ -132,9 +129,8 @@ const Properties = () => {
                             </select>
                         </span>
                         <span class="form-group col-auto my-auto">
-                            <label class="my-auto" for="inputState">Baths&nbsp;</label>
                             <select id="inputState">
-                                <option>0</option>
+                                <option>Baths</option>
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
@@ -142,13 +138,8 @@ const Properties = () => {
                             </select>
                         </span>
                         <span class="form-group col-auto my-auto">
-                            <label class="my-auto" for="inputZip">Zip Code&nbsp;</label>
-                            <input type="text" id="inputZip" />
-                        </span>
-                        <span class="form-group col-auto my-auto">
-                            <label class="my-auto" for="inputState">Sort By&nbsp;</label>
                             <select id="inputState">
-                                <option>None</option>
+                                <option>Sort By</option>
                                 <option>Rent (High to Low)</option>
                                 <option>Rent (Low to High)</option>
                                 <option>Beds (High to Low)</option>
