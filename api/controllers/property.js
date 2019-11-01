@@ -83,6 +83,12 @@ exports.readPropertiesWithQuery = (req, res) => {
                     query['rent'].$lte = Number(req.query[param]);
                     break; 
                 }
+            case 'beds':
+                query['beds'] = Number(req.query[param]);
+                break;
+            case 'baths':
+                query['baths'] = Number(req.query[param]);
+                break;
             case 'sortBy':
                 sortBy = req.query[param];
                 break;

@@ -74,6 +74,92 @@ const Properties = () => {
     return (
         <div>
             {useWindowSize()}
+                <form>
+                    <div className='row'>
+                        <span class="my-auto col-auto">
+                            <h4 class="my-auto">Property Filters</h4>
+                        </span>
+                        <span class="form-group col-auto my-auto">
+                            <label class="my-auto" for="inputState">Min Rent&nbsp;</label>
+                            <select id="inputState">
+                                <option>0</option>
+                                <option>100</option>
+                                <option>200</option>
+                                <option>300</option>
+                                <option>400</option>
+                                <option>500</option>
+                                <option>600</option>
+                                <option>700</option>
+                                <option>800</option>
+                                <option>900</option>
+                                <option>1000</option>
+                                <option>1100</option>
+                                <option>1200</option>
+                                <option>1300</option>
+                                <option>1400</option>
+                                <option>1500</option>
+                            </select>
+                        </span>
+                        <span class="form-group col-auto my-auto">
+                            <label class="my-auto" for="inputState">Max Rent&nbsp;</label>
+                            <select id="inputState">
+                                <option>0</option>
+                                <option>100</option>
+                                <option>200</option>
+                                <option>300</option>
+                                <option>400</option>
+                                <option>500</option>
+                                <option>600</option>
+                                <option>700</option>
+                                <option>800</option>
+                                <option>900</option>
+                                <option>1000</option>
+                                <option>1100</option>
+                                <option>1200</option>
+                                <option>1300</option>
+                                <option>1400</option>
+                                <option>1500</option>
+                            </select>
+                        </span>
+                        <span class="form-group col-auto my-auto">
+                            <label class="my-auto" for="inputState">Beds&nbsp;</label>
+                            <select id="inputState">
+                                <option>0</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                        </span>
+                        <span class="form-group col-auto my-auto">
+                            <label class="my-auto" for="inputState">Baths&nbsp;</label>
+                            <select id="inputState">
+                                <option>0</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                        </span>
+                        <span class="form-group col-auto my-auto">
+                            <label class="my-auto" for="inputZip">Zip Code&nbsp;</label>
+                            <input type="text" id="inputZip" />
+                        </span>
+                        <span class="form-group col-auto my-auto">
+                            <label class="my-auto" for="inputState">Sort By&nbsp;</label>
+                            <select id="inputState">
+                                <option>None</option>
+                                <option>Rent (High to Low)</option>
+                                <option>Rent (Low to High)</option>
+                                <option>Beds (High to Low)</option>
+                                <option>Beds (Low to High)</option>
+                            </select>
+                        </span>
+                        <span class="col-auto my-auto">
+                            <button class="btn btn-primary">Search Properties</button>
+                        </span>
+                    </div>
+                </form>
             <div className='row'>
                 <div className='col-sm-12 col-md-8 p-0 order-2 order-md-1'>
                 <button className='btn btn-primary map-view' onClick={changeMapType}>{mapType === street ? 'Satellite View' : 'Street View'}</button>
