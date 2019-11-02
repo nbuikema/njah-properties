@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {createProperty} from './apiUsers';
+import {isAuth} from '../auth/apiAuth';
 
 const ManageProperties = () => {
     const [images, setImages] = useState([]);
@@ -17,6 +18,7 @@ const ManageProperties = () => {
         formData: new FormData()
     });
     const {address, city, state, zip, rent, size, beds, baths, info, available, formData} = newProperty;
+    const {token} = isAuth();
 
     const changePropertyInfo = selected => event => {
         let value = selected === 'photos' ? event.target.files[0] : event.target.value;
@@ -38,7 +40,7 @@ const ManageProperties = () => {
 
     const addProperty = event => {
         event.preventDefault();
-        createProperty(formData).then(data => {
+        createProperty(token, formData).then(data => {
             console.log(data);
         });
     };

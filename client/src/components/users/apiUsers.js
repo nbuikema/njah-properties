@@ -62,11 +62,12 @@ export const deleteUser = (token, user) => {
     });
 };
 
-export const createProperty = property => {
+export const createProperty = (token, property) => {
     return fetch(`${API}/property/create`, {
         method: 'POST',
         headers: {
-            Accept: 'application/json'
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`
         },
         body: property
     }).then(response => {

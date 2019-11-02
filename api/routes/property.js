@@ -20,7 +20,7 @@ const parser = multer({ storage: storage });
 const {isAuth, isAdmin} = require('../controllers/auth');
 const {propertyById, createProperty, readAllProperties, readPropertiesWithQuery, readProperty} = require('../controllers/property');
 
-router.post('/create', parser.array('photos', 12), createProperty);
+router.post('/create', isAuth, isAdmin, parser.array('photos', 12), createProperty);
 router.get('/read/all', readAllProperties);
 router.get('/read/query', readPropertiesWithQuery);
 router.get('/read/:propertyId', readProperty);
