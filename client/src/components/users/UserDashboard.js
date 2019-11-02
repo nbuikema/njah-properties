@@ -106,18 +106,22 @@ const UserDashboard = () => {
                 {role === 1 ? (
                     <div>
                         <br />
-                        <p className="font-weight-bold px-3 small pb-4 mb-0">Admin</p>
+                        <p className="font-weight-bold px-3 small pb-4 mb-0">Property Management</p>
+                        <ul className="nav flex-column bg-white mb-0">
+                            <li className="nav-item">
+                                <button className="nav-link text-dark font-italic bg-light" onClick={toggleSection('manageproperties')}>
+                                    <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                                    Add Property
+                                </button>
+                            </li>
+                        </ul>
+                        <br />
+                        <p className="font-weight-bold px-3 small pb-4 mb-0">Resident Management</p>
                         <ul className="nav flex-column bg-white mb-0">
                             <li className="nav-item">
                                 <button className="nav-link text-dark font-italic bg-light" onClick={toggleSection('manageresidents')}>
                                     <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
-                                    Manage Residents
-                                </button>
-                            </li>
-                            <li className="nav-item">
-                                <button className="nav-link text-dark font-italic bg-light" onClick={toggleSection('manageproperties')}>
-                                    <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
-                                    Manage Properties
+                                    Update/Delete Residents
                                 </button>
                             </li>
                         </ul>
