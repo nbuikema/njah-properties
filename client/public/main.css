@@ -7,7 +7,7 @@
 .vertical-nav {
     min-width: 17rem;
     width: 17rem;
-    height: 100vh;
+    height: calc(100vh - 60px);
     position: fixed;
     top: 60px;
     left: 0;
@@ -85,6 +85,10 @@
     margin-left: -8px;
     margin-top: -8px;
     background-color: #007bff;
+}
+
+#sidebar {
+    overflow-y: scroll;
 }
 
 .scrolly {
@@ -186,4 +190,8 @@
     z-index: 1;
     width: 35px;
     text-align: center;
+}
+
+.dashboard-btn {
+    width: 100%;
 }
