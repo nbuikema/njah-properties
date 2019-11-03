@@ -141,11 +141,11 @@ const Properties = () => {
                 <button className="btn btn-primary toggleBtn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                     Toggle Filters
                 </button>
-                <div className="collapse" id="collapseExample">
+                <div className="collapse show" id="collapseExample">
                     <form>
                         <div>
                             <div className="col-12 my-2">
-                                <h4>Property Filters</h4>
+                                <h4>Filter Properties</h4>
                             </div>
                             <div className="form-group col-12 mb-2">
                                 <select className="form-control" onChange={changeFilters('rentMin')} id="rentMin" name="rentMin">
