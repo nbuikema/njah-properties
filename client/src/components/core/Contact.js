@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {readAllProperties} from '../properties/apiProperties';
+import {sendContact} from './apiContact';
 
 const Contact = () => {
     const [properties, setProperties] = useState([]);
@@ -11,9 +12,10 @@ const Contact = () => {
         reason: '',
         property: '',
         application: '',
-        message: ''
+        message: '',
+        formData: new FormData()
     });
-    const {first_name, last_name, email, phone, reason, property, application, message} = contact;
+    const {first_name, last_name, email, phone, reason, property, application, message, formData} = contact;
 
     const getAllProperties = () => {
         readAllProperties().then(data => {
@@ -26,22 +28,28 @@ const Contact = () => {
     }, []);
 
     const onChange = selected => event => {
+        let value = selected === 'application' ? event.target.files[0] : event.target.value;
         if(selected === 'reason') {
+            formData.set(selected, value);
+            formData.delete('application');
             setContact({
                 ...contact,
                 property: '',
                 message: '',
                 application: '',
-                reason: event.target.value
+                reason: value
             });
         } else {
-            setContact({...contact, [selected]: event.target.value});
+            setContact({...contact, [selected]: value});
+            formData.set(selected, value);
         }
     };
 
     const onSubmit = event => {
         event.preventDefault();
-        console.log(contact);
+        sendContact(formData).then(data => {
+            console.log(data);
+        });
     };
 
     const conditionalInput = () => {
@@ -99,7 +107,7 @@ const Contact = () => {
     }
 
     const contactForm = () => (
-        <form>
+        <form encType="multipart/form-data">
             <div className='row'>
                 <div className='col-sm-12 col-md-6'>
                     <div className='form-group'>

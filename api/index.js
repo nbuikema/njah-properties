@@ -7,6 +7,7 @@ require('dotenv').config();
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const propertyRoutes = require('./routes/property');
+const contactRoutes = require('./routes/contact');
 
 const app = express();
 mongoose.connect(process.env.DATABASE, {
@@ -23,6 +24,7 @@ app.use(cors());
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/property', propertyRoutes);
+app.use('/api/contact', contactRoutes);
 
 app.listen(3001, () => {
     console.log('server started on port 3000');
