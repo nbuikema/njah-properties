@@ -1,8 +1,8 @@
 import React, {useState, useEffect, useCallback} from 'react';
-import {readAllUsers, updateUser, deleteUser} from './apiUsers';
-import {isAuth} from '../auth/apiAuth';
+import {readAllUsers, updateUser, deleteUser} from '../apiUsers';
+import {isAuth} from '../../auth/apiAuth';
 
-const ManageResidents = () => {
+const ManageResidents = ({op}) => {
     const [users, setUsers] = useState([]);
     const [selectedUser, setSelectedUser] = useState({
         _id: '',
@@ -140,15 +140,15 @@ const ManageResidents = () => {
                 </div>
             </div>
             <div className='text-center'>
-                <button onClick={updateUserClick} type='submit' className='btn btn-primary'>Update User</button>
-                <button onClick={deleteUserClick} className='btn btn-danger'>Delete User</button>
+                {op === 'Update' && <button onClick={updateUserClick} type='submit' className='btn btn-primary'>Update User</button>}
+                {op === 'Remove' && <button onClick={deleteUserClick} className='btn btn-danger'>Delete User</button>}
             </div>
         </form>
     );
 
     return (
         <div>
-            <h1>Manage Users</h1>
+            <h1>{op} Residents</h1>
             {showAllUsersDropdown()}
             {showSelectedUserInfo()}
         </div>

@@ -3,8 +3,8 @@ import {readCurrentUser} from './apiUsers';
 import {isAuth} from '../auth/apiAuth';
 
 import UserInfo from './UserInfo';
-import ManageResidents from './ManageResidents';
-import ManageProperties from './ManageProperties';
+import ManageResidents from './admin/ManageResidents';
+import ManageProperties from './admin/ManageProperties';
 
 const UserDashboard = () => {
     const [section, setSection] = useState('info');
@@ -44,16 +44,22 @@ const UserDashboard = () => {
 
     const showSection = () => {
         switch(section) {
-            case 'info':
-                return <UserInfo user={user} />;
             case 'maintenance':
                 return <div>Request Maintenance</div>;
             case 'contact':
                 return <div>Contact Us</div>;
-            case 'manageresidents':
-                return <ManageResidents />;
-            case 'manageproperties':
-                return <ManageProperties />;
+            case 'addProperty':
+                return <ManageProperties op={'Add'} />;
+            case 'updateProperty':
+                return <ManageProperties op={'Update'} />;
+            case 'removeProperty':
+                return <ManageProperties op={'Remove'} />;
+            case 'addResident':
+                return <ManageResidents op={'Add'} />;
+            case 'updateResident':
+                return <ManageResidents op={'Update'} />;
+            case 'removeResident':
+                return <ManageResidents op={'Remove'} />;
             default: 
                 return <UserInfo user={user} />;
         }
@@ -80,6 +86,12 @@ const UserDashboard = () => {
                         <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('info')}>
                             <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
                             My Info
+                        </button>
+                    </li>
+                    <li className="nav-item">
+                        <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('info')}>
+                            <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                            View Messages
                         </button>
                     </li>
                 </ul>
@@ -125,19 +137,19 @@ const UserDashboard = () => {
                         <p className="font-weight-bold px-3 small pb-4 mb-0">Properties</p>
                         <ul className="nav flex-column bg-white mb-0">
                             <li className="nav-item">
-                                <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('manageproperties')}>
+                                <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('addProperty')}>
                                     <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
                                     Add Property
                                 </button>
                             </li>
                             <li className="nav-item">
-                                <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('manageproperties')}>
+                                <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('updateProperty')}>
                                     <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
                                     Update Property
                                 </button>
                             </li>
                             <li className="nav-item">
-                                <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('manageproperties')}>
+                                <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('removeProperty')}>
                                     <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
                                     Remove Property
                                 </button>
@@ -147,19 +159,19 @@ const UserDashboard = () => {
                         <p className="font-weight-bold px-3 small pb-4 mb-0">Residents</p>
                         <ul className="nav flex-column bg-white mb-0">
                             <li className="nav-item">
-                                <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('manageresidents')}>
+                                <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('addResident')}>
                                     <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
                                     Add Resident
                                 </button>
                             </li>
                             <li className="nav-item">
-                                <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('manageresidents')}>
+                                <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('updateResident')}>
                                     <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
                                     Update Resident
                                 </button>
                             </li>
                             <li className="nav-item">
-                                <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('manageresidents')}>
+                                <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('removeResident')}>
                                     <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
                                     Remove Resident
                                 </button>

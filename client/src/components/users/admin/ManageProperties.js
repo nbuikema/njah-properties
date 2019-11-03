@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {createProperty} from './apiUsers';
-import {isAuth} from '../auth/apiAuth';
+import {createProperty} from '../apiUsers';
+import {isAuth} from '../../auth/apiAuth';
 
-const ManageProperties = () => {
+const ManageProperties = ({op}) => {
     const [images, setImages] = useState([]);
     const [newProperty, setNewProperty] = useState({
         address: '',
@@ -153,7 +153,7 @@ const ManageProperties = () => {
 
     return (
         <div>
-            <h1>Manage Properties</h1>
+            <h1>{op} Properties</h1>
             {showSelectedUserInfo()}
         </div>
     );
