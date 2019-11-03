@@ -48,7 +48,17 @@ const Contact = () => {
     const onSubmit = event => {
         event.preventDefault();
         sendContact(formData).then(data => {
-            console.log(data);
+            setContact({
+                first_name: '',
+                last_name: '',
+                email: '',
+                phone: '',
+                reason: '',
+                property: '',
+                application: '',
+                message: '',
+                formData: new FormData()
+            });
         });
     };
 

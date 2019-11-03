@@ -14,7 +14,7 @@ const ManageProperties = () => {
         beds: 0,
         baths: 0,
         info: '',
-        available: true,
+        available: false,
         formData: new FormData()
     });
     const {address, city, state, zip, rent, size, beds, baths, info, available, formData} = newProperty;
@@ -41,7 +41,19 @@ const ManageProperties = () => {
     const addProperty = event => {
         event.preventDefault();
         createProperty(token, formData).then(data => {
-            console.log(data);
+            setNewProperty({
+                address: '',
+                city: '',
+                state: '',
+                zip: '',
+                rent: 0,
+                size: 0,
+                beds: 0,
+                baths: 0,
+                info: '',
+                available: false,
+                formData: new FormData()
+            });
         });
     };
 
