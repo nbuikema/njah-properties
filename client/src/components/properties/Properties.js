@@ -134,7 +134,7 @@ const Properties = () => {
     };
 
     return (
-        <div>
+        <div className='container'>
             {useWindowSize()}
             <div className='row'>
                 <div className='col-sm-12 col-md-8 p-0 order-2 order-md-1'>
