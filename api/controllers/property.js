@@ -63,8 +63,8 @@ exports.readAllProperties = (req, res) => {
 
 exports.readPropertiesWithQuery = (req, res) => {
     let query = {};
-    let sortBy = 'rent';
-    let order = 'desc';
+    let sortBy = '_id';
+    let order = 'asc';
     for(let param in req.query) {
         switch(param) {
             case 'rentMin':

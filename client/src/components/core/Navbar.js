@@ -36,7 +36,7 @@ const Navbar = ({history}) => (
                         </li>
                         <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
                             <Link className='nav-link' to='/contact' style={isActive(history, '/contact')}>
-                                Contact
+                                Contact & Forms
                             </Link>
                         </li>
                     </ul>
