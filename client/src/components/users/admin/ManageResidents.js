@@ -70,7 +70,7 @@ const ManageResidents = ({op}) => {
                 <select value={selectedUser._id} onChange={selectUser} className="form-control" id="selectUser">
                     <option value='-1'>Select User</option>
                     {users.map((user, i) => (
-                        <option value={`${user._id}`} key={i}>{user.last_name}, {user.first_name}</option>
+                        <option value={user._id} key={i}>{user.last_name}, {user.first_name}</option>
                     ))}
                 </select>
             </div>
@@ -150,7 +150,7 @@ const ManageResidents = ({op}) => {
             </div>
             <div className='text-center'>
                 {op === 'Update' && <button onClick={updateUserClick} type='submit' className='btn btn-primary'>Update User</button>}
-                {op === 'Remove' && <button onClick={deleteUserClick} className='btn btn-danger'>Delete User</button>}
+                {op === 'Remove' && <button onClick={deleteUserClick} className='btn btn-danger'>Remove User</button>}
             </div>
         </form>
     );

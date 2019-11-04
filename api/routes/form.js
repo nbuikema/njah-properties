@@ -15,10 +15,13 @@ const storage = cloudinaryStorage({
 });
 const parser = multer({ storage: storage });
 
-const {createForm, readAllForms} = require('../controllers/form');
+const {formById, createForm, readAllForms, deleteForm} = require('../controllers/form');
 const {isAuth, isAdmin} = require('../controllers/auth');
 
 router.post('/create', isAuth, isAdmin, parser.single('file'), createForm);
 router.get('/read/all', readAllForms);
+router.delete('/delete/:formId', isAuth, isAdmin, deleteForm);
+
+router.param('formId', formById);
 
 module.exports = router;

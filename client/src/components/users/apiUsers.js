@@ -120,3 +120,19 @@ export const createForm = (token, data) => {
         console.log(err);
     });
 };
+
+export const deleteForm = (token, form) => {
+    return fetch(`${API}/form/delete/${form._id}`, {
+        method: 'DELETE',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(form)
+    }).then(response => {
+        return response.json();
+    }).catch(err => {
+        console.log(err)
+    });
+};

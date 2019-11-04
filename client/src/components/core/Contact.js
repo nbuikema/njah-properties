@@ -184,8 +184,8 @@ const Contact = () => {
                         <h2>Forms</h2>
                         <br />
                         {forms.map((form, i) => (
-                            <div>
-                                <a key={i} href={`${form.file.url}`} target='_blank' rel="noopener noreferrer">{form.name}</a>
+                            <div key={i}>
+                                <a href={`${form.file.url}`} target='_blank' rel="noopener noreferrer">{form.name}</a>
                             </div>
                         ))}
                     </div>
