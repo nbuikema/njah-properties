@@ -24,3 +24,33 @@ exports.readAllMessages = (req, res) => {
         return res.json(contacts);
     });
 };
+
+exports.readMessagesWithQuery = (req, res) => {
+    let query = {};
+    let sortBy = 'createdAt';
+    let order = 'desc';
+    for(let param in req.query) {
+        switch(param) {
+            case 'reason':
+                query['reason'] = req.query[param];
+                break;
+            case 'sortBy':
+                sortBy = req.query[param];
+                break;
+            case 'order':
+                order = req.query[param];
+                break;
+            default:
+                return;
+        }
+    }
+
+    console.log(query);
+
+    Contact.find(query).sort([[sortBy, order]]).exec((err, contacts) => {
+        if(err) {
+            return res.status(400).json({error: 'Could not find contacts.'});
+        }
+        return res.json(contacts);
+    });
+};

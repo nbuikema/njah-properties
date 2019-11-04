@@ -100,8 +100,6 @@ exports.readPropertiesWithQuery = (req, res) => {
         }
     }
 
-    console.log(query);
-
     Property.find(query).sort([[sortBy, order]]).exec((err, properties) => {
         if(err) {
             return res.status(400).json({error: 'Could not find properties.'});
