@@ -91,3 +91,17 @@ export const readAllMessages = token => {
         console.log(err);
     });
 };
+
+export const readMessagesWithQuery = query => {
+    return fetch(`${API}/contact/read/query?${query}`, {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }).then(response => {
+        return response.json();
+    }).catch(err => {
+        console.log(err);
+    });
+};

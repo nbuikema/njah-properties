@@ -17,7 +17,9 @@ exports.contact = (req, res) => {
 };
 
 exports.readAllMessages = (req, res) => {
-    Contact.find().populate('property', 'address city state zip').exec((err, contacts) => {
+    const sortBy = 'createdAt';
+    const order = 'desc';
+    Contact.find().populate('property', 'address city state zip').sort([[sortBy, order]]).exec((err, contacts) => {
         if(err) {
             return res.status(400).json({error: 'Could not find contacts.'});
         }
@@ -34,6 +36,9 @@ exports.readMessagesWithQuery = (req, res) => {
             case 'reason':
                 query['reason'] = req.query[param];
                 break;
+            case 'type':
+                query['type'] = req.query[param];
+                break;
             case 'sortBy':
                 sortBy = req.query[param];
                 break;
@@ -45,9 +50,7 @@ exports.readMessagesWithQuery = (req, res) => {
         }
     }
 
-    console.log(query);
-
-    Contact.find(query).sort([[sortBy, order]]).exec((err, contacts) => {
+    Contact.find(query).populate('property', 'address city state zip').sort([[sortBy, order]]).exec((err, contacts) => {
         if(err) {
             return res.status(400).json({error: 'Could not find contacts.'});
         }

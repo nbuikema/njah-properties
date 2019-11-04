@@ -47,6 +47,7 @@ const Contact = () => {
 
     const onSubmit = event => {
         event.preventDefault();
+        formData.set('type', 'General');
         sendContact(formData).then(data => {
             setContact({
                 first_name: '',

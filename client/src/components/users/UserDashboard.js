@@ -119,7 +119,7 @@ const UserDashboard = () => {
                             <li className="nav-item">
                                 <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('contact')}>
                                     <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
-                                    Contact Us
+                                    Contact Property Manager
                                 </button>
                             </li>
                         </ul>
