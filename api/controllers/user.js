@@ -15,7 +15,7 @@ exports.readCurrentUser = (req, res) => {
 };
 
 exports.readAllUsers = (req, res) => {
-    User.find().exec((err, users) => {
+    User.find({role: 0}).exec((err, users) => {
         if(err) {
             return res.status(400).json({error: 'Could not find users.'});
         }
