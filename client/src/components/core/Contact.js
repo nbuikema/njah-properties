@@ -69,8 +69,8 @@ const Contact = () => {
                     <div>
                         <div className="form-group">
                             <label htmlFor='property'>Which Property Are You Interested In?</label>
-                            <select onChange={onChange('property')} className="form-control" id="property" name="property">
-                                <option value='' selected={property === ''}>Select One</option>
+                            <select value={property} onChange={onChange('property')} className="form-control" id="property" name="property">
+                                <option value=''>Select One</option>
                                 {properties.map((property, i) => (
                                     <option key={i} value={property._id}>{property.address}, {property.city}, {property.state}, {property.zip}</option>
                                 ))}
@@ -87,8 +87,8 @@ const Contact = () => {
                         <div>
                             <div className="form-group">
                                 <label htmlFor='property'>Which Property Are You Interested In?</label>
-                                <select onChange={onChange('property')} className="form-control" id="property" name="property">
-                                    <option value='' selected={property === ''}>Select One</option>
+                                <select value={property} onChange={onChange('property')} className="form-control" id="property" name="property">
+                                    <option value=''>Select One</option>
                                     {properties.map((property, i) => (
                                         <option key={i} value={property._id}>{property.address}, {property.city}, {property.state}, {property.zip}</option>
                                     ))}

@@ -13,6 +13,15 @@ const ManageResidents = ({op}) => {
         createdAt: '',
         updatedAt: ''
     });
+    const [newUser, setNewUser] = useState({
+        _id: '',
+        first_name: '',
+        last_name: '',
+        email: '',
+        role: '',
+        createdAt: '',
+        updatedAt: ''
+    });
     const {token} = isAuth();
 
     const getAllUsers = useCallback(() => {
@@ -54,11 +63,11 @@ const ManageResidents = ({op}) => {
         });
     };
 
-    const showAllUsersDropdown = () => (
+    const showAllUsersDropdown = () => op !== 'Add' && (
         <form>
             <div className="form-group">
                 <label htmlFor="selectUser">Select User</label>
-                <select onChange={selectUser} className="form-control" id="selectUser">
+                <select value={selectedUser._id} onChange={selectUser} className="form-control" id="selectUser">
                     <option value='-1'>Select User</option>
                     {users.map((user, i) => (
                         <option value={`${user._id}`} key={i}>{user.last_name}, {user.first_name}</option>
@@ -69,7 +78,7 @@ const ManageResidents = ({op}) => {
     );
 
     const changeUserInfo = selected => event => {
-        setSelectedUser({...selectedUser, [selected]: event.target.value});
+        op === 'Add' ? setNewUser({...newUser, [selected]: event.target.value}) : setSelectedUser({...selectedUser, [selected]: event.target.value});
     };
     
     const updateUserClick = event => {
@@ -100,43 +109,43 @@ const ManageResidents = ({op}) => {
             <div className="form-group row">
                 <label htmlFor="id" className="col-sm-4 col-form-label">ID</label>
                 <div className="col-sm-8">
-                    <input type="text" readOnly className="form-control" id="id" value={`${selectedUser._id}`} />
+                    <input type="text" readOnly className="form-control" id="id" value={op === 'Add' ? `${newUser._id}` : `${selectedUser._id}`} />
                 </div>
             </div>
             <div className="form-group row">
                 <label htmlFor="first_name" className="col-sm-4 col-form-label">First Name</label>
                 <div className="col-sm-8">
-                    <input onChange={changeUserInfo('first_name')} type="text" className="form-control" id="first_name" value={`${selectedUser.first_name}`} />
+                    <input onChange={changeUserInfo('first_name')} type="text" className="form-control" id="first_name" value={op === 'Add' ? `${newUser.first_name}` : `${selectedUser.first_name}`} />
                 </div>
             </div>
             <div className="form-group row">
                 <label htmlFor="last_name" className="col-sm-4 col-form-label">Last Name</label>
                 <div className="col-sm-8">
-                    <input onChange={changeUserInfo('last_name')} type="text" className="form-control" id="last_name" value={`${selectedUser.last_name}`} />
+                    <input onChange={changeUserInfo('last_name')} type="text" className="form-control" id="last_name" value={op === 'Add' ? `${newUser.last_name}` : `${selectedUser.last_name}`} />
                 </div>
             </div>
             <div className="form-group row">
                 <label htmlFor="email" className="col-sm-4 col-form-label">Email</label>
                 <div className="col-sm-8">
-                    <input onChange={changeUserInfo('email')} type="email" className="form-control" id="email" value={`${selectedUser.email}`} />
+                    <input onChange={changeUserInfo('email')} type="email" className="form-control" id="email" value={op === 'Add' ? `${newUser.email}` : `${selectedUser.email}`} />
                 </div>
             </div>
             <div className="form-group row">
                 <label htmlFor="role" className="col-sm-4 col-form-label">Role</label>
                 <div className="col-sm-8">
-                    <input onChange={changeUserInfo('role')} type="text" className="form-control" id="role" value={`${selectedUser.role}`} />
+                    <input onChange={changeUserInfo('role')} type="text" className="form-control" id="role" value={op === 'Add' ? `${newUser.role}` : `${selectedUser.role}`} />
                 </div>
             </div>
             <div className="form-group row">
                 <label htmlFor="createdAt" className="col-sm-4 col-form-label">Registered</label>
                 <div className="col-sm-8">
-                    <input type="text" readOnly className="form-control" id="createdAt" value={`${selectedUser.createdAt}`} />
+                    <input type="text" readOnly className="form-control" id="createdAt" value={op === 'Add' ? `${newUser.createdAt}` : `${selectedUser.createdAt}`} />
                 </div>
             </div>
             <div className="form-group row">
                 <label htmlFor="updatedAt" className="col-sm-4 col-form-label">Last Updated</label>
                 <div className="col-sm-8">
-                    <input type="text" readOnly className="form-control" id="updatedAt" value={`${selectedUser.updatedAt}`} />
+                    <input type="text" readOnly className="form-control" id="updatedAt" value={op === 'Add' ? `${newUser.updatedAt}` : `${selectedUser.updatedAt}`} />
                 </div>
             </div>
             <div className='text-center'>

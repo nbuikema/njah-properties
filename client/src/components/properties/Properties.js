@@ -148,8 +148,8 @@ const Properties = () => {
                                 <h4>Filter Properties</h4>
                             </div>
                             <div className="form-group col-12 mb-2">
-                                <select className="form-control" onChange={changeFilters('rentMin')} id="rentMin" name="rentMin">
-                                    <option value='' selected={filters.rentMin === ''}>Min Rent</option>
+                                <select value={filters.rentMin} className="form-control" onChange={changeFilters('rentMin')} id="rentMin" name="rentMin">
+                                    <option value=''>Min Rent</option>
                                     <option value='100'>$100</option>
                                     <option value='200'>$200</option>
                                     <option value='300'>$300</option>
@@ -168,8 +168,8 @@ const Properties = () => {
                                 </select>
                             </div>
                             <div className="form-group col-12 mb-2">
-                                <select className="form-control" onChange={changeFilters('rentMax')} id="rentMax" name="rentMax">
-                                    <option value='' selected={filters.rentMax === ''}>Max Rent</option>
+                                <select value={filters.rentMax} className="form-control" onChange={changeFilters('rentMax')} id="rentMax" name="rentMax">
+                                    <option value=''>Max Rent</option>
                                     <option value='100'>$100</option>
                                     <option value='200'>$200</option>
                                     <option value='300'>$300</option>
@@ -188,8 +188,8 @@ const Properties = () => {
                                 </select>
                             </div>
                             <div className="form-group col-12 mb-2">
-                                <select className="form-control" onChange={changeFilters('beds')} id="beds" name="beds">
-                                    <option value='' selected={filters.beds === ''}>Beds</option>
+                                <select value={filters.beds} className="form-control" onChange={changeFilters('beds')} id="beds" name="beds">
+                                    <option value=''>Beds</option>
                                     <option value='1'>1</option>
                                     <option value='2'>2</option>
                                     <option value='3'>3</option>
@@ -197,8 +197,8 @@ const Properties = () => {
                                 </select>
                             </div>
                             <div className="form-group col-12 mb-2">
-                                <select className="form-control" onChange={changeFilters('baths')} id="baths" name="baths">
-                                    <option value='' selected={filters.baths === ''}>Baths</option>
+                                <select value={filters.baths} className="form-control" onChange={changeFilters('baths')} id="baths" name="baths">
+                                    <option value=''>Baths</option>
                                     <option value='1'>1</option>
                                     <option value='2'>2</option>
                                     <option value='3'>3</option>
@@ -206,8 +206,8 @@ const Properties = () => {
                                 </select>
                             </div>
                             <div className="form-group col-12 mb-2">
-                                <select className="form-control" onChange={changeFilters('sort')} id="sort" name="sort">
-                                    <option value='' selected={filters.sort === ''}>Sort By</option>
+                                <select value={filters.sort} className="form-control" onChange={changeFilters('sort')} id="sort" name="sort">
+                                    <option value=''>Sort By</option>
                                     <option value='rent desc'>Rent (High to Low)</option>
                                     <option value='rent asc'>Rent (Low to High)</option>
                                     <option value='beds desc'>Beds (High to Low)</option>
