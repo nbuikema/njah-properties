@@ -71,55 +71,55 @@ const ManageProperties = ({op}) => {
             <div className="form-group row">
                 <label htmlFor="address" className="col-sm-4 col-form-label">Address</label>
                 <div className="col-sm-8">
-                    <input onChange={changePropertyInfo('address')} type="text" className="form-control" id="first_name" value={`${address}`} />
+                    <input onChange={changePropertyInfo('address')} type="text" className="form-control" id="first_name" value={address} />
                 </div>
             </div>
             <div className="form-group row">
                 <label htmlFor="city" className="col-sm-4 col-form-label">City</label>
                 <div className="col-sm-8">
-                    <input onChange={changePropertyInfo('city')} type="text" className="form-control" id="city" value={`${city}`} />
+                    <input onChange={changePropertyInfo('city')} type="text" className="form-control" id="city" value={city} />
                 </div>
             </div>
             <div className="form-group row">
                 <label htmlFor="state" className="col-sm-4 col-form-label">State</label>
                 <div className="col-sm-8">
-                    <input onChange={changePropertyInfo('state')} type="text" className="form-control" id="state" value={`${state}`} />
+                    <input onChange={changePropertyInfo('state')} type="text" className="form-control" id="state" value={state} />
                 </div>
             </div>
             <div className="form-group row">
                 <label htmlFor="zip" className="col-sm-4 col-form-label">Zip</label>
                 <div className="col-sm-8">
-                    <input onChange={changePropertyInfo('zip')} type="text" className="form-control" id="zip" value={`${zip}`} />
+                    <input onChange={changePropertyInfo('zip')} type="text" className="form-control" id="zip" value={zip} />
                 </div>
             </div>
             <div className="form-group row">
                 <label htmlFor="rent" className="col-sm-4 col-form-label">Rent</label>
                 <div className="col-sm-8">
-                    <input onChange={changePropertyInfo('rent')} type="number" className="form-control" id="rent" value={`${rent}`} />
+                    <input onChange={changePropertyInfo('rent')} type="number" className="form-control" id="rent" value={rent} />
                 </div>
             </div>
             <div className="form-group row">
                 <label htmlFor="size" className="col-sm-4 col-form-label">Size (Sq Ft)</label>
                 <div className="col-sm-8">
-                    <input onChange={changePropertyInfo('size')} type="number" className="form-control" id="size" value={`${size}`} />
+                    <input onChange={changePropertyInfo('size')} type="number" className="form-control" id="size" value={size} />
                 </div>
             </div>
             <div className="form-group row">
                 <label htmlFor="beds" className="col-sm-4 col-form-label">Beds</label>
                 <div className="col-sm-8">
-                    <input onChange={changePropertyInfo('beds')} type="number" className="form-control" id="beds" value={`${beds}`} />
+                    <input onChange={changePropertyInfo('beds')} type="number" className="form-control" id="beds" value={beds} />
                 </div>
             </div>
             <div className="form-group row">
                 <label htmlFor="baths" className="col-sm-4 col-form-label">Baths</label>
                 <div className="col-sm-8">
-                    <input onChange={changePropertyInfo('baths')} type="number" className="form-control" id="baths" value={`${baths}`} />
+                    <input onChange={changePropertyInfo('baths')} type="number" className="form-control" id="baths" value={baths} />
                 </div>
             </div>
             <div className="form-group row">
                 <label htmlFor="info" className="col-sm-4 col-form-label">Additional Info</label>
                 <div className="col-sm-8">
-                    <textarea onChange={changePropertyInfo('info')} className="form-control" id="info" rows='4' value={`${info}`}></textarea>
+                    <textarea onChange={changePropertyInfo('info')} className="form-control" id="info" rows='4' value={info}></textarea>
                 </div>
             </div>
             {showImageField()}

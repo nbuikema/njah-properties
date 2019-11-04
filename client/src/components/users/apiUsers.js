@@ -105,3 +105,18 @@ export const readMessagesWithQuery = query => {
         console.log(err);
     });
 };
+
+export const createForm = (token, data) => {
+    return fetch(`${API}/form/create`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`
+        },
+        body: data
+    }).then(response => {
+        return response.json();
+    }).catch(err => {
+        console.log(err);
+    });
+};
