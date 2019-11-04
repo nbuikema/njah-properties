@@ -13,3 +13,17 @@ export const sendContact = (data) => {
         console.log(err);
     });
 };
+
+export const readAllForms = () => {
+    return fetch(`${API}/form/read/all`, {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }).then(response => {
+        return response.json();
+    }).catch(err => {
+        console.log(err);
+    });
+};

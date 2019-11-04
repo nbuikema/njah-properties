@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {readAllProperties} from '../properties/apiProperties';
-import {sendContact} from './apiContact';
+import {sendContact, readAllForms} from './apiContact';
 
 const Contact = () => {
+    const [forms, setForms] = useState([]);
     const [properties, setProperties] = useState([]);
     const [contact, setContact] = useState({
         first_name: '',
@@ -23,8 +24,15 @@ const Contact = () => {
         });
     };
 
+    const getAllForms = () => {
+        readAllForms().then(data => {
+            setForms(data);
+        });
+    };
+
     useEffect(() => {
         getAllProperties();
+        getAllForms();
     }, []);
 
     const onChange = selected => event => {
@@ -175,7 +183,11 @@ const Contact = () => {
                     <div>
                         <h2>Forms</h2>
                         <br />
-                        <a href=''>Application</a>
+                        {forms.map((form, i) => (
+                            <div>
+                                <a key={i} href={`${form.file.url}`} target='_blank' rel="noopener noreferrer">{form.name}</a>
+                            </div>
+                        ))}
                     </div>
                     <br />
                     <hr />
