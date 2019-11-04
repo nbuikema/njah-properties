@@ -134,9 +134,9 @@ const Properties = () => {
     };
 
     return (
-        <div className='container'>
+        <div>
             {useWindowSize()}
-            <div className='row'>
+            <div className='row reset-margin'>
                 <div className='col-sm-12 col-md-8 p-0 order-2 order-md-1'>
                 <button className="btn btn-primary toggleBtn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                     Toggle Filters

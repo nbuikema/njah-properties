@@ -195,3 +195,8 @@
 .dashboard-btn {
     width: 100%;
 }
+
+.reset-margin {
+    margin-left: 0!important;
+    margin-right: 0!important;
+}

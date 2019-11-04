@@ -3,8 +3,12 @@ import {readCurrentUser} from './apiUsers';
 import {isAuth} from '../auth/apiAuth';
 
 import UserInfo from './UserInfo';
+import ManageForms from './admin/ManageForms';
 import ManageResidents from './admin/ManageResidents';
 import ManageProperties from './admin/ManageProperties';
+import Messages from './Messages';
+import ResidentContact from './resident/ResidentContact';
+import Maintenance from './resident/Maintenance';
 
 const UserDashboard = () => {
     const [section, setSection] = useState('info');
@@ -45,9 +49,15 @@ const UserDashboard = () => {
     const showSection = () => {
         switch(section) {
             case 'maintenance':
-                return <div>Request Maintenance</div>;
+                return <Maintenance />;
             case 'contact':
-                return <div>Contact Us</div>;
+                return <ResidentContact />;
+            case 'messages':
+                return <Messages role={role} />;
+            case 'addForm':
+                return <ManageForms op={'Add'} />;
+            case 'removeForm':
+                return <ManageForms op={'Remove'} />;
             case 'addProperty':
                 return <ManageProperties op={'Add'} />;
             case 'updateProperty':
@@ -89,7 +99,7 @@ const UserDashboard = () => {
                         </button>
                     </li>
                     <li className="nav-item">
-                        <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('info')}>
+                        <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('messages')}>
                             <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
                             View Messages
                         </button>
@@ -121,13 +131,13 @@ const UserDashboard = () => {
                         <p className="font-weight-bold px-3 small pb-4 mb-0">Forms</p>
                         <ul className="nav flex-column bg-white mb-0">
                             <li className="nav-item">
-                                <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('manageproperties')}>
+                                <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('addForm')}>
                                     <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
                                     Add Forms
                                 </button>
                             </li>
                             <li className="nav-item">
-                                <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('manageproperties')}>
+                                <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('removeForm')}>
                                     <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
                                     Remove Forms
                                 </button>
@@ -180,10 +190,11 @@ const UserDashboard = () => {
                     </div>
                 ) : null}
             </div>
-            <div className={`page-content p-5 ${!sidebar && 'active'}`} id="content">
+            <div className={`page-content px-3 pt-3 ${!sidebar && 'active'}`} id="content">
                 <button onClick={toggleSidebar} id="sidebarCollapse" type="button" className="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i className="fa fa-bars mr-2"></i><small className="font-weight-bold">Toggle</small></button>
-
-                {showSection()}
+                <div className='pl-3'>
+                    {showSection()}
+                </div>
             </div>
         </div>
     );
