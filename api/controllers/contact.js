@@ -15,3 +15,12 @@ exports.contact = (req, res) => {
         return res.json({data});
     });
 };
+
+exports.readAllMessages = (req, res) => {
+    Contact.find().populate('property', 'address city state zip').exec((err, contacts) => {
+        if(err) {
+            return res.status(400).json({error: 'Could not find contacts.'});
+        }
+        return res.json(contacts);
+    });
+};
