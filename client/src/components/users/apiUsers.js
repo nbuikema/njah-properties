@@ -136,3 +136,19 @@ export const deleteForm = (token, form) => {
         console.log(err)
     });
 };
+
+export const deleteProperty = (token, property) => {
+    return fetch(`${API}/property/delete/${property._id}`, {
+        method: 'DELETE',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(property)
+    }).then(response => {
+        return response.json();
+    }).catch(err => {
+        console.log(err)
+    });
+};

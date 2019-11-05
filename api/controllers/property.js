@@ -1,5 +1,12 @@
+const cloudinary = require("cloudinary");
 const NodeGeocoder = require('node-geocoder');
 const Property = require('../models/property');
+
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.CLOUD_API_KEY,
+    api_secret: process.env.CLOUD_API_SECRET
+});
 
 const options = {
     provider: 'mapquest',
@@ -115,4 +122,24 @@ exports.readProperty = (req, res) => {
         }
         return res.json(property);
     });
+};
+
+exports.deleteProperty = (req, res) => {
+    req.selectedProperty.images.map(image => {
+        cloudinary.v2.uploader.destroy(`${image.id}`, function(error, result) {
+            if(error) {
+                return res.status(400).json({error: 'Property could not be deleted.'});
+            }
+        });
+    });
+    Property.findOneAndDelete(
+        {_id: req.selectedProperty._id},
+        (err, property) => {
+            if(err) {
+                return res.status(400).json({error: 'Property could not be deleted.'});
+            } else {
+                return res.json({message: 'Property successfully deleted.'});
+            }
+        }
+    );
 };
