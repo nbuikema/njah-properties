@@ -26,14 +26,14 @@ exports.signup = (req, res) => {
 
 exports.signin = (req, res) => {
     const {email, password} = req.body;
-    User.findOne({email}, (err, user) => {
+    User.findOne({email}).populate('property', 'address city state zip rent size beds baths').exec((err, user) => {
         if(err || !user) {
             return res.status(400).json({error: 'Could not sign user in.'});
         }
         if(!bcrypt.compareSync(password, user.password)) {
             return res.status(401).json({error: 'Email and Password do not match.'});
         }
-        const {_id, email, first_name, last_name, role} = user;
+        const {_id, email, first_name, last_name, role, property} = user;
         user.password = undefined;
         jwt.sign({user: user}, process.env.JWT_SECRET, {expiresIn: '60m'}, (err, token) => {
             if(err || !token) {

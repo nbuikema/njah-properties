@@ -18,6 +18,7 @@ const UserDashboard = () => {
         last_name: '',
         email: '',
         role: '',
+        property: {},
         createdAt: '',
         updatedAt: ''
     });
@@ -31,6 +32,7 @@ const UserDashboard = () => {
                 last_name: data.user.last_name,
                 email: data.user.email,
                 role: data.user.role,
+                property: data.user.property,
                 createdAt: data.user.createdAt,
                 updatedAt: data.user.updatedAt
             });
