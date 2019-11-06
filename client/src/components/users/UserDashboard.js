@@ -51,9 +51,9 @@ const UserDashboard = () => {
     const showSection = () => {
         switch(section) {
             case 'maintenance':
-                return <Maintenance />;
+                return <Maintenance user={user} />;
             case 'contact':
-                return <ResidentContact />;
+                return <ResidentContact user={user} />;
             case 'messages':
                 return <Messages role={role} />;
             case 'addForm':

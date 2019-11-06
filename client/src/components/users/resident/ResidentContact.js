@@ -1,39 +1,20 @@
-import React, {useState, useEffect} from 'react';
-import {readAllProperties} from '../../properties/apiProperties';
-import {sendContact, readAllForms} from '../../core/apiContact';
+import React, {useState} from 'react';
+import {sendContact} from '../../core/apiContact';
 
-const ResidentContact = () => {
+const ResidentContact = ({user}) => {
     const [forms, setForms] = useState([]);
     const [properties, setProperties] = useState([]);
     const [contact, setContact] = useState({
-        first_name: '',
-        last_name: '',
-        email: '',
-        phone: '',
+        first_name: user.first_name,
+        last_name: user.last_name,
+        email: user.email,
+        property: user.property,
         reason: '',
-        property: '',
         application: '',
         message: '',
         formData: new FormData()
     });
     const {first_name, last_name, email, phone, reason, property, application, message, formData} = contact;
-
-    const getAllProperties = () => {
-        readAllProperties().then(data => {
-            setProperties(data);
-        });
-    };
-
-    const getAllForms = () => {
-        readAllForms().then(data => {
-            setForms(data);
-        });
-    };
-
-    useEffect(() => {
-        getAllProperties();
-        getAllForms();
-    }, []);
 
     const onChange = selected => event => {
         let value = selected === 'application' ? event.target.files[0] : event.target.value;
@@ -128,26 +109,6 @@ const ResidentContact = () => {
     const contactForm = () => (
         <form encType="multipart/form-data">
             <div className='row'>
-                <div className='col-sm-12 col-md-6'>
-                    <div className='form-group'>
-                        <label htmlFor='first_name'>First Name</label>
-                        <input onChange={onChange('first_name')} value={first_name} type='text' className='form-control' id='first_name' aria-describedby='firstName' />
-                    </div>
-                </div>
-                <div className='col-sm-12 col-md-6'>
-                    <div className='form-group'>
-                        <label htmlFor='last_name'>Last Name</label>
-                        <input onChange={onChange('last_name')} value={last_name} type='text' className='form-control' id='last_name' aria-describedby='lastName' />
-                    </div>
-                </div>
-            </div>
-            <div className='row'>
-                <div className='col-md-12 col-lg-6'>
-                    <div className='form-group'>
-                        <label htmlFor='email'>Email Address</label>
-                        <input onChange={onChange('email')} value={email} type='email' className='form-control' id='email' aria-describedby='email' />
-                    </div>
-                </div>
                 <div className='col-md-12 col-lg-6'>
                     <div className='form-group'>
                         <label htmlFor='phone'>Phone Number</label>
@@ -172,40 +133,10 @@ const ResidentContact = () => {
     );
 
     return (
-        <div className='container'>
-            <div className='row'>
-                <div className='col-8'>
-                    <h2>Send Us A Message</h2>
-                    <br />
-                    {contactForm()}
-                </div>
-                <div className='col-4'>
-                    <div>
-                        <h2>Forms</h2>
-                        <br />
-                        {forms.map((form, i) => (
-                            <div key={i}>
-                                <a href={`${form.file.url}`} target='_blank' rel="noopener noreferrer">{form.name}</a>
-                            </div>
-                        ))}
-                    </div>
-                    <br />
-                    <hr />
-                    <br />
-                    <div>
-                        <h2>Contact Info</h2>
-                        <br />
-                        <h6>Telephone</h6>
-                        <a href="tel:1234567890">123-456-7890</a>
-                        <hr />
-                        <h6>Fax</h6>
-                        <a href="tel:1234567890">123-456-7890</a>
-                        <hr />
-                        <h6>Email</h6>
-                        <a href="mailto:sample@email.com">sample@email.com</a>
-                    </div>
-                </div>
-            </div>
+        <div>
+            <h2>Send Us A Message</h2>
+            <br />
+            {contactForm()}
         </div>
     );
 };
