@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import {readAllUsers, updateUser, deleteUser} from '../apiUsers';
+import {readAllProperties} from '../../properties/apiProperties';
 import {isAuth} from '../../auth/apiAuth';
 
 const ManageResidents = ({op}) => {
@@ -10,6 +11,7 @@ const ManageResidents = ({op}) => {
         last_name: '',
         email: '',
         role: '',
+        property: '',
         createdAt: '',
         updatedAt: ''
     });
@@ -22,7 +24,21 @@ const ManageResidents = ({op}) => {
         createdAt: '',
         updatedAt: ''
     });
+    const [properties, setProperties] = useState([]);
+    const [selectedProperty, setSelectedProperty] = useState({
+        _id: '',
+        address: '',
+        city: '',
+        state: '',
+        zip: ''
+    });
     const {token} = isAuth();
+
+    const getAllProperties = useCallback(() => {
+        readAllProperties().then(data => {
+            setProperties(data);
+        });
+    }, []);
 
     const getAllUsers = useCallback(() => {
         readAllUsers(token).then(data => {
@@ -32,7 +48,33 @@ const ManageResidents = ({op}) => {
 
     useEffect(() => {
         getAllUsers();
-    }, [getAllUsers]);
+        getAllProperties();
+    }, [getAllUsers, getAllProperties]);
+
+    const selectProperty = event => {
+        let selectedId = event.target.value;
+        properties.forEach((property) => {
+            if(selectedId === '-1') {
+                setSelectedProperty({
+                    _id: '',
+                    address: '',
+                    city: '',
+                    state: '',
+                    zip: ''
+                });
+            }
+            if(property._id === selectedId) {
+                setSelectedProperty({
+                    _id: property._id,
+                    address: property.address,
+                    city: property.city,
+                    state: property.state,
+                    zip: property.zip
+                });
+                return;
+            }
+        });
+    };
 
     const selectUser = event => {
         let selectedId = event.target.value;
@@ -44,6 +86,7 @@ const ManageResidents = ({op}) => {
                     last_name: '',
                     email: '',
                     role: '',
+                    property: '',
                     createdAt: '',
                     updatedAt: ''
                 });
@@ -55,6 +98,7 @@ const ManageResidents = ({op}) => {
                     last_name: user.last_name,
                     email: user.email,
                     role: user.role,
+                    property: user.property,
                     createdAt: user.createdAt,
                     updatedAt: user.updatedAt
                 });
@@ -62,6 +106,20 @@ const ManageResidents = ({op}) => {
             }
         });
     };
+
+    const showAllPropertiesDropdown = () => op === 'Update' && (
+        <div className="form-group row">
+            <label htmlFor="selectProperty" className='col-sm-4 col-form-label'>Assign Property</label>
+            <div className='col-sm-8'>
+                <select value={selectedUser.property.length > 0 ? selectedUser.property : selectedProperty._id} onChange={selectProperty, changeUserInfo('property')} className="form-control" id="selectProperty">
+                    <option value='-1'>Select Property (None)</option>
+                    {properties.map((property, i) => (
+                        <option value={property._id} key={i}>{property.address}, {property.city}, {property.state}, {property.zip}</option>
+                    ))}
+                </select>
+            </div>
+        </div>
+    );
 
     const showAllUsersDropdown = () => op !== 'Add' && (
         <form>
@@ -98,6 +156,7 @@ const ManageResidents = ({op}) => {
                 last_name: '',
                 email: '',
                 role: '',
+                property: '',
                 createdAt: '',
                 updatedAt: ''
             });
@@ -136,6 +195,7 @@ const ManageResidents = ({op}) => {
                     <input onChange={changeUserInfo('role')} type="text" className="form-control" id="role" value={op === 'Add' ? `${newUser.role}` : `${selectedUser.role}`} />
                 </div>
             </div>
+            {showAllPropertiesDropdown()}
             <div className="form-group row">
                 <label htmlFor="createdAt" className="col-sm-4 col-form-label">Registered</label>
                 <div className="col-sm-8">

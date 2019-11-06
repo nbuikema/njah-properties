@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const {ObjectId} = mongoose.Schema;
 
 const userSchema = new mongoose.Schema(
     {
@@ -26,6 +27,10 @@ const userSchema = new mongoose.Schema(
             type: Number,
             default: 0
         },
+        property: {
+            type: ObjectId,
+            ref: 'Property'
+        }
     }, {timestamps: true}
 );
 
