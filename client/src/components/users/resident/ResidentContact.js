@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {sendContact} from '../../core/apiContact';
 
 const ResidentContact = ({user}) => {
@@ -15,6 +15,17 @@ const ResidentContact = ({user}) => {
         formData: new FormData()
     });
     const {first_name, last_name, email, phone, reason, property, application, message, formData} = contact;
+
+    const setUserFormInfo = () => {
+        formData.set('first_name', user.first_name);
+        formData.set('last_name', user.last_name);
+        formData.set('email', user.email);
+        formData.set('property', user.property._id);
+    }
+
+    useEffect(() => {
+        setUserFormInfo();
+    }, [setUserFormInfo]);
 
     const onChange = selected => event => {
         let value = selected === 'application' ? event.target.files[0] : event.target.value;
