@@ -2,8 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {sendContact} from '../../core/apiContact';
 
 const Maintenance = ({user}) => {
-    const [forms, setForms] = useState([]);
-    const [properties, setProperties] = useState([]);
     const [contact, setContact] = useState({
         user: user._id,
         first_name: user.first_name,

@@ -1,25 +1,27 @@
 import React, {useState, useEffect} from 'react';
 import {sendContact} from '../../core/apiContact';
 
-const ResidentContact = ({user}) => {
-    const [forms, setForms] = useState([]);
-    const [properties, setProperties] = useState([]);
+const Maintenance = ({user}) => {
     const [contact, setContact] = useState({
+        user: user._id,
         first_name: user.first_name,
         last_name: user.last_name,
         email: user.email,
-        property: user.property,
+        phone: '123',
+        property: user.property._id,
         reason: '',
-        application: '',
+        severity: '',
         message: '',
         formData: new FormData()
     });
-    const {first_name, last_name, email, phone, reason, property, application, message, formData} = contact;
+    const {first_name, last_name, email, phone, reason, property, severity, message, formData} = contact;
 
     const setUserFormInfo = () => {
+        formData.set('user', user._id);
         formData.set('first_name', user.first_name);
         formData.set('last_name', user.last_name);
         formData.set('email', user.email);
+        formData.set('phone', '123');
         formData.set('property', user.property._id);
     }
 
@@ -28,15 +30,13 @@ const ResidentContact = ({user}) => {
     }, [setUserFormInfo]);
 
     const onChange = selected => event => {
-        let value = selected === 'application' ? event.target.files[0] : event.target.value;
+        let value = event.target.value;
         if(selected === 'reason') {
             formData.set(selected, value);
-            formData.delete('application');
             setContact({
                 ...contact,
-                property: '',
                 message: '',
-                application: '',
+                severity: '',
                 reason: value
             });
         } else {
@@ -47,75 +47,17 @@ const ResidentContact = ({user}) => {
 
     const onSubmit = event => {
         event.preventDefault();
-        formData.set('type', 'General');
+        formData.set('type', 'Resident');
         sendContact(formData).then(data => {
             setContact({
-                first_name: '',
-                last_name: '',
-                email: '',
-                phone: '',
+                ...contact,
                 reason: '',
-                property: '',
-                application: '',
+                severity: '',
                 message: '',
                 formData: new FormData()
             });
         });
     };
-
-    const conditionalInput = () => {
-        switch(reason) {
-            case 'Property Inquiry':
-                return (
-                    <div>
-                        <div className="form-group">
-                            <label htmlFor='property'>Which Property Are You Interested In?</label>
-                            <select value={property} onChange={onChange('property')} className="form-control" id="property" name="property">
-                                <option value=''>Select One</option>
-                                {properties.map((property, i) => (
-                                    <option key={i} value={property._id}>{property.address}, {property.city}, {property.state}, {property.zip}</option>
-                                ))}
-                            </select>
-                        </div>
-                        <div className='form-group'>
-                            <label htmlFor='message'>Anything Else We Should Know?</label>
-                            <textarea onChange={onChange('message')} value={message} rows='4' className='form-control' id='message' aria-describedby='message'></textarea>
-                        </div>
-                    </div>
-                );
-                case 'Property Application':
-                    return (
-                        <div>
-                            <div className="form-group">
-                                <label htmlFor='property'>Which Property Are You Interested In?</label>
-                                <select value={property} onChange={onChange('property')} className="form-control" id="property" name="property">
-                                    <option value=''>Select One</option>
-                                    {properties.map((property, i) => (
-                                        <option key={i} value={property._id}>{property.address}, {property.city}, {property.state}, {property.zip}</option>
-                                    ))}
-                                </select>
-                            </div>
-                            <div className='form-group'>
-                                <label htmlFor='application'>Upload Application&nbsp;</label>
-                                <input onChange={onChange('application')} type='file' accept='*' id='application' name='application' />
-                            </div>
-                            <div className='form-group'>
-                                <label htmlFor='message'>Anything Else We Should Know?</label>
-                                <textarea onChange={onChange('message')} value={message} rows='4' className='form-control' id='message' aria-describedby='message'></textarea>
-                            </div>
-                        </div>
-                    );
-            case 'Other':
-                return (
-                    <div className='form-group'>
-                        <label htmlFor='message'>How Can We Help?</label>
-                        <textarea onChange={onChange('message')} value={message} rows='4' className='form-control' id='message' aria-describedby='message'></textarea>
-                    </div>
-                );
-            default:
-                return null;
-        }
-    }
 
     const contactForm = () => (
         <form encType="multipart/form-data">
@@ -128,15 +70,18 @@ const ResidentContact = ({user}) => {
                 </div>
             </div>
             <div className="form-group">
-                <label htmlFor='reason'>Reason for Contact</label>
+                <label htmlFor='reason'>What Can We Help With?</label>
                 <select onChange={onChange('reason')} className="form-control" id="reason" name="reason">
                     <option value=''>Select One</option>
-                    <option value='Property Inquiry'>Property Inquiry</option>
-                    <option value='Property Application'>Apply for Property</option>
+                    <option value='General Question'>General Question</option>
+                    <option value='Payment'>Payment</option>
                     <option value='Other'>Other</option>
                 </select>
             </div>
-            {conditionalInput()}
+            <div className='form-group'>
+                <label htmlFor='message'>Anything Else We Should Know?</label>
+                <textarea onChange={onChange('message')} value={message} rows='4' className='form-control' id='message' aria-describedby='message'></textarea>
+            </div>
             <div className='text-center'>
                 <button onClick={onSubmit} type='submit' className='btn btn-primary'>Get In Touch</button>
             </div>
@@ -152,4 +97,4 @@ const ResidentContact = ({user}) => {
     );
 };
 
-export default ResidentContact;
+export default Maintenance;
