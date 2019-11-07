@@ -14,6 +14,7 @@ const UserDashboard = () => {
     const [section, setSection] = useState('info');
     const [sidebar, setSidebar] = useState(true);
     const [user, setUser] = useState({
+        _id: '',
         first_name: '',
         last_name: '',
         email: '',
@@ -28,6 +29,7 @@ const UserDashboard = () => {
     const getUser = useCallback(() => {
         readCurrentUser(token).then(data => {
             setUser({
+                _id: data.user._id,
                 first_name: data.user.first_name,
                 last_name: data.user.last_name,
                 email: data.user.email,

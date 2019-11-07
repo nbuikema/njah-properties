@@ -32,12 +32,16 @@ exports.readMessagesWithQuery = (req, res) => {
     let sortBy = 'createdAt';
     let order = 'desc';
     for(let param in req.query) {
+        console.log(req.query[param]);
         switch(param) {
             case 'reason':
                 query['reason'] = req.query[param];
                 break;
             case 'type':
                 query['type'] = req.query[param];
+                break;
+            case 'user':
+                query['user'] = req.query[param];
                 break;
             case 'sortBy':
                 sortBy = req.query[param];

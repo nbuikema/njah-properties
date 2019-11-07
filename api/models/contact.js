@@ -3,6 +3,10 @@ const {ObjectId} = mongoose.Schema;
 
 const contactSchema = new mongoose.Schema(
     {
+        user: {
+            type: ObjectId,
+            ref: 'User'
+        },
         first_name: {
             type: String,
             trim: true,

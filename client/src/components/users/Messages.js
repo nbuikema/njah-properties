@@ -10,9 +10,10 @@ const Messages = ({role}) => {
     const [filters, setFilters] = useState({
         type: '',
         reason: '',
+        user: '',
         sort: ''
     });
-    const {type, reason, sort} = filters;
+    const {type, reason, sort, user} = filters;
     const {token} = isAuth();
 
     const getMessages = useCallback(() => {
@@ -94,24 +95,22 @@ const Messages = ({role}) => {
                 </div>
                 {type.length > 0 && (
                     <div className='form-group col-auto'>
-                        <select value={reason} onChange={changeFilters('reason')} id="reason" className="form-control">
-                            {type === 'General' && (
-                                <>
-                                    <option value=''>Reason (Any)</option>
-                                    <option value='Property Inquiry'>Property Inquiry</option>
-                                    <option value='Property Application'>Property Application</option>
-                                    <option value='Other'>Other</option>
-                                </>
-                            )}
-                            {(type === 'Resident' || type === 'Maintenance') && (
-                                <>
-                                    <option value=''>Resident (Any)</option>
-                                    {users.map((user, i) => (
-                                        <option value={`${user._id}`} key={i}>{user.last_name}, {user.first_name}</option>
-                                    ))}
-                                </>
-                            )}
-                        </select>
+                        {type === 'General' && (
+                            <select value={reason} onChange={changeFilters('reason')} id="reason" className="form-control">
+                                <option value=''>Reason (Any)</option>
+                                <option value='Property Inquiry'>Property Inquiry</option>
+                                <option value='Property Application'>Property Application</option>
+                                <option value='Other'>Other</option>
+                            </select>
+                        )}
+                        {(type === 'Resident' || type === 'Maintenance') && (
+                            <select value={user} onChange={changeFilters('user')} id="user" className="form-control">
+                                <option value=''>Resident (Any)</option>
+                                {users.map((user, i) => (
+                                    <option value={`${user._id}`} key={i}>{user.last_name}, {user.first_name}</option>
+                                ))}
+                            </select>
+                        )}
                     </div>
                 )}
                 <div className='form-group col-auto'>
