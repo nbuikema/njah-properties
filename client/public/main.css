@@ -205,3 +205,24 @@
     color: orange;
     border-bottom: 2px solid orange;
 }
+
+.brand-fix,
+.brand-fix:hover {
+    color: inherit;
+    text-decoration: none;
+}
+
+@media (min-width: 768px) {
+    .navbar-brand.abs
+        {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            text-align: center;
+            z-index: 0;
+        }
+
+        .navbar-nav {
+            z-index: 1;
+        }
+    }
