@@ -17,7 +17,6 @@ const ManageProperties = ({op}) => {
         baths: '',
         info: '',
         available: false,
-        images: [],
         createdAt: '',
         updatedAt: '',
         lat: '',
@@ -71,7 +70,6 @@ const ManageProperties = ({op}) => {
                     baths: '',
                     info: '',
                     available: false,
-                    images: [],
                     createdAt: '',
                     updatedAt: '',
                     lat: '',
@@ -91,7 +89,6 @@ const ManageProperties = ({op}) => {
                     baths: property.baths,
                     info: property.info,
                     available: property.info,
-                    images: property.images,
                     createdAt: property.createdAt,
                     updatedAt: property.updatedAt,
                     lat: property.lat,
@@ -136,21 +133,32 @@ const ManageProperties = ({op}) => {
 
     const addProperty = event => {
         event.preventDefault();
-        createProperty(token, formData).then(data => {
-            getAllProperties();
+        createProperty(token, formData).then(returnData => {
+            [...document.getElementsByClassName("input-photos")].forEach(
+                (element) => {
+                    element.value = null;
+                }
+            );
+            setImages([]);
             setNewProperty({
+                _id: '',
                 address: '',
                 city: '',
                 state: '',
                 zip: '',
-                rent: 0,
-                size: 0,
-                beds: 0,
-                baths: 0,
+                rent: '',
+                size: '',
+                beds: '',
+                baths: '',
                 info: '',
                 available: false,
+                createdAt: '',
+                updatedAt: '',
+                lat: '',
+                long: '',
                 formData: new FormData()
             });
+            getAllProperties();
         });
     };
 
@@ -158,7 +166,7 @@ const ManageProperties = ({op}) => {
         <div className='form-group col-6 row'>
             <label htmlFor='photos' className="col col-form-label">Upload Image</label>
             <div className='col'>
-                <input onChange={changePropertyInfo('photos')} type='file' accept='image/*' id='photos' />
+                <input onChange={changePropertyInfo('photos')} type='file' accept='image/*' className='input-photos' />
             </div>
         </div>
     );
@@ -173,13 +181,12 @@ const ManageProperties = ({op}) => {
                 city: '',
                 state: '',
                 zip: '',
-                rent: 0,
-                size: 0,
-                beds: 0,
-                baths: 0,
+                rent: '',
+                size: '',
+                beds: '',
+                baths: '',
                 info: '',
                 available: false,
-                images: [],
                 createdAt: '',
                 updatedAt: '',
                 lat: '',
@@ -258,7 +265,7 @@ const ManageProperties = ({op}) => {
                     </div>
                 </div>
                 <div className="form-group col-12 row">
-                    <label htmlFor="info" className="col-sm-2 col-form-label">Additional Info</label>
+                    <label htmlFor="info" className="col-sm-3 col-lg-2 col-form-label">Additional Info</label>
                     <div className="col-sm-9">
                         <textarea onChange={changePropertyInfo('info')} className="form-control" id="info" rows='4' value={op === 'Add' ? `${info}` : `${selectedProperty.info}`}></textarea>
                     </div>
