@@ -85,7 +85,7 @@ const UserDashboard = () => {
 
     const showDashboard = () => (
         <div>
-            <div className={`vertical-nav bg-white ${!sidebar && 'active'}`} id="sidebar">
+            <div className={`vertical-nav bg-white ${!sidebar && 'dashboard-active'}`} id="sidebar">
                 <div className="py-4 px-3 mb-4 bg-light">
                     <div className="media d-flex align-items-center">
                     <div className="media-body">
@@ -194,7 +194,7 @@ const UserDashboard = () => {
                     </div>
                 ) : null}
             </div>
-            <div className={`page-content px-3 pt-3 ${!sidebar && 'active'}`} id="content">
+            <div className={`page-content px-3 pt-3 ${!sidebar && 'dashboard-active'}`} id="content">
                 <button onClick={toggleSidebar} id="sidebarCollapse" type="button" className="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i className="fa fa-bars mr-2"></i><small className="font-weight-bold">Toggle</small></button>
                 <div className='pl-3'>
                     {showSection()}

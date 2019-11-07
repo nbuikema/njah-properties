@@ -21,11 +21,11 @@
     transition: all 0.4s;
 }
   
-#sidebar.active {
+#sidebar.dashboard-active {
     margin-left: -17rem;
 }
   
-#content.active {
+#content.dashboard-active {
     width: 100%;
     margin: 0;
   }
@@ -35,7 +35,7 @@
         margin-left: -17rem;
     }
 
-    #sidebar.active {
+    #sidebar.dashboard-active {
         margin-left: 0;
     }
 
@@ -44,7 +44,7 @@
         margin: 0;
     }
 
-    #content.active {
+    #content.dashboard-active {
         margin-left: 17rem;
         width: calc(100% - 17rem);
     }

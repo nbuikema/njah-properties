@@ -27,12 +27,20 @@ exports.readAllMessages = (req, res) => {
     });
 };
 
+exports.readMyMessages = (req, res) => {
+    Contact.find({user: req.user._id}).populate('property', 'address city state zip').exec((err, contact) => {
+        if(err) {
+            return res.status(400).json({error: 'Could not find messages.'});
+        }
+        return res.json(contact);
+    });
+};
+
 exports.readMessagesWithQuery = (req, res) => {
     let query = {};
     let sortBy = 'createdAt';
     let order = 'desc';
     for(let param in req.query) {
-        console.log(req.query[param]);
         switch(param) {
             case 'reason':
                 query['reason'] = req.query[param];

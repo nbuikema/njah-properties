@@ -92,6 +92,21 @@ export const readAllMessages = token => {
     });
 };
 
+export const readMyMessages = token => {
+    return fetch(`${API}/contact/read/current`, {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    }).then(response => {
+        return response.json();
+    }).catch(err => {
+        console.log(err);
+    });
+};
+
 export const readMessagesWithQuery = query => {
     return fetch(`${API}/contact/read/query?${query}`, {
         method: 'GET',

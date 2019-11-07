@@ -15,11 +15,12 @@ const storage = cloudinaryStorage({
 });
 const parser = multer({ storage: storage });
 
-const {contact, readAllMessages, readMessagesWithQuery} = require('../controllers/contact');
+const {contact, readAllMessages, readMessagesWithQuery, readMyMessages} = require('../controllers/contact');
 const {isAuth, isAdmin} = require('../controllers/auth');
 
 router.post('/contact', parser.single('application'), contact);
 router.get('/read/all', isAuth, isAdmin, readAllMessages);
 router.get('/read/query', readMessagesWithQuery);
+router.get('/read/current', isAuth, readMyMessages);
 
 module.exports = router;

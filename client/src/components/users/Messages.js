@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react';
-import {readAllMessages, readMessagesWithQuery} from './apiUsers';
+import {readAllMessages, readMessagesWithQuery, readMyMessages} from './apiUsers';
 import {readAllUsers} from './apiUsers';
 import {isAuth} from '../auth/apiAuth';
 
@@ -19,6 +19,10 @@ const Messages = ({role}) => {
     const getMessages = useCallback(() => {
         if(role === 1) {
             readAllMessages(token).then(data => {
+                setMessages(data);
+            });
+        } else {
+            readMyMessages(token).then(data => {
                 setMessages(data);
             });
         }
