@@ -137,7 +137,7 @@ const Properties = () => {
         <div>
             {useWindowSize()}
             <div className='row reset-margin'>
-                <div className='col-sm-12 col-md-8 p-0 order-2 order-md-1'>
+                <div className='col-xs-12 col-sm-8 p-0 order-2 order-sm-1'>
                 <button className="btn btn-primary toggleBtn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                     Toggle Filters
                 </button>
@@ -255,7 +255,7 @@ const Properties = () => {
                         })}
                     </ReactMapGL>
                 </div>
-                <div className='scrolly col-sm-12 col-md-4 p-0 order-1 order-md-2'>
+                <div className='scrolly col-xs-12 col-sm-4 p-0 order-1 order-sm-2'>
                     {!selected && filteredProperties.length === 0 && properties.map(property => (
                         <div key={property._id} className="card">
                             {property.images.length > 0 && <img src={`${property.images[0].url}`} className="card-img-top" alt={`${property.address}`} />}
