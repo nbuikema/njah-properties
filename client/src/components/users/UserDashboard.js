@@ -85,26 +85,26 @@ const UserDashboard = () => {
 
     const showDashboard = () => (
         <div>
-            <div className={`vertical-nav bg-white ${!sidebar && 'dashboard-active'}`} id="sidebar">
-                <div className="py-4 px-3 mb-4 bg-light">
+            <div className={`vertical-nav bg-light ${!sidebar && 'dashboard-active'}`} id="sidebar">
+                <div className="py-3 px-3 bg-white shadow-sm">
                     <div className="media d-flex align-items-center">
                     <div className="media-body">
-                        <h4 className="m-0">{first_name} {last_name}</h4>
-                        <p className="font-weight-light text-muted mb-0">{role === 1 ? 'Admin' : 'Resident'}</p>
+                        <h4 className="m-0 bg-white">{first_name} {last_name}</h4>
+                        <p className="font-weight-light mb-0 bg-white">{role === 1 ? 'Admin' : 'Resident'}</p>
                     </div>
                     </div>
                 </div>
-                <p className="font-weight-bold px-3 small pb-4 mb-0">Main</p>
+                <p className="font-weight-bold px-3 pb-1 mt-4 mb-0">Main</p>
                 <ul className="nav flex-column bg-white mb-0">
                     <li className="nav-item">
-                        <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('info')}>
-                            <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                        <button className="nav-link dashboard-btn" onClick={toggleSection('info')}>
+                            <i className="fas fa-info-circle mr-3 text-primary fa-fw"></i>
                             My Info
                         </button>
                     </li>
                     <li className="nav-item">
-                        <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('messages')}>
-                            <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                        <button className="nav-link dashboard-btn" onClick={toggleSection('messages')}>
+                            <i className="fas fa-envelope mr-3 text-primary fa-fw"></i>
                             View Messages
                         </button>
                     </li>
@@ -112,16 +112,16 @@ const UserDashboard = () => {
                 {role === 0 ? (
                     <div>
                         <br />
-                        <p className="font-weight-bold px-3 small pb-4 mb-0">Residents</p>
+                        <p className="font-weight-bold px-3 pb-1 mb-0">Residents</p>
                         <ul className="nav flex-column bg-white mb-0">
                             <li className="nav-item">
-                                <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('maintenance')}>
+                                <button className="nav-link dashboard-btn" onClick={toggleSection('maintenance')}>
                                     <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
                                     Maintenance Request
                                 </button>
                             </li>
                             <li className="nav-item">
-                                <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('contact')}>
+                                <button className="nav-link dashboard-btn" onClick={toggleSection('contact')}>
                                     <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
                                     Contact Property Manager
                                 </button>
@@ -132,61 +132,61 @@ const UserDashboard = () => {
                 {role === 1 ? (
                     <div>
                         <br />
-                        <p className="font-weight-bold px-3 small pb-4 mb-0">Forms</p>
+                        <p className="font-weight-bold px-3 pb-1 mb-0">Forms</p>
                         <ul className="nav flex-column bg-white mb-0">
                             <li className="nav-item">
-                                <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('addForm')}>
-                                    <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                                <button className="nav-link dashboard-btn" onClick={toggleSection('addForm')}>
+                                    <i className="fas fa-plus mr-3 text-primary fa-fw"></i>
                                     Add Forms
                                 </button>
                             </li>
                             <li className="nav-item">
-                                <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('removeForm')}>
-                                    <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                                <button className="nav-link dashboard-btn" onClick={toggleSection('removeForm')}>
+                                    <i className="fas fa-minus mr-3 text-primary fa-fw"></i>
                                     Remove Forms
                                 </button>
                             </li>
                         </ul>
                         <br />
-                        <p className="font-weight-bold px-3 small pb-4 mb-0">Properties</p>
+                        <p className="font-weight-bold px-3 pb-1 mb-0">Properties</p>
                         <ul className="nav flex-column bg-white mb-0">
                             <li className="nav-item">
-                                <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('addProperty')}>
-                                    <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                                <button className="nav-link dashboard-btn" onClick={toggleSection('addProperty')}>
+                                    <i className="fas fa-plus mr-3 text-primary fa-fw"></i>
                                     Add Property
                                 </button>
                             </li>
                             <li className="nav-item">
-                                <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('updateProperty')}>
-                                    <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                                <button className="nav-link dashboard-btn" onClick={toggleSection('updateProperty')}>
+                                    <i className="fas fa-pencil-alt mr-3 text-primary fa-fw"></i>
                                     Update Property
                                 </button>
                             </li>
                             <li className="nav-item">
-                                <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('removeProperty')}>
-                                    <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                                <button className="nav-link dashboard-btn" onClick={toggleSection('removeProperty')}>
+                                    <i className="fas fa-minus mr-3 text-primary fa-fw"></i>
                                     Remove Property
                                 </button>
                             </li>
                         </ul>
                         <br />
-                        <p className="font-weight-bold px-3 small pb-4 mb-0">Residents</p>
+                        <p className="font-weight-bold px-3 small pb-1 mb-0">Residents</p>
                         <ul className="nav flex-column bg-white mb-0">
                             <li className="nav-item">
-                                <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('addResident')}>
-                                    <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                                <button className="nav-link dashboard-btn" onClick={toggleSection('addResident')}>
+                                    <i className="fas fa-plus mr-3 text-primary fa-fw"></i>
                                     Add Resident
                                 </button>
                             </li>
                             <li className="nav-item">
-                                <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('updateResident')}>
-                                    <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                                <button className="nav-link dashboard-btn" onClick={toggleSection('updateResident')}>
+                                    <i className="fas fa-pencil-alt mr-3 text-primary fa-fw"></i>
                                     Update Resident
                                 </button>
                             </li>
                             <li className="nav-item">
-                                <button className="nav-link text-dark font-italic bg-light dashboard-btn" onClick={toggleSection('removeResident')}>
-                                    <i className="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                                <button className="nav-link dashboard-btn" onClick={toggleSection('removeResident')}>
+                                    <i className="fas fa-minus mr-3 text-primary fa-fw"></i>
                                     Remove Resident
                                 </button>
                             </li>
@@ -195,7 +195,7 @@ const UserDashboard = () => {
                 ) : null}
             </div>
             <div className={`page-content px-3 pt-3 ${!sidebar && 'dashboard-active'}`} id="content">
-                <button onClick={toggleSidebar} id="sidebarCollapse" type="button" className="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i className="fa fa-bars mr-2"></i><small className="font-weight-bold">Toggle</small></button>
+                <button onClick={toggleSidebar} id="sidebarCollapse" type="button" className="btn btn-white bg-white rounded-pill shadow-sm px-4 mb-4"><i className={`${sidebar && 'fas fa-arrow-left'} ${!sidebar && 'fas fa-arrow-right'} mr-2`}></i><small className="font-weight-bold">{sidebar ? 'Hide Menu' : 'Show Menu'}</small></button>
                 <div className='pl-3'>
                     {showSection()}
                 </div>

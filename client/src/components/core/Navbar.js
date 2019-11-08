@@ -9,7 +9,7 @@ const isActive = (history, path) => {
 }
 
 const Navbar = ({history}) => (
-    <div className='sticky-top'>
+    <div className='sticky-top shadow-sm'>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div className='container-fluid'>
                 <div className='navbar-brand abs'>

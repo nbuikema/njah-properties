@@ -1,12 +1,22 @@
 @import url('https://fonts.googleapis.com/css?family=ZCOOL+XiaoWei&display=swap');
 
+button:focus {
+    outline: 0;
+}
+
+* {
+    font-family: 'ZCOOL XiaoWei', serif;
+    color: rgb(7, 58, 112)!important;
+    background-color: #f8f9fa!important;
+}
+
 .navbar {
     height: 60px!important;
 }
 
 .vertical-nav {
-    min-width: 17rem;
-    width: 17rem;
+    min-width: 15rem;
+    width: 15rem;
     height: calc(100vh - 60px);
     position: fixed;
     top: 60px;
@@ -16,13 +26,13 @@
 }
   
 .page-content {
-    width: calc(100% - 17rem);
-    margin-left: 17rem;
+    width: calc(100% - 15rem);
+    margin-left: 15rem;
     transition: all 0.4s;
 }
   
 #sidebar.dashboard-active {
-    margin-left: -17rem;
+    margin-left: -15rem;
 }
   
 #content.dashboard-active {
@@ -32,7 +42,7 @@
   
 @media (max-width: 768px) {
     #sidebar {
-        margin-left: -17rem;
+        margin-left: -15rem;
     }
 
     #sidebar.dashboard-active {
@@ -45,8 +55,8 @@
     }
 
     #content.dashboard-active {
-        margin-left: 17rem;
-        width: calc(100% - 17rem);
+        margin-left: 15rem;
+        width: calc(100% - 15rem);
     }
 }
 
@@ -84,7 +94,7 @@
     left: 50%;
     margin-left: -8px;
     margin-top: -8px;
-    background-color: #007bff;
+    background-color: rgb(7, 58, 112);
 }
 
 #sidebar {
@@ -141,10 +151,8 @@
 }
 
 .home-header {
-    font-family: 'ZCOOL XiaoWei', serif;
     margin-top: calc(25vh - 60px);
     z-index: 999;
-    color: black;
     font-size: 7rem;
     opacity: 1;
 }
@@ -152,11 +160,6 @@
 .home-header2 {
     font-size: 4rem;
     margin-top: 0;
-}
-
-.footer {
-    height: 60px;
-    background-color: black;
 }
 
 #collapseExample {
@@ -194,6 +197,9 @@
 
 .dashboard-btn {
     width: 100%;
+    text-align: left;
+    background-color: inherit;
+    border: none;
 }
 
 .reset-margin {
@@ -202,8 +208,29 @@
 }
 
 .active {
-    color: orange;
-    border-bottom: 2px solid orange;
+    border-bottom: 2px solid rgb(7, 58, 112);
+    padding-bottom: 0;
+}
+
+.nav-link {
+    font-size: 1em;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.nav-link:after {
+    display: block;
+    content: '';
+    border-bottom: 2px solid rgb(7, 58, 112);
+    transform: scaleX(0);
+    transition: transform 300ms ease-in-out;
+    position: relative;
+    top: 2px;
+}
+
+.nav-link:hover:after,
+.dropdown-toggle:hover:after {
+    transform: scaleX(1);
 }
 
 .brand-fix,
@@ -214,15 +241,15 @@
 
 @media (min-width: 992px) {
     .navbar-brand.abs
-        {
-            position: absolute;
-            width: 100%;
-            left: 0;
-            text-align: center;
-            z-index: 0;
-        }
-
-        .navbar-nav {
-            z-index: 1;
-        }
+    {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        text-align: center;
+        z-index: 0;
     }
+
+    .navbar-nav {
+        z-index: 1;
+    }
+}
