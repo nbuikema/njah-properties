@@ -24,7 +24,6 @@ exports.readAllUsers = (req, res) => {
 };
 
 exports.updateUser = (req, res) => {
-    console.log(req.body);
     User.findOneAndUpdate(
         {_id: req.selectedUser._id},
         {$set: req.body},

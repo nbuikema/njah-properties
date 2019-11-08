@@ -6,8 +6,6 @@ button:focus {
 
 * {
     font-family: 'ZCOOL XiaoWei', serif;
-    color: rgb(7, 58, 112)!important;
-    background-color: #f8f9fa!important;
 }
 
 .navbar {
@@ -38,7 +36,7 @@ button:focus {
 #content.dashboard-active {
     width: 100%;
     margin: 0;
-  }
+}
   
 @media (max-width: 768px) {
     #sidebar {
@@ -216,6 +214,7 @@ button:focus {
     font-size: 1em;
     letter-spacing: 1px;
     text-transform: uppercase;
+    color: rgb(7, 58, 112)!important;
 }
 
 .nav-link:after {
@@ -237,6 +236,7 @@ button:focus {
 .brand-fix:hover {
     color: inherit;
     text-decoration: none;
+    color: rgb(7, 58, 112);
 }
 
 @media (min-width: 992px) {
