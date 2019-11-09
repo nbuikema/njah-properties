@@ -217,7 +217,8 @@ const ManageResidents = ({op}) => {
 
     return (
         <div>
-            <h1>{op} Residents</h1>
+            <h1 className='my-4'>{op} Resident</h1>
+            <hr />
             {showAllUsersDropdown()}
             {showSelectedUserInfo()}
         </div>

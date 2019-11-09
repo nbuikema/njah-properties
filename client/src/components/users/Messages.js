@@ -133,11 +133,12 @@ const Messages = ({role}) => {
 
     return (
         <div>
-            <h1>Messages</h1>
+            <h1 className='my-4'>{role === 0 && 'Sent'} Messages</h1>
+            <hr />
             {role === 1 && showFilters()}
             {filteredMessages.length === 0 && messages.map((message, i) => (
                 <div key={i}>
-                <hr />
+                    {i !== 0 && <hr />}
                     <div className='row'>
                         <div className='col-6'>
                             <h6>Name: {message.last_name}, {message.first_name}</h6>
@@ -161,7 +162,7 @@ const Messages = ({role}) => {
             ))}
             {filteredMessages.length > 0 && filteredMessages.map((message, i) => (
                 <div key={i}>
-                <hr />
+                    {i !== 0 && <hr />}
                     <div className='row'>
                         <div className='col-6'>
                             <h6>Name: {message.last_name}, {message.first_name}</h6>

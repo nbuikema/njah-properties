@@ -84,7 +84,7 @@ const UserDashboard = () => {
     };
 
     const showDashboard = () => (
-        <div>
+        <div className='text-primary'>
             <div className={`vertical-nav bg-light ${!sidebar && 'dashboard-active'}`} id="sidebar">
                 <div className="py-3 px-3 bg-white shadow-sm">
                     <div className="media d-flex align-items-center">
@@ -137,13 +137,13 @@ const UserDashboard = () => {
                             <li className="nav-item">
                                 <button className="nav-link dashboard-btn bg-light" onClick={toggleSection('addForm')}>
                                     <i className="fas fa-plus mr-3 text-primary fa-fw"></i>
-                                    Add Forms
+                                    Add Form
                                 </button>
                             </li>
                             <li className="nav-item">
                                 <button className="nav-link dashboard-btn bg-light" onClick={toggleSection('removeForm')}>
                                     <i className="fas fa-minus mr-3 text-primary fa-fw"></i>
-                                    Remove Forms
+                                    Remove Form
                                 </button>
                             </li>
                         </ul>
@@ -194,9 +194,9 @@ const UserDashboard = () => {
                     </div>
                 ) : null}
             </div>
-            <div className={`page-content px-3 pt-3 bg-light ${!sidebar && 'dashboard-active'}`} id="content">
-                <button onClick={toggleSidebar} id="sidebarCollapse" type="button" className="btn btn-white bg-white rounded-pill shadow-sm px-4 mb-4"><i className={`${sidebar && 'fas fa-arrow-left'} ${!sidebar && 'fas fa-arrow-right'} mr-2`}></i><small className="font-weight-bold">{sidebar ? 'Hide Menu' : 'Show Menu'}</small></button>
-                <div className='pl-3'>
+            <div className={`page-content px-3 pt-3 mb-4 bg-light ${!sidebar && 'dashboard-active'}`} id="content">
+                <button onClick={toggleSidebar} id="sidebarCollapse" type="button" className="btn btn-white bg-white text-primary rounded-pill shadow-sm px-4"><i className={`${sidebar && 'fas fa-arrow-left'} ${!sidebar && 'fas fa-arrow-right'} mr-2`}></i><small className="font-weight-bold">{sidebar ? 'Hide Menu' : 'Show Menu'}</small></button>
+                <div className='pl-3 dashboard-page'>
                     {showSection()}
                 </div>
             </div>

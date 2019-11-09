@@ -316,7 +316,8 @@ const ManageProperties = ({op}) => {
 
     return (
         <div>
-            <h1>{op} Properties</h1>
+            <h1 className='my-4'>{op} Property</h1>
+            <hr />
             {showAllPropertiesDropdown()}
             {showSelectedPropertyInfo()}
         </div>

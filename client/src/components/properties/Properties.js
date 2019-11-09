@@ -136,19 +136,19 @@ const Properties = () => {
     return (
         <div>
             {useWindowSize()}
-            <div className='row reset-margin'>
+            <div className='row reset-margin text-primary'>
                 <div className='col-xs-12 col-sm-8 p-0 order-2 order-sm-1'>
                 <button className="btn btn-primary toggleBtn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                     Toggle Filters
                 </button>
-                <div className="collapse show" id="collapseExample">
+                <div className="collapse show bg-light" id="collapseExample">
                     <form>
                         <div>
                             <div className="col-12 my-2">
                                 <h4>Filter Properties</h4>
                             </div>
                             <div className="form-group col-12 mb-2">
-                                <select value={filters.rentMin} className="form-control" onChange={changeFilters('rentMin')} id="rentMin" name="rentMin">
+                                <select value={filters.rentMin} className="form-control text-primary" onChange={changeFilters('rentMin')} id="rentMin" name="rentMin">
                                     <option value=''>Min Rent</option>
                                     <option value='100'>$100</option>
                                     <option value='200'>$200</option>
@@ -168,7 +168,7 @@ const Properties = () => {
                                 </select>
                             </div>
                             <div className="form-group col-12 mb-2">
-                                <select value={filters.rentMax} className="form-control" onChange={changeFilters('rentMax')} id="rentMax" name="rentMax">
+                                <select value={filters.rentMax} className="form-control text-primary" onChange={changeFilters('rentMax')} id="rentMax" name="rentMax">
                                     <option value=''>Max Rent</option>
                                     <option value='100'>$100</option>
                                     <option value='200'>$200</option>
@@ -188,7 +188,7 @@ const Properties = () => {
                                 </select>
                             </div>
                             <div className="form-group col-12 mb-2">
-                                <select value={filters.beds} className="form-control" onChange={changeFilters('beds')} id="beds" name="beds">
+                                <select value={filters.beds} className="form-control text-primary" onChange={changeFilters('beds')} id="beds" name="beds">
                                     <option value=''>Beds</option>
                                     <option value='1'>1</option>
                                     <option value='2'>2</option>
@@ -197,7 +197,7 @@ const Properties = () => {
                                 </select>
                             </div>
                             <div className="form-group col-12 mb-2">
-                                <select value={filters.baths} className="form-control" onChange={changeFilters('baths')} id="baths" name="baths">
+                                <select value={filters.baths} className="form-control text-primary" onChange={changeFilters('baths')} id="baths" name="baths">
                                     <option value=''>Baths</option>
                                     <option value='1'>1</option>
                                     <option value='2'>2</option>
@@ -206,7 +206,7 @@ const Properties = () => {
                                 </select>
                             </div>
                             <div className="form-group col-12 mb-2">
-                                <select value={filters.sort} className="form-control" onChange={changeFilters('sort')} id="sort" name="sort">
+                                <select value={filters.sort} className="form-control text-primary" onChange={changeFilters('sort')} id="sort" name="sort">
                                     <option value=''>Sort By</option>
                                     <option value='rent desc'>Rent (High to Low)</option>
                                     <option value='rent asc'>Rent (Low to High)</option>
@@ -257,7 +257,7 @@ const Properties = () => {
                 </div>
                 <div className='scrolly col-xs-12 col-sm-4 p-0 order-1 order-sm-2'>
                     {!selected && filteredProperties.length === 0 && properties.map(property => (
-                        <div key={property._id} className="card">
+                        <div key={property._id} className="card bg-light">
                             {property.images.length > 0 && <img src={`${property.images[0].url}`} className="card-img-top" alt={`${property.address}`} />}
                             <div className="card-body">
                                 <h5 className="card-title">{property.address}</h5>
@@ -270,7 +270,7 @@ const Properties = () => {
                         </div>
                     ))}
                     {!selected && filteredProperties.length > 0 && filteredProperties.map(property => (
-                        <div key={property._id} className="card">
+                        <div key={property._id} className="card bg-light">
                             {property.images.length > 0 && <img src={`${property.images[0].url}`} className="card-img-top" alt={`${property.address}`} />}
                             <div className="card-body">
                                 <h5 className="card-title">{property.address}</h5>
@@ -285,7 +285,7 @@ const Properties = () => {
                     {selected && properties.map(property => {
                         if(selected === property._id) {
                             return (
-                                <div key={property._id} className="card">
+                                <div key={property._id} className="card bg-light">
                                     {property.images.length > 0 && <img src={`${property.images[0].url}`} className="card-img-top" alt={`${property.address}`} />}
                                     <div className="card-body">
                                         <h5 className="card-title">{property.address}</h5>

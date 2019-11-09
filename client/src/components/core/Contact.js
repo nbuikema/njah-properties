@@ -78,7 +78,7 @@ const Contact = () => {
                     <div>
                         <div className="form-group">
                             <label htmlFor='property'>Which Property Are You Interested In?</label>
-                            <select value={property} onChange={onChange('property')} className="form-control" id="property" name="property">
+                            <select value={property} onChange={onChange('property')} className="form-control text-primary" id="property" name="property">
                                 <option value=''>Select One</option>
                                 {properties.map((property, i) => (
                                     <option key={i} value={property._id}>{property.address}, {property.city}, {property.state}, {property.zip}</option>
@@ -96,7 +96,7 @@ const Contact = () => {
                         <div>
                             <div className="form-group">
                                 <label htmlFor='property'>Which Property Are You Interested In?</label>
-                                <select value={property} onChange={onChange('property')} className="form-control" id="property" name="property">
+                                <select value={property} onChange={onChange('property')} className="form-control text-primary" id="property" name="property">
                                     <option value=''>Select One</option>
                                     {properties.map((property, i) => (
                                         <option key={i} value={property._id}>{property.address}, {property.city}, {property.state}, {property.zip}</option>
@@ -157,7 +157,7 @@ const Contact = () => {
             </div>
             <div className="form-group">
                 <label htmlFor='reason'>Reason for Contact</label>
-                <select onChange={onChange('reason')} className="form-control" id="reason" name="reason">
+                <select onChange={onChange('reason')} className="form-control text-primary" id="reason" name="reason">
                     <option value=''>Select One</option>
                     <option value='Property Inquiry'>Property Inquiry</option>
                     <option value='Property Application'>Apply for Property</option>
@@ -172,37 +172,39 @@ const Contact = () => {
     );
 
     return (
-        <div className='container'>
-            <div className='row'>
-                <div className='col-8'>
-                    <h2>Send Us A Message</h2>
-                    <br />
-                    {contactForm()}
-                </div>
-                <div className='col-4'>
-                    <div>
-                        <h2>Forms</h2>
-                        <br />
-                        {forms.map((form, i) => (
-                            <div key={i}>
-                                <a href={`${form.file.url}`} target='_blank' rel="noopener noreferrer">{form.name}</a>
-                            </div>
-                        ))}
+        <div className='text-primary my-4'>
+            <div className='container'>
+                <div className='row'>
+                    <div className='col-8'>
+                        <h1 className='text-center'>Send Us A Message</h1>
+                        <hr />
+                        {contactForm()}
                     </div>
-                    <br />
-                    <hr />
-                    <br />
-                    <div>
-                        <h2>Contact Info</h2>
+                    <div className='col-4 text-center'>
+                        <div>
+                            <h1>Forms</h1>
+                            <br />
+                            {forms.map((form, i) => (
+                                <div key={i}>
+                                    <a href={`${form.file.url}`} target='_blank' rel="noopener noreferrer">{form.name}</a>
+                                </div>
+                            ))}
+                        </div>
                         <br />
-                        <h6>Telephone</h6>
-                        <a href="tel:1234567890">123-456-7890</a>
                         <hr />
-                        <h6>Fax</h6>
-                        <a href="tel:1234567890">123-456-7890</a>
-                        <hr />
-                        <h6>Email</h6>
-                        <a href="mailto:sample@email.com">sample@email.com</a>
+                        <br />
+                        <div>
+                            <h1>Contact Info</h1>
+                            <br />
+                            <h6>Telephone</h6>
+                            <a href="tel:1234567890">123-456-7890</a>
+                            <hr />
+                            <h6>Fax</h6>
+                            <a href="tel:1234567890">123-456-7890</a>
+                            <hr />
+                            <h6>Email</h6>
+                            <a href="mailto:sample@email.com">sample@email.com</a>
+                        </div>
                     </div>
                 </div>
             </div>

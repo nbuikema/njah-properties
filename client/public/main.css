@@ -1,15 +1,26 @@
 @import url('https://fonts.googleapis.com/css?family=ZCOOL+XiaoWei&display=swap');
 
-button:focus {
-    outline: 0;
+
+a.bg-light:focus, a.bg-light:hover, button.bg-light:focus, button.bg-light:hover {
+    outline: 0!important;
+    background-color: #f8f9fa!important;
 }
 
 * {
     font-family: 'ZCOOL XiaoWei', serif;
 }
 
+html,
+body {
+    background-color: #f8f9fa!important;
+}
+
 .navbar {
     height: 60px!important;
+}
+
+.text-primary {
+    color: rgb(7, 58, 112)!important;
 }
 
 .vertical-nav {
@@ -19,7 +30,7 @@ button:focus {
     position: fixed;
     top: 60px;
     left: 0;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: .125rem .125rem .25rem rgba(0, 0, 0, 0.075);
     transition: all 0.4s;
 }
   
@@ -144,7 +155,7 @@ button:focus {
     background-size: cover;
     background-position-y: 40%;
     background-attachment: fixed;
-    opacity: 0.5;
+    opacity: 0.4;
     z-index: -1;
 }
 
@@ -153,6 +164,7 @@ button:focus {
     z-index: 999;
     font-size: 7rem;
     opacity: 1;
+    background-color: transparent;
 }
 
 .home-header2 {

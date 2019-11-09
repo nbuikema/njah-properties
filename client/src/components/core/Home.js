@@ -3,7 +3,7 @@ import React from 'react';
 const Home = () => (
     <div>
         <div className='home fixed'></div>
-        <div className='w-100 text-center'>
+        <div className='w-100 text-center text-primary'>
             <h1 className='home-header'>
                 NJAH Properties
             </h1>

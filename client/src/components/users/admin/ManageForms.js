@@ -115,7 +115,8 @@ const ManageForms = ({op}) => {
 
     return (
         <div>
-            <h1>{op} Forms</h1>
+            <h1 className='my-4'>{op} Form</h1>
+            <hr />
             {op === 'Add' && (
                 contactForm()
             )}

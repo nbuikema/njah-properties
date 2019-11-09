@@ -54,22 +54,24 @@ const Property = ({match}) => {
     );
 
     return (
-        <div className='container'>
-            <br />
-            <div className='row'>
-                <div className='col-sm-12 col-md-8'>
-                    {property._id && showImages()}
-                </div>
-                <div className='col-sm-12 col-md-4'>
-                    <h2>{property.address}</h2>
-                    <h4>{property.city}, {property.state}, {property.zip}</h4>
-                    <hr />
-                    <h6>Rent: ${property.rent}</h6>
-                    <h6>Size: {property.size} Sq Ft</h6>
-                    <h6>Beds: {property.beds}</h6>
-                    <h6>Baths: {property.baths}</h6>
-                    <h6>Additional Info:</h6>
-                    <p>{property.info}</p>
+        <div className='text-primary'>
+            <div className='container'>
+                <br />
+                <div className='row'>
+                    <div className='col-sm-12 col-md-8'>
+                        {property._id && showImages()}
+                    </div>
+                    <div className='col-sm-12 col-md-4'>
+                        <h2>{property.address}</h2>
+                        <h4>{property.city}, {property.state}, {property.zip}</h4>
+                        <hr />
+                        <h6>Rent: ${property.rent}</h6>
+                        <h6>Size: {property.size} Sq Ft</h6>
+                        <h6>Beds: {property.beds}</h6>
+                        <h6>Baths: {property.baths}</h6>
+                        <h6>Additional Info:</h6>
+                        <p>{property.info}</p>
+                    </div>
                 </div>
             </div>
         </div>
