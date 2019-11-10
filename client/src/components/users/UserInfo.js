@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import moment from 'moment';
 
 const UserInfo = ({user}) => {
@@ -9,23 +10,80 @@ const UserInfo = ({user}) => {
             <div className='col-6'>
                 <h1 className='my-4'>My Info</h1>
                 <hr />
-                <h5>First Name: {first_name}</h5>
-                <h5>Last Name: {last_name}</h5>
-                <h5>Email: {email}</h5>
-                <h5>Role: {role === 1 ? 'Admin' : 'Resident'}</h5>
-                <h5>Joined: {moment(createdAt).format('MMMM Do YYYY, h:mm:ss a')}</h5>
-                <h5>Last Updated: {moment(updatedAt).format('MMMM Do YYYY, h:mm:ss a')}</h5>
+                <h5 className='form-group row'>
+                    <label className='col-sm-4 col-form-label'><strong>First Name</strong></label>
+                    <div className='col-sm-8'>
+                        <span className='form-control-plaintext text-primary'><em>{first_name}</em></span>
+                    </div>
+                </h5>
+                <h5 className='form-group row'>
+                    <label className='col-sm-4 col-form-label'><strong>Last Name</strong></label>
+                    <div className='col-sm-8'>
+                        <span className='form-control-plaintext text-primary'><em>{last_name}</em></span>
+                    </div>
+                </h5>
+                <h5 className='form-group row'>
+                    <label className='col-sm-4 col-form-label'><strong>Email</strong></label>
+                    <div className='col-sm-8'>
+                        <span className='form-control-plaintext text-primary'><em>{email}</em></span>
+                    </div>
+                </h5>
+                <h5 className='form-group row'>
+                    <label className='col-sm-4 col-form-label'><strong>Role</strong></label>
+                    <div className='col-sm-8'>
+                        <span className='form-control-plaintext text-primary'><em>{role === 1 ? 'Admin' : 'Resident'}</em></span>
+                    </div>
+                </h5>
+                <h5 className='form-group row'>
+                    <label className='col-sm-4 col-form-label'><strong>Joined</strong></label>
+                    <div className='col-sm-8'>
+                        <span className='form-control-plaintext text-primary'><em>{moment(createdAt).format('MMMM Do YYYY, h:mm:ss a')}</em></span>
+                    </div>
+                </h5>
+                <h5 className='form-group row'>
+                    <label className='col-sm-4 col-form-label'><strong>Last Updated</strong></label>
+                    <div className='col-sm-8'>
+                        <span className='form-control-plaintext text-primary'><em>{moment(updatedAt).format('MMMM Do YYYY, h:mm:ss a')}</em></span>
+                    </div>
+                </h5>
             </div>
             {property && (
                 <div className='col-6'>
-                    <h1 className='my-4'>My Property Info</h1>
+                    <h1 className='my-4'>My Property</h1>
                     <hr />
-                    <h5>Address: {property.address}, {property.city}, {property.state}, {property.zip}</h5>
-                    <h5>Rent: ${property.rent}</h5>
-                    <h5>Size: {property.size} Sq Ft</h5>
-                    <h5>Beds: {property.beds}</h5>
-                    <h5>Baths: {property.baths}</h5>
-                    <h5>View Property Page</h5>
+                    <h5 className='form-group row'>
+                        <label className='col-sm-4 col-form-label'><strong>Address</strong></label>
+                        <div className='col-sm-8'>
+                            <span className='form-control-plaintext text-primary'><em>{property.address}, {property.city}, {property.state}, {property.zip}</em></span>
+                        </div>
+                    </h5>
+                    <h5 className='form-group row'>
+                        <label className='col-sm-4 col-form-label'><strong>Rent</strong></label>
+                        <div className='col-sm-8'>
+                            <span className='form-control-plaintext text-primary'><em>${property.rent}</em></span>
+                        </div>
+                    </h5>
+                    <h5 className='form-group row'>
+                        <label className='col-sm-4 col-form-label'><strong>Size</strong></label>
+                        <div className='col-sm-8'>
+                            <span className='form-control-plaintext text-primary'><em>{property.size} Sq Ft</em></span>
+                        </div>
+                    </h5>
+                    <h5 className='form-group row'>
+                        <label className='col-sm-4 col-form-label'><strong>Beds</strong></label>
+                        <div className='col-sm-8'>
+                            <span className='form-control-plaintext text-primary'><em>{property.beds}</em></span>
+                        </div>
+                    </h5>
+                    <h5 className='form-group row'>
+                        <label className='col-sm-4 col-form-label'><strong>Baths</strong></label>
+                        <div className='col-sm-8'>
+                            <span className='form-control-plaintext text-primary'><em>{property.baths}</em></span>
+                        </div>
+                    </h5>
+                    <h5 className='form-group row'>
+                        <label className='col-sm-12 col-form-label text-center'><Link to={`/properties/${property._id}`}><strong>View My Property's Page</strong></Link></label>
+                    </h5>
                 </div>
             )}
         </div>
