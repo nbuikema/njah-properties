@@ -12,10 +12,10 @@ a.bg-light:focus, a.bg-light:hover, button.bg-light:focus, button.bg-light:hover
 
 .logo {
     transform: scale(.23);
-    position: absolute;
-    top: -95px;
-    left: -80px;
     border-radius: 50%;
+    position: absolute;
+    top: -126px;
+    left: -100px;
 }
 
 html,
@@ -254,6 +254,9 @@ body {
 
 .brand-fix,
 .brand-fix:hover {
+    position: absolute;
+    width: 0;
+    height: 0;
     color: inherit;
     text-decoration: none;
     color: rgb(7, 58, 112);
@@ -285,6 +288,6 @@ body {
         border-radius: 50%;
         position: relative;
         top: -130px;
-        left: 0;
+        left: -125px;
     }
 }
