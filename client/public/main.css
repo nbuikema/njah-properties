@@ -10,6 +10,14 @@ a.bg-light:focus, a.bg-light:hover, button.bg-light:focus, button.bg-light:hover
     font-family: 'ZCOOL XiaoWei', serif;
 }
 
+.logo {
+    transform: scale(.23);
+    position: absolute;
+    top: -95px;
+    left: -80px;
+    border-radius: 50%;
+}
+
 html,
 body {
     background-color: #f8f9fa!important;
@@ -156,12 +164,12 @@ body {
     background-position-y: 40%;
     background-attachment: fixed;
     opacity: 0.4;
-    z-index: -1;
+    z-index: 0;
 }
 
 .home-header {
+    position: relative;
     margin-top: calc(25vh - 60px);
-    z-index: 999;
     font-size: 7rem;
     opacity: 1;
     background-color: transparent;
@@ -259,9 +267,24 @@ body {
         left: 0;
         text-align: center;
         z-index: 0;
+        height: 0;
     }
 
     .navbar-nav {
         z-index: 1;
+    }
+
+    .navbar-expand-lg .navbar-nav .nav-link {
+        padding-right: 0;
+        padding-left: 0;
+        margin: 0 0.8rem;
+    }
+
+    .logo {
+        transform: scale(.45);
+        border-radius: 50%;
+        position: relative;
+        top: -130px;
+        left: 0;
     }
 }

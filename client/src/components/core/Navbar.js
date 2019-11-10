@@ -2,6 +2,8 @@ import React from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import {isAuth, signout} from '../auth/apiAuth';
 
+import logo from './logo.png';
+
 const isActive = (history, path) => {
     if(history.location.pathname === path) {
         return true;
@@ -14,7 +16,7 @@ const Navbar = ({history}) => (
             <div className='container-fluid'>
                 <div className='navbar-brand abs'>
                     <Link className='brand-fix' to='/'>
-                        NJAH Properties
+                        <img className='logo shadow-lg' src={logo} />
                     </Link>
                 </div>
                 <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#collapsingNavbar">

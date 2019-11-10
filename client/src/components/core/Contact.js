@@ -183,7 +183,7 @@ const Contact = () => {
                     <div className='col-4 text-center'>
                         <div>
                             <h1>Forms</h1>
-                            <br />
+                            <hr />
                             {forms.map((form, i) => (
                                 <div key={i}>
                                     <a href={`${form.file.url}`} target='_blank' rel="noopener noreferrer">{form.name}</a>
@@ -191,11 +191,10 @@ const Contact = () => {
                             ))}
                         </div>
                         <br />
-                        <hr />
                         <br />
                         <div>
                             <h1>Contact Info</h1>
-                            <br />
+                            <hr />
                             <h6>Telephone</h6>
                             <a href="tel:1234567890">123-456-7890</a>
                             <hr />
