@@ -259,18 +259,18 @@ const Properties = () => {
                     {!selected && filteredProperties.length === 0 && properties.map(property => (
                         <div key={property._id} class="card bg-light">
                             <div class="row no-gutters">
-                                <div class="col-6">
+                                <h5 className="card-title w-100 text-center mt-2"><strong>{property.address}, {property.city}, {property.state}, {property.zip}</strong></h5>
+                                <div class="col-6 col-sm-12 col-lg-7">
                                     {property.images.length > 0 && <img src={`${property.images[0].url}`} className="card-img" alt={`${property.address}`} />}
                                 </div>
-                                <div class="col-6">
-                                    <div class="card-body">
-                                        <h5 className="card-title">{property.address}</h5>
-                                        <p className="card-text">{property.city}, {property.state}, {property.zip}</p>
-                                        <Link className='btn btn-primary' to={`/properties/${property._id}`}>More Info</Link>
-                                        <button className='btn btn-secondary' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
-                                            Show on Map
-                                        </button>
-                                    </div>
+                                <div class="col-6 col-sm-12 col-lg-5 px-2 mt-2">
+                                    <h6>Rent: ${property.rent}</h6>
+                                    <h6>Size: {property.size} Sq Ft</h6>
+                                    <Link className='btn btn-primary mt-1 w-100' to={`/properties/${property._id}`}>More Info</Link>
+                                    <button className='markerbtn mt-1 outline w-100' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
+                                        <div className='marker'></div>
+                                        <div className='marker-card-text'>Locate</div>
+                                    </button>
                                 </div>
                             </div>
                         </div>

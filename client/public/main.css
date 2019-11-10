@@ -85,6 +85,7 @@ body {
 
 .card {
     width: 100%;
+    margin-bottom: -10px;
 }
 
 .markerbtn {
@@ -112,6 +113,21 @@ body {
     margin-left: -8px;
     margin-top: -8px;
     background-color: rgb(7, 58, 112);
+}
+
+.marker-card-text {
+    position: relative;
+    top: -24px;
+    left: 4px;
+    color: rgb(7, 58, 112);
+}
+
+.outline {
+    border: 2px solid rgb(7, 58, 112);
+    max-height: 44px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    border-radius: .25rem;
 }
 
 #sidebar {
