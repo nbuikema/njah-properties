@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react';
+import moment from 'moment';
 import {createProperty, deleteProperty} from '../apiUsers';
 import {readAllProperties} from '../../properties/apiProperties';
 import {isAuth} from '../../auth/apiAuth';
@@ -100,16 +101,13 @@ const ManageProperties = ({op}) => {
     };
 
     const showAllPropertiesDropdown = () => op !== 'Add' && (
-        <form>
-            <div className="form-group">
-                <label htmlFor="selectProperty">Select Property</label>
-                <select value={selectedProperty._id} onChange={selectProperty} className="form-control" id="selectProperty">
-                    <option value='-1'>Select Property</option>
-                    {properties.map((property, i) => (
-                        <option value={property._id} key={i}>{property.address}, {property.city}, {property.state}, {property.zip}</option>
-                    ))}
-                </select>
-            </div>
+        <form className='mt-2'>
+            <select value={selectedProperty._id} onChange={selectProperty} className="form-control text-primary" id="selectProperty">
+                <option value='-1'>Select Property</option>
+                {properties.map((property, i) => (
+                    <option value={property._id} key={i}>{property.address}, {property.city}, {property.state}, {property.zip}</option>
+                ))}
+            </select>
         </form>
     );
 
@@ -198,12 +196,14 @@ const ManageProperties = ({op}) => {
     const showSelectedPropertyInfo = () => (
         <form encType="multipart/form-data">
             <div className='row'>
-                <div className="form-group col-12 row">
-                    <label htmlFor="id" className="col-sm-3 col-lg-2 col-form-label">ID</label>
-                    <div className="col-sm-9">
-                        <input type="text" readOnly className="form-control" id="id" value={op === 'Add' ? `${_id}` : `${selectedProperty._id}`} />
+                {op !== 'Add' && (
+                    <div className="form-group col-12 row">
+                        <label htmlFor="id" className="col-sm-3 col-lg-2 col-form-label">ID</label>
+                        <div className="col-sm-9">
+                            <input type="text" readOnly className="form-control" id="id" value={op === 'Add' ? `${_id}` : `${selectedProperty._id}`} />
+                        </div>
                     </div>
-                </div>
+                )}
                 <div className="form-group col-12 col-lg-6 row">
                     <label htmlFor="address" className="col-sm-3 col-form-label">Address</label>
                     <div className="col-sm-9">
@@ -228,18 +228,22 @@ const ManageProperties = ({op}) => {
                         <input onChange={changePropertyInfo('zip')} type="text" className="form-control" id="zip" value={op === 'Add' ? `${zip}` : `${selectedProperty.zip}`} />
                     </div>
                 </div>
-                <div className="form-group col-12 col-lg-6 row">
-                    <label htmlFor="id" className="col-sm-3 col-form-label">Latitude</label>
-                    <div className="col-sm-9">
-                        <input type="text" readOnly className="form-control" id="id" value={op === 'Add' ? `${lat}` : `${selectedProperty.lat}`} />
-                    </div>
-                </div>
-                <div className="form-group col-12 col-lg-6 row">
-                    <label htmlFor="id" className="col-sm-3 col-form-label">Longitude</label>
-                    <div className="col-sm-9">
-                        <input type="text" readOnly className="form-control" id="id" value={op === 'Add' ? `${long}` : `${selectedProperty.long}`} />
-                    </div>
-                </div>
+                {op !== 'Add' && (
+                    <>
+                        <div className="form-group col-12 col-lg-6 row">
+                            <label htmlFor="id" className="col-sm-3 col-form-label">Latitude</label>
+                            <div className="col-sm-9">
+                                <input type="text" className="form-control" id="id" value={op === 'Add' ? `${lat}` : `${selectedProperty.lat}`} />
+                            </div>
+                        </div>
+                        <div className="form-group col-12 col-lg-6 row">
+                            <label htmlFor="id" className="col-sm-3 col-form-label">Longitude</label>
+                            <div className="col-sm-9">
+                                <input type="text" className="form-control" id="id" value={op === 'Add' ? `${long}` : `${selectedProperty.long}`} />
+                            </div>
+                        </div>
+                    </>
+                )}
                 <div className="form-group col-12 col-lg-6 row">
                     <label htmlFor="rent" className="col-sm-3 col-form-label">Rent</label>
                     <div className="col-sm-9">
@@ -270,16 +274,16 @@ const ManageProperties = ({op}) => {
                         <textarea onChange={changePropertyInfo('info')} className="form-control" id="info" rows='4' value={op === 'Add' ? `${info}` : `${selectedProperty.info}`}></textarea>
                     </div>
                 </div>
-                {showImageField()}
-                {images.length > 0 && showImageField()}
-                {images.length > 1 && showImageField()}
-                {images.length > 2 && showImageField()}
-                {images.length > 3 && showImageField()}
-                {images.length > 4 && showImageField()}
-                {images.length > 5 && showImageField()}
-                {images.length > 6 && showImageField()}
-                {images.length > 7 && showImageField()}
-                {images.length > 8 && showImageField()}
+                {op === 'Add' && showImageField()}
+                {op === 'Add' && images.length > 0 && showImageField()}
+                {op === 'Add' && images.length > 1 && showImageField()}
+                {op === 'Add' && images.length > 2 && showImageField()}
+                {op === 'Add' && images.length > 3 && showImageField()}
+                {op === 'Add' && images.length > 4 && showImageField()}
+                {op === 'Add' && images.length > 5 && showImageField()}
+                {op === 'Add' && images.length > 6 && showImageField()}
+                {op === 'Add' && images.length > 7 && showImageField()}
+                {op === 'Add' && images.length > 8 && showImageField()}
                 <div className="form-group col-12 row">
                     <label htmlFor="available" className="col-sm-auto col-form-label">Is this property currently available?</label>
                     <div className="col-sm-auto">
@@ -293,18 +297,22 @@ const ManageProperties = ({op}) => {
                         </div>
                     </div>
                 </div>
-                <div className="form-group col-12 col-lg-6 row">
-                    <label htmlFor="id" className="col-sm-4 col-form-label">Added</label>
-                    <div className="col-sm-8">
-                        <input type="text" readOnly className="form-control" id="id" value={op === 'Add' ? `${createdAt}` : `${selectedProperty.createdAt}`} />
-                    </div>
-                </div>
-                <div className="form-group col-12 col-lg-6 row">
-                    <label htmlFor="id" className="col-sm-4 col-form-label">Last Updated</label>
-                    <div className="col-sm-8">
-                        <input type="text" readOnly className="form-control" id="id" value={op === 'Add' ? `${updatedAt}` : `${selectedProperty.updatedAt}`} />
-                    </div>
-                </div>
+                {op !== 'Add' && (
+                    <>
+                        <div className="form-group col-12 col-lg-6 row">
+                            <label htmlFor="id" className="col-sm-4 col-form-label">Added</label>
+                            <div className="col-sm-8">
+                                <input type="text" readOnly className="form-control" id="id" value={op === 'Add' ? `${createdAt}` : `${moment(selectedProperty.createdAt).format('MMMM Do YYYY, h:mm:ss a')}`} />
+                            </div>
+                        </div>
+                        <div className="form-group col-12 col-lg-6 row">
+                            <label htmlFor="id" className="col-sm-4 col-form-label">Last Updated</label>
+                            <div className="col-sm-8">
+                                <input type="text" readOnly className="form-control" id="id" value={op === 'Add' ? `${updatedAt}` : `${moment(selectedProperty.updatedAt).format('MMMM Do YYYY, h:mm:ss a')}`} />
+                            </div>
+                        </div>
+                    </>
+                )}
             </div>
             <div className='text-center'>
                 {op === 'Add' && <button onClick={addProperty} type='submit' className='btn btn-primary'>Create Property</button>}
@@ -315,10 +323,16 @@ const ManageProperties = ({op}) => {
     );
 
     return (
-        <div>
-            <h1 className='my-4'>{op} Property</h1>
+        <div className='my-4'>
+            <div className='row'>
+                <div className='col-auto'>
+                    <h1>{op} Property</h1>
+                </div>
+                <div className='col-auto'>
+                    {showAllPropertiesDropdown()}
+                </div>
+            </div>
             <hr />
-            {showAllPropertiesDropdown()}
             {showSelectedPropertyInfo()}
         </div>
     );
