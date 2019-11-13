@@ -251,6 +251,11 @@ body {
 .active {
     border-bottom: 2px solid rgb(7, 58, 112);
     padding-bottom: 0;
+    margin-bottom: 6px;
+}
+
+.selector {
+    margin-left: 1rem;
 }
 
 .nav-link {
@@ -258,6 +263,8 @@ body {
     letter-spacing: 1px;
     text-transform: uppercase;
     color: rgb(7, 58, 112)!important;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .nav-link:after {
