@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react';
+import moment from 'moment';
 import {readAllMessages, readMessagesWithQuery, readMyMessages} from './apiUsers';
 import {readAllUsers} from './apiUsers';
 import {isAuth} from '../auth/apiAuth';
@@ -87,10 +88,10 @@ const Messages = ({role}) => {
     };
 
     const showFilters = () => (
-        <form className='mt-3'>
+        <form className='mt-2'>
             <div className='form-row'>
                 <div className='form-group col-auto'>
-                    <select value={type} onChange={changeFilters('type')} id="type" className="form-control">
+                    <select value={type} onChange={changeFilters('type')} id="type" className="form-control text-primary">
                         <option value=''>Type (Any)</option>
                         <option value='General'>General Contact</option>
                         <option value='Resident'>Resident Contact</option>
@@ -100,7 +101,7 @@ const Messages = ({role}) => {
                 {type.length > 0 && (
                     <div className='form-group col-auto'>
                         {type === 'General' && (
-                            <select value={reason} onChange={changeFilters('reason')} id="reason" className="form-control">
+                            <select value={reason} onChange={changeFilters('reason')} id="reason" className="form-control text-primary">
                                 <option value=''>Reason (Any)</option>
                                 <option value='Property Inquiry'>Property Inquiry</option>
                                 <option value='Property Application'>Property Application</option>
@@ -108,7 +109,7 @@ const Messages = ({role}) => {
                             </select>
                         )}
                         {(type === 'Resident' || type === 'Maintenance') && (
-                            <select value={user} onChange={changeFilters('user')} id="user" className="form-control">
+                            <select value={user} onChange={changeFilters('user')} id="user" className="form-control text-primary">
                                 <option value=''>Resident (Any)</option>
                                 {users.map((user, i) => (
                                     <option value={`${user._id}`} key={i}>{user.last_name}, {user.first_name}</option>
@@ -118,7 +119,7 @@ const Messages = ({role}) => {
                     </div>
                 )}
                 <div className='form-group col-auto'>
-                    <select value={sort} onChange={changeFilters('sort')} id="sort" className="form-control">
+                    <select value={sort} onChange={changeFilters('sort')} id="sort" className="form-control text-primary">
                         <option value=''>Sort By</option>
                         <option value='createdAt desc'>Date (Newest First)</option>
                         <option value='createdAt asc'>Date (Oldest First)</option>
@@ -132,30 +133,36 @@ const Messages = ({role}) => {
     );
 
     return (
-        <div>
-            <h1 className='my-4'>{role === 0 && 'Sent'} Messages</h1>
+        <div className='my-4'>
+            <div className='row'>
+                <div className='col-auto'>
+                    <h1>{role === 0 && 'Sent'} Messages</h1>
+                </div>
+                <div className='col-auto'>
+                    {role === 1 && showFilters()}
+                </div>
+            </div>
             <hr />
-            {role === 1 && showFilters()}
             {filteredMessages.length === 0 && messages.map((message, i) => (
                 <div key={i}>
                     {i !== 0 && <hr />}
                     <div className='row'>
                         <div className='col-6'>
-                            <h6>Name: {message.last_name}, {message.first_name}</h6>
-                            <h6>Email: {message.email}</h6>
-                            <h6>Phone: {message.phone}</h6>
-                            <h6>Sent: {message.createdAt}</h6>
+                            <h5><strong>Name:</strong> <em>{message.last_name}, {message.first_name}</em></h5>
+                            <h5><strong>Email:</strong> <em>{message.email}</em></h5>
+                            <h5><strong>Phone:</strong> <em>{message.phone}</em></h5>
+                            <h5><strong>Sent:</strong> <em>{moment(message.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</em></h5>
                         </div>
                         <div className='col-6'>
-                            <h6>Type: {message.type}</h6>
-                            <h6>Reason: {message.reason}</h6>
+                            <h5><strong>Type:</strong> <em>{message.type}</em></h5>
+                            <h5><strong>Reason:</strong> <em>{message.reason}</em></h5>
                             {message.property && (
-                                <h6>Property: {message.property.address}, {message.property.city}, {message.property.state}, {message.property.zip}</h6>
+                                <h5><strong>Property:</strong> <em>{message.property.address}, {message.property.city}, {message.property.state}, {message.property.zip}</em></h5>
                             )}
                             {message.application && (
-                                <h6>Application: <a href={`${message.application.url}`} target='_blank' rel="noopener noreferrer">View Application</a></h6>
+                                <h5><strong>Application:</strong> <em><a href={`${message.application.url}`} target='_blank' rel="noopener noreferrer">View Application</a></em></h5>
                             )}
-                            <h6>Message: {message.message}</h6>
+                            <h5><strong>Message:</strong> <em>{message.message}</em></h5>
                         </div>
                     </div>
                 </div>
@@ -165,21 +172,21 @@ const Messages = ({role}) => {
                     {i !== 0 && <hr />}
                     <div className='row'>
                         <div className='col-6'>
-                            <h6>Name: {message.last_name}, {message.first_name}</h6>
-                            <h6>Email: {message.email}</h6>
-                            <h6>Phone: {message.phone}</h6>
-                            <h6>Sent: {message.createdAt}</h6>
+                            <h5><strong>Name:</strong> {message.last_name}, {message.first_name}</h5>
+                            <h5><strong>Email:</strong> {message.email}</h5>
+                            <h5><strong>Phone:</strong> {message.phone}</h5>
+                            <h5><strong>Sent:</strong> <em>{moment(message.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</em></h5>
                         </div>
                         <div className='col-6'>
-                            <h6>Type: {message.type}</h6>
-                            <h6>Reason: {message.reason}</h6>
+                            <h5><strong>Type:</strong> {message.type}</h5>
+                            <h5><strong>Reason:</strong> {message.reason}</h5>
                             {message.property && (
-                                <h6>Property: {message.property.address}, {message.property.city}, {message.property.state}, {message.property.zip}</h6>
+                                <h5><strong>Property:</strong> {message.property.address}, {message.property.city}, {message.property.state}, {message.property.zip}</h5>
                             )}
                             {message.application && (
-                                <h6>Application: <a href={`${message.application.url}`} target='_blank' rel="noopener noreferrer">View Application</a></h6>
+                                <h5><strong>Application:</strong> <a href={`${message.application.url}`} target='_blank' rel="noopener noreferrer">View Application</a></h5>
                             )}
-                            <h6>Message: {message.message}</h6>
+                            <h5><strong>Message:</strong> {message.message}</h5>
                         </div>
                     </div>
                 </div>
