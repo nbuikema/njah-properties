@@ -56,26 +56,6 @@ body {
     width: 100%;
     margin: 0;
 }
-  
-@media (max-width: 768px) {
-    #sidebar {
-        margin-left: -15rem;
-    }
-
-    #sidebar.dashboard-active {
-        margin-left: 0;
-    }
-
-    #content {
-        width: 100%;
-        margin: 0;
-    }
-
-    #content.dashboard-active {
-        margin-left: 15rem;
-        width: calc(100% - 15rem);
-    }
-}
 
 #map {
     position: fixed;

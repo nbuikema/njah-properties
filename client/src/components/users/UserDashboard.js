@@ -88,10 +88,10 @@ const UserDashboard = () => {
             <div className={`vertical-nav bg-light ${!sidebar && 'dashboard-active'}`} id="sidebar">
                 <div className="py-3 px-3 bg-white shadow-sm">
                     <div className="media d-flex align-items-center">
-                    <div className="media-body">
-                        <h4 className="m-0 bg-white">{first_name} {last_name}</h4>
-                        <p className="font-weight-light mb-0 bg-white">{role === 1 ? 'Admin' : 'Resident'}</p>
-                    </div>
+                        <div className="media-body">
+                            <h4 className="m-0 bg-white">{first_name} {last_name}</h4>
+                            <p className="font-weight-light mb-0 bg-white">{role === 1 ? 'Admin' : 'Resident'}</p>
+                        </div>
                     </div>
                 </div>
                 <p className="font-weight-bold px-3 pb-1 mt-4 mb-0">Main</p>
