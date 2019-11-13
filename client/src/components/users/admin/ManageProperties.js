@@ -284,11 +284,11 @@ const ManageProperties = ({op}) => {
                     <label htmlFor="available" className="col-sm-auto col-form-label">Is this property currently available?</label>
                     <div className="col-sm-auto">
                         <div className="form-check form-check-inline">
-                            <input onChange={changePropertyInfo('available')} className="form-check-input" type="radio" name="available" id="availableyes" value="true" />
+                            <input onChange={changePropertyInfo('available')} checked={available === true} className="form-check-input" type="radio" name="available" id="availableyes" value="true" />
                             <label className="form-check-label" htmlFor="availableyes">Yes</label>
                         </div>
                         <div className="form-check form-check-inline">
-                            <input onChange={changePropertyInfo('available')} className="form-check-input" type="radio" name="available" id="availableno" value="false" checked />
+                            <input onChange={changePropertyInfo('available')} checked={available === false} className="form-check-input" type="radio" name="available" id="availableno" value="false" />
                             <label className="form-check-label" htmlFor="availableno">No</label>
                         </div>
                     </div>

@@ -119,7 +119,6 @@ body {
     position: relative;
     top: -24px;
     left: 4px;
-    color: rgb(7, 58, 112);
 }
 
 .outline {
@@ -128,6 +127,14 @@ body {
     overflow-x: hidden;
     overflow-y: hidden;
     border-radius: .25rem;
+    color: rgb(7, 58, 112);
+    transition: all 150ms ease-in-out;
+}
+
+.outline:hover {
+    background-color: rgb(7, 58, 112);
+    color: white;
+    transition: all 150ms ease-in-out;
 }
 
 #sidebar {
