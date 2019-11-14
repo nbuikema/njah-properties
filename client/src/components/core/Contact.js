@@ -87,7 +87,7 @@ const Contact = () => {
                         </div>
                         <div className='form-group'>
                             <label htmlFor='message'>Anything Else We Should Know?</label>
-                            <textarea onChange={onChange('message')} value={message} rows='4' className='form-control' id='message' aria-describedby='message'></textarea>
+                            <textarea onChange={onChange('message')} value={message} rows='4' className='form-control text-primary' id='message' aria-describedby='message'></textarea>
                         </div>
                     </div>
                 );
@@ -105,11 +105,11 @@ const Contact = () => {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='application'>Upload Application&nbsp;</label>
-                                <input onChange={onChange('application')} type='file' accept='*' id='application' name='application' />
+                                <input onChange={onChange('application')} type='file' accept='*' id='application' name='application' className='text-primary' />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='message'>Anything Else We Should Know?</label>
-                                <textarea onChange={onChange('message')} value={message} rows='4' className='form-control' id='message' aria-describedby='message'></textarea>
+                                <textarea onChange={onChange('message')} value={message} rows='4' className='form-control text-primary' id='message' aria-describedby='message'></textarea>
                             </div>
                         </div>
                     );
@@ -117,7 +117,7 @@ const Contact = () => {
                 return (
                     <div className='form-group'>
                         <label htmlFor='message'>How Can We Help?</label>
-                        <textarea onChange={onChange('message')} value={message} rows='4' className='form-control' id='message' aria-describedby='message'></textarea>
+                        <textarea onChange={onChange('message')} value={message} rows='4' className='form-control text-primary' id='message' aria-describedby='message'></textarea>
                     </div>
                 );
             default:
@@ -131,13 +131,13 @@ const Contact = () => {
                 <div className='col-sm-12 col-md-6'>
                     <div className='form-group'>
                         <label htmlFor='first_name'>First Name</label>
-                        <input onChange={onChange('first_name')} value={first_name} type='text' className='form-control' id='first_name' aria-describedby='firstName' />
+                        <input onChange={onChange('first_name')} value={first_name} type='text' className='form-control text-primary' id='first_name' aria-describedby='firstName' />
                     </div>
                 </div>
                 <div className='col-sm-12 col-md-6'>
                     <div className='form-group'>
                         <label htmlFor='last_name'>Last Name</label>
-                        <input onChange={onChange('last_name')} value={last_name} type='text' className='form-control' id='last_name' aria-describedby='lastName' />
+                        <input onChange={onChange('last_name')} value={last_name} type='text' className='form-control text-primary' id='last_name' aria-describedby='lastName' />
                     </div>
                 </div>
             </div>
@@ -145,13 +145,13 @@ const Contact = () => {
                 <div className='col-md-12 col-lg-6'>
                     <div className='form-group'>
                         <label htmlFor='email'>Email Address</label>
-                        <input onChange={onChange('email')} value={email} type='email' className='form-control' id='email' aria-describedby='email' />
+                        <input onChange={onChange('email')} value={email} type='email' className='form-control text-primary' id='email' aria-describedby='email' />
                     </div>
                 </div>
                 <div className='col-md-12 col-lg-6'>
                     <div className='form-group'>
                         <label htmlFor='phone'>Phone Number</label>
-                        <input onChange={onChange('phone')} value={phone} type='tel' className='form-control' id='phone' aria-describedby='phone' />
+                        <input onChange={onChange('phone')} value={phone} type='tel' className='form-control text-primary' id='phone' aria-describedby='phone' />
                     </div>
                 </div>
             </div>

@@ -33,14 +33,14 @@ const Signin = () => {
         <form className='mt-3'>
             <div className='form-group'>
                 <label htmlFor='email'>Email Address</label>
-                <input onChange={onChange('email')} value={email} type='email' className='form-control' id='email' aria-describedby='email' />
+                <input onChange={onChange('email')} value={email} type='email' className='form-control text-primary' id='email' aria-describedby='email' />
             </div>
             <div className='form-group'>
                 <label htmlFor='password'>Password</label>
-                <input onChange={onChange('password')} value={password} type='password' className='form-control' id='password' />
+                <input onChange={onChange('password')} value={password} type='password' className='form-control text-primary' id='password' />
             </div>
             <div className='text-center'>
-                <button onClick={onSubmit} type='submit' className='btn btn-primary-inverse'>Sign In</button>
+                <button onClick={onSubmit} type='submit' className='btn btn-primary'>Sign In</button>
             </div>
         </form>
     );

@@ -65,13 +65,13 @@ const Maintenance = ({user}) => {
                 <div className='col-md-12 col-lg-6'>
                     <div className='form-group'>
                         <label htmlFor='phone'>Phone Number</label>
-                        <input onChange={onChange('phone')} value={phone} type='tel' className='form-control' id='phone' aria-describedby='phone' />
+                        <input onChange={onChange('phone')} value={phone} type='tel' className='form-control text-primary' id='phone' aria-describedby='phone' />
                     </div>
                 </div>
             </div>
             <div className="form-group">
                 <label htmlFor='reason'>What Can We Help With?</label>
-                <select onChange={onChange('reason')} className="form-control" id="reason" name="reason">
+                <select onChange={onChange('reason')} className="form-control text-primary" id="reason" name="reason">
                     <option value=''>Select One</option>
                     <option value='General Question'>General Question</option>
                     <option value='Payment'>Payment</option>
@@ -80,7 +80,7 @@ const Maintenance = ({user}) => {
             </div>
             <div className='form-group'>
                 <label htmlFor='message'>Anything Else We Should Know?</label>
-                <textarea onChange={onChange('message')} value={message} rows='4' className='form-control' id='message' aria-describedby='message'></textarea>
+                <textarea onChange={onChange('message')} value={message} rows='4' className='form-control text-primary' id='message' aria-describedby='message'></textarea>
             </div>
             <div className='text-center'>
                 <button onClick={onSubmit} type='submit' className='btn btn-primary'>Get In Touch</button>

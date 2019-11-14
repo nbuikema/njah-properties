@@ -162,9 +162,9 @@ const ManageProperties = ({op}) => {
 
     const showImageField = () => (
         <div className='form-group col-6 row'>
-            <label htmlFor='photos' className="col col-form-label">Upload Image</label>
+            <label htmlFor='photos' className="col col-form-label"><strong>Upload Image</strong></label>
             <div className='col'>
-                <input onChange={changePropertyInfo('photos')} type='file' accept='image/*' className='input-photos' />
+                <input onChange={changePropertyInfo('photos')} type='file' accept='image/*' className='input-photos mt-1 text-primary' />
             </div>
         </div>
     );
@@ -198,80 +198,80 @@ const ManageProperties = ({op}) => {
             <div className='row'>
                 {op !== 'Add' && (
                     <div className="form-group col-12 row">
-                        <label htmlFor="id" className="col-sm-3 col-lg-2 col-form-label">ID</label>
+                        <label htmlFor="id" className="col-sm-3 col-lg-2 col-form-label"><strong>ID</strong></label>
                         <div className="col-sm-9">
-                            <input type="text" readOnly className="form-control" id="id" value={op === 'Add' ? `${_id}` : `${selectedProperty._id}`} />
+                            <input type="text" readOnly className="form-control text-primary" id="id" value={op === 'Add' ? `${_id}` : `${selectedProperty._id}`} />
                         </div>
                     </div>
                 )}
                 <div className="form-group col-12 col-lg-6 row">
-                    <label htmlFor="address" className="col-sm-3 col-form-label">Address</label>
+                    <label htmlFor="address" className="col-sm-3 col-form-label"><strong>Address</strong></label>
                     <div className="col-sm-9">
-                        <input onChange={changePropertyInfo('address')} type="text" className="form-control" id="first_name" value={op === 'Add' ? `${address}` : `${selectedProperty.address}`} />
+                        <input onChange={changePropertyInfo('address')} type="text" className="form-control text-primary" id="first_name" value={op === 'Add' ? `${address}` : `${selectedProperty.address}`} />
                     </div>
                 </div>
                 <div className="form-group col-12 col-lg-6 row">
-                    <label htmlFor="city" className="col-sm-3 col-form-label">City</label>
+                    <label htmlFor="city" className="col-sm-3 col-form-label"><strong>City</strong></label>
                     <div className="col-sm-9">
-                        <input onChange={changePropertyInfo('city')} type="text" className="form-control" id="city" value={op === 'Add' ? `${city}` : `${selectedProperty.city}`} />
+                        <input onChange={changePropertyInfo('city')} type="text" className="form-control text-primary" id="city" value={op === 'Add' ? `${city}` : `${selectedProperty.city}`} />
                     </div>
                 </div>
                 <div className="form-group col-12 col-lg-6 row">
-                    <label htmlFor="state" className="col-sm-3 col-form-label">State</label>
+                    <label htmlFor="state" className="col-sm-3 col-form-label"><strong>State</strong></label>
                     <div className="col-sm-9">
-                        <input onChange={changePropertyInfo('state')} type="text" className="form-control" id="state" value={op === 'Add' ? `${state}` : `${selectedProperty.state}`} />
+                        <input onChange={changePropertyInfo('state')} type="text" className="form-control text-primary" id="state" value={op === 'Add' ? `${state}` : `${selectedProperty.state}`} />
                     </div>
                 </div>
                 <div className="form-group col-12 col-lg-6 row">
-                    <label htmlFor="zip" className="col-sm-3 col-form-label">Zip</label>
+                    <label htmlFor="zip" className="col-sm-3 col-form-label"><strong>Zip</strong></label>
                     <div className="col-sm-9">
-                        <input onChange={changePropertyInfo('zip')} type="text" className="form-control" id="zip" value={op === 'Add' ? `${zip}` : `${selectedProperty.zip}`} />
+                        <input onChange={changePropertyInfo('zip')} type="text" className="form-control text-primary" id="zip" value={op === 'Add' ? `${zip}` : `${selectedProperty.zip}`} />
                     </div>
                 </div>
                 {op !== 'Add' && (
                     <>
                         <div className="form-group col-12 col-lg-6 row">
-                            <label htmlFor="id" className="col-sm-3 col-form-label">Latitude</label>
+                            <label htmlFor="id" className="col-sm-3 col-form-label"><strong>Latitude</strong></label>
                             <div className="col-sm-9">
-                                <input type="text" className="form-control" id="id" value={op === 'Add' ? `${lat}` : `${selectedProperty.lat}`} />
+                                <input type="text" className="form-control text-primary" id="id" value={op === 'Add' ? `${lat}` : `${selectedProperty.lat}`} />
                             </div>
                         </div>
                         <div className="form-group col-12 col-lg-6 row">
-                            <label htmlFor="id" className="col-sm-3 col-form-label">Longitude</label>
+                            <label htmlFor="id" className="col-sm-3 col-form-label"><strong>Longitude</strong></label>
                             <div className="col-sm-9">
-                                <input type="text" className="form-control" id="id" value={op === 'Add' ? `${long}` : `${selectedProperty.long}`} />
+                                <input type="text" className="form-control text-primary" id="id" value={op === 'Add' ? `${long}` : `${selectedProperty.long}`} />
                             </div>
                         </div>
                     </>
                 )}
                 <div className="form-group col-12 col-lg-6 row">
-                    <label htmlFor="rent" className="col-sm-3 col-form-label">Rent</label>
+                    <label htmlFor="rent" className="col-sm-3 col-form-label"><strong>Rent</strong></label>
                     <div className="col-sm-9">
-                        <input onChange={changePropertyInfo('rent')} type="number" className="form-control" id="rent" value={op === 'Add' ? `${rent}` : `${selectedProperty.rent}`} />
+                        <input onChange={changePropertyInfo('rent')} type="number" className="form-control text-primary" id="rent" value={op === 'Add' ? `${rent}` : `${selectedProperty.rent}`} />
                     </div>
                 </div>
                 <div className="form-group col-12 col-lg-6 row">
-                    <label htmlFor="size" className="col-sm-3 col-form-label">Size (Sq Ft)</label>
+                    <label htmlFor="size" className="col-sm-3 col-form-label"><strong>Size (Sq Ft)</strong></label>
                     <div className="col-sm-9">
-                        <input onChange={changePropertyInfo('size')} type="number" className="form-control" id="size" value={op === 'Add' ? `${size}` : `${selectedProperty.size}`} />
+                        <input onChange={changePropertyInfo('size')} type="number" className="form-control text-primary" id="size" value={op === 'Add' ? `${size}` : `${selectedProperty.size}`} />
                     </div>
                 </div>
                 <div className="form-group col-12 col-lg-6 row">
-                    <label htmlFor="beds" className="col-sm-3 col-form-label">Beds</label>
+                    <label htmlFor="beds" className="col-sm-3 col-form-label"><strong>Beds</strong></label>
                     <div className="col-sm-9">
-                        <input onChange={changePropertyInfo('beds')} type="number" className="form-control" id="beds" value={op === 'Add' ? `${beds}` : `${selectedProperty.beds}`} />
+                        <input onChange={changePropertyInfo('beds')} type="number" className="form-control text-primary" id="beds" value={op === 'Add' ? `${beds}` : `${selectedProperty.beds}`} />
                     </div>
                 </div>
                 <div className="form-group col-12 col-lg-6 row">
-                    <label htmlFor="baths" className="col-sm-3 col-form-label">Baths</label>
+                    <label htmlFor="baths" className="col-sm-3 col-form-label"><strong>Baths</strong></label>
                     <div className="col-sm-9">
-                        <input onChange={changePropertyInfo('baths')} type="number" className="form-control" id="baths" value={op === 'Add' ? `${baths}` : `${selectedProperty.baths}`} />
+                        <input onChange={changePropertyInfo('baths')} type="number" className="form-control text-primary" id="baths" value={op === 'Add' ? `${baths}` : `${selectedProperty.baths}`} />
                     </div>
                 </div>
                 <div className="form-group col-12 row">
-                    <label htmlFor="info" className="col-sm-3 col-lg-2 col-form-label">Additional Info</label>
+                    <label htmlFor="info" className="col-sm-3 col-lg-2 col-form-label"><strong>Additional Info</strong></label>
                     <div className="col-sm-9">
-                        <textarea onChange={changePropertyInfo('info')} className="form-control" id="info" rows='4' value={op === 'Add' ? `${info}` : `${selectedProperty.info}`}></textarea>
+                        <textarea onChange={changePropertyInfo('info')} className="form-control text-primary" id="info" rows='4' value={op === 'Add' ? `${info}` : `${selectedProperty.info}`}></textarea>
                     </div>
                 </div>
                 {op === 'Add' && showImageField()}
@@ -285,30 +285,30 @@ const ManageProperties = ({op}) => {
                 {op === 'Add' && images.length > 7 && showImageField()}
                 {op === 'Add' && images.length > 8 && showImageField()}
                 <div className="form-group col-12 row">
-                    <label htmlFor="available" className="col-sm-auto col-form-label">Is this property currently available?</label>
-                    <div className="col-sm-auto">
+                    <label htmlFor="available" className="col-sm-auto col-form-label"><strong>Is this property currently available?</strong></label>
+                    <div className="col-sm-auto mt-1">
                         <div className="form-check form-check-inline">
                             <input onChange={changePropertyInfo('available')} checked={available === true} className="form-check-input" type="radio" name="available" id="availableyes" value="true" />
-                            <label className="form-check-label" htmlFor="availableyes">Yes</label>
+                            <label className="form-check-label text-primary" htmlFor="availableyes">Yes</label>
                         </div>
                         <div className="form-check form-check-inline">
                             <input onChange={changePropertyInfo('available')} checked={available === false} className="form-check-input" type="radio" name="available" id="availableno" value="false" />
-                            <label className="form-check-label" htmlFor="availableno">No</label>
+                            <label className="form-check-label text-primary" htmlFor="availableno">No</label>
                         </div>
                     </div>
                 </div>
                 {op !== 'Add' && (
                     <>
                         <div className="form-group col-12 col-lg-6 row">
-                            <label htmlFor="id" className="col-sm-4 col-form-label">Added</label>
+                            <label htmlFor="id" className="col-sm-4 col-form-label"><strong>Added</strong></label>
                             <div className="col-sm-8">
-                                <input type="text" readOnly className="form-control" id="id" value={op === 'Add' ? `${createdAt}` : `${moment(selectedProperty.createdAt).format('MMMM Do YYYY, h:mm:ss a')}`} />
+                                <input type="text" readOnly className="form-control text-primary" id="id" value={op === 'Add' ? `${createdAt}` : `${moment(selectedProperty.createdAt).format('MMMM Do YYYY, h:mm:ss a')}`} />
                             </div>
                         </div>
                         <div className="form-group col-12 col-lg-6 row">
-                            <label htmlFor="id" className="col-sm-4 col-form-label">Last Updated</label>
+                            <label htmlFor="id" className="col-sm-4 col-form-label"><strong>Last Updated</strong></label>
                             <div className="col-sm-8">
-                                <input type="text" readOnly className="form-control" id="id" value={op === 'Add' ? `${updatedAt}` : `${moment(selectedProperty.updatedAt).format('MMMM Do YYYY, h:mm:ss a')}`} />
+                                <input type="text" readOnly className="form-control text-primary" id="id" value={op === 'Add' ? `${updatedAt}` : `${moment(selectedProperty.updatedAt).format('MMMM Do YYYY, h:mm:ss a')}`} />
                             </div>
                         </div>
                     </>

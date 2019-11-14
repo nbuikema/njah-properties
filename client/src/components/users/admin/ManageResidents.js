@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react';
+import moment from 'moment';
 import {readAllUsers, updateUser, deleteUser} from '../apiUsers';
 import {readAllProperties} from '../../properties/apiProperties';
 import {isAuth} from '../../auth/apiAuth';
@@ -111,7 +112,7 @@ const ManageResidents = ({op}) => {
         <div className="form-group row">
             <label htmlFor="selectProperty" className='col-sm-4 col-form-label'>Assign Property</label>
             <div className='col-sm-8'>
-                <select value={selectedUser.property.length > 0 ? selectedUser.property : selectedProperty._id} onChange={selectProperty, changeUserInfo('property')} className="form-control" id="selectProperty">
+                <select value={selectedUser.property.length > 0 ? selectedUser.property : selectedProperty._id} onChange={selectProperty, changeUserInfo('property')} className="form-control text-primary" id="selectProperty">
                     <option value='-1'>Select Property (None)</option>
                     {properties.map((property, i) => (
                         <option value={property._id} key={i}>{property.address}, {property.city}, {property.state}, {property.zip}</option>
@@ -122,16 +123,13 @@ const ManageResidents = ({op}) => {
     );
 
     const showAllUsersDropdown = () => op !== 'Add' && (
-        <form>
-            <div className="form-group">
-                <label htmlFor="selectUser">Select User</label>
-                <select value={selectedUser._id} onChange={selectUser} className="form-control" id="selectUser">
-                    <option value='-1'>Select User</option>
-                    {users.map((user, i) => (
-                        <option value={user._id} key={i}>{user.last_name}, {user.first_name}</option>
-                    ))}
-                </select>
-            </div>
+        <form className='mt-2'>
+            <select value={selectedUser._id} onChange={selectUser} className="form-control text-primary" id="selectUser">
+                <option value='-1'>Select User</option>
+                {users.map((user, i) => (
+                    <option value={user._id} key={i}>{user.last_name}, {user.first_name}</option>
+                ))}
+            </select>
         </form>
     );
 
@@ -165,49 +163,57 @@ const ManageResidents = ({op}) => {
 
     const showSelectedUserInfo = () => (
         <form>
+            {op !== 'Add' && (
+                <div className="form-group row">
+                    <label htmlFor="id" className="col-sm-4 col-form-label"><strong>ID</strong></label>
+                    <div className="col-sm-8">
+                        <input type="text" readOnly className="form-control text-primary" id="id" value={op === 'Add' ? `${newUser._id}` : `${selectedUser._id}`} />
+                    </div>
+                </div>
+            )}
             <div className="form-group row">
-                <label htmlFor="id" className="col-sm-4 col-form-label">ID</label>
+                <label htmlFor="first_name" className="col-sm-4 col-form-label"><strong>First Name</strong></label>
                 <div className="col-sm-8">
-                    <input type="text" readOnly className="form-control" id="id" value={op === 'Add' ? `${newUser._id}` : `${selectedUser._id}`} />
+                    <input onChange={changeUserInfo('first_name')} type="text" className="form-control text-primary" id="first_name" value={op === 'Add' ? `${newUser.first_name}` : `${selectedUser.first_name}`} />
                 </div>
             </div>
             <div className="form-group row">
-                <label htmlFor="first_name" className="col-sm-4 col-form-label">First Name</label>
+                <label htmlFor="last_name" className="col-sm-4 col-form-label"><strong>Last Name</strong></label>
                 <div className="col-sm-8">
-                    <input onChange={changeUserInfo('first_name')} type="text" className="form-control" id="first_name" value={op === 'Add' ? `${newUser.first_name}` : `${selectedUser.first_name}`} />
+                    <input onChange={changeUserInfo('last_name')} type="text" className="form-control text-primary" id="last_name" value={op === 'Add' ? `${newUser.last_name}` : `${selectedUser.last_name}`} />
                 </div>
             </div>
             <div className="form-group row">
-                <label htmlFor="last_name" className="col-sm-4 col-form-label">Last Name</label>
+                <label htmlFor="email" className="col-sm-4 col-form-label"><strong>Email</strong></label>
                 <div className="col-sm-8">
-                    <input onChange={changeUserInfo('last_name')} type="text" className="form-control" id="last_name" value={op === 'Add' ? `${newUser.last_name}` : `${selectedUser.last_name}`} />
+                    <input onChange={changeUserInfo('email')} type="email" className="form-control text-primary" id="email" value={op === 'Add' ? `${newUser.email}` : `${selectedUser.email}`} />
                 </div>
             </div>
-            <div className="form-group row">
-                <label htmlFor="email" className="col-sm-4 col-form-label">Email</label>
-                <div className="col-sm-8">
-                    <input onChange={changeUserInfo('email')} type="email" className="form-control" id="email" value={op === 'Add' ? `${newUser.email}` : `${selectedUser.email}`} />
+            {op !== 'Add' && (
+                <div className="form-group row">
+                    <label htmlFor="role" className="col-sm-4 col-form-label"><strong>Role</strong></label>
+                    <div className="col-sm-8">
+                        <input onChange={changeUserInfo('role')} type="text" className="form-control text-primary" id="role" value={op === 'Add' ? `${newUser.role}` : `${selectedUser.role}`} />
+                    </div>
                 </div>
-            </div>
-            <div className="form-group row">
-                <label htmlFor="role" className="col-sm-4 col-form-label">Role</label>
-                <div className="col-sm-8">
-                    <input onChange={changeUserInfo('role')} type="text" className="form-control" id="role" value={op === 'Add' ? `${newUser.role}` : `${selectedUser.role}`} />
-                </div>
-            </div>
+            )}
             {showAllPropertiesDropdown()}
-            <div className="form-group row">
-                <label htmlFor="createdAt" className="col-sm-4 col-form-label">Registered</label>
-                <div className="col-sm-8">
-                    <input type="text" readOnly className="form-control" id="createdAt" value={op === 'Add' ? `${newUser.createdAt}` : `${selectedUser.createdAt}`} />
-                </div>
-            </div>
-            <div className="form-group row">
-                <label htmlFor="updatedAt" className="col-sm-4 col-form-label">Last Updated</label>
-                <div className="col-sm-8">
-                    <input type="text" readOnly className="form-control" id="updatedAt" value={op === 'Add' ? `${newUser.updatedAt}` : `${selectedUser.updatedAt}`} />
-                </div>
-            </div>
+            {op !== 'Add' && (
+                <>
+                    <div className="form-group row">
+                        <label htmlFor="createdAt" className="col-sm-4 col-form-label"><strong>Registered</strong></label>
+                        <div className="col-sm-8">
+                            <input type="text" readOnly className="form-control text-primary" id="createdAt" value={op === 'Add' ? `${newUser.createdAt}` : `${moment(selectedUser.createdAt).format('MMMM Do YYYY, h:mm:ss a')}`} />
+                        </div>
+                    </div>
+                    <div className="form-group row">
+                        <label htmlFor="updatedAt" className="col-sm-4 col-form-label"><strong>Last Updated</strong></label>
+                        <div className="col-sm-8">
+                            <input type="text" readOnly className="form-control text-primary" id="updatedAt" value={op === 'Add' ? `${newUser.updatedAt}` : `${moment(selectedUser.updatedAt).format('MMMM Do YYYY, h:mm:ss a')}`} />
+                        </div>
+                    </div>
+                </>
+            )}
             <div className='text-center'>
                 {op === 'Update' && <button onClick={updateUserClick} type='submit' className='btn btn-primary'>Update User</button>}
                 {op === 'Remove' && <button onClick={deleteUserClick} className='btn btn-danger'>Remove User</button>}
@@ -216,10 +222,16 @@ const ManageResidents = ({op}) => {
     );
 
     return (
-        <div>
-            <h1 className='my-4'>{op} Resident</h1>
+        <div className='my-4'>
+            <div className='row'>
+                <div className='col-auto'>
+                    <h1>{op} Resident</h1>
+                </div>
+                <div className='col-auto'>
+                    {showAllUsersDropdown()}
+                </div>
+            </div>
             <hr />
-            {showAllUsersDropdown()}
             {showSelectedUserInfo()}
         </div>
     );

@@ -49,15 +49,15 @@ const ManageForms = ({op}) => {
     const contactForm = () => (
         <form encType="multipart/form-data">
             <div className="form-group row">
-                <label htmlFor="name" className="col-sm-4 col-form-label">Name</label>
+                <label htmlFor="name" className="col-sm-4 col-form-label"><strong>Name</strong></label>
                 <div className="col-sm-8">
                     <input onChange={onChange('name')} type="text" className="form-control" id="name" value={name} />
                 </div>
             </div>
             <div className='form-group row'>
-            <label htmlFor='file' className="col-sm-4 col-form-label">Upload File</label>
+            <label htmlFor='file' className="col-sm-4 col-form-label"><strong>Upload File</strong></label>
             <div className='col-sm-8'>
-                <input onChange={onChange('file')} type='file' accept='*' id='file' />
+                <input onChange={onChange('file')} type='file' accept='*' id='file' className='mt-1 text-primary' />
             </div>
         </div>
             <div className='text-center'>
@@ -90,8 +90,8 @@ const ManageForms = ({op}) => {
     const showAllFormsDropdown = () => op !== 'Add' && (
         <form>
             <div className="form-group">
-                <label htmlFor="selectForm">Select Form</label>
-                <select value={selectedForm._id} onChange={selectForm} className="form-control" id="selectForm">
+                <label htmlFor="selectForm"><strong>Select Form</strong></label>
+                <select value={selectedForm._id} onChange={selectForm} className="form-control text-primary" id="selectForm">
                     <option value='-1'>Select Form</option>
                     {forms.map((form, i) => (
                         <option value={form._id} key={i}>{form.name}</option>
@@ -125,7 +125,7 @@ const ManageForms = ({op}) => {
                     {forms.length > 0 && showAllFormsDropdown()}
                     {selectedForm._id.length > 0 && (
                         <div>
-                            <h6>Is This The Right Form?</h6>
+                            <h6><strong>Is This The Right Form?</strong></h6>
                             <h6>
                                 <a href={`${selectedForm.file}`} target='_blank' rel="noopener noreferrer">{selectedForm.name}</a>
                             </h6>
