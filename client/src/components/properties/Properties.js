@@ -264,8 +264,31 @@ const Properties = () => {
                                     {property.images.length > 0 && <img src={`${property.images[0].url}`} className="card-img" alt={`${property.address}`} />}
                                 </div>
                                 <div class="col-6 col-sm-12 col-lg-5 px-2 mt-2">
-                                    <h6>Rent: ${property.rent}</h6>
-                                    <h6>Size: {property.size} Sq Ft</h6>
+                                    <h6><strong>Rent: </strong>${property.rent}</h6>
+                                    <h6><strong>Size: </strong>{property.size} Sq Ft</h6>
+                                    <h6><strong>Beds: </strong>{property.beds}</h6>
+                                    <h6><strong>Baths: </strong>{property.baths}</h6>
+                                </div>
+                            </div>
+                            <div className='btn-group'>
+                                <button className='markerbtn mt-1 outline w-100' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
+                                    <div className='marker'></div>
+                                    <div className='marker-card-text'>Locate</div>
+                                </button>
+                                <Link className='btn btn-primary mt-1 w-100' to={`/properties/${property._id}`}>More Info</Link>   
+                            </div>
+                        </div>
+                    ))}
+                    {!selected && filteredProperties.length > 0 && filteredProperties.map(property => (
+                        <div key={property._id} class="card bg-light">
+                            <div class="row no-gutters">
+                                <h5 className="card-title w-100 text-center mt-2"><strong>{property.address}, {property.city}, {property.state}, {property.zip}</strong></h5>
+                                <div class="col-6 col-sm-12 col-lg-7">
+                                    {property.images.length > 0 && <img src={`${property.images[0].url}`} className="card-img" alt={`${property.address}`} />}
+                                </div>
+                                <div class="col-6 col-sm-12 col-lg-5 px-2 mt-2">
+                                    <h6><strong>Rent:</strong> ${property.rent}</h6>
+                                    <h6><strong>Size:</strong> {property.size} Sq Ft</h6>
                                     <Link className='btn btn-primary mt-1 w-100' to={`/properties/${property._id}`}>More Info</Link>
                                     <button className='markerbtn mt-1 outline w-100' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
                                         <div className='marker'></div>
@@ -275,47 +298,23 @@ const Properties = () => {
                             </div>
                         </div>
                     ))}
-                    {!selected && filteredProperties.length > 0 && filteredProperties.map(property => (
-                        <div key={property._id} class="card bg-light">
-                            <div class="row no-gutters">
-                                <div class="col-6">
-                                    {property.images.length > 0 && <img src={`${property.images[0].url}`} className="card-img" alt={`${property.address}`} />}
-                                </div>
-                                <div class="col-6">
-                                    <div class="card-body">
-                                        <h5 className="card-title">{property.address}</h5>
-                                        <p className="card-text">{property.city}, {property.state}, {property.zip}</p>
-                                        <Link className='btn btn-primary' to={`/properties/${property._id}`}>More Info</Link>
-                                        <button className='btn btn-secondary' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
-                                            Show on Map
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
                     {selected && properties.map(property => {
                         if(selected === property._id) {
                             return (
                                 <div key={property._id} class="card bg-light">
                                     <div class="row no-gutters">
-                                        <div class="col-6">
+                                        <h5 className="card-title w-100 text-center mt-2"><strong>{property.address}, {property.city}, {property.state}, {property.zip}</strong></h5>
+                                        <div class="col-6 col-sm-12 col-lg-7">
                                             {property.images.length > 0 && <img src={`${property.images[0].url}`} className="card-img" alt={`${property.address}`} />}
                                         </div>
-                                        <div class="col-6">
-                                            <div class="card-body">
-                                                <h5 className="card-title">{property.address}</h5>
-                                                <p className="card-text">{property.city}, {property.state}, {property.zip}</p>
-                                                <p className="card-text">Rent: ${property.rent}</p>
-                                                <p className="card-text">Size: {property.size} Sq Ft</p>
-                                                <p className="card-text">Beds: {property.beds}</p>
-                                                <p className="card-text">Baths: {property.baths}</p>
-                                                <p className="card-text">Additional Info: {property.info}</p>
-                                                <Link className='btn btn-primary' to={`/properties/${property._id}`}>More Info</Link>
-                                                <button className='btn btn-secondary' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
-                                                    Show on Map
-                                                </button>
-                                            </div>
+                                        <div class="col-6 col-sm-12 col-lg-5 px-2 mt-2">
+                                            <h6><strong>Rent:</strong> ${property.rent}</h6>
+                                            <h6><strong>Size:</strong> {property.size} Sq Ft</h6>
+                                            <Link className='btn btn-primary mt-1 w-100' to={`/properties/${property._id}`}>More Info</Link>
+                                            <button className='markerbtn mt-1 outline w-100' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
+                                                <div className='marker'></div>
+                                                <div className='marker-card-text'>Locate</div>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

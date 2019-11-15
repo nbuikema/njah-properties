@@ -58,18 +58,18 @@ const Property = ({match}) => {
             <div className='container'>
                 <br />
                 <div className='row'>
-                    <div className='col-sm-12 col-md-8'>
+                    <div className='col-sm-12 col-md-8 order-1 order-md-0'>
                         {property._id && showImages()}
                     </div>
-                    <div className='col-sm-12 col-md-4'>
-                        <h2>{property.address}</h2>
-                        <h4>{property.city}, {property.state}, {property.zip}</h4>
+                    <div className='col-sm-12 col-md-4 order-0 order-md-1'>
+                        <h2><strong>{property.address}</strong></h2>
+                        <h4><em>{property.city}, {property.state}, {property.zip}</em></h4>
                         <hr />
-                        <h6>Rent: ${property.rent}</h6>
-                        <h6>Size: {property.size} Sq Ft</h6>
-                        <h6>Beds: {property.beds}</h6>
-                        <h6>Baths: {property.baths}</h6>
-                        <h6>Additional Info:</h6>
+                        <h6><strong>Rent:</strong> ${property.rent}</h6>
+                        <h6><strong>Size:</strong> {property.size} Sq Ft</h6>
+                        <h6><strong>Beds:</strong> {property.beds}</h6>
+                        <h6><strong>Baths:</strong> {property.baths}</h6>
+                        <h6><strong>Additional Info:</strong></h6>
                         <p>{property.info}</p>
                     </div>
                 </div>

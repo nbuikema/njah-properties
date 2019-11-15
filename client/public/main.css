@@ -65,7 +65,6 @@ body {
 
 .card {
     width: 100%;
-    margin-bottom: -10px;
 }
 
 .markerbtn {
@@ -138,10 +137,6 @@ body {
     top: 0;
     right: 0;
     z-index: 1;
-}
-
-.carousel-item img {
-    height: calc(80vh - 60px)!important;
 }
 
 .carousel-indicators {
@@ -299,5 +294,11 @@ body {
         position: relative;
         top: -130px;
         left: -125px;
+    }
+}
+
+@media (min-width: 992px) {
+    .carousel-item img {
+        height: calc(80vh - 60px);
     }
 }
