@@ -113,9 +113,35 @@ const ManageProperties = ({op}) => {
 
     const changePropertyInfo = selected => event => {
         let value = selected === 'photos' ? event.target.files[0] : event.target.value;
-        if(selected === 'photos') {
-            setImages([...images, value]);
-            formData.append(selected, value);
+        if(selected.includes('photos')) {
+            let target = selected.split(' ')[1];
+            let prop = selected.split(' ')[0];
+            if(value === undefined || value.length < 1) {
+                images.splice(target, 1);
+                let photos = formData.getAll('photos');
+                photos.splice(target, 1);
+                photos.map((photo, i) => {
+                    if(i === 0) {
+                        formData.set('photos', photo);
+                    } else {
+                        formData.append('photos', photo);
+                    }
+                });
+            } else if(target < images.length) {
+                images.splice(target, 1, value);
+                let photos = formData.getAll('photos');
+                photos.splice(target, 1, value);
+                photos.map((photo, i) => {
+                    if(i === 0) {
+                        formData.set('photos', photo);
+                    } else {
+                        formData.append('photos', photo);
+                    }
+                });
+            } else {
+                setImages([...images, value]);
+                formData.append(prop, value);
+            }
         } else {
             if(selected === 'available') {
                 if(value === 'true') {
@@ -159,15 +185,6 @@ const ManageProperties = ({op}) => {
             getAllProperties();
         });
     };
-
-    const showImageField = () => (
-        <div className='form-group col-6 row'>
-            <label htmlFor='photos' className="col col-form-label"><strong>Upload Image</strong></label>
-            <div className='col'>
-                <input onChange={changePropertyInfo('photos')} type='file' accept='image/*' className='input-photos mt-1 text-primary' />
-            </div>
-        </div>
-    );
 
     const deletePropertyClick = event => {
         event.preventDefault();
@@ -274,17 +291,58 @@ const ManageProperties = ({op}) => {
                         <textarea onChange={changePropertyInfo('info')} className="form-control text-primary" id="info" rows='4' value={op === 'Add' ? `${info}` : `${selectedProperty.info}`}></textarea>
                     </div>
                 </div>
-                {op === 'Add' && showImageField()}
-                {op === 'Add' && images.length > 0 && showImageField()}
-                {op === 'Add' && images.length > 1 && showImageField()}
-                {op === 'Add' && images.length > 2 && showImageField()}
-                {op === 'Add' && images.length > 3 && showImageField()}
-                {op === 'Add' && images.length > 4 && showImageField()}
-                {op === 'Add' && images.length > 5 && showImageField()}
-                {op === 'Add' && images.length > 6 && showImageField()}
-                {op === 'Add' && images.length > 7 && showImageField()}
-                {op === 'Add' && images.length > 8 && showImageField()}
-                <div className="form-group col-12 row">
+                <label htmlFor='photos' className="col-12 col-form-label"><strong>Upload Images (Up To 10)</strong></label>
+                {op === 'Add' && (
+                    <div className='col-auto'>
+                        <input onChange={changePropertyInfo('photos 0')} type='file' accept='image/*' className='input-photos mt-1 text-primary' />
+                    </div>
+                )}
+                {op === 'Add' && images.length > 0 && (
+                    <div className='col-auto'>
+                        <input onChange={changePropertyInfo('photos 1')} type='file' accept='image/*' className='input-photos mt-1 text-primary' />
+                    </div>
+                )}
+                {op === 'Add' && images.length > 1 && (
+                    <div className='col-auto'>
+                        <input onChange={changePropertyInfo('photos 2')} type='file' accept='image/*' className='input-photos mt-1 text-primary' />
+                    </div>
+                )}
+                {op === 'Add' && images.length > 2 && (
+                    <div className='col-auto'>
+                        <input onChange={changePropertyInfo('photos 3')} type='file' accept='image/*' className='input-photos mt-1 text-primary' />
+                    </div>
+                )}
+                {op === 'Add' && images.length > 3 && (
+                    <div className='col-auto'>
+                        <input onChange={changePropertyInfo('photos 4')} type='file' accept='image/*' className='input-photos mt-1 text-primary' />
+                    </div>
+                )}
+                {op === 'Add' && images.length > 4 && (
+                    <div className='col-auto'>
+                        <input onChange={changePropertyInfo('photos 5')} type='file' accept='image/*' className='input-photos mt-1 text-primary' />
+                    </div>
+                )}
+                {op === 'Add' && images.length > 5 && (
+                    <div className='col-auto'>
+                        <input onChange={changePropertyInfo('photos 6')} type='file' accept='image/*' className='input-photos mt-1 text-primary' />
+                    </div>
+                )}
+                {op === 'Add' && images.length > 6 && (
+                    <div className='col-auto'>
+                        <input onChange={changePropertyInfo('photos 7')} type='file' accept='image/*' className='input-photos mt-1 text-primary' />
+                    </div>
+                )}
+                {op === 'Add' && images.length > 7 && (
+                    <div className='col-auto'>
+                        <input onChange={changePropertyInfo('photos 8')} type='file' accept='image/*' className='input-photos mt-1 text-primary' />
+                    </div>
+                )}
+                {op === 'Add' && images.length > 8 && (
+                    <div className='col-auto'>
+                        <input onChange={changePropertyInfo('photos 9')} type='file' accept='image/*' className='input-photos mt-1 text-primary' />
+                    </div>
+                )}
+                <div className="form-group col-12 row mt-3">
                     <label htmlFor="available" className="col-sm-auto col-form-label"><strong>Is this property currently available?</strong></label>
                     <div className="col-sm-auto mt-1">
                         <div className="form-check form-check-inline">
