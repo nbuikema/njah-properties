@@ -120,18 +120,11 @@ body {
     max-width: 220px;
 }
 
-.fa-times {
-    position: relative;
-    top: 5px;
-    font-size: 1.8rem;
-    color: red;
-}
-
+.fa-times,
 .fa-check {
     position: relative;
     top: 5px;
-    font-size: 1.7rem;
-    color: green;
+    font-size: 1.8rem;
 }
 
 #sidebar {
