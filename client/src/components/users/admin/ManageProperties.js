@@ -114,14 +114,13 @@ const ManageProperties = ({op}) => {
     const changePropertyInfo = selected => event => {
         let value = selected.includes('photos') ? event.target.files[0] : event.target.value;
         if(selected.includes('photos')) {
-            console.log(value);
             let target = selected.split(' ')[1];
             let prop = selected.split(' ')[0];
             if(value === undefined || value.length < 1) {
-                images.splice(target, 1);
+                images.splice(target, 1, null);
                 setImages([...images]);
                 let photos = formData.getAll('photos');
-                photos.splice(target, 1);
+                photos.splice(target, 1, null);
                 photos.map((photo, i) => {
                     if(i === 0) {
                         formData.set('photos', photo);
@@ -211,6 +210,14 @@ const ManageProperties = ({op}) => {
                 long: ''
             });
         });
+    }
+
+    const findFileInputIndex = i => {
+        if(document.getElementsByClassName('input-photos')[i]) {
+            let inputIndex = document.getElementsByClassName('input-photos')[i].value;
+            console.log(inputIndex.length > 0 ? true : false);
+            return inputIndex.length > 0 ? true : false;
+        }
     }
 
     const showSelectedPropertyInfo = () => (
