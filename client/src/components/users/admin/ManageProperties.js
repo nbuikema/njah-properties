@@ -295,12 +295,12 @@ const ManageProperties = ({op}) => {
                     </div>
                 </div>
                 <div className="form-group col-12 row">
-                    <label htmlFor="info" className="col-sm-3 col-lg-2 col-form-label"><strong>Additional Info</strong></label>
-                    <div className="col-sm-9">
+                    <label htmlFor="info" className="col-12 col-form-label"><strong>Additional Info - <small>Feel free to let visitors know anything else you think is important. Be descriptive!</small></strong></label>
+                    <div className="col-12">
                         <textarea onChange={changePropertyInfo('info')} className="form-control text-primary" id="info" rows='4' value={op === 'Add' ? `${info}` : `${selectedProperty.info}`}></textarea>
                     </div>
                 </div>
-                <label htmlFor='photos' className="col-12 col-form-label"><strong>Upload Images (Up To 10)</strong></label>
+                <label htmlFor='photos' className="col-12 col-form-label"><strong>Upload Images (Up To 10) - <small>The first image will be the property preview, so we recommend using the front of the property.</small></strong></label>
                 {op === 'Add' && (
                     <div className='col-auto'>
                         {isFileSelected(0) ? <i className="fas fa-check text-success mr-2"></i> : <i class="fas fa-times text-danger mr-2"></i>}
