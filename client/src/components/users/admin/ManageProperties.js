@@ -387,7 +387,7 @@ const ManageProperties = ({op}) => {
                         </div>
                     </>
                 )}
-                <div className='w-100 text-center'>
+                <div className='col-12 text-center'>
                     {op === 'Add' && <button onClick={addProperty} type='submit' className='btn btn-primary'>Create Property</button>}
                     {op === 'Update' && <button type='submit' className='btn btn-primary'>Update Property</button>}
                     {op === 'Remove' && <button onClick={deletePropertyClick} className='btn btn-danger'>Remove Property</button>}

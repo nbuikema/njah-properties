@@ -205,7 +205,7 @@ const ManageResidents = ({op}) => {
                         </div>
                     </>
                 )}
-                <div className='w-100 text-center'>
+                <div className='col-12 text-center'>
                     {op === 'Update' && <button onClick={updateUserClick} type='submit' className='btn btn-primary'>Update User</button>}
                     {op === 'Remove' && <button onClick={deleteUserClick} className='btn btn-danger'>Remove User</button>}
                 </div>
