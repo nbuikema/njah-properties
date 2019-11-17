@@ -100,17 +100,6 @@ const ManageProperties = ({op}) => {
         });
     };
 
-    const showAllPropertiesDropdown = () => op !== 'Add' && (
-        <form className='mt-2'>
-            <select value={selectedProperty._id} onChange={selectProperty} className="form-control text-primary" id="selectProperty">
-                <option value='-1'>Select Property</option>
-                {properties.map((property, i) => (
-                    <option value={property._id} key={i}>{property.address}, {property.city}, {property.state}, {property.zip}</option>
-                ))}
-            </select>
-        </form>
-    );
-
     const changePropertyInfo = selected => event => {
         let value = selected.includes('photos') ? event.target.files[0] : event.target.value;
         if(selected.includes('photos')) {
@@ -222,6 +211,19 @@ const ManageProperties = ({op}) => {
     const showSelectedPropertyInfo = () => (
         <form encType="multipart/form-data">
             <div className='row mr-1'>
+                {op !== 'Add' && (
+                    <div className="form-group col-12 row form-row">
+                        <label htmlFor="address" className="col-sm-auto col-form-label mr-2"><strong>Which property would you like to {op}?</strong></label>
+                        <div className="col-sm-auto">
+                            <select value={selectedProperty._id} onChange={selectProperty} className="form-control text-primary" id="selectProperty">
+                                <option value='-1'>Select Property</option>
+                                {properties.map((property, i) => (
+                                    <option value={property._id} key={i}>{property.address}, {property.city}, {property.state}, {property.zip}</option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+                )}
                 <div className="form-group col-12 col-lg-6 row form-row">
                     <label htmlFor="address" className="col-sm-3 col-form-label"><strong>Address</strong></label>
                     <div className="col-sm-9">
@@ -248,7 +250,7 @@ const ManageProperties = ({op}) => {
                 </div>
                 {op !== 'Add' && (
                     <>
-                        <div className='col-12 ml-1'><small>* Want to make the property more accurate on the map? These values were geocoded when you first added the property, but they aren't always perfect. We don't recommend you change <strong>latitude</strong> or <strong>longitude</strong> unless you know more precise coordinates.</small></div>
+                        <div className='col-12 ml-1'><small>* Want to make the property more accurate on the map? These values were geocoded when you first added the property, but they aren't always perfect. We don't recommend you change <strong>latitude</strong> or <strong>longitude</strong> unless you know more precise coordinates, as this change cannot be undone.</small></div>
                         <div className="form-group col-12 col-lg-6 row form-row">
                             <label htmlFor="id" className="col-sm-3 col-form-label"><strong>Latitude</strong></label>
                             <div className="col-sm-9">
@@ -399,9 +401,6 @@ const ManageProperties = ({op}) => {
             <div className='row'>
                 <div className='col-auto'>
                     <h1>{op} Property</h1>
-                </div>
-                <div className='col-auto'>
-                    {showAllPropertiesDropdown()}
                 </div>
             </div>
             <hr />
