@@ -120,7 +120,7 @@ const Messages = ({role}) => {
                 )}
                 <div className='form-group col-auto'>
                     <select value={sort} onChange={changeFilters('sort')} id="sort" className="form-control text-primary">
-                        <option value=''>Sort By</option>
+                        <option value=''>Sort By (Default)</option>
                         <option value='createdAt desc'>Date (Newest First)</option>
                         <option value='createdAt asc'>Date (Oldest First)</option>
                     </select>
@@ -134,15 +134,14 @@ const Messages = ({role}) => {
 
     return (
         <div className='my-4'>
-            <div className='row fix-messages'>
+            <div className='row'>
                 <div className='col-auto'>
-                    <h1>{role === 0 && 'Sent'} Messages</h1>
-                </div>
-                <div className='col-auto'>
-                    {role === 1 && showFilters()}
+                    <h1>{role === 1 ? 'Received' : 'My Sent'} Messages</h1>
                 </div>
             </div>
             <hr />
+            {role === 1 && showFilters()}
+            {role === 1 && <hr />}
             {filteredMessages.length === 0 && messages.map((message, i) => (
                 <div key={i}>
                     {i !== 0 && <hr />}
