@@ -127,6 +127,11 @@ body {
     font-size: 1.8rem;
 }
 
+.form-row {
+    margin-right: 0;
+    margin-left: 0;
+}
+
 #sidebar {
     overflow-y: scroll;
 }
