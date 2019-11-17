@@ -117,13 +117,13 @@ const UserDashboard = () => {
                             <li className="nav-item">
                                 <button className={`nav-link dashboard-btn bg-light ${section === 'maintenance' && 'active'}`} onClick={toggleSection('maintenance')}>
                                     <i className="fa fa-th-large mr-3 text-primary fa-fw selector"></i>
-                                    Maintenance Request
+                                    Maintenance
                                 </button>
                             </li>
                             <li className="nav-item">
                                 <button className={`nav-link dashboard-btn bg-light ${section === 'contact' && 'active'}`} onClick={toggleSection('contact')}>
                                     <i className="fa fa-th-large mr-3 text-primary fa-fw selector"></i>
-                                    Contact Property Manager
+                                    Contact Property
                                 </button>
                             </li>
                         </ul>

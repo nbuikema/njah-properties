@@ -97,9 +97,13 @@ const Maintenance = ({user}) => {
     );
 
     return (
-        <div>
-            <h2>Send Us A Message</h2>
-            <br />
+        <div className='my-4'>
+            <div className='row'>
+                <div className='col-auto'>
+                    <h1>Maintenance Request</h1>
+                </div>
+            </div>
+            <hr />
             {contactForm()}
         </div>
     );

@@ -79,7 +79,7 @@ const Maintenance = ({user}) => {
                 </select>
             </div>
             <div className='form-group'>
-                <label htmlFor='message'>Anything Else We Should Know?</label>
+                <label htmlFor='message'>What Should We Know?</label>
                 <textarea onChange={onChange('message')} value={message} rows='4' className='form-control text-primary' id='message' aria-describedby='message'></textarea>
             </div>
             <div className='text-center'>
@@ -89,9 +89,13 @@ const Maintenance = ({user}) => {
     );
 
     return (
-        <div>
-            <h2>Send Us A Message</h2>
-            <br />
+        <div className='my-4'>
+            <div className='row'>
+                <div className='col-auto'>
+                    <h1>Contact Property</h1>
+                </div>
+            </div>
+            <hr />
             {contactForm()}
         </div>
     );
