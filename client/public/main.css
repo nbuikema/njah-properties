@@ -132,6 +132,10 @@ body {
     margin-left: 0;
 }
 
+.fix-messages {
+    margin-bottom: -6px;
+}
+
 #sidebar {
     overflow-y: scroll;
 }

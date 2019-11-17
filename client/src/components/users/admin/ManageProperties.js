@@ -221,7 +221,7 @@ const ManageProperties = ({op}) => {
 
     const showSelectedPropertyInfo = () => (
         <form encType="multipart/form-data">
-            <div className='row mr-2'>
+            <div className='row mr-1'>
                 <div className="form-group col-12 col-lg-6 row form-row">
                     <label htmlFor="address" className="col-sm-3 col-form-label"><strong>Address</strong></label>
                     <div className="col-sm-9">

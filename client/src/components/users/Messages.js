@@ -134,7 +134,7 @@ const Messages = ({role}) => {
 
     return (
         <div className='my-4'>
-            <div className='row'>
+            <div className='row fix-messages'>
                 <div className='col-auto'>
                     <h1>{role === 0 && 'Sent'} Messages</h1>
                 </div>
