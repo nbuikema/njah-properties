@@ -26,6 +26,7 @@ const Properties = () => {
         baths: '',
         sort: ''
     });
+    const [expandedFilters, setExpandedFilters] = useState(true);
 
     const useWindowSize = () => {
         const [size, setSize] = useState([0, 0]);
@@ -134,13 +135,22 @@ const Properties = () => {
         direction === 'in' ? setViewport({...viewport, zoom: (viewport.zoom + 1)}) : setViewport({...viewport, zoom: (viewport.zoom - 1)})
     };
 
+    const handleFilterToggle = event => {
+        let isExpanded = document.getElementById('filter-toggle').getAttribute('aria-expanded');
+        if(isExpanded === 'true') {
+            setExpandedFilters(true);
+        } else {
+            setExpandedFilters(false);
+        }
+    };
+
     return (
         <div>
             {useWindowSize()}
             <div className='row reset-margin text-primary'>
                 <div className='col-xs-12 col-sm-8 d-none d-sm-block p-0 order-2 order-sm-1'>
-                    <button className="btn btn-primary toggleBtn" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                        Toggle Filters
+                    <button onClick={handleFilterToggle} className="btn btn-primary toggleBtn" id='filter-toggle' type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        {expandedFilters === true ? 'Hide' : 'Show'} Filters
                     </button>
                     <div className="collapse show bg-light" id="collapseExample">
                         <form>
@@ -219,13 +229,13 @@ const Properties = () => {
                                     <button onClick={submitFilters} className="btn btn-primary w-100">Search Properties</button>
                                 </div>
                                 <div className="col-12 mb-2">
-                                    <button onClick={resetFilters} className="btn btn-primary w-100">Reset Filters</button>
+                                    <button onClick={resetFilters} className="btn btn-outline-primary w-100">Reset Filters</button>
                                 </div>
                             </div>
                         </form>
                     </div>
                     <button className='btn btn-primary map-view' onClick={changeMapType}>{mapType === street ? 'Satellite View' : 'Street View'}</button>
-                    <button className='btn btn-primary map-reset' onClick={changeSelected(null)}>Reset Selected</button>
+                    <button className='btn btn-primary map-reset' onClick={changeSelected(null)}>Reset Map</button>
                     <button className='btn btn-primary map-zoomIn' onClick={zoomMap('in')}>+</button>
                     <button className='btn btn-primary map-zoomOut' onClick={zoomMap('out')}>-</button>
                     <ReactMapGL {...viewport} mapStyle={mapType} mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_KEY} onViewportChange={viewport => {setViewport(viewport)}}>
@@ -273,12 +283,12 @@ const Properties = () => {
                                     <h6><strong>Baths: </strong>{property.baths}</h6>
                                 </div>
                             </div>
-                            <div className='btn-group'>
-                                <button className='markerbtn mt-1 outline w-100' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
+                            <div className='row form-row'>
+                                <button className='markerbtn mt-1 outline w-100 col-6 col-sm-12 col-md-6' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
                                     <div className='marker'></div>
                                     <div className='marker-card-text'>Locate</div>
                                 </button>
-                                <Link className='btn btn-primary mt-1 w-100' to={`/properties/${property._id}`}>More Info</Link>   
+                                <Link className='btn btn-primary mt-1 w-100 col-6 col-sm-12 col-md-6' to={`/properties/${property._id}`}>More Info</Link>   
                             </div>
                         </div>
                     ))}
@@ -286,7 +296,7 @@ const Properties = () => {
                         <div key={property._id} className="card bg-light">
                             <div className="row no-gutters">
                                 <h5 className="card-title w-100 text-center mt-2"><strong>{property.address}, {property.city}, {property.state}, {property.zip}</strong></h5>
-                                <div class="col-6 col-sm-12 col-lg-7">
+                                <div className="col-6 col-sm-12 col-lg-7">
                                     {property.images.length > 0 && <img src={`${property.images[0].url}`} className="card-img" alt={`${property.address}`} />}
                                 </div>
                                 <div className="col-6 col-sm-12 col-lg-5 px-2 mt-2">
@@ -296,12 +306,12 @@ const Properties = () => {
                                     <h6><strong>Baths: </strong>{property.baths}</h6>
                                 </div>
                             </div>
-                            <div className='btn-group'>
-                                <button className='markerbtn mt-1 outline w-100' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
+                            <div className='row form-row'>
+                                <button className='markerbtn mt-1 outline w-100 col-6 col-sm-12 col-md-6' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
                                     <div className='marker'></div>
                                     <div className='marker-card-text'>Locate</div>
                                 </button>
-                                <Link className='btn btn-primary mt-1 w-100' to={`/properties/${property._id}`}>More Info</Link>   
+                                <Link className='btn btn-primary mt-1 w-100 col-6 col-sm-12 col-md-6' to={`/properties/${property._id}`}>More Info</Link>   
                             </div>
                         </div>
                     ))}
@@ -321,12 +331,9 @@ const Properties = () => {
                                             <h6><strong>Baths: </strong>{property.baths}</h6>
                                         </div>
                                     </div>
-                                    <div className='btn-group'>
-                                        <button className='markerbtn mt-1 outline w-100' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
-                                            <div className='marker'></div>
-                                            <div className='marker-card-text'>Locate</div>
-                                        </button>
-                                        <Link className='btn btn-primary mt-1 w-100' to={`/properties/${property._id}`}>More Info</Link>   
+                                    <div className='row form-row'>
+                                        <button className='btn outline mt-1 col-6 col-sm-12 col-md-6' onClick={changeSelected(null)}>Reset Selected</button>
+                                        <Link className='btn btn-primary mt-1 w-100 col-6 col-sm-12 col-md-6' to={`/properties/${property._id}`}>More Info</Link>   
                                     </div>
                                 </div>
                             );

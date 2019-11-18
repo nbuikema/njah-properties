@@ -96,7 +96,7 @@ body {
 
 .marker-card-text {
     position: relative;
-    top: -26px;
+    top: -27px;
     left: 4px;
 }
 
@@ -112,9 +112,22 @@ body {
     transition: all 250ms ease-in-out;
 }
 
+.btn-outline-primary {
+    border: 2px solid rgb(7, 58, 112);
+    color: rgb(7, 58, 112);
+    transition: all 250ms ease-in-out;
+}
+
+.btn-outline-primary:hover {
+    border: 2px solid rgb(7, 58, 112);
+    background-color: rgb(7, 58, 112);
+    color: white;
+    transition: all 250ms ease-in-out;
+}
+
 .outline {
     border: 2px solid rgb(7, 58, 112);
-    max-height: 44px;
+    height: 44px;
     overflow-x: hidden;
     overflow-y: hidden;
     border-radius: .25rem;
@@ -219,6 +232,7 @@ body {
 }
 
 .toggleBtn {
+    width: 196px;
     position: absolute;
     top: 0;
     left: 0;
