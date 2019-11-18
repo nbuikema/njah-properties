@@ -96,8 +96,20 @@ body {
 
 .marker-card-text {
     position: relative;
-    top: -24px;
+    top: -26px;
     left: 4px;
+}
+
+.btn-primary {
+    border: 2px solid rgb(7, 58, 112);
+    transition: all 250ms ease-in-out;
+}
+
+.btn-primary:hover {
+    border: 2px solid rgb(7, 58, 112);
+    background-color: rgb(7, 58, 112);
+    color: white;
+    transition: all 250ms ease-in-out;
 }
 
 .outline {
@@ -107,13 +119,13 @@ body {
     overflow-y: hidden;
     border-radius: .25rem;
     color: rgb(7, 58, 112);
-    transition: all 150ms ease-in-out;
+    transition: all 250ms ease-in-out;
 }
 
 .outline:hover {
     background-color: rgb(7, 58, 112);
     color: white;
-    transition: all 150ms ease-in-out;
+    transition: all 250ms ease-in-out;
 }
 
 .input-photos {
@@ -200,7 +212,7 @@ body {
 
 #collapseExample {
     position: absolute;
-    top: 38px;
+    top: 40px;
     left: 0;
     z-index: 1;
     background-color: white;
