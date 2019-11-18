@@ -175,12 +175,16 @@ const Contact = () => {
         <div className='text-primary my-4'>
             <div className='container'>
                 <div className='row'>
-                    <div className='col-8'>
+                    <div className='col-12 col-lg-8 order-1 order-lg-0'>
+                        <div className='d-block d-lg-none'>
+                            <br />
+                            <br />
+                        </div>
                         <h1 className='text-center'>Send Us A Message</h1>
                         <hr />
                         {contactForm()}
                     </div>
-                    <div className='col-4 text-center'>
+                    <div className='col-12 col-lg-4 order-0 order-lg-1 text-center'>
                         <div>
                             <h1>Forms</h1>
                             <hr />
