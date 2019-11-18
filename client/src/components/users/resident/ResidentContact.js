@@ -7,7 +7,7 @@ const Maintenance = ({user}) => {
         first_name: user.first_name,
         last_name: user.last_name,
         email: user.email,
-        phone: '123',
+        phone: user.phone,
         property: user.property._id,
         reason: '',
         severity: '',
@@ -21,7 +21,7 @@ const Maintenance = ({user}) => {
         formData.set('first_name', user.first_name);
         formData.set('last_name', user.last_name);
         formData.set('email', user.email);
-        formData.set('phone', '123');
+        formData.set('phone', user.phone);
         formData.set('property', user.property._id);
     }
 

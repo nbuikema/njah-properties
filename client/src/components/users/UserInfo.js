@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import moment from 'moment';
 
 const UserInfo = ({user}) => {
-    const {first_name, last_name, email, role, property, createdAt, updatedAt} = user;
+    const {first_name, last_name, email, phone, role, property, createdAt, updatedAt} = user;
 
     const showUserInfo = () => (
         <div>
@@ -39,9 +39,9 @@ const UserInfo = ({user}) => {
                         </div>
                     </h6>
                     <h6 className='form-group row'>
-                        <label className='col-sm-4 col-form-label'><strong>Role</strong></label>
+                        <label className='col-sm-4 col-form-label'><strong>Phone</strong></label>
                         <div className='col-sm-8'>
-                            <span className='form-control-plaintext text-primary'><em>{role === 1 ? 'Admin' : 'Resident'}</em></span>
+                            <span className='form-control-plaintext text-primary'><em>{phone}</em></span>
                         </div>
                     </h6>
                     <h6 className='form-group row'>

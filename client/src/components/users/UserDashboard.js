@@ -18,6 +18,7 @@ const UserDashboard = () => {
         first_name: '',
         last_name: '',
         email: '',
+        phone: '',
         role: '',
         property: {},
         createdAt: '',

@@ -11,6 +11,7 @@ const ManageResidents = ({op}) => {
         first_name: '',
         last_name: '',
         email: '',
+        phone: '',
         role: '',
         property: '',
         createdAt: '',
@@ -21,7 +22,9 @@ const ManageResidents = ({op}) => {
         first_name: '',
         last_name: '',
         email: '',
+        phone: '',
         role: '',
+        property: '',
         createdAt: '',
         updatedAt: ''
     });
@@ -86,6 +89,7 @@ const ManageResidents = ({op}) => {
                     first_name: '',
                     last_name: '',
                     email: '',
+                    phone: '',
                     role: '',
                     property: '',
                     createdAt: '',
@@ -98,6 +102,7 @@ const ManageResidents = ({op}) => {
                     first_name: user.first_name,
                     last_name: user.last_name,
                     email: user.email,
+                    phone: user.phone,
                     role: user.role,
                     property: user.property,
                     createdAt: user.createdAt,
@@ -170,18 +175,16 @@ const ManageResidents = ({op}) => {
                         <input onChange={changeUserInfo('email')} type="email" className="form-control text-primary" id="email" value={op === 'Add' ? `${newUser.email}` : `${selectedUser.email}`} disabled={op === 'Remove' ? true : false} />
                     </div>
                 </div>
-                {op !== 'Add' && (
-                    <div className="form-group col-12 col-lg-6 row form-row">
-                        <label htmlFor="role" className="col-sm-3 col-form-label"><strong>Role</strong></label>
-                        <div className="col-sm-9">
-                            <input onChange={changeUserInfo('role')} type="text" className="form-control text-primary" id="role" value={op === 'Add' ? `${newUser.role}` : `${selectedUser.role}`} disabled={op === 'Remove' ? true : false} />
-                        </div>
+                <div className="form-group col-12 col-lg-6 row form-row">
+                    <label htmlFor="phone" className="col-sm-3 col-form-label"><strong>Phone</strong></label>
+                    <div className="col-sm-9">
+                        <input onChange={changeUserInfo('phone')} type="text" className="form-control text-primary" id="phone" value={op === 'Add' ? `${newUser.phone}` : `${selectedUser.phone}`} disabled={op === 'Remove' ? true : false} />
                     </div>
-                )}
+                </div>
                 <div className="form-group col-12 row form-row">
                     <label htmlFor="selectProperty" className='col-sm-auto col-form-label mr-2'>Which property would you like to assign this resident to?</label>
                     <div className='col-sm-auto'>
-                        <select value={selectedUser.property.length > 0 ? selectedUser.property : selectedProperty._id} onChange={selectProperty, changeUserInfo('property')} className="form-control text-primary" id="selectProperty" disabled={op === 'Remove' ? true : false}>
+                        <select value={op === 'Add' ? newUser.property.length > 0 ? newUser.property : selectedProperty._id : selectedUser.property.length > 0 ? selectedUser.property : selectedProperty._id} onChange={selectProperty, changeUserInfo('property')} className="form-control text-primary" id="selectProperty" disabled={op === 'Remove' ? true : false}>
                             <option value='-1'>Select Property (None)</option>
                             {properties.map((property, i) => (
                                 <option value={property._id} key={i}>{property.address}, {property.city}, {property.state}, {property.zip}</option>
@@ -194,13 +197,13 @@ const ManageResidents = ({op}) => {
                         <div className="form-group col-12 col-lg-6 row form-row">
                             <label htmlFor="createdAt" className="col-sm-3 col-form-label"><strong>Registered</strong></label>
                             <div className="col-sm-9">
-                                <input type="text" disabled className="form-control text-primary" id="createdAt" value={op === 'Add' ? `${newUser.createdAt}` : `${moment(selectedUser.createdAt).format('MMMM Do YYYY, h:mm:ss a')}`} />
+                                <input type="text" disabled className="form-control text-primary" id="createdAt" value={op !== 'Add' && selectedUser.createdAt.length > 0 ? `${moment(selectedUser.createdAt).format('MMMM Do YYYY, h:mm:ss a')}` : ''} />
                             </div>
                         </div>
                         <div className="form-group col-12 col-lg-6 row form-row">
                             <label htmlFor="updatedAt" className="col-sm-3 col-form-label"><strong>Last Updated</strong></label>
                             <div className="col-sm-9">
-                                <input type="text" disabled className="form-control text-primary" id="updatedAt" value={op === 'Add' ? `${newUser.updatedAt}` : `${moment(selectedUser.updatedAt).format('MMMM Do YYYY, h:mm:ss a')}`} />
+                                <input type="text" disabled className="form-control text-primary" id="updatedAt" value={op !== 'Add' && selectedUser.createdAt.length > 0 ? `${moment(selectedUser.updatedAt).format('MMMM Do YYYY, h:mm:ss a')}` : ''} />
                             </div>
                         </div>
                     </>
