@@ -54,7 +54,7 @@ const Property = ({match}) => {
     );
 
     return (
-        <div className='text-primary'>
+        <div className='text-primary my-4'>
             <div className='container'>
                 <br />
                 <div className='row'>

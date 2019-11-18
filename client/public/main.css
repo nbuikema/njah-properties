@@ -193,7 +193,7 @@ body {
 }
 
 .carousel-indicators li img {
-    height: 50px;
+    height: 30px;
 }
 
 .home {
@@ -346,5 +346,9 @@ body {
 @media (min-width: 992px) {
     .carousel-item img {
         height: calc(80vh - 60px);
+    }
+
+    .carousel-indicators li img {
+        height: 50px;
     }
 }
