@@ -167,3 +167,19 @@ export const deleteProperty = (token, property) => {
         console.log(err)
     });
 };
+
+export const updateProperty = (token, property) => {
+    return fetch(`${API}/property/update/${property._id}`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(property)
+    }).then(response => {
+        return response.json();
+    }).catch(err => {
+        console.log(err)
+    });
+};

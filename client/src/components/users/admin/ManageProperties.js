@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import moment from 'moment';
-import {createProperty, deleteProperty} from '../apiUsers';
+import {createProperty, deleteProperty, updateProperty} from '../apiUsers';
 import {readAllProperties} from '../../properties/apiProperties';
 import {isAuth} from '../../auth/apiAuth';
 
@@ -101,39 +101,52 @@ const ManageProperties = ({op}) => {
     };
 
     const changePropertyInfo = selected => event => {
-        let value = selected.includes('photos') ? event.target.files[0] : event.target.value;
-        if(selected.includes('photos')) {
-            let target = selected.split(' ')[1];
-            let prop = selected.split(' ')[0];
-            if(value === undefined || value.length < 1) {
-                images.splice(target, 1, null);
-                setImages([...images]);
-                let photos = formData.getAll('photos');
-                photos.splice(target, 1, null);
-                photos.map((photo, i) => {
-                    if(i === 0) {
-                        formData.set('photos', photo);
-                    } else {
-                        formData.append('photos', photo);
-                    }
-                });
-            } else if(target < images.length) {
-                images.splice(target, 1, value);
-                setImages([...images]);
-                let photos = formData.getAll('photos');
-                photos.splice(target, 1, value);
-                photos.map((photo, i) => {
-                    if(i === 0) {
-                        formData.set('photos', photo);
-                    } else {
-                        formData.append('photos', photo);
-                    }
-                });
+        if(op === 'Add') {
+            let value = selected.includes('photos') ? event.target.files[0] : event.target.value;
+            if(selected.includes('photos')) {
+                let target = selected.split(' ')[1];
+                let prop = selected.split(' ')[0];
+                if(value === undefined || value.length < 1) {
+                    images.splice(target, 1, null);
+                    setImages([...images]);
+                    let photos = formData.getAll('photos');
+                    photos.splice(target, 1, null);
+                    photos.map((photo, i) => {
+                        if(i === 0) {
+                            formData.set('photos', photo);
+                        } else {
+                            formData.append('photos', photo);
+                        }
+                    });
+                } else if(target < images.length) {
+                    images.splice(target, 1, value);
+                    setImages([...images]);
+                    let photos = formData.getAll('photos');
+                    photos.splice(target, 1, value);
+                    photos.map((photo, i) => {
+                        if(i === 0) {
+                            formData.set('photos', photo);
+                        } else {
+                            formData.append('photos', photo);
+                        }
+                    });
+                } else {
+                    setImages([...images, value]);
+                    formData.append(prop, value);
+                }
             } else {
-                setImages([...images, value]);
-                formData.append(prop, value);
+                if(selected === 'available') {
+                    if(value === 'true') {
+                        value = true;
+                    } else {
+                        value = false;
+                    }
+                }
+                setNewProperty({...newProperty, [selected]: value});
+                formData.set(selected, value);
             }
-        } else {
+        } else if(op === 'Update') {
+            let value = event.target.value;
             if(selected === 'available') {
                 if(value === 'true') {
                     value = true;
@@ -141,8 +154,7 @@ const ManageProperties = ({op}) => {
                     value = false;
                 }
             }
-            setNewProperty({...newProperty, [selected]: value});
-            formData.set(selected, value);
+            setSelectedProperty({...selectedProperty, [selected]: value});
         }
     };
 
@@ -176,6 +188,13 @@ const ManageProperties = ({op}) => {
             getAllProperties();
         });
     };
+
+    const updatePropertyClick = event => {
+        event.preventDefault();
+        updateProperty(token, selectedProperty).then(() => {
+            getAllProperties();
+        });
+    }
 
     const deletePropertyClick = event => {
         event.preventDefault();
@@ -389,7 +408,7 @@ const ManageProperties = ({op}) => {
                 )}
                 <div className='col-12 text-center'>
                     {op === 'Add' && <button onClick={addProperty} type='submit' className='btn btn-primary'>Create Property</button>}
-                    {op === 'Update' && <button type='submit' className='btn btn-primary'>Update Property</button>}
+                    {op === 'Update' && <button onClick={updatePropertyClick} type='submit' className='btn btn-primary'>Update Property</button>}
                     {op === 'Remove' && <button onClick={deletePropertyClick} className='btn btn-danger'>Remove Property</button>}
                 </div>
             </div>

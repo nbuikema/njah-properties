@@ -143,3 +143,17 @@ exports.deleteProperty = (req, res) => {
         }
     );
 };
+
+exports.updateProperty = (req, res) => {
+    Property.findOneAndUpdate(
+        {_id: req.selectedProperty._id},
+        {$set: req.body},
+        {new: true},
+        (err, property) => {
+            if(err) {
+                return res.status(400).json({error: 'Property could not be updated.'});
+            }
+            return res.json(property);
+        }
+    );
+};
