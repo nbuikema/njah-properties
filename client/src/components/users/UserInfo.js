@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import moment from 'moment';
 
 const UserInfo = ({user}) => {
-    const {first_name, last_name, email, phone, role, property, createdAt, updatedAt} = user;
+    const {first_name, last_name, email, phone, property, createdAt, updatedAt} = user;
 
     const showUserInfo = () => (
         <div>

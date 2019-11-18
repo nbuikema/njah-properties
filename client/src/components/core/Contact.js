@@ -16,7 +16,7 @@ const Contact = () => {
         message: '',
         formData: new FormData()
     });
-    const {first_name, last_name, email, phone, reason, property, application, message, formData} = contact;
+    const {first_name, last_name, email, phone, reason, property, message, formData} = contact;
 
     const getAllProperties = () => {
         readAllProperties().then(data => {

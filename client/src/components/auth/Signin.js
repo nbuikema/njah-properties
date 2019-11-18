@@ -6,21 +6,19 @@ const Signin = () => {
     const [values, setValues] = useState({
         email: '',
         password: '',
-        error: '',
         success: false
     });
-    const {email, password, error, success} = values;
+    const {email, password, success} = values;
 
     const onChange = valueProp => event => {
-        setValues({...values, [valueProp]: event.target.value, error: ''});
+        setValues({...values, [valueProp]: event.target.value});
     };
 
     const onSubmit = event => {
         event.preventDefault();
-        setValues({...values, error: ''});
         signin({email, password}).then(data => {
             if(data.error) {
-                setValues({...values, error: data.error, success: false});
+                setValues({...values, success: false});
             } else {
                 authenticate(data, () => {
                     setValues({...values, success: true});
@@ -46,14 +44,17 @@ const Signin = () => {
     );
 
     const successRedirect = () => success ? (
-        <Redirect to='/' />
+        <Redirect to='/dashboard' />
     ) : null;
     
     return (
-        <div className='container'>
-            <h1>Sign In</h1>
-            {signinForm()}
-            {successRedirect()}
+        <div className='text-primary my-4'>
+            <div className='container'>
+                <h1 className='text-center'>Sign In</h1>
+                <hr />
+                {signinForm()}
+                {successRedirect()}
+            </div>
         </div>
     );
 };

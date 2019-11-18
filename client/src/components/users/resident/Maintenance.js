@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {sendContact} from '../../core/apiContact';
 
 const Maintenance = ({user}) => {
@@ -14,16 +14,16 @@ const Maintenance = ({user}) => {
         message: '',
         formData: new FormData()
     });
-    const {first_name, last_name, email, phone, reason, property, severity, message, formData} = contact;
+    const {message, formData} = contact;
 
-    const setUserFormInfo = () => {
+    const setUserFormInfo = useCallback(() => {
         formData.set('user', user._id);
         formData.set('first_name', user.first_name);
         formData.set('last_name', user.last_name);
         formData.set('email', user.email);
         formData.set('phone', user.phone);
         formData.set('property', user.property._id);
-    }
+    }, [formData, user._id, user.first_name, user.last_name, user.email, user.phone, user.property._id]);
 
     useEffect(() => {
         setUserFormInfo();

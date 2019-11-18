@@ -15,7 +15,7 @@ const ManageForms = ({op}) => {
         file: '',
         formData: new FormData()
     });
-    const {name, file, formData} = newForm;
+    const {name, formData} = newForm;
     const {token} = isAuth();
 
     const getAllForms = () => {

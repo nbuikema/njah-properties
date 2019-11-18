@@ -42,7 +42,7 @@ const ManageProperties = ({op}) => {
         long: '',
         formData: new FormData()
     });
-    const {_id, address, city, state, zip, rent, size, beds, baths, info, available, createdAt, updatedAt, long, lat, formData} = newProperty;
+    const {address, city, state, zip, rent, size, beds, baths, info, available, createdAt, updatedAt, long, lat, formData} = newProperty;
     const {token} = isAuth();
 
     const getAllProperties = useCallback(() => {
@@ -113,9 +113,9 @@ const ManageProperties = ({op}) => {
                     photos.splice(target, 1, null);
                     photos.map((photo, i) => {
                         if(i === 0) {
-                            formData.set('photos', photo);
+                            return formData.set('photos', photo);
                         } else {
-                            formData.append('photos', photo);
+                            return formData.append('photos', photo);
                         }
                     });
                 } else if(target < images.length) {
@@ -125,9 +125,9 @@ const ManageProperties = ({op}) => {
                     photos.splice(target, 1, value);
                     photos.map((photo, i) => {
                         if(i === 0) {
-                            formData.set('photos', photo);
+                            return formData.set('photos', photo);
                         } else {
-                            formData.append('photos', photo);
+                            return formData.append('photos', photo);
                         }
                     });
                 } else {
@@ -318,11 +318,11 @@ const ManageProperties = ({op}) => {
                     <label htmlFor="available" className="col-sm-auto col-form-label"><strong>Is this property currently available?</strong></label>
                     <div className="col-sm-auto mt-2">
                         <div className="form-check form-check-inline">
-                            <input onChange={changePropertyInfo('available')} checked={op === 'Add' && available === true ? true : false || op !== 'Add' && selectedProperty.available === true ? true : false} className="form-check-input" type="radio" name="available" id="availableyes" value="true" disabled={op === 'Remove' ? true : false} />
+                            <input onChange={changePropertyInfo('available')} checked={(op === 'Add' && available === true ? true : false) || (op !== 'Add' && selectedProperty.available === true ? true : false)} className="form-check-input" type="radio" name="available" id="availableyes" value="true" disabled={op === 'Remove' ? true : false} />
                             <label className="form-check-label text-primary" htmlFor="availableyes">Yes</label>
                         </div>
                         <div className="form-check form-check-inline">
-                            <input onChange={changePropertyInfo('available')} checked={op === 'Add' && available === false ? true : false || op !== 'Add' && selectedProperty.available === false ? true : false} className="form-check-input" type="radio" name="available" id="availableno" value="false" disabled={op === 'Remove' ? true : false} />
+                            <input onChange={changePropertyInfo('available')} checked={(op === 'Add' && available === false ? true : false) || (op !== 'Add' && selectedProperty.available === false ? true : false)} className="form-check-input" type="radio" name="available" id="availableno" value="false" disabled={op === 'Remove' ? true : false} />
                             <label className="form-check-label text-primary" htmlFor="availableno">No</label>
                         </div>
                     </div>

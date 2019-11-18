@@ -12,18 +12,18 @@ const isActive = (history, path) => {
 
 const Navbar = ({history}) => (
     <div className='sticky-top shadow-sm'>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className='container-fluid'>
                 <div className='navbar-brand abs'>
                     <Link className='brand-fix' to='/'>
-                        <img className='logo shadow-lg' src={logo} />
+                        <img className='logo shadow-lg' src={logo} alt='NJAH Properties Logo' />
                     </Link>
                 </div>
-                <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
-                    <span class="navbar-toggler-icon"></span>
+                <button className="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+                    <span className="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse" id="collapsingNavbar">
-                    <ul class="navbar-nav">
+                <div className="navbar-collapse collapse" id="collapsingNavbar">
+                    <ul className="navbar-nav">
                         <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
                             <Link className={`nav-link ${isActive(history, '/') && 'active'}`} to='/'>
                                 Home
@@ -40,7 +40,7 @@ const Navbar = ({history}) => (
                             </Link>
                         </li>
                     </ul>
-                    <ul class="navbar-nav ml-auto">
+                    <ul className="navbar-nav ml-auto">
                         {!isAuth() ? (
                             <>
                                 <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
