@@ -19,7 +19,7 @@ const Navbar = ({history}) => (
                         <img className='logo shadow-lg' src={logo} alt='NJAH Properties Logo' />
                     </Link>
                 </div>
-                <button className="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+                <button className="custom-toggler navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="navbar-collapse collapse" id="collapsingNavbar">

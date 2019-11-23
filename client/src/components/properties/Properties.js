@@ -277,7 +277,8 @@ const Properties = () => {
                                     {property.images.length > 0 && <img src={`${property.images[0].url}`} className="card-img" alt={`${property.address}`} />}
                                 </div>
                                 <div className="col-6 col-sm-12 col-lg-5 px-2 mt-2">
-                                    <h6><strong>Rent: </strong>${property.rent}</h6>
+                                    <h6><strong>{property.available === true ? 'Available' : 'Not Available'}</strong></h6>
+                                    <h6><strong>Rent: </strong>{property.available === true ? `$${property.rent}` : 'N/A'}</h6>
                                     <h6><strong>Size: </strong>{property.size} Sq Ft</h6>
                                     <h6><strong>Beds: </strong>{property.beds}</h6>
                                     <h6><strong>Baths: </strong>{property.baths}</h6>

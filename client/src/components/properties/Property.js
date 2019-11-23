@@ -65,7 +65,8 @@ const Property = ({match}) => {
                         <h2><strong>{property.address}</strong></h2>
                         <h4><em>{property.city}, {property.state}, {property.zip}</em></h4>
                         <hr />
-                        <h6><strong>Rent:</strong> ${property.rent}</h6>
+                        <h6><strong>{property.available === true ? 'Available' : 'Not Available'}</strong></h6>
+                        <h6><strong>Rent:</strong> {property.available === true ? `$${property.rent}` : 'N/A'}</h6>
                         <h6><strong>Size:</strong> {property.size} Sq Ft</h6>
                         <h6><strong>Beds:</strong> {property.beds}</h6>
                         <h6><strong>Baths:</strong> {property.baths}</h6>
