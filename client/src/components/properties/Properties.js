@@ -285,11 +285,11 @@ const Properties = () => {
                                 </div>
                             </div>
                             <div className='row form-row'>
-                                <button className='markerbtn mt-1 outline w-100 col-6 col-sm-12 col-md-6' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
+                                <button className='markerbtn mt-1 outline w-100 col-6 col-sm-12 col-md-6 d-none d-sm-block' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
                                     <div className='marker'></div>
                                     <div className='marker-card-text'>Locate</div>
                                 </button>
-                                <Link className='btn btn-primary mt-1 w-100 col-6 col-sm-12 col-md-6' to={`/properties/${property._id}`}>More Info</Link>   
+                                <Link className='btn btn-primary mt-1 w-100 col-12 col-md-6' to={`/properties/${property._id}`}>More Info</Link>   
                             </div>
                         </div>
                     ))}
