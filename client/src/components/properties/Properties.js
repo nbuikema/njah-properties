@@ -17,7 +17,6 @@ const Properties = () => {
         latitude: 33.2148,
         width: '100%',
         height: 'calc(100vh - 60px)',
-        windowHeight: 0,
         zoom: 11
     });
     const [filters, setFilters] = useState({
@@ -32,6 +31,11 @@ const Properties = () => {
 
     const getWindowSize = () => {
         setSize([window.innerWidth, window.innerHeight]);
+        if(window.innerWidth >= 2000) {
+            setViewport({...viewport, zoom: 13});
+        } else if(window.innerWidth < 2000 && window.innerWidth >= 1400) {
+            setViewport({...viewport, zoom: 12});
+        }
     }
 
     const useWindowSize = () => {
@@ -291,7 +295,7 @@ const Properties = () => {
                                     <h6><strong>Beds: </strong>{property.beds}</h6>
                                     <h6><strong>Baths: </strong>{property.baths}</h6>
                                     {size[0] >= 1700 && (
-                                        <div className='xxl-btns pr-3'>
+                                        <div className='xxl-btns'>
                                             <button className='markerbtn mt-1 outline w-100 col-12' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
                                                 <div className='marker'></div>
                                                 <div className='marker-card-text'>Locate</div>

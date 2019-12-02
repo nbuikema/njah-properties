@@ -169,7 +169,6 @@ body {
     margin-top: 60px;
     max-width: 66.67%;
     z-index: 1;
-    
 }
 
 .map-view {
@@ -326,7 +325,7 @@ body {
 .xxl-btns {
     position: absolute;
     bottom: 0;
-    width: 100%;
+    width: 95%;
 }
 
 input:-webkit-autofill,
