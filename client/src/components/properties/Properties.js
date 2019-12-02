@@ -296,11 +296,11 @@ const Properties = () => {
                                     <h6><strong>Baths: </strong>{property.baths}</h6>
                                     {size[0] >= 1700 && (
                                         <div className='xxl-btns'>
-                                            <button className='markerbtn mt-1 outline w-100 col-12' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
+                                            <Link className='btn btn-primary w-100 col-12' to={`/properties/${property._id}`}>More Info</Link>
+                                            <button className='markerbtn outline mt-2 w-100 col-12' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
                                                 <div className='marker'></div>
                                                 <div className='marker-card-text'>Locate</div>
                                             </button>
-                                            <Link className='btn btn-primary w-100 col-12' to={`/properties/${property._id}`}>More Info</Link>   
                                         </div>
                                     )}
                                 </div>
@@ -330,12 +330,12 @@ const Properties = () => {
                                     <h6><strong>Beds: </strong>{property.beds}</h6>
                                     <h6><strong>Baths: </strong>{property.baths}</h6>
                                     {size[0] >= 1700 && (
-                                        <div className='xxl-btns pr-3'>
-                                            <button className='markerbtn mt-1 outline w-100 col-12' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
+                                        <div className='xxl-btns'>
+                                            <Link className='btn btn-primary w-100 col-12' to={`/properties/${property._id}`}>More Info</Link>
+                                            <button className='markerbtn outline mt-2 w-100 col-12' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
                                                 <div className='marker'></div>
                                                 <div className='marker-card-text'>Locate</div>
                                             </button>
-                                            <Link className='btn btn-primary w-100 col-12' to={`/properties/${property._id}`}>More Info</Link>   
                                         </div>
                                     )}
                                 </div>
@@ -367,9 +367,9 @@ const Properties = () => {
                                             <h6><strong>Beds: </strong>{property.beds}</h6>
                                             <h6><strong>Baths: </strong>{property.baths}</h6>
                                             {size[0] >= 1700 && (
-                                                <div className='xxl-btns pr-3'>
-                                                    <button className='btn outline col-12' onClick={changeSelected(null)}>Reset Selected</button>
-                                                    <Link className='btn btn-primary w-100 col-12' to={`/properties/${property._id}`}>More Info</Link>   
+                                                <div className='xxl-btns'>
+                                                    <Link className='btn btn-primary w-100 col-12' to={`/properties/${property._id}`}>More Info</Link>
+                                                    <button className='btn mt-2 outline col-12' onClick={changeSelected(null)}>Reset Selected</button>
                                                 </div>
                                             )}
                                         </div>

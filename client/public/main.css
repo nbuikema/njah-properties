@@ -324,8 +324,9 @@ body {
 
 .xxl-btns {
     position: absolute;
-    bottom: 0;
+    bottom: 1rem!important;
     width: 95%;
+    max-height: 84px;
 }
 
 input:-webkit-autofill,
