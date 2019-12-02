@@ -17,6 +17,7 @@ const Properties = () => {
         latitude: 33.2148,
         width: '100%',
         height: 'calc(100vh - 60px)',
+        windowHeight: 0,
         zoom: 11
     });
     const [filters, setFilters] = useState({
@@ -27,9 +28,13 @@ const Properties = () => {
         sort: ''
     });
     const [expandedFilters, setExpandedFilters] = useState(true);
+    const [size, setSize] = useState([0, 0]);
+
+    const getWindowSize = () => {
+        setSize([window.innerWidth, window.innerHeight]);
+    }
 
     const useWindowSize = () => {
-        const [size, setSize] = useState([0, 0]);
         useLayoutEffect(() => {
             function updateSize() {
                 setSize([window.innerWidth, window.innerHeight]);
@@ -48,6 +53,7 @@ const Properties = () => {
 
     useEffect(() => {
         getAllProperties();
+        getWindowSize();
     }, []);
 
     const changeSelected = (id, long, lat) => event => {
@@ -282,15 +288,26 @@ const Properties = () => {
                                     <h6><strong>Size: </strong>{property.size} Sq Ft</h6>
                                     <h6><strong>Beds: </strong>{property.beds}</h6>
                                     <h6><strong>Baths: </strong>{property.baths}</h6>
+                                    {size[0] >= 1700 && (
+                                        <div className='xxl-btns pr-3'>
+                                            <button className='markerbtn mt-1 outline w-100 col-12' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
+                                                <div className='marker'></div>
+                                                <div className='marker-card-text'>Locate</div>
+                                            </button>
+                                            <Link className='btn btn-primary w-100 col-12' to={`/properties/${property._id}`}>More Info</Link>   
+                                        </div>
+                                    )}
                                 </div>
                             </div>
-                            <div className='row form-row'>
-                                <button className='markerbtn mt-1 outline w-100 col-6 col-sm-12 col-md-6 d-none d-sm-block' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
-                                    <div className='marker'></div>
-                                    <div className='marker-card-text'>Locate</div>
-                                </button>
-                                <Link className='btn btn-primary mt-1 w-100 col-12 col-md-6' to={`/properties/${property._id}`}>More Info</Link>   
-                            </div>
+                            {size[0] < 1700 && (
+                                <div className='row form-row'>
+                                    <button className='markerbtn mt-1 outline w-100 col-6 col-sm-12 col-md-6 d-none d-sm-block' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
+                                        <div className='marker'></div>
+                                        <div className='marker-card-text'>Locate</div>
+                                    </button>
+                                    <Link className='btn btn-primary mt-1 w-100 col-12 col-md-6' to={`/properties/${property._id}`}>More Info</Link>   
+                                </div>
+                            )}
                         </div>
                     ))}
                     {!selected && filteredProperties.length > 0 && filteredProperties.map(property => (
@@ -301,19 +318,31 @@ const Properties = () => {
                                     {property.images.length > 0 && <img src={`${property.images[0].url}`} className="card-img" alt={`${property.address}`} />}
                                 </div>
                                 <div className="col-6 col-sm-12 col-lg-5 px-2 mt-2">
-                                    <h6><strong>Rent: </strong>${property.rent}</h6>
+                                    <h6><strong>{property.available === true ? 'Available' : 'Not Available'}</strong></h6>
+                                    <h6><strong>Rent: </strong>{property.available === true ? `$${property.rent}` : 'N/A'}</h6>
                                     <h6><strong>Size: </strong>{property.size} Sq Ft</h6>
                                     <h6><strong>Beds: </strong>{property.beds}</h6>
                                     <h6><strong>Baths: </strong>{property.baths}</h6>
+                                    {size[0] >= 1700 && (
+                                        <div className='xxl-btns pr-3'>
+                                            <button className='markerbtn mt-1 outline w-100 col-12' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
+                                                <div className='marker'></div>
+                                                <div className='marker-card-text'>Locate</div>
+                                            </button>
+                                            <Link className='btn btn-primary w-100 col-12' to={`/properties/${property._id}`}>More Info</Link>   
+                                        </div>
+                                    )}
                                 </div>
                             </div>
-                            <div className='row form-row'>
-                                <button className='markerbtn mt-1 outline w-100 col-6 col-sm-12 col-md-6' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
-                                    <div className='marker'></div>
-                                    <div className='marker-card-text'>Locate</div>
-                                </button>
-                                <Link className='btn btn-primary mt-1 w-100 col-6 col-sm-12 col-md-6' to={`/properties/${property._id}`}>More Info</Link>   
-                            </div>
+                            {size[0] < 1700 && (
+                                <div className='row form-row'>
+                                    <button className='markerbtn mt-1 outline w-100 col-6 col-sm-12 col-md-6 d-none d-sm-block' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
+                                        <div className='marker'></div>
+                                        <div className='marker-card-text'>Locate</div>
+                                    </button>
+                                    <Link className='btn btn-primary mt-1 w-100 col-12 col-md-6' to={`/properties/${property._id}`}>More Info</Link>   
+                                </div>
+                            )}
                         </div>
                     ))}
                     {selected && properties.map(property => {
@@ -326,16 +355,25 @@ const Properties = () => {
                                             {property.images.length > 0 && <img src={`${property.images[0].url}`} className="card-img" alt={`${property.address}`} />}
                                         </div>
                                         <div className="col-6 col-sm-12 col-lg-5 px-2 mt-2">
-                                            <h6><strong>Rent: </strong>${property.rent}</h6>
+                                            <h6><strong>{property.available === true ? 'Available' : 'Not Available'}</strong></h6>
+                                            <h6><strong>Rent: </strong>{property.available === true ? `$${property.rent}` : 'N/A'}</h6>
                                             <h6><strong>Size: </strong>{property.size} Sq Ft</h6>
                                             <h6><strong>Beds: </strong>{property.beds}</h6>
                                             <h6><strong>Baths: </strong>{property.baths}</h6>
+                                            {size[0] >= 1700 && (
+                                                <div className='xxl-btns pr-3'>
+                                                    <button className='btn outline col-12' onClick={changeSelected(null)}>Reset Selected</button>
+                                                    <Link className='btn btn-primary w-100 col-12' to={`/properties/${property._id}`}>More Info</Link>   
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
-                                    <div className='row form-row'>
-                                        <button className='btn outline mt-1 col-6 col-sm-12 col-md-6' onClick={changeSelected(null)}>Reset Selected</button>
-                                        <Link className='btn btn-primary mt-1 w-100 col-6 col-sm-12 col-md-6' to={`/properties/${property._id}`}>More Info</Link>   
-                                    </div>
+                                    {size[0] < 1700 && (
+                                        <div className='row form-row'>
+                                            <button className='btn outline mt-1 col-6 col-sm-12 col-md-6' onClick={changeSelected(null)}>Reset Selected</button>
+                                            <Link className='btn btn-primary mt-1 w-100 col-6 col-sm-12 col-md-6' to={`/properties/${property._id}`}>More Info</Link>   
+                                        </div>
+                                    )}
                                 </div>
                             );
                         } else {
