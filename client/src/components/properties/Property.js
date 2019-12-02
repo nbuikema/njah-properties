@@ -19,33 +19,33 @@ const Property = ({match}) => {
             <div className="carousel-inner">
                 {property.images.map((image, i) => {
                     return i === 0 ? (
-                        <div key={i} className="carousel-item active">
+                        <div key={i} className="carousel-item active no-border">
                             <img src={`${image.url}`} className="d-block w-100" alt="..." />
                         </div>
                     ) : (
-                        <div key={i} className="carousel-item">
+                        <div key={i} className="carousel-item no-border">
                             <img src={`${image.url}`} className="d-block w-100" alt="..." />
                         </div>
                     );
                 })}
+                <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span className="sr-only">Previous</span>
+                </a>
+                <a className="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span className="sr-only">Next</span>
+                </a>
             </div>
-            <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span className="sr-only">Previous</span>
-            </a>
-            <a className="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                <span className="sr-only">Next</span>
-            </a>
-            <ol className="carousel-indicators">
+            <ol className="carousel-indicators row">
                 {property.images.map((image, i) => {
                     return i === 0 ? (
-                        <li key={i} data-target="#carouselExampleIndicators" data-slide-to={i} className="active">
-                            <img src={`${image.url}`} className="d-block w-100" alt="..." />
+                        <li className='col-2 px-0 mb-0 active' key={i} data-target="#carouselExampleIndicators" data-slide-to={i}>
+                            <img src={`${image.url}`} className="d-block w-100 h-100" alt="..." />
                         </li>
                     ) : (
-                        <li key={i} data-target="#carouselExampleIndicators" data-slide-to={i}>
-                            <img src={`${image.url}`} className="d-block w-100" alt="..." />
+                        <li className='col-2 px-0 mb-0' key={i} data-target="#carouselExampleIndicators" data-slide-to={i}>
+                            <img src={`${image.url}`} className="d-block w-100 h-100" alt="..." />
                         </li>
                     );
                 })}
@@ -58,10 +58,10 @@ const Property = ({match}) => {
             <div className='container'>
                 <br />
                 <div className='row'>
-                    <div className='col-sm-12 col-md-8 order-1 order-md-0'>
+                    <div className='col-sm-12 col-lg-8 order-1 order-lg-0'>
                         {property._id && showImages()}
                     </div>
-                    <div className='col-sm-12 col-md-4 order-0 order-md-1'>
+                    <div className='col-sm-12 col-lg-4 order-0 order-lg-1'>
                         <h2><strong>{property.address}</strong></h2>
                         <h4><em>{property.city}, {property.state}, {property.zip}</em></h4>
                         <hr />
