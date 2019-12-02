@@ -18,6 +18,10 @@ a.bg-light:focus, a.bg-light:hover, button.bg-light:focus, button.bg-light:hover
     left: -100px;
 }
 
+html {
+    overflow-y: scroll;
+}
+
 html,
 body {
     background-color: #f8f9fa!important;
