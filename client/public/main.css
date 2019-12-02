@@ -358,6 +358,10 @@ select:-webkit-autofill:focus {
     transition: background-color 0s ease-in-out 0s;
 }
 
+.mobile-mb {
+    margin-bottom: 40px;
+}
+
 @media (max-width: 575px) {
     .home-header {
         font-size: 3.5rem;
@@ -379,6 +383,10 @@ select:-webkit-autofill:focus {
         top: 60px;
         text-align: center;
     }
+
+    .mobile-mb {
+        margin-bottom: 80px;
+    }
 }
 
 @media (max-width: 767px) and (min-width: 576px) {
@@ -393,6 +401,10 @@ select:-webkit-autofill:focus {
         left: 0;
         top: 60px;
         text-align: center;
+    }
+
+    .mobile-mb {
+        margin-bottom: 80px;
     }
 }
 

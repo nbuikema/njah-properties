@@ -172,7 +172,7 @@ const UserDashboard = () => {
                         </ul>
                         <br />
                         <p className="font-weight-bold px-3 pb-1 mb-0">Residents</p>
-                        <ul className="nav flex-column bg-white mb-0">
+                        <ul className="nav flex-column bg-white mobile-mb">
                             <li className="nav-item">
                                 <button className={`nav-link dashboard-btn bg-light ${section === 'addResident' && 'active'}`} onClick={toggleSection('addResident')}>
                                     <i className="fas fa-plus mr-3 text-primary fa-fw selector"></i>
