@@ -363,11 +363,29 @@ select:-webkit-autofill:focus {
     .carousel-item img {
         height: 240px;
     }
+
+    .navbar-collapse {
+        background-color: #f8f9fa;
+        min-width: 100vw;
+        position: absolute;
+        left: 0;
+        top: 60px;
+        text-align: center;
+    }
 }
 
 @media (max-width: 767px) and (min-width: 576px) {
     .carousel-item img {
         height: 360px;
+    }
+
+    .navbar-collapse {
+        background-color: #f8f9fa;
+        min-width: 100vw;
+        position: absolute;
+        left: 0;
+        top: 60px;
+        text-align: center;
     }
 }
 
