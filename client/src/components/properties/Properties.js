@@ -155,126 +155,128 @@ const Properties = () => {
             {useWindowSize()}
             <div className='row reset-margin text-primary'>
                 <div className='col-xs-12 col-sm-8 d-none d-sm-block p-0 order-2 order-sm-1'>
-                    <button onClick={handleFilterToggle} className="btn btn-primary toggleBtn" id='filter-toggle' type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                        {expandedFilters === true ? 'Hide' : 'Show'} Filters
-                    </button>
-                    <div className="collapse show bg-light" id="collapseExample">
-                        <form>
-                            <div>
-                                <div className="col-12 my-2">
-                                    <h4>Filter Properties</h4>
+                    <div className='fixed-top fixed-map'>
+                        <button onClick={handleFilterToggle} className="btn btn-primary toggleBtn" id='filter-toggle' type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            {expandedFilters === true ? 'Hide' : 'Show'} Filters
+                        </button>
+                        <div className="collapse show bg-light" id="collapseExample">
+                            <form>
+                                <div>
+                                    <div className="col-12 my-2">
+                                        <h4>Filter Properties</h4>
+                                    </div>
+                                    <div className="form-group col-12 mb-2">
+                                        <select value={filters.rentMin} className="form-control text-primary" onChange={changeFilters('rentMin')} id="rentMin" name="rentMin">
+                                            <option value=''>Min Rent</option>
+                                            <option value='100'>$100</option>
+                                            <option value='200'>$200</option>
+                                            <option value='300'>$300</option>
+                                            <option value='400'>$400</option>
+                                            <option value='500'>$500</option>
+                                            <option value='600'>$600</option>
+                                            <option value='700'>$700</option>
+                                            <option value='800'>$800</option>
+                                            <option value='900'>$900</option>
+                                            <option value='1000'>$1000</option>
+                                            <option value='1100'>$1100</option>
+                                            <option value='1200'>$1200</option>
+                                            <option value='1300'>$1300</option>
+                                            <option value='1400'>$1400</option>
+                                            <option value='1500'>$1500</option>
+                                        </select>
+                                    </div>
+                                    <div className="form-group col-12 mb-2">
+                                        <select value={filters.rentMax} className="form-control text-primary" onChange={changeFilters('rentMax')} id="rentMax" name="rentMax">
+                                            <option value=''>Max Rent</option>
+                                            <option value='100'>$100</option>
+                                            <option value='200'>$200</option>
+                                            <option value='300'>$300</option>
+                                            <option value='400'>$400</option>
+                                            <option value='500'>$500</option>
+                                            <option value='600'>$600</option>
+                                            <option value='700'>$700</option>
+                                            <option value='800'>$800</option>
+                                            <option value='900'>$900</option>
+                                            <option value='1000'>$1000</option>
+                                            <option value='1100'>$1100</option>
+                                            <option value='1200'>$1200</option>
+                                            <option value='1300'>$1300</option>
+                                            <option value='1400'>$1400</option>
+                                            <option value='1500'>$1500</option>
+                                        </select>
+                                    </div>
+                                    <div className="form-group col-12 mb-2">
+                                        <select value={filters.beds} className="form-control text-primary" onChange={changeFilters('beds')} id="beds" name="beds">
+                                            <option value=''>Beds</option>
+                                            <option value='1'>1</option>
+                                            <option value='2'>2</option>
+                                            <option value='3'>3</option>
+                                            <option value='4'>4</option>
+                                        </select>
+                                    </div>
+                                    <div className="form-group col-12 mb-2">
+                                        <select value={filters.baths} className="form-control text-primary" onChange={changeFilters('baths')} id="baths" name="baths">
+                                            <option value=''>Baths</option>
+                                            <option value='1'>1</option>
+                                            <option value='2'>2</option>
+                                            <option value='3'>3</option>
+                                            <option value='4'>4</option>
+                                        </select>
+                                    </div>
+                                    <div className="form-group col-12 mb-2">
+                                        <select value={filters.sort} className="form-control text-primary" onChange={changeFilters('sort')} id="sort" name="sort">
+                                            <option value=''>Sort By</option>
+                                            <option value='rent desc'>Rent (High to Low)</option>
+                                            <option value='rent asc'>Rent (Low to High)</option>
+                                            <option value='beds desc'>Beds (High to Low)</option>
+                                            <option value='beds asc'>Beds (Low to High)</option>
+                                        </select>
+                                    </div>
+                                    <div className="col-12 mb-2">
+                                        <button onClick={submitFilters} className="btn btn-primary w-100">Search Properties</button>
+                                    </div>
+                                    <div className="col-12 mb-2">
+                                        <button onClick={resetFilters} className="btn btn-outline-primary w-100">Reset Filters</button>
+                                    </div>
                                 </div>
-                                <div className="form-group col-12 mb-2">
-                                    <select value={filters.rentMin} className="form-control text-primary" onChange={changeFilters('rentMin')} id="rentMin" name="rentMin">
-                                        <option value=''>Min Rent</option>
-                                        <option value='100'>$100</option>
-                                        <option value='200'>$200</option>
-                                        <option value='300'>$300</option>
-                                        <option value='400'>$400</option>
-                                        <option value='500'>$500</option>
-                                        <option value='600'>$600</option>
-                                        <option value='700'>$700</option>
-                                        <option value='800'>$800</option>
-                                        <option value='900'>$900</option>
-                                        <option value='1000'>$1000</option>
-                                        <option value='1100'>$1100</option>
-                                        <option value='1200'>$1200</option>
-                                        <option value='1300'>$1300</option>
-                                        <option value='1400'>$1400</option>
-                                        <option value='1500'>$1500</option>
-                                    </select>
-                                </div>
-                                <div className="form-group col-12 mb-2">
-                                    <select value={filters.rentMax} className="form-control text-primary" onChange={changeFilters('rentMax')} id="rentMax" name="rentMax">
-                                        <option value=''>Max Rent</option>
-                                        <option value='100'>$100</option>
-                                        <option value='200'>$200</option>
-                                        <option value='300'>$300</option>
-                                        <option value='400'>$400</option>
-                                        <option value='500'>$500</option>
-                                        <option value='600'>$600</option>
-                                        <option value='700'>$700</option>
-                                        <option value='800'>$800</option>
-                                        <option value='900'>$900</option>
-                                        <option value='1000'>$1000</option>
-                                        <option value='1100'>$1100</option>
-                                        <option value='1200'>$1200</option>
-                                        <option value='1300'>$1300</option>
-                                        <option value='1400'>$1400</option>
-                                        <option value='1500'>$1500</option>
-                                    </select>
-                                </div>
-                                <div className="form-group col-12 mb-2">
-                                    <select value={filters.beds} className="form-control text-primary" onChange={changeFilters('beds')} id="beds" name="beds">
-                                        <option value=''>Beds</option>
-                                        <option value='1'>1</option>
-                                        <option value='2'>2</option>
-                                        <option value='3'>3</option>
-                                        <option value='4'>4</option>
-                                    </select>
-                                </div>
-                                <div className="form-group col-12 mb-2">
-                                    <select value={filters.baths} className="form-control text-primary" onChange={changeFilters('baths')} id="baths" name="baths">
-                                        <option value=''>Baths</option>
-                                        <option value='1'>1</option>
-                                        <option value='2'>2</option>
-                                        <option value='3'>3</option>
-                                        <option value='4'>4</option>
-                                    </select>
-                                </div>
-                                <div className="form-group col-12 mb-2">
-                                    <select value={filters.sort} className="form-control text-primary" onChange={changeFilters('sort')} id="sort" name="sort">
-                                        <option value=''>Sort By</option>
-                                        <option value='rent desc'>Rent (High to Low)</option>
-                                        <option value='rent asc'>Rent (Low to High)</option>
-                                        <option value='beds desc'>Beds (High to Low)</option>
-                                        <option value='beds asc'>Beds (Low to High)</option>
-                                    </select>
-                                </div>
-                                <div className="col-12 mb-2">
-                                    <button onClick={submitFilters} className="btn btn-primary w-100">Search Properties</button>
-                                </div>
-                                <div className="col-12 mb-2">
-                                    <button onClick={resetFilters} className="btn btn-outline-primary w-100">Reset Filters</button>
-                                </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
+                        <button className='btn btn-primary map-view' onClick={changeMapType}>{mapType === street ? 'Satellite View' : 'Street View'}</button>
+                        <button className='btn btn-primary map-reset' onClick={changeSelected(null)}>Reset Map</button>
+                        <button className='btn btn-primary map-zoomIn' onClick={zoomMap('in')}>+</button>
+                        <button className='btn btn-primary map-zoomOut' onClick={zoomMap('out')}>-</button>
+                        <ReactMapGL {...viewport} mapStyle={mapType} mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_KEY} onViewportChange={viewport => {setViewport(viewport)}}>
+                            {!selected && filteredProperties.length === 0 && properties.map(property => (
+                                <Marker key={property._id} latitude={Number(property.lat)} longitude={Number(property.long)}>
+                                    <button className='markerbtn' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
+                                        <div className='marker'></div>
+                                    </button>
+                                </Marker>
+                            ))}
+                            {!selected && filteredProperties.length > 0 && filteredProperties.map(property => (
+                                <Marker key={property._id} latitude={Number(property.lat)} longitude={Number(property.long)}>
+                                    <button className='markerbtn' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
+                                        <div className='marker'></div>
+                                    </button>
+                                </Marker>
+                            ))}
+                            {selected && properties.map(property => {
+                                if(selected === property._id) {
+                                    return (
+                                        <Marker key={property._id} latitude={Number(property.lat)} longitude={Number(property.long)}>
+                                            <button className='markerbtn'>
+                                                <div className='marker'></div>
+                                            </button>
+                                        </Marker>
+                                    );
+                                } else {
+                                    return null;
+                                }
+                            })}
+                        </ReactMapGL>
                     </div>
-                    <button className='btn btn-primary map-view' onClick={changeMapType}>{mapType === street ? 'Satellite View' : 'Street View'}</button>
-                    <button className='btn btn-primary map-reset' onClick={changeSelected(null)}>Reset Map</button>
-                    <button className='btn btn-primary map-zoomIn' onClick={zoomMap('in')}>+</button>
-                    <button className='btn btn-primary map-zoomOut' onClick={zoomMap('out')}>-</button>
-                    <ReactMapGL {...viewport} mapStyle={mapType} mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_KEY} onViewportChange={viewport => {setViewport(viewport)}}>
-                        {!selected && filteredProperties.length === 0 && properties.map(property => (
-                            <Marker key={property._id} latitude={Number(property.lat)} longitude={Number(property.long)}>
-                                <button className='markerbtn' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
-                                    <div className='marker'></div>
-                                </button>
-                            </Marker>
-                        ))}
-                        {!selected && filteredProperties.length > 0 && filteredProperties.map(property => (
-                            <Marker key={property._id} latitude={Number(property.lat)} longitude={Number(property.long)}>
-                                <button className='markerbtn' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
-                                    <div className='marker'></div>
-                                </button>
-                            </Marker>
-                        ))}
-                        {selected && properties.map(property => {
-                            if(selected === property._id) {
-                                return (
-                                    <Marker key={property._id} latitude={Number(property.lat)} longitude={Number(property.long)}>
-                                        <button className='markerbtn'>
-                                            <div className='marker'></div>
-                                        </button>
-                                    </Marker>
-                                );
-                            } else {
-                                return null;
-                            }
-                        })}
-                    </ReactMapGL>
                 </div>
-                <div className='scrolly col-xs-12 col-sm-4 p-0 order-1 order-sm-2'>
+                <div className='col-xs-12 col-sm-4 p-0 order-1 order-sm-2'>
                     {!selected && filteredProperties.length === 0 && properties.map(property => (
                         <div key={property._id} className="card bg-light">
                             <div className="row no-gutters">
