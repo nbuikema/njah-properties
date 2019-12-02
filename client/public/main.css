@@ -167,6 +167,13 @@ body {
 
 #sidebar {
     overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+#sidebar::-webkit-scrollbar {
+    width: 0;
+    height: 0;
 }
 
 .fixed-map {
