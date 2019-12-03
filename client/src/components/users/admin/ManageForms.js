@@ -65,7 +65,7 @@ const ManageForms = ({op}) => {
                 <div className='form-group col-12 row form-row'>
                     <label htmlFor='file' className="col-sm-3 col-form-label"><strong>Upload File</strong></label>
                     <div className='col-sm-9'>
-                        {isFileSelected(0) ? <i className="fas fa-check text-success mr-2"></i> : <i class="fas fa-times text-danger mr-2"></i>}
+                        {isFileSelected(0) ? <i className="fas fa-check text-success mr-2"></i> : <i className="fas fa-times text-danger mr-2"></i>}
                         <input onChange={onChange('file')} type='file' accept='*' id='file' className='mt-1 text-primary file' />
                     </div>
                 </div>

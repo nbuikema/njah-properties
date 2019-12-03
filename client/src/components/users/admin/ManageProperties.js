@@ -331,60 +331,60 @@ const ManageProperties = ({op}) => {
                     <div className="form-group col-12 row form-row">
                         <label htmlFor='photos' className="col-12 col-form-label"><strong>Upload Images (Up To 10) - <small>The first image will be the property preview, so we recommend using the front of the property.</small></strong></label>
                         <div className='col-auto'>
-                            {isFileSelected(0) ? <i className="fas fa-check text-success mr-2"></i> : <i class="fas fa-times text-danger mr-2"></i>}
+                            {isFileSelected(0) ? <i className="fas fa-check text-success mr-2"></i> : <i className="fas fa-times text-danger mr-2"></i>}
                             <input onChange={changePropertyInfo('photos 0')} type='file' accept='image/*' className='input-photos mt-1 text-primary' />
                         </div>
                         {images.length > 0 && (
                             <div className='col-auto'>
-                                {isFileSelected(1) ? <i className="fas fa-check text-success mr-2"></i> : <i class="fas fa-times text-danger mr-2"></i>}
+                                {isFileSelected(1) ? <i className="fas fa-check text-success mr-2"></i> : <i className="fas fa-times text-danger mr-2"></i>}
                                 <input onChange={changePropertyInfo('photos 1')} type='file' accept='image/*' className='input-photos mt-1 text-primary' />
                             </div>
                         )}
                         {images.length > 1 && (
                             <div className='col-auto'>
-                                {isFileSelected(2) ? <i className="fas fa-check text-success mr-2"></i> : <i class="fas fa-times text-danger mr-2"></i>}
+                                {isFileSelected(2) ? <i className="fas fa-check text-success mr-2"></i> : <i className="fas fa-times text-danger mr-2"></i>}
                                 <input onChange={changePropertyInfo('photos 2')} type='file' accept='image/*' className='input-photos mt-1 text-primary' />
                             </div>
                         )}
                         {images.length > 2 && (
                             <div className='col-auto'>
-                                {isFileSelected(3) ? <i className="fas fa-check text-success mr-2"></i> : <i class="fas fa-times text-danger mr-2"></i>}
+                                {isFileSelected(3) ? <i className="fas fa-check text-success mr-2"></i> : <i className="fas fa-times text-danger mr-2"></i>}
                                 <input onChange={changePropertyInfo('photos 3')} type='file' accept='image/*' className='input-photos mt-1 text-primary' />
                             </div>
                         )}
                         {images.length > 3 && (
                             <div className='col-auto'>
-                                {isFileSelected(4) ? <i className="fas fa-check text-success mr-2"></i> : <i class="fas fa-times text-danger mr-2"></i>}
+                                {isFileSelected(4) ? <i className="fas fa-check text-success mr-2"></i> : <i className="fas fa-times text-danger mr-2"></i>}
                                 <input onChange={changePropertyInfo('photos 4')} type='file' accept='image/*' className='input-photos mt-1 text-primary' />
                             </div>
                         )}
                         {images.length > 4 && (
                             <div className='col-auto'>
-                                {isFileSelected(5) ? <i className="fas fa-check text-success mr-2"></i> : <i class="fas fa-times text-danger mr-2"></i>}
+                                {isFileSelected(5) ? <i className="fas fa-check text-success mr-2"></i> : <i className="fas fa-times text-danger mr-2"></i>}
                                 <input onChange={changePropertyInfo('photos 5')} type='file' accept='image/*' className='input-photos mt-1 text-primary' />
                             </div>
                         )}
                         {images.length > 5 && (
                             <div className='col-auto'>
-                                {isFileSelected(6) ? <i className="fas fa-check text-success mr-2"></i> : <i class="fas fa-times text-danger mr-2"></i>}
+                                {isFileSelected(6) ? <i className="fas fa-check text-success mr-2"></i> : <i className="fas fa-times text-danger mr-2"></i>}
                                 <input onChange={changePropertyInfo('photos 6')} type='file' accept='image/*' className='input-photos mt-1 text-primary' />
                             </div>
                         )}
                         {images.length > 6 && (
                             <div className='col-auto'>
-                                {isFileSelected(7) ? <i className="fas fa-check text-success mr-2"></i> : <i class="fas fa-times text-danger mr-2"></i>}
+                                {isFileSelected(7) ? <i className="fas fa-check text-success mr-2"></i> : <i className="fas fa-times text-danger mr-2"></i>}
                                 <input onChange={changePropertyInfo('photos 7')} type='file' accept='image/*' className='input-photos mt-1 text-primary' />
                             </div>
                         )}
                         {images.length > 7 && (
                             <div className='col-auto'>
-                                {isFileSelected(8) ? <i className="fas fa-check text-success mr-2"></i> : <i class="fas fa-times text-danger mr-2"></i>}
+                                {isFileSelected(8) ? <i className="fas fa-check text-success mr-2"></i> : <i className="fas fa-times text-danger mr-2"></i>}
                                 <input onChange={changePropertyInfo('photos 8')} type='file' accept='image/*' className='input-photos mt-1 text-primary' />
                             </div>
                         )}
                         {images.length > 8 && (
                             <div className='col-auto'>
-                                {isFileSelected(9) ? <i className="fas fa-check text-success mr-2"></i> : <i class="fas fa-times text-danger mr-2"></i>}
+                                {isFileSelected(9) ? <i className="fas fa-check text-success mr-2"></i> : <i className="fas fa-times text-danger mr-2"></i>}
                                 <input onChange={changePropertyInfo('photos 9')} type='file' accept='image/*' className='input-photos mt-1 text-primary' />
                             </div>
                         )}
