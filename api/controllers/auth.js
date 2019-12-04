@@ -1,5 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const crs = require('crypto-random-string');
+const sgMail = require('@sendgrid/mail');
 const User = require('../models/user');
 
 exports.signup = (req, res) => {
@@ -72,4 +74,32 @@ exports.isAdmin = (req, res, next) => {
 exports.signout = (req, res) => {
     res.clearCookie('jwt');
     res.json({message: 'User signed out.'});
+};
+
+exports.forgotPassword = (req, res) => {
+    const tempPassword = crs({length: 20});
+    req.body.password = bcrypt.hashSync(tempPassword, 10);
+    User.findOneAndUpdate(
+        {email: req.body.email},
+        {$set: req.body},
+        {new: true},
+        (err, user) => {
+            if(err || !user) {
+                return res.status(400).json({error: 'User not found.'});
+            }
+            const emailData = {
+                to: req.body.email,
+                from: 'noreply@njahproperties.com',
+                subject: `Password Reset Instructions`,
+                html: `
+                    <p>You have recently requested a new password.</p>
+                    <p>To reset your password, sign in with the temporary password</p>
+                    <p><strong>${tempPassword}</strong></p>
+                    <p>and visit Update Account to change your password.</p>
+                `
+            };
+            sgMail.send(emailData);
+            return res.json(user.email);
+        }
+    );
 };
