@@ -9,6 +9,7 @@ import Properties from './components/properties/Properties';
 import Property from './components/properties/Property';
 import Signup from './components/auth/Signup';
 import Signin from './components/auth/Signin';
+import ForgotPassword from './components/auth/ForgotPassword';
 import UserDashboard from './components/users/UserDashboard';
 
 const App = () => {
@@ -23,6 +24,7 @@ const App = () => {
                     <Route path='/properties/:propertyId' exact component={Property} />
                     <Route path='/signup' exact component={Signup} />
                     <Route path='/signin' exact component={Signin} />
+                    <Route path='/password/reset' exact component={ForgotPassword} />
                     <PrivateRoute path='/dashboard' exact component={UserDashboard} />
                 </Switch>
             </BrowserRouter>
