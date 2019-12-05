@@ -50,9 +50,9 @@ const ForgotPassword = () => {
     );
 
     return (
-        <div className='text-primary my-4'>
+        <div className='text-primary my-5'>
             <div className='container'>
-                <h1 className='text-center mt-3'>Password Reset</h1>
+                <h1 className='text-center'>Password Reset</h1>
                 <hr />
                 {showError()}
                 {showSuccess()}

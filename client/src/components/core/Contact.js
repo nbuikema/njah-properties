@@ -172,7 +172,7 @@ const Contact = () => {
     );
 
     return (
-        <div className='text-primary my-4'>
+        <div className='text-primary my-5'>
             <div className='container'>
                 <div className='row'>
                     <div className='col-12 col-lg-8 order-1 order-lg-0'>
