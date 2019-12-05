@@ -30,7 +30,7 @@ exports.signin = (req, res) => {
     const {email, password} = req.body;
     User.findOne({email}).populate('property', 'address city state zip rent size beds baths').exec((err, user) => {
         if(err || !user) {
-            return res.status(400).json({error: 'Could not sign user in.'});
+            return res.status(400).json({error: 'User not found.'});
         }
         if(!bcrypt.compareSync(password, user.password)) {
             return res.status(401).json({error: 'Email and Password do not match.'});
@@ -39,7 +39,7 @@ exports.signin = (req, res) => {
         user.password = undefined;
         jwt.sign({user: user}, process.env.JWT_SECRET, {expiresIn: '60m'}, (err, token) => {
             if(err || !token) {
-                return res.status(400).json({error: 'Could not sign user in.'});
+                return res.status(400).json({error: 'Something went wrong signing you in. Please try again.'});
             }
             return res.json({token});
         })
