@@ -16,17 +16,29 @@ const Contact = () => {
         message: '',
         formData: new FormData()
     });
+    const [errors, setErrors] = useState({
+        loading: '',
+        input: ''
+    });
     const {first_name, last_name, email, phone, reason, property, message, formData} = contact;
 
     const getAllProperties = () => {
-        readAllProperties().then(data => {
-            setProperties(data);
+        readAllProperties().then((data, err) => {
+            if(err || !data) {
+                err ? setErrors({...errors, loading: err}) : setErrors({...errors, loading: 'Something went wrong on our end. Please try refreshing the page, or send us a message regarding the issue.'});
+            } else {
+                setProperties(data);
+            }
         });
     };
 
     const getAllForms = () => {
-        readAllForms().then(data => {
-            setForms(data);
+        readAllForms().then((data, err) => {
+            if(err || !data) {
+                err ? setErrors({...errors, loading: err}) : setErrors({...errors, loading: 'Something went wrong on our end. Please try refreshing the page, or send us a message regarding the issue.'});
+            } else {
+                setForms(data);
+            }
         });
     };
 
@@ -56,18 +68,23 @@ const Contact = () => {
     const onSubmit = event => {
         event.preventDefault();
         formData.set('type', 'General');
-        sendContact(formData).then(data => {
-            setContact({
-                first_name: '',
-                last_name: '',
-                email: '',
-                phone: '',
-                reason: '',
-                property: '',
-                application: '',
-                message: '',
-                formData: new FormData()
-            });
+        sendContact(formData).then((data, err) => {
+            if(!data || data.error || err) {
+                err ? setErrors({...errors, input: err}) : setErrors({...errors, input: 'Contact form could not be submitted.'});
+                data && data.error ? setErrors({...errors, input: data.error}) : setErrors({...errors, input: 'Contact form could not be submitted.'});
+            } else {
+                setContact({
+                    first_name: '',
+                    last_name: '',
+                    email: '',
+                    phone: '',
+                    reason: '',
+                    property: '',
+                    application: '',
+                    message: '',
+                    formData: new FormData()
+                });
+            }
         });
     };
 
@@ -80,7 +97,7 @@ const Contact = () => {
                             <label htmlFor='property'>Which Property Are You Interested In?</label>
                             <select value={property} onChange={onChange('property')} className="form-control text-primary" id="property" name="property">
                                 <option value=''>Select One</option>
-                                {properties.map((property, i) => (
+                                {properties.length > 0 && properties.map((property, i) => (
                                     <option key={i} value={property._id}>{property.address}, {property.city}, {property.state}, {property.zip}</option>
                                 ))}
                             </select>
@@ -98,7 +115,7 @@ const Contact = () => {
                                 <label htmlFor='property'>Which Property Are You Interested In?</label>
                                 <select value={property} onChange={onChange('property')} className="form-control text-primary" id="property" name="property">
                                     <option value=''>Select One</option>
-                                    {properties.map((property, i) => (
+                                    {properties.length > 0 && properties.map((property, i) => (
                                         <option key={i} value={property._id}>{property.address}, {property.city}, {property.state}, {property.zip}</option>
                                     ))}
                                 </select>
@@ -171,9 +188,21 @@ const Contact = () => {
         </form>
     );
 
+    const showError = () => (
+        <div>
+            <div className='alert alert-danger' style={{display: errors.loading ? '' : 'none'}}>
+                {errors.loading}
+            </div>
+            <div className='alert alert-danger mt-1' style={{display: errors.input ? '' : 'none'}}>
+                {errors.input}
+            </div>
+        </div>
+    );
+
     return (
         <div className='text-primary my-5'>
             <div className='container'>
+                {showError()}
                 <div className='row'>
                     <div className='col-12 col-lg-8 order-1 order-lg-0'>
                         <div className='d-block d-lg-none'>
@@ -188,7 +217,7 @@ const Contact = () => {
                         <div>
                             <h1>Forms</h1>
                             <hr />
-                            {forms.map((form, i) => (
+                            {forms.length > 0 && forms.map((form, i) => (
                                 <div key={i}>
                                     <a href={`${form.file.url}`} target='_blank' rel="noopener noreferrer">{form.name}</a>
                                 </div>

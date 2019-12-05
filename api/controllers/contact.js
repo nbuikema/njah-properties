@@ -10,7 +10,7 @@ exports.contact = (req, res) => {
     }
     contact.save((err, data) => {
         if(err) {
-            return res.status(400).json({error: 'Contact could not be created.'});
+            return res.status(400).json({error: 'Contact form could not be submitted.'});
         }
         return res.json({data});
     });
