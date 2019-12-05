@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Redirect} from 'react-router-dom';
+import {Redirect, Link} from 'react-router-dom';
 import {signin, authenticate} from './apiAuth';
 
 const Signin = () => {
@@ -39,6 +39,9 @@ const Signin = () => {
             </div>
             <div className='text-center'>
                 <button onClick={onSubmit} type='submit' className='btn btn-primary'>Sign In</button>
+                <Link className='mt-4 d-block' to={`/password/reset`}>
+                    Forgot Password?
+                </Link>
             </div>
         </form>
     );
