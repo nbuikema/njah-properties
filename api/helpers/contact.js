@@ -1,4 +1,5 @@
 exports.contactValidator = (req, res, next) => {
+    console.log(req);
     req.check('first_name', 'First name is required.').notEmpty();
     req.check('last_name', 'Last name is required.').notEmpty();
     req.check('email', 'Email is required.').notEmpty();
