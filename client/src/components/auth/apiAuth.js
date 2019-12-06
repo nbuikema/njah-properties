@@ -63,9 +63,7 @@ export const signout = next => {
         next();
         return fetch(`${API}/auth/signout`, {
             method: 'GET'
-        }).then(response => {
-            
-        }).catch(err => {
+        }).then().catch(err => {
             console.log(err)
         });
     }
@@ -82,6 +80,6 @@ export const forgotPassword = (email) => {
     }).then(response => {
         return response.json();
     }).catch(err => {
-        console.log(err)
+        console.log(err);
     });
 };

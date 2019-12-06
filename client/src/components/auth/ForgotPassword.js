@@ -17,10 +17,14 @@ const ForgotPassword = () => {
         event.preventDefault();
         setValues({...values, error: ''});
         forgotPassword(email).then(data => {
-            if(data.error) {
-                setValues({...values, error: data.error});
+            if(!data) {
+                setValues({...values, error: 'Oops! Something went wrong.'});
             } else {
-                setValues({...values, success: true});
+                if(data.error) {
+                    setValues({...values, error: data.error});
+                } else {
+                    setValues({...values, success: true});
+                }
             }
         });
     };
