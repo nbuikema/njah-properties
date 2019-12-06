@@ -101,7 +101,7 @@ const Contact = () => {
                             <label htmlFor='property'>Which Property Are You Interested In?</label>
                             <select value={property} onChange={onChange('property')} className="form-control text-primary" id="property" name="property">
                                 <option value=''>Select One</option>
-                                {properties.length > 0 && properties.map((property, i) => (
+                                {properties.length > 0 && properties.map((property, i) => property.available === true && (
                                     <option key={i} value={property._id}>{property.address}, {property.city}, {property.state}, {property.zip}</option>
                                 ))}
                             </select>
@@ -119,7 +119,7 @@ const Contact = () => {
                                 <label htmlFor='property'>Which Property Are You Interested In?</label>
                                 <select value={property} onChange={onChange('property')} className="form-control text-primary" id="property" name="property">
                                     <option value=''>Select One</option>
-                                    {properties.length > 0 && properties.map((property, i) => (
+                                    {properties.length > 0 && properties.map((property, i) => property.available === true && (
                                         <option key={i} value={property._id}>{property.address}, {property.city}, {property.state}, {property.zip}</option>
                                     ))}
                                 </select>
