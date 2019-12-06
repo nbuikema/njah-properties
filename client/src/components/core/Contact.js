@@ -25,7 +25,7 @@ const Contact = () => {
     const getAllProperties = () => {
         readAllProperties().then((data, err) => {
             if(err || !data) {
-                err ? setErrors({...errors, loading: err}) : setErrors({...errors, loading: 'Something went wrong on our end. Please try refreshing the page, or send us a message regarding the issue.'});
+                setErrors({...errors, loading: 'Oops! Something went wrong.'});
             } else {
                 setProperties(data);
             }
@@ -35,7 +35,7 @@ const Contact = () => {
     const getAllForms = () => {
         readAllForms().then((data, err) => {
             if(err || !data) {
-                err ? setErrors({...errors, loading: err}) : setErrors({...errors, loading: 'Something went wrong on our end. Please try refreshing the page, or send us a message regarding the issue.'});
+                setErrors({...errors, loading: 'Oops! Something went wrong.'});
             } else {
                 setForms(data);
             }
@@ -48,6 +48,7 @@ const Contact = () => {
     }, []);
 
     const onChange = selected => event => {
+        setErrors({...errors, input: ''});
         let value = selected === 'application' ? event.target.files[0] : event.target.value;
         if(selected === 'reason') {
             formData.set(selected, value);
@@ -69,21 +70,24 @@ const Contact = () => {
         event.preventDefault();
         formData.set('type', 'General');
         sendContact(formData).then((data, err) => {
-            if(!data || data.error || err) {
-                err ? setErrors({...errors, input: err}) : setErrors({...errors, input: 'Contact form could not be submitted.'});
-                data && data.error ? setErrors({...errors, input: data.error}) : setErrors({...errors, input: 'Contact form could not be submitted.'});
+            if(!data) {
+                setErrors({...errors, input: 'Oops! Something went wrong.'});
             } else {
-                setContact({
-                    first_name: '',
-                    last_name: '',
-                    email: '',
-                    phone: '',
-                    reason: '',
-                    property: '',
-                    application: '',
-                    message: '',
-                    formData: new FormData()
-                });
+                if(data.error) {
+                    setErrors({...errors, input: data.error});
+                } else {
+                    setContact({
+                        first_name: '',
+                        last_name: '',
+                        email: '',
+                        phone: '',
+                        reason: '',
+                        property: '',
+                        application: '',
+                        message: '',
+                        formData: new FormData()
+                    });
+                }
             }
         });
     };
