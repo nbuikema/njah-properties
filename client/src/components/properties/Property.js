@@ -3,10 +3,16 @@ import {readProperty} from './apiProperties';
 
 const Property = ({match}) => {
     const [property, setProperty] = useState({});
+    const [error, setError] = useState('');
 
     const getProperty = propertyId => {
-        readProperty(propertyId).then(data => {
-            setProperty(data[0]);
+        readProperty(propertyId).then((data, err) => {
+            if(err || !data) {
+                setError('Oops! Something went wrong.');
+            } else {
+                setError('');
+                setProperty(data[0]);
+            }
         });
     };
 
@@ -38,7 +44,7 @@ const Property = ({match}) => {
                 </a>
             </div>
             <ol className="carousel-indicators row">
-                {property.images.map((image, i) => {
+                {property.images.length > 0 ? property.images.map((image, i) => {
                     return i === 0 ? (
                         <li className='col-2 px-0 mb-0 active' key={i} data-target="#carouselExampleIndicators" data-slide-to={i}>
                             <img src={`${image.url}`} className="d-block w-100 h-100" alt="..." />
@@ -48,8 +54,18 @@ const Property = ({match}) => {
                             <img src={`${image.url}`} className="d-block w-100 h-100" alt="..." />
                         </li>
                     );
-                })}
+                }) : (
+                    <div>
+                        This property does not currently have any images. Please check back later to see images of the property after it has been updated.
+                    </div>
+                )}
             </ol>
+        </div>
+    );
+
+    const showError = () => (
+        <div className='alert alert-danger' style={{display: error ? '' : 'none'}}>
+            {error}
         </div>
     );
 
@@ -57,23 +73,26 @@ const Property = ({match}) => {
         <div className='text-primary my-4'>
             <div className='container'>
                 <br />
-                <div className='row'>
-                    <div className='col-sm-12 col-lg-8 order-1 order-lg-0'>
-                        {property._id && showImages()}
+                {showError()}
+                {property._id && (
+                    <div className='row'>
+                        <div className='col-sm-12 col-lg-8 order-1 order-lg-0'>
+                            {showImages()}
+                        </div>
+                        <div className='col-sm-12 col-lg-4 order-0 order-lg-1'>
+                            <h2><strong>{property.address}</strong></h2>
+                            <h4><em>{property.city}, {property.state}, {property.zip}</em></h4>
+                            <hr />
+                            <h6><strong>{property.available === true ? 'Available' : 'Not Available'}</strong></h6>
+                            <h6><strong>Rent:</strong> {property.available === true ? `$${property.rent}` : 'N/A'}</h6>
+                            <h6><strong>Size:</strong> {property.size} Sq Ft</h6>
+                            <h6><strong>Beds:</strong> {property.beds}</h6>
+                            <h6><strong>Baths:</strong> {property.baths}</h6>
+                            <h6><strong>Additional Info:</strong></h6>
+                            <p>{property.info}</p>
+                        </div>
                     </div>
-                    <div className='col-sm-12 col-lg-4 order-0 order-lg-1'>
-                        <h2><strong>{property.address}</strong></h2>
-                        <h4><em>{property.city}, {property.state}, {property.zip}</em></h4>
-                        <hr />
-                        <h6><strong>{property.available === true ? 'Available' : 'Not Available'}</strong></h6>
-                        <h6><strong>Rent:</strong> {property.available === true ? `$${property.rent}` : 'N/A'}</h6>
-                        <h6><strong>Size:</strong> {property.size} Sq Ft</h6>
-                        <h6><strong>Beds:</strong> {property.beds}</h6>
-                        <h6><strong>Baths:</strong> {property.baths}</h6>
-                        <h6><strong>Additional Info:</strong></h6>
-                        <p>{property.info}</p>
-                    </div>
-                </div>
+                )}
             </div>
         </div>
     );
