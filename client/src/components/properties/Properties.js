@@ -28,6 +28,7 @@ const Properties = () => {
     });
     const [expandedFilters, setExpandedFilters] = useState(true);
     const [size, setSize] = useState([0, 0]);
+    const [error, setError] = useState('');
 
     const getWindowSize = () => {
         setSize([window.innerWidth, window.innerHeight]);
@@ -50,8 +51,13 @@ const Properties = () => {
     }
 
     const getAllProperties = () => {
-        readAllProperties().then(data => {
-            setProperties(data);
+        readAllProperties().then((data, err) => {
+            if(err || !data) {
+                setError('Oops! Something went wrong.');
+            } else {
+                setError('');
+                setProperties(data);
+            }
         });
     };
 
@@ -115,17 +121,22 @@ const Properties = () => {
                 }
             }
         }
-        readPropertiesWithQuery(queryString).then(data => {
-            if(data.length === 0) {
-                setFilters({
-                    rentMin: '',
-                    rentMax: '',
-                    beds: '',
-                    baths: '',
-                    sort: ''
-                });
+        readPropertiesWithQuery(queryString).then((data, err) => {
+            if(!data || err) {
+                setError('Oops! Something went wrong.');
+            } else {
+                if(data.length === 0) {
+                    setFilters({
+                        rentMin: '',
+                        rentMax: '',
+                        beds: '',
+                        baths: '',
+                        sort: ''
+                    });
+                }
+                setError('');
+                setFilteredProperties(data);
             }
-            setFilteredProperties(data);
         });
     };
 
@@ -139,6 +150,7 @@ const Properties = () => {
             sort: ''
         });
         setFilteredProperties([]);
+        getAllProperties();
     };
 
     const zoomMap = direction => event => {
@@ -153,6 +165,16 @@ const Properties = () => {
             setExpandedFilters(false);
         }
     };
+
+    const showError = () => (
+        <div className='mt-3 mx-3 alert alert-danger' style={{display: error ? '' : 'none'}}>
+            {error}
+            <br />
+            <button className='btn btn-primary mt-2' onClick={() => getAllProperties()}>
+                Reload Properties
+            </button>
+        </div>
+    );
 
     return (
         <div>
@@ -281,6 +303,7 @@ const Properties = () => {
                     </div>
                 </div>
                 <div className='col-xs-12 col-sm-4 p-0 order-1 order-sm-2'>
+                    {showError()}
                     {!selected && filteredProperties.length === 0 && properties.map(property => (
                         <div key={property._id} className="card bg-light">
                             <div className="row no-gutters">
