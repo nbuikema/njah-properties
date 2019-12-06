@@ -16,8 +16,8 @@ const ForgotPassword = () => {
     const onSubmit = event => {
         event.preventDefault();
         setValues({...values, error: ''});
-        forgotPassword(email).then(data => {
-            if(!data) {
+        forgotPassword(email).then((data, err) => {
+            if(!data || err) {
                 setValues({...values, error: 'Oops! Something went wrong.'});
             } else {
                 if(data.error) {
