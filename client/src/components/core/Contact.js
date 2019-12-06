@@ -69,12 +69,12 @@ const Contact = () => {
     const onSubmit = event => {
         event.preventDefault();
         formData.set('type', 'General');
-        sendContact(formData).then((data, err) => {
+        sendContact(formData).then(data => {
             if(!data) {
                 setErrors({...errors, input: 'Oops! Something went wrong.'});
             } else {
-                if(data.error) {
-                    setErrors({...errors, input: data.error});
+                if(data.err) {
+                    setErrors({...errors, input: data.err});
                 } else {
                     setContact({
                         first_name: '',
