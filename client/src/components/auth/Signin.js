@@ -18,12 +18,16 @@ const Signin = () => {
     const onSubmit = event => {
         event.preventDefault();
         signin({email, password}).then(data => {
-            if(data.error) {
-                setValues({...values, error: data.error});
+            if(!data) {
+                setValues({...values, error: 'Oops! Something went wrong.'});
             } else {
-                authenticate(data, () => {
-                    setValues({...values, success: true, error: ''});
-                });
+                if(data.error) {
+                    setValues({...values, error: data.error});
+                } else {
+                    authenticate(data, () => {
+                        setValues({...values, success: true, error: ''});
+                    });
+                }
             }
         });
     };
@@ -54,6 +58,11 @@ const Signin = () => {
     const showError = () => (
         <div className='alert alert-danger' style={{display: error ? '' : 'none'}}>
             {error}
+            {error === 'Password is incorrect.' && (
+                <Link to={`/password/reset`}>
+                    &nbsp;Forgot Password?
+                </Link>
+            )}
         </div>
     );
     

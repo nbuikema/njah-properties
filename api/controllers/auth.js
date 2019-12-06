@@ -33,7 +33,7 @@ exports.signin = (req, res) => {
             return res.status(400).json({error: 'User not found.'});
         }
         if(!bcrypt.compareSync(password, user.password)) {
-            return res.status(401).json({error: 'Email and Password do not match.'});
+            return res.status(401).json({error: 'Password is incorrect.'});
         }
         const {_id, email, first_name, last_name, role, property} = user;
         user.password = undefined;
