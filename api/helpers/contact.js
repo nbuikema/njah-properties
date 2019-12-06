@@ -1,10 +1,21 @@
 exports.contactValidator = (req, res, next) => {
+    console.log(req);
     req.check('first_name', 'First name is required.').notEmpty();
     req.check('last_name', 'Last name is required.').notEmpty();
     req.check('email', 'Email is required.').notEmpty();
     req.check('email', 'Invalid email format.').matches(/.+\@.+\..+/);
-    req.check('phone', 'Email is required.').notEmpty();
+    req.check('phone', 'Phone number is required.').notEmpty();
     req.check('reason', 'Reason for contact is required.').notEmpty();
+    if(req.body.reason === 'Property Inquiry') {
+        req.check('property', 'You must select a property.').notEmpty();
+    }
+    if(req.body.reason === 'Property Application') {
+        req.check('property', 'You must select a property.').notEmpty();
+        req.check('application', 'You must attach a property application.').notEmpty();
+    }
+    if(req.body.reason === 'Other') {
+        req.check('message', 'You must include a message.').notEmpty();
+    }
     const errors = req.validationErrors();
     if(errors) {
         const firstError = errors.map(error => error.msg)[0];
