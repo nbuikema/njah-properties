@@ -38,6 +38,7 @@ const UserDashboard = () => {
                     first_name: data.user.first_name,
                     last_name: data.user.last_name,
                     email: data.user.email,
+                    phone: data.user.phone,
                     role: data.user.role,
                     property: data.user.property,
                     createdAt: data.user.createdAt,
