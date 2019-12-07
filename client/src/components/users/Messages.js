@@ -14,17 +14,26 @@ const Messages = ({role}) => {
         user: '',
         sort: ''
     });
+    const [error, setError] = useState('');
     const {type, reason, sort, user} = filters;
     const {token} = isAuth();
 
     const getMessages = useCallback(() => {
         if(role === 1) {
-            readAllMessages(token).then(data => {
-                setMessages(data);
+            readAllMessages(token).then((data, err) => {
+                if(!data || err) {
+                    setError('Oops! Something went wrong.');
+                } else {
+                    setMessages(data);
+                }
             });
         } else {
-            readMyMessages(token).then(data => {
-                setMessages(data);
+            readMyMessages(token).then((data, err) => {
+                if(!data || err) {
+                    setError('Oops! Something went wrong.');
+                } else {
+                    setMessages(data);
+                }
             });
         }
     }, [token, role]);
@@ -132,6 +141,12 @@ const Messages = ({role}) => {
         </form>
     );
 
+    const showError = () => (
+        <div className='alert alert-danger' style={{display: error ? '' : 'none'}}>
+            {error}
+        </div>
+    );
+
     return (
         <div className='my-4'>
             <div className='row'>
@@ -140,8 +155,9 @@ const Messages = ({role}) => {
                 </div>
             </div>
             <hr />
-            {role === 1 && showFilters()}
-            {role === 1 && <hr />}
+            {showError()}
+            {!error && role === 1 && showFilters()}
+            {!error && role === 1 && <hr />}
             {filteredMessages.length === 0 && messages.map((message, i) => (
                 <div key={i}>
                     {i !== 0 && <hr />}
