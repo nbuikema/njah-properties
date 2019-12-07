@@ -1,80 +1,35 @@
 import React, {useState, useEffect} from 'react';
-import {createForm, deleteForm} from '../apiUsers';
+import {deleteForm} from '../apiUsers';
 import {readAllForms} from '../../core/apiContact';
 import {isAuth} from '../../auth/apiAuth';
 
-const ManageForms = ({op}) => {
+const RemoveForms = () => {
     const [forms, setForms] = useState([]);
     const [selectedForm, setSelectedForm] = useState({
         _id: '',
         name: '',
         file: {}
     });
-    const [newForm, setNewForm] = useState({
-        name: '',
-        file: '',
-        formData: new FormData()
+    const [errors, setErrors] = useState({
+        loading: '',
+        input: ''
     });
-    const {name, formData} = newForm;
+    const [success, setSuccess] = useState(false);
     const {token} = isAuth();
 
     const getAllForms = () => {
-        readAllForms().then(data => {
-            setForms(data);
+        readAllForms().then((data, err) => {
+            if(!data || err) {
+                setErrors({...errors, loading: 'Oops! Something went wrong.'});
+            } else {
+                setForms(data);
+            }
         });
     };
 
     useEffect(() => {
         getAllForms();
     }, []);
-
-    const onChange = selected => event => {
-        let value = selected === 'file' ? event.target.files[0] : event.target.value;
-        setNewForm({...newForm, [selected]: value});
-        formData.set(selected, value);
-    };
-
-    const onSubmit = event => {
-        event.preventDefault();
-        createForm(token, formData).then(data => {
-            setNewForm({
-                name: '',
-                file: '',
-                formData: new FormData()
-            });
-            getAllForms();
-        });
-    };
-
-    const isFileSelected = i => {
-        if(document.getElementsByClassName('file')[i]) {
-            let inputIndex = document.getElementsByClassName('file')[i].value;
-            return inputIndex.length > 0 ? true : false;
-        }
-    }
-
-    const contactForm = () => (
-        <form encType="multipart/form-data">
-            <div className='row mr-1'>
-                <div className="form-group col-12 row form-row">
-                    <label htmlFor="name" className="col-sm-3 col-form-label"><strong>Name</strong></label>
-                    <div className="col-sm-9">
-                        <input onChange={onChange('name')} type="text" className="form-control" id="name" value={name} />
-                    </div>
-                </div>
-                <div className='form-group col-12 row form-row'>
-                    <label htmlFor='file' className="col-sm-3 col-form-label"><strong>Upload File</strong></label>
-                    <div className='col-sm-9'>
-                        {isFileSelected(0) ? <i className="fas fa-check text-success mr-2"></i> : <i className="fas fa-times text-danger mr-2"></i>}
-                        <input onChange={onChange('file')} type='file' accept='*' id='file' className='mt-1 text-primary file' />
-                    </div>
-                </div>
-                <div className='w-100 text-center'>
-                    <button onClick={onSubmit} type='submit' className='btn btn-primary'>Add Form</button>
-                </div>
-            </div>
-        </form>
-    );
 
     const selectForm = event => {
         let selectedId = event.target.value;
@@ -97,7 +52,7 @@ const ManageForms = ({op}) => {
         });
     };
 
-    const showAllFormsDropdown = () => op !== 'Add' && (
+    const showAllFormsDropdown = () => (
         <form>
             <div className='row mr-1'>
                 <div className="form-group col-auto row form-row">
@@ -138,20 +93,32 @@ const ManageForms = ({op}) => {
         });
     }
 
+    const showError = () => (
+        <div>
+            <div className='alert alert-danger' style={{display: errors.loading ? '' : 'none'}}>
+                {errors.loading}
+            </div>
+            <div className='alert alert-danger mt-1' style={{display: errors.input ? '' : 'none'}}>
+                {errors.input}
+            </div>
+        </div>
+    );
+
+    const showSuccess = () => (
+        <div className='alert alert-success' style={{display: success ? '' : 'none'}}>
+            You will receive an email shortly with instructions for resetting your password.
+        </div>
+    );
+
     return (
         <div>
-            <h1 className='my-4'>{op} Form</h1>
+            <h1 className='my-4'>Remove Form</h1>
             <hr />
-            {op === 'Add' && (
-                contactForm()
-            )}
-            {op === 'Remove' && (
-                <div>
-                    {forms.length > 0 && showAllFormsDropdown()}
-                </div>
-            )}
+            {showError()}
+            {showSuccess()}
+            {forms.length > 0 && showAllFormsDropdown()}
         </div>
     );
 };
 
-export default ManageForms;
+export default RemoveForms;

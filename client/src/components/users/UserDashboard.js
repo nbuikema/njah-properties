@@ -3,7 +3,8 @@ import {readCurrentUser} from './apiUsers';
 import {isAuth, signout} from '../auth/apiAuth';
 
 import UserInfo from './UserInfo';
-import ManageForms from './admin/ManageForms';
+import AddForms from './admin/AddForms';
+import RemoveForms from './admin/RemoveForms';
 import ManageResidents from './admin/ManageResidents';
 import ManageProperties from './admin/ManageProperties';
 import Messages from './Messages';
@@ -33,7 +34,7 @@ const UserDashboard = () => {
             if(!data || err) {
                 setError('Oops! Something went wrong.');
             } else {
-                if(!data.user._id) {
+                if(!data.user) {
                     signout();
                 } else {
                     setUser({
@@ -70,9 +71,9 @@ const UserDashboard = () => {
             case 'messages':
                 return <Messages role={role} />;
             case 'addForm':
-                return <ManageForms op={'Add'} />;
+                return <AddForms />;
             case 'removeForm':
-                return <ManageForms op={'Remove'} />;
+                return <RemoveForms />;
             case 'addProperty':
                 return <ManageProperties op={'Add'} />;
             case 'updateProperty':

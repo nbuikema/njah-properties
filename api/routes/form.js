@@ -17,8 +17,9 @@ const parser = multer({ storage: storage });
 
 const {formById, createForm, readAllForms, deleteForm} = require('../controllers/form');
 const {isAuth, isAdmin} = require('../controllers/auth');
+const {formValidator} = require('../helpers/form');
 
-router.post('/create', isAuth, isAdmin, parser.single('file'), createForm);
+router.post('/create', isAuth, isAdmin, parser.single('file'), formValidator, createForm);
 router.get('/read/all', readAllForms);
 router.delete('/delete/:formId', isAuth, isAdmin, deleteForm);
 
