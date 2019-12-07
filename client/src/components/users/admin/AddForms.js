@@ -8,17 +8,14 @@ const ManageForms = () => {
         file: '',
         formData: new FormData()
     });
-    const [errors, setErrors] = useState({
-        loading: '',
-        input: ''
-    });
+    const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
     const {name, formData} = newForm;
     const {token} = isAuth();
 
     const onChange = selected => event => {
         let value = selected === 'file' ? event.target.files[0] : event.target.value;
-        setErrors({...errors, input: ''});
+        setError('');
         setSuccess(false);
         setNewForm({...newForm, [selected]: value});
         formData.set(selected, value);
@@ -27,21 +24,21 @@ const ManageForms = () => {
     const onSubmit = event => {
         event.preventDefault();
         if(!isFileSelected(0)) {
-            return setErrors({...errors, input: 'You must attach a file.'});
+            return setError('You must attach a file.');
         }
-        createForm(token, formData).then(data => {
-            if(!data) {
-                setErrors({...errors, input: 'Oops! Something went wrong.'});
+        createForm(token, formData).then((data, err) => {
+            if(!data || err) {
+                setError('Oops! Something went wrong.');
             } else {
-                if(data.err) {
-                    setErrors({...errors, input: data.err});
+                if(data.error) {
+                    setError(data.error);
                 } else {
                     setNewForm({
                         name: '',
                         file: '',
                         formData: new FormData()
                     });
-                    setErrors({...errors, input: ''});
+                    setError('');
                     setSuccess(true);
                 }
             }
@@ -79,19 +76,14 @@ const ManageForms = () => {
     );
 
     const showError = () => (
-        <div>
-            <div className='alert alert-danger' style={{display: errors.loading ? '' : 'none'}}>
-                {errors.loading}
-            </div>
-            <div className='alert alert-danger mt-1' style={{display: errors.input ? '' : 'none'}}>
-                {errors.input}
-            </div>
+        <div className='alert alert-danger' style={{display: error ? '' : 'none'}}>
+            {error}
         </div>
     );
 
     const showSuccess = () => (
         <div className='alert alert-success' style={{display: success ? '' : 'none'}}>
-            You will receive an email shortly with instructions for resetting your password.
+            Form was successfully added.
         </div>
     );
 

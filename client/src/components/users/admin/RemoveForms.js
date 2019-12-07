@@ -10,17 +10,14 @@ const RemoveForms = () => {
         name: '',
         file: {}
     });
-    const [errors, setErrors] = useState({
-        loading: '',
-        input: ''
-    });
+    const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
     const {token} = isAuth();
 
     const getAllForms = () => {
         readAllForms().then((data, err) => {
             if(!data || err) {
-                setErrors({...errors, loading: 'Oops! Something went wrong.'});
+                setError('Oops! Something went wrong.');
             } else {
                 setForms(data);
             }
@@ -33,6 +30,8 @@ const RemoveForms = () => {
 
     const selectForm = event => {
         let selectedId = event.target.value;
+        setSuccess(false);
+        setError('');
         forms.forEach((form) => {
             if(selectedId === '-1') {
                 setSelectedForm({
@@ -83,30 +82,37 @@ const RemoveForms = () => {
 
     const deleteFormClick = event => {
         event.preventDefault();
-        deleteForm(token, selectedForm).then(() => {
-            getAllForms();
-            setSelectedForm({
-                _id: '',
-                name: '',
-                file: ''
+        const confirmDelete = window.confirm('Are you sure you want to delete this form? This process cannot be undone.');
+        if(confirmDelete) {
+            deleteForm(token, selectedForm).then((data, err) => {
+                if(!data || err) {
+                    setError('Oops! Something went wrong.');
+                } else {
+                    if(data.error) {
+                        setError(data.error);
+                    } else {
+                        getAllForms();
+                        setSelectedForm({
+                            _id: '',
+                            name: '',
+                            file: ''
+                        });
+                        setSuccess(true);
+                    }
+                }
             });
-        });
+        }
     }
 
     const showError = () => (
-        <div>
-            <div className='alert alert-danger' style={{display: errors.loading ? '' : 'none'}}>
-                {errors.loading}
-            </div>
-            <div className='alert alert-danger mt-1' style={{display: errors.input ? '' : 'none'}}>
-                {errors.input}
-            </div>
+        <div className='alert alert-danger' style={{display: error ? '' : 'none'}}>
+            {error}
         </div>
     );
 
     const showSuccess = () => (
         <div className='alert alert-success' style={{display: success ? '' : 'none'}}>
-            You will receive an email shortly with instructions for resetting your password.
+            Form was successfully deleted.
         </div>
     );
 
