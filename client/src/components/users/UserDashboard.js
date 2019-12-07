@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import {readCurrentUser} from './apiUsers';
-import {isAuth} from '../auth/apiAuth';
+import {isAuth, signout} from '../auth/apiAuth';
 
 import UserInfo from './UserInfo';
 import ManageForms from './admin/ManageForms';
@@ -33,17 +33,21 @@ const UserDashboard = () => {
             if(!data || err) {
                 setError('Oops! Something went wrong.');
             } else {
-                setUser({
-                    _id: data.user._id,
-                    first_name: data.user.first_name,
-                    last_name: data.user.last_name,
-                    email: data.user.email,
-                    phone: data.user.phone,
-                    role: data.user.role,
-                    property: data.user.property,
-                    createdAt: data.user.createdAt,
-                    updatedAt: data.user.updatedAt
-                });
+                if(!data.user._id) {
+                    signout();
+                } else {
+                    setUser({
+                        _id: data.user._id,
+                        first_name: data.user.first_name,
+                        last_name: data.user.last_name,
+                        email: data.user.email,
+                        phone: data.user.phone,
+                        role: data.user.role,
+                        property: data.user.property,
+                        createdAt: data.user.createdAt,
+                        updatedAt: data.user.updatedAt
+                    });
+                }
             }
         });
     }, [token]);
