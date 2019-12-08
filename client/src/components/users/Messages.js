@@ -24,7 +24,11 @@ const Messages = ({role}) => {
                 if(!data || err) {
                     setError('Oops! Something went wrong.');
                 } else {
-                    setMessages(data);
+                    if(data.error) {
+                        setError(data.error);
+                    } else {
+                        setMessages(data);
+                    }
                 }
             });
         } else {
@@ -32,7 +36,11 @@ const Messages = ({role}) => {
                 if(!data || err) {
                     setError('Oops! Something went wrong.');
                 } else {
-                    setMessages(data);
+                    if(data.error) {
+                        setError(data.error);
+                    } else {
+                        setMessages(data);
+                    }
                 }
             });
         }
@@ -156,8 +164,8 @@ const Messages = ({role}) => {
             </div>
             <hr />
             {showError()}
-            {!error && role === 1 && showFilters()}
-            {!error && role === 1 && <hr />}
+            {role === 1 && showFilters()}
+            {role === 1 && <hr />}
             {filteredMessages.length === 0 && messages.map((message, i) => (
                 <div key={i}>
                     {i !== 0 && <hr />}
