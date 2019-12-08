@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useCallback} from 'react';
+import {Redirect} from 'react-router-dom';
 import {readCurrentUser} from './apiUsers';
-import {isAuth, signout} from '../auth/apiAuth';
+import {isAuth} from '../auth/apiAuth';
 
 import UserInfo from './UserInfo';
 import AddForms from './admin/AddForms';
@@ -28,6 +29,7 @@ const UserDashboard = () => {
         updatedAt: ''
     });
     const [error, setError] = useState('');
+    const [signedIn, setSignedIn] = useState(true);
     const {first_name, last_name, role} = user;
     const {token} = isAuth();
 
@@ -39,6 +41,7 @@ const UserDashboard = () => {
                 if(!data.user) {
                     if(typeof window !== 'undefined') {
                         localStorage.removeItem('jwt');
+                        setSignedIn(false);
                     }
                 } else {
                     setUser({
@@ -52,6 +55,7 @@ const UserDashboard = () => {
                         createdAt: data.user.createdAt,
                         updatedAt: data.user.updatedAt
                     });
+                    setSignedIn(true);
                 }
             }
         });
@@ -216,9 +220,14 @@ const UserDashboard = () => {
         </div>
     );
 
+    const signedInRedirect = () => !signedIn ? (
+        <Redirect to='/signin' />
+    ) : null;
+
     return (
         <div>
             {showDashboard()}
+            {signedInRedirect()}
         </div>
     );
 };
