@@ -5,7 +5,9 @@ import {isAuth, signout} from '../auth/apiAuth';
 import UserInfo from './UserInfo';
 import AddForms from './admin/AddForms';
 import RemoveForms from './admin/RemoveForms';
+import AddResidents from './admin/AddResidents';
 import ManageResidents from './admin/ManageResidents';
+import AddProperties from './admin/AddProperties';
 import ManageProperties from './admin/ManageProperties';
 import Messages from './Messages';
 import ResidentContact from './resident/ResidentContact';
@@ -75,17 +77,13 @@ const UserDashboard = () => {
             case 'removeForm':
                 return <RemoveForms />;
             case 'addProperty':
-                return <ManageProperties op={'Add'} />;
-            case 'updateProperty':
-                return <ManageProperties op={'Update'} />;
-            case 'removeProperty':
-                return <ManageProperties op={'Remove'} />;
+                return <AddProperties />;
+            case 'manageProperties':
+                return <ManageProperties />;
             case 'addResident':
-                return <ManageResidents op={'Add'} />;
-            case 'updateResident':
-                return <ManageResidents op={'Update'} />;
-            case 'removeResident':
-                return <ManageResidents op={'Remove'} />;
+                return <AddResidents />;
+            case 'manageResidents':
+                return <ManageResidents />;
             default: 
                 if(!error) {
                     return <UserInfo user={user} />;
@@ -181,15 +179,9 @@ const UserDashboard = () => {
                                     </button>
                                 </li>
                                 <li className="nav-item">
-                                    <button className={`nav-link dashboard-btn bg-light ${section === 'updateProperty' && 'active'}`} onClick={toggleSection('updateProperty')}>
+                                    <button className={`nav-link dashboard-btn bg-light ${section === 'manageProperties' && 'active'}`} onClick={toggleSection('manageProperties')}>
                                         <i className="fas fa-pencil-alt mr-3 text-primary fa-fw selector"></i>
-                                        Update Property
-                                    </button>
-                                </li>
-                                <li className="nav-item">
-                                    <button className={`nav-link dashboard-btn bg-light ${section === 'removeProperty' && 'active'}`} onClick={toggleSection('removeProperty')}>
-                                        <i className="fas fa-minus mr-3 text-primary fa-fw selector"></i>
-                                        Remove Property
+                                        Manage Properties
                                     </button>
                                 </li>
                             </ul>
@@ -203,15 +195,9 @@ const UserDashboard = () => {
                                     </button>
                                 </li>
                                 <li className="nav-item">
-                                    <button className={`nav-link dashboard-btn bg-light ${section === 'updateResident' && 'active'}`} onClick={toggleSection('updateResident')}>
+                                    <button className={`nav-link dashboard-btn bg-light ${section === 'manageResidents' && 'active'}`} onClick={toggleSection('manageResidents')}>
                                         <i className="fas fa-pencil-alt mr-3 text-primary fa-fw selector"></i>
-                                        Update Resident
-                                    </button>
-                                </li>
-                                <li className="nav-item">
-                                    <button className={`nav-link dashboard-btn bg-light ${section === 'removeResident' && 'active'}`} onClick={toggleSection('removeResident')}>
-                                        <i className="fas fa-minus mr-3 text-primary fa-fw selector"></i>
-                                        Remove Resident
+                                        Manage Residents
                                     </button>
                                 </li>
                             </ul>
