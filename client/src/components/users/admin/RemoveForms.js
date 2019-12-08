@@ -122,7 +122,7 @@ const RemoveForms = () => {
             <hr />
             {showError()}
             {showSuccess()}
-            {forms.length > 0 && showAllFormsDropdown()}
+            {showAllFormsDropdown()}
         </div>
     );
 };
