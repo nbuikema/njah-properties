@@ -27,11 +27,11 @@ const Properties = () => {
         sort: ''
     });
     const [expandedFilters, setExpandedFilters] = useState(true);
-    const [size, setSize] = useState([0, 0]);
+    const [windowSize, setWindowSize] = useState([0, 0]);
     const [error, setError] = useState('');
 
     const getWindowSize = () => {
-        setSize([window.innerWidth, window.innerHeight]);
+        setWindowSize([window.innerWidth, window.innerHeight]);
         if(window.innerWidth >= 2000) {
             setViewport({...viewport, zoom: 13});
         } else if(window.innerWidth < 2000 && window.innerWidth >= 1400) {
@@ -42,12 +42,12 @@ const Properties = () => {
     const useWindowSize = () => {
         useLayoutEffect(() => {
             function updateSize() {
-                setSize([window.innerWidth, window.innerHeight]);
+                setWindowSize([window.innerWidth, window.innerHeight]);
             }
             window.addEventListener('resize', updateSize);
             setViewport({...viewport, width: '100%', height: 'calc(100vh - 60px)'});
             return () => window.removeEventListener('resize', updateSize);
-        }, [size]);
+        }, [windowSize]);
     }
 
     const getAllProperties = () => {
@@ -317,7 +317,7 @@ const Properties = () => {
                                     <h6><strong>Size: </strong>{property.size} Sq Ft</h6>
                                     <h6><strong>Beds: </strong>{property.beds}</h6>
                                     <h6><strong>Baths: </strong>{property.baths}</h6>
-                                    {size[0] >= 1700 && (
+                                    {windowSize[0] >= 1700 && (
                                         <div className='xxl-btns'>
                                             <Link className='btn btn-primary w-100 col-12' to={`/properties/${property._id}`}>More Info</Link>
                                             <button className='markerbtn outline mt-2 w-100 col-12' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
@@ -328,7 +328,7 @@ const Properties = () => {
                                     )}
                                 </div>
                             </div>
-                            {size[0] < 1700 && (
+                            {windowSize[0] < 1700 && (
                                 <div className='row form-row'>
                                     <button className='markerbtn mt-1 outline w-100 col-6 col-sm-12 col-md-6 d-none d-sm-block' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
                                         <div className='marker'></div>
@@ -352,7 +352,7 @@ const Properties = () => {
                                     <h6><strong>Size: </strong>{property.size} Sq Ft</h6>
                                     <h6><strong>Beds: </strong>{property.beds}</h6>
                                     <h6><strong>Baths: </strong>{property.baths}</h6>
-                                    {size[0] >= 1700 && (
+                                    {windowSize[0] >= 1700 && (
                                         <div className='xxl-btns'>
                                             <Link className='btn btn-primary w-100 col-12' to={`/properties/${property._id}`}>More Info</Link>
                                             <button className='markerbtn outline mt-2 w-100 col-12' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
@@ -363,7 +363,7 @@ const Properties = () => {
                                     )}
                                 </div>
                             </div>
-                            {size[0] < 1700 && (
+                            {windowSize[0] < 1700 && (
                                 <div className='row form-row'>
                                     <button className='markerbtn mt-1 outline w-100 col-6 col-sm-12 col-md-6 d-none d-sm-block' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
                                         <div className='marker'></div>
@@ -389,7 +389,7 @@ const Properties = () => {
                                             <h6><strong>Size: </strong>{property.size} Sq Ft</h6>
                                             <h6><strong>Beds: </strong>{property.beds}</h6>
                                             <h6><strong>Baths: </strong>{property.baths}</h6>
-                                            {size[0] >= 1700 && (
+                                            {windowSize[0] >= 1700 && (
                                                 <div className='xxl-btns'>
                                                     <Link className='btn btn-primary w-100 col-12' to={`/properties/${property._id}`}>More Info</Link>
                                                     <button className='btn mt-2 outline col-12' onClick={changeSelected(null)}>Reset Selected</button>
@@ -397,7 +397,7 @@ const Properties = () => {
                                             )}
                                         </div>
                                     </div>
-                                    {size[0] < 1700 && (
+                                    {windowSize[0] < 1700 && (
                                         <div className='row form-row'>
                                             <button className='btn outline mt-1 col-6 col-sm-12 col-md-6' onClick={changeSelected(null)}>Reset Selected</button>
                                             <Link className='btn btn-primary mt-1 w-100 col-6 col-sm-12 col-md-6' to={`/properties/${property._id}`}>More Info</Link>   

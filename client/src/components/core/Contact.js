@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {readAllProperties} from '../properties/apiProperties';
 import {sendContact, readAllForms} from './apiContact';
 
@@ -22,7 +22,7 @@ const Contact = () => {
     });
     const {first_name, last_name, email, phone, reason, property, message, formData} = contact;
 
-    const getAllProperties = () => {
+    const getAllProperties = useCallback(() => {
         readAllProperties().then((data, err) => {
             if(err || !data) {
                 setErrors({...errors, loading: 'Oops! Something went wrong.'});
@@ -30,9 +30,9 @@ const Contact = () => {
                 setProperties(data);
             }
         });
-    };
+    }, [errors]);
 
-    const getAllForms = () => {
+    const getAllForms = useCallback(() => {
         readAllForms().then((data, err) => {
             if(err || !data) {
                 setErrors({...errors, loading: 'Oops! Something went wrong.'});
@@ -40,12 +40,12 @@ const Contact = () => {
                 setForms(data);
             }
         });
-    };
+    }, [errors]);
 
     useEffect(() => {
         getAllProperties();
         getAllForms();
-    }, []);
+    }, [getAllProperties, getAllForms]);
 
     const onChange = selected => event => {
         setErrors({...errors, input: ''});

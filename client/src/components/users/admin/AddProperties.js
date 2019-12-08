@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {createProperty} from '../apiUsers';
 import {isAuth} from '../../auth/apiAuth';
 
@@ -24,16 +24,16 @@ const AddProperties = () => {
     });
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
-    const {address, city, state, zip, rent, size, beds, baths, info, available, createdAt, updatedAt, long, lat, formData} = newProperty;
+    const {address, city, state, zip, rent, size, beds, baths, info, available, formData} = newProperty;
     const {token} = isAuth();
 
-    const setInitialAvailability = () => {
+    const setInitialAvailability = useCallback(() => {
         formData.set('available', false);
-    };
+    }, [formData]);
 
     useEffect(() => {
         setInitialAvailability();
-    }, []);
+    }, [setInitialAvailability]);
 
     const changePropertyInfo = selected => event => {
         setError('');
