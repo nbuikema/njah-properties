@@ -64,7 +64,7 @@ const Signup = () => {
                 <div className="form-group col-12 col-lg-6 row form-row">
                     <label htmlFor="password" className="col-sm-3 col-form-label"><strong>Password</strong></label>
                     <div className="col-sm-9">
-                        <input onChange={onChange('password')} type="password" className="form-control text-primary" id="password" value={password} />
+                        <input onChange={onChange('password')} autoComplete="new-password" type="password" className="form-control text-primary" id="password" value={password} />
                     </div>
                 </div>
                 <div className="form-group col-12 col-lg-6 row form-row">

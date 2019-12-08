@@ -37,7 +37,9 @@ const UserDashboard = () => {
                 setError('Oops! Something went wrong.');
             } else {
                 if(!data.user) {
-                    signout();
+                    if(typeof window !== 'undefined') {
+                        localStorage.removeItem('jwt');
+                    }
                 } else {
                     setUser({
                         _id: data.user._id,
