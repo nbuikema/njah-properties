@@ -9,7 +9,7 @@ exports.signupValidator = (req, res, next) => {
     req.check('password', 'Password must contain a special character.').matches(/[-!$%^&*()_+|~=`{}[:;<>?,.@#\]]/);
     const errors = req.validationErrors();
     if(errors) {
-        const errorList = errors.map(error => error.msg);
+        const errorList = errors.map(error => error.msg)[0];
         return res.status(400).json({err: errorList});
     }
     next();

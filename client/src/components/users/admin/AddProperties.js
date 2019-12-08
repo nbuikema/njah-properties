@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {createProperty} from '../apiUsers';
 import {isAuth} from '../../auth/apiAuth';
 
@@ -22,10 +22,21 @@ const AddProperties = () => {
         long: '',
         formData: new FormData()
     });
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState(false);
     const {address, city, state, zip, rent, size, beds, baths, info, available, createdAt, updatedAt, long, lat, formData} = newProperty;
     const {token} = isAuth();
 
+    const setInitialAvailability = () => {
+        formData.set('available', false);
+    };
+
+    useEffect(() => {
+        setInitialAvailability();
+    }, []);
+
     const changePropertyInfo = selected => event => {
+        setError('');
         let value = selected.includes('photos') ? event.target.files[0] : event.target.value;
         if(selected.includes('photos')) {
             let target = selected.split(' ')[1];
@@ -73,31 +84,40 @@ const AddProperties = () => {
 
     const addProperty = event => {
         event.preventDefault();
-        createProperty(token, formData).then(returnData => {
-            [...document.getElementsByClassName("input-photos")].forEach(
-                (element) => {
-                    element.value = null;
+        createProperty(token, formData).then((returnData, err) => {
+            if(!returnData || err) {
+                setError('Oops! Something went wrong.');
+            } else {
+                if(returnData.err) {
+                    setError(returnData.err);
+                } else {
+                    [...document.getElementsByClassName("input-photos")].forEach(
+                        (element) => {
+                            element.value = null;
+                        }
+                    );
+                    setImages([]);
+                    setNewProperty({
+                        _id: '',
+                        address: '',
+                        city: '',
+                        state: '',
+                        zip: '',
+                        rent: '',
+                        size: '',
+                        beds: '',
+                        baths: '',
+                        info: '',
+                        available: false,
+                        createdAt: '',
+                        updatedAt: '',
+                        lat: '',
+                        long: '',
+                        formData: new FormData()
+                    });
+                    setSuccess(true);
                 }
-            );
-            setImages([]);
-            setNewProperty({
-                _id: '',
-                address: '',
-                city: '',
-                state: '',
-                zip: '',
-                rent: '',
-                size: '',
-                beds: '',
-                baths: '',
-                info: '',
-                available: false,
-                createdAt: '',
-                updatedAt: '',
-                lat: '',
-                long: '',
-                formData: new FormData()
-            });
+            }
         });
     };
 
@@ -246,6 +266,18 @@ const AddProperties = () => {
         </form>
     );
 
+    const showError = () => (
+        <div className='alert alert-danger' style={{display: error ? '' : 'none'}}>
+            {error}
+        </div>
+    );
+
+    const showSuccess = () => (
+        <div className='alert alert-success' style={{display: success ? '' : 'none'}}>
+            Property was successfully added.
+        </div>
+    );
+
     return (
         <div className='my-4'>
             <div className='row'>
@@ -254,6 +286,8 @@ const AddProperties = () => {
                 </div>
             </div>
             <hr />
+            {showError()}
+            {showSuccess()}
             {showSelectedPropertyInfo()}
         </div>
     );

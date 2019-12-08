@@ -40,11 +40,13 @@ exports.createProperty = (req, res) => {
         property.long = response[0].longitude;
         Property.find({lat: property.lat, long:property.long}).exec((err, foundProperty) => {
             if(err) {
+                console.log("1", err);
                 return res.status(400).json({error: 'Property could not be created.'});
             } else {
                 if(foundProperty.length === 0) {
                     property.save((err, data) => {
                         if(err) {
+                            console.log("2", err);
                             return res.status(400).json({error: 'Property could not be created.'});
                         }
                         return res.json({data});
