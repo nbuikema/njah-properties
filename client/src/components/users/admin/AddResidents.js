@@ -11,6 +11,7 @@ const Signup = () => {
         confirm_password: ''
     });
     const [error, setError] = useState('');
+    const [success, setSuccess] = useState(false);
     const {first_name, last_name, email, phone, password, confirm_password} = user;
 
     const onChange = selected => event => {
@@ -25,10 +26,22 @@ const Signup = () => {
             setError('Passwords must match.');
         } else {
             signup({first_name, last_name, email, phone, password}).then((data, err) => {
-                if(data.error) {
-                    setError(data.error);
+                if(!data || err) {
+                    setError('Oops! Something went wrong.');
                 } else {
-
+                    if(data.err) {
+                        setError(data.err);
+                    } else {
+                        setUser({
+                            first_name: '',
+                            last_name: '',
+                            email: '',
+                            phone: '',
+                            password: '',
+                            confirm_password: ''
+                        });
+                        setSuccess(true);
+                    }
                 }
             });
         }
@@ -80,6 +93,18 @@ const Signup = () => {
         </form>
     );
 
+    const showError = () => (
+        <div className='alert alert-danger' style={{display: error ? '' : 'none'}}>
+            {error}
+        </div>
+    );
+
+    const showSuccess = () => (
+        <div className='alert alert-success' style={{display: success ? '' : 'none'}}>
+            Resident was successfully added.
+        </div>
+    );
+
     return (
         <div className='my-4'>
             <div className='row'>
@@ -88,6 +113,8 @@ const Signup = () => {
                 </div>
             </div>
             <hr />
+            {showError()}
+            {showSuccess()}
             {signupForm()}
         </div>
     );

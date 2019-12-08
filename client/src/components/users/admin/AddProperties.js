@@ -84,6 +84,7 @@ const AddProperties = () => {
 
     const addProperty = event => {
         event.preventDefault();
+        setError('');
         createProperty(token, formData).then((returnData, err) => {
             if(!returnData || err) {
                 setError('Oops! Something went wrong.');

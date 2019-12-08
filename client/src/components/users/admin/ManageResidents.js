@@ -172,7 +172,7 @@ const ManageResidents = ({op}) => {
                 <div className="form-group col-12 row form-row">
                     <label htmlFor="selectProperty" className='col-sm-auto col-form-label mr-2'><strong>Which property would you like to assign this resident to?</strong></label>
                     <div className='col-auto'>
-                        <select value={property.length > 0 ? property : selectedProperty._id} onChange={selectProperty && changeUserInfo('property')} className="form-control text-primary" id="selectProperty" >
+                        <select value={property ? property : selectedProperty._id} onChange={selectProperty && changeUserInfo('property')} className="form-control text-primary" id="selectProperty" >
                             <option value='-1'>Select Property (None)</option>
                             {properties.map((property, i) => (
                                 <option value={property._id} key={i}>{property.address}, {property.city}, {property.state}, {property.zip}</option>
