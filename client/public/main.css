@@ -10,6 +10,10 @@ a.bg-light:focus, a.bg-light:hover, button.bg-light:focus, button.bg-light:hover
     font-family: 'ZCOOL XiaoWei', serif;
 }
 
+.nav-item {
+    min-height: 42px;
+}
+
 .logo {
     transform: scale(.23);
     border-radius: 50%;

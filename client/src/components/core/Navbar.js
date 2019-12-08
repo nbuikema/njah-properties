@@ -42,18 +42,11 @@ const Navbar = ({history}) => (
                     </ul>
                     <ul className="navbar-nav ml-auto">
                         {!isAuth() ? (
-                            <>
-                                <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
-                                    <Link className={`nav-link ${isActive(history, '/signup') && 'active'}`} to='/signup'>
-                                        Sign Up
-                                    </Link>
-                                </li>
-                                <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
-                                    <Link className={`nav-link ${isActive(history, '/signin') && 'active'}`} to='/signin'>
-                                        Sign In
-                                    </Link>
-                                </li>
-                            </>
+                            <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
+                                <Link className={`nav-link ${isActive(history, '/signin') && 'active'}`} to='/signin'>
+                                    Resident Sign In
+                                </Link>
+                            </li>
                         ) : (
                             <>
                                 <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
