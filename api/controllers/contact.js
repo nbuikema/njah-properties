@@ -1,5 +1,15 @@
 const Contact = require('../models/contact');
 
+exports.contactById = (req, res, next, id) => {
+    Contact.findById(id).exec((err, contact) => {
+        if(err || !contact) {
+            return res.status(400).json({error: 'Contact was not found.'});
+        }
+        req.selectedContact = contact;
+        next();
+    });
+};
+
 exports.contact = (req, res) => {
     const contact = new Contact(req.body);
     if(req.file) {
@@ -68,4 +78,16 @@ exports.readMessagesWithQuery = (req, res) => {
         }
         return res.json(contacts);
     });
+};
+
+exports.deleteContact = (req, res) => {
+    Contact.findOneAndDelete(
+        {_id: req.selectedContact._id},
+        (err, contact) => {
+            if(err) {
+                return res.status(400).json({error: 'Contact could not be deleted.'});
+            }
+            return res.json(`Contact: "${contact._id}" has been deleted.`);
+        }
+    );
 };

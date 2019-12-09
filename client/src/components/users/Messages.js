@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import moment from 'moment';
-import {readAllMessages, readMessagesWithQuery, readMyMessages} from './apiUsers';
+import {readAllMessages, readMessagesWithQuery, readMyMessages, deleteContact} from './apiUsers';
 import {readAllUsers} from './apiUsers';
 import {isAuth} from '../auth/apiAuth';
 
@@ -104,6 +104,25 @@ const Messages = ({role}) => {
         });
     };
 
+    const deleteMessage = contactId => event => {
+        event.preventDefault();
+        const confirmDelete = window.confirm('Are you sure you want to delete this message? This process cannot be undone.');
+        if(confirmDelete) {
+            deleteContact(token, contactId).then((data, err) => {
+                if(err || !data) {
+                    setError('Oops! Something went wrong.');
+                } else {
+                    if(data.err) {
+                        setError(data.err);
+                    } else {
+                        getMessages();
+                        setError('');
+                    }
+                }
+            });
+        }
+    };
+
     const showFilters = () => (
         <form className='mt-2'>
             <div className='form-row'>
@@ -187,6 +206,7 @@ const Messages = ({role}) => {
                             )}
                             <h6><strong>Message:</strong> {message.message}</h6>
                         </div>
+                        <button onClick={deleteMessage(message._id)} className='btn'><i className="fas fa-times text-danger"></i></button>
                     </div>
                 </div>
             ))}

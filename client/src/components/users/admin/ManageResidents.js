@@ -141,7 +141,6 @@ const ManageResidents = () => {
 
     const deleteUserClick = event => {
         event.preventDefault();
-        event.preventDefault();
         const confirmDelete = window.confirm('Are you sure you want to delete this property? This process cannot be undone.');
         if(confirmDelete) {
             deleteUser(token, selectedUser).then((data, err) => {
