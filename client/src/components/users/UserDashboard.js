@@ -4,6 +4,7 @@ import {readCurrentUser} from './apiUsers';
 import {isAuth} from '../auth/apiAuth';
 
 import UserInfo from './UserInfo';
+import UpdateSelf from './UpdateSelf';
 import AddForms from './admin/AddForms';
 import RemoveForms from './admin/RemoveForms';
 import AddResidents from './admin/AddResidents';
@@ -90,6 +91,8 @@ const UserDashboard = () => {
                 return <AddResidents />;
             case 'manageResidents':
                 return <ManageResidents />;
+            case 'updateSelf':
+                return <UpdateSelf user={user} />;
             default: 
                 if(!error) {
                     return <UserInfo user={user} />;
@@ -128,6 +131,12 @@ const UserDashboard = () => {
                             <button className={`nav-link dashboard-btn bg-light ${section === 'info' && 'active'}`} onClick={toggleSection('info')}>
                                 <i className="fas fa-info-circle mr-3 text-primary fa-fw selector"></i>
                                 My Info
+                            </button>
+                        </li>
+                        <li className="nav-item">
+                            <button className={`nav-link dashboard-btn bg-light ${section === 'updateSelf' && 'active'}`} onClick={toggleSection('updateSelf')}>
+                                <i className="fas fa-info-circle mr-3 text-primary fa-fw selector"></i>
+                                Update My Info
                             </button>
                         </li>
                         <li className="nav-item">

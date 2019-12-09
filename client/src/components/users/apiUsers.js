@@ -198,3 +198,19 @@ export const deleteContact = (token, contactId) => {
         console.log(err)
     });
 };
+
+export const updateSelf = (token, user) => {
+    return fetch(`${API}/user/update/self/${user._id}`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(user)
+    }).then(response => {
+        return response.json();
+    }).catch(err => {
+        console.log(err)
+    });
+};

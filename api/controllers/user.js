@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const User = require('../models/user');
 
 exports.userById = (req, res, next, id) => {
@@ -49,4 +50,28 @@ exports.deleteUser = (req, res) => {
             return res.json(`User: "${user._id}" has been deleted.`);
         }
     );
+};
+
+exports.updateSelf = (req, res) => {
+    if(req.body.password.length > 0) {
+        req.body.password = bcrypt.hashSync(req.body.password, 10);
+    } else {
+        delete req.body.password;
+    }
+    if(req.body._id === req.user._id) {
+        User.findOneAndUpdate(
+            {_id: req.user._id},
+            {$set: req.body},
+            {new: true},
+            (err, user) => {
+                if(err) {
+                    return res.status(400).json({error: 'Your info could not be updated.'});
+                }
+                user.password = undefined;
+                return res.json(user);
+            }
+        );
+    } else {
+        return res.status(403).json({error: 'You do not have permission to do that.'});
+    }
 };
