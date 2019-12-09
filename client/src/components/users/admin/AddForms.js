@@ -30,14 +30,15 @@ const ManageForms = () => {
             if(!data || err) {
                 setError('Oops! Something went wrong.');
             } else {
-                if(data.error) {
-                    setError(data.error);
+                if(data.err) {
+                    setError(data.err);
                 } else {
                     setNewForm({
                         name: '',
                         file: '',
                         formData: new FormData()
                     });
+                    document.getElementById("file").value = null;
                     setError('');
                     setSuccess(true);
                 }
