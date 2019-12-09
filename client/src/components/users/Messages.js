@@ -60,6 +60,7 @@ const Messages = ({role}) => {
     }, [getMessages, getAllUsers]);
 
     const changeFilters = selected => event => {
+        setError('');
         if(selected === 'type' && reason.length > 0) {
             setFilters({
                 ...filters,
@@ -92,16 +93,38 @@ const Messages = ({role}) => {
                 }
             }
         }
-        readMessagesWithQuery(queryString).then(data => {
-            if(data.length === 0) {
-                setFilters({
-                    type: '',
-                    reason: '',
-                    sort: ''
-                });
+        readMessagesWithQuery(queryString).then((data, err) => {
+            if(!data || err) {
+                setError('Oops! Something went wrong.');
+            } else {
+                if(data.error) {
+                    setError(data.error);
+                } else {
+                    if(data.length === 0) {
+                        setError('No messages found.');
+                        setFilters({
+                            type: '',
+                            reason: '',
+                            sort: ''
+                        });
+                    } else {
+                        setError('');
+                        setFilteredMessages(data);
+                    }
+                }
             }
-            setFilteredMessages(data);
         });
+    };
+
+    const resetFilters = event => {
+        event.preventDefault();
+        setFilters({
+            type: '',
+            reason: '',
+            sort: ''
+        });
+        setError('');
+        setFilteredMessages([]);
     };
 
     const deleteMessage = contactId => event => {
@@ -163,6 +186,9 @@ const Messages = ({role}) => {
                 </div>
                 <div className='form-group col-auto text-center'>
                     <button onClick={submitFilters} type='submit' className='btn btn-primary'>Filter Messages</button>
+                </div>
+                <div className='form-group col-auto text-center'>
+                    <button onClick={resetFilters} type='submit' className='btn btn-outline-primary'>Reset Filters</button>
                 </div>
             </div>
         </form>
@@ -231,6 +257,7 @@ const Messages = ({role}) => {
                             )}
                             <h6><strong>Message:</strong> {message.message}</h6>
                         </div>
+                        <button onClick={deleteMessage(message._id)} className='btn'><i className="fas fa-times text-danger"></i></button>
                     </div>
                 </div>
             ))}
