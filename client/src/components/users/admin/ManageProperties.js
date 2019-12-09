@@ -45,6 +45,7 @@ const ManageProperties = () => {
 
     const selectProperty = event => {
         let selectedId = event.target.value;
+        setError('');
         setSuccess(false);
         properties.forEach((property) => {
             if(selectedId === '-1') {
@@ -99,31 +100,15 @@ const ManageProperties = () => {
             }
         }
         setError('');
+        setSuccess(false);
         setSelectedProperty({...selectedProperty, [selected]: value});
     };
 
     const updatePropertyClick = event => {
         event.preventDefault();
-        setError('');
-        updateProperty(token, selectedProperty).then((data, err) => {
-            if(err || !data) {
-                setError('Oops! Something went wrong.');
-            } else {
-                if(data.err) {
-                    setError(data.err);
-                } else {
-                    getAllProperties();
-                    setSuccess('updated');
-                }
-            }
-        });
-    };
-
-    const deletePropertyClick = event => {
-        event.preventDefault();
-        const confirmDelete = window.confirm('Are you sure you want to delete this property? This process cannot be undone.');
-        if(confirmDelete) {
-            deleteProperty(token, selectedProperty).then((data, err) => {
+        if(selectedProperty._id) {
+            setError('');
+            updateProperty(token, selectedProperty).then((data, err) => {
                 if(err || !data) {
                     setError('Oops! Something went wrong.');
                 } else {
@@ -131,27 +116,52 @@ const ManageProperties = () => {
                         setError(data.err);
                     } else {
                         getAllProperties();
-                        setSelectedProperty({
-                            _id: '',
-                            address: '',
-                            city: '',
-                            state: '',
-                            zip: '',
-                            rent: '',
-                            size: '',
-                            beds: '',
-                            baths: '',
-                            info: '',
-                            available: false,
-                            createdAt: '',
-                            updatedAt: '',
-                            lat: '',
-                            long: ''
-                        });
-                        setSuccess('deleted');
+                        setSuccess('updated');
                     }
                 }
             });
+        } else {
+            setError('You must select a property.');
+        }
+    };
+
+    const deletePropertyClick = event => {
+        event.preventDefault();
+        if(selectedProperty._id) {
+            const confirmDelete = window.confirm('Are you sure you want to delete this property? This process cannot be undone.');
+            if(confirmDelete) {
+                deleteProperty(token, selectedProperty).then((data, err) => {
+                    if(err || !data) {
+                        setError('Oops! Something went wrong.');
+                    } else {
+                        if(data.err) {
+                            setError(data.err);
+                        } else {
+                            getAllProperties();
+                            setSelectedProperty({
+                                _id: '',
+                                address: '',
+                                city: '',
+                                state: '',
+                                zip: '',
+                                rent: '',
+                                size: '',
+                                beds: '',
+                                baths: '',
+                                info: '',
+                                available: false,
+                                createdAt: '',
+                                updatedAt: '',
+                                lat: '',
+                                long: ''
+                            });
+                            setSuccess('deleted');
+                        }
+                    }
+                });
+            } else {
+                setError('You must select a property.');
+            }
         }
     };
 

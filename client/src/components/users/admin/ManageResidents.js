@@ -125,25 +125,8 @@ const ManageResidents = () => {
     const updateUserClick = event => {
         event.preventDefault();
         setError('');
-        updateUser(token, selectedUser).then((data, err) => {
-            if(err || !data) {
-                setError('Oops! Something went wrong.');
-            } else {
-                if(data.err) {
-                    setError(data.err);
-                } else {
-                    getAllUsers();
-                    setSuccess('updated');
-                }
-            }
-        });
-    };
-
-    const deleteUserClick = event => {
-        event.preventDefault();
-        const confirmDelete = window.confirm('Are you sure you want to delete this property? This process cannot be undone.');
-        if(confirmDelete) {
-            deleteUser(token, selectedUser).then((data, err) => {
+        if(selectedUser._id) {
+            updateUser(token, selectedUser).then((data, err) => {
                 if(err || !data) {
                     setError('Oops! Something went wrong.');
                 } else {
@@ -151,19 +134,46 @@ const ManageResidents = () => {
                         setError(data.err);
                     } else {
                         getAllUsers();
-                        setSelectedUser({
-                            _id: '',
-                            first_name: '',
-                            last_name: '',
-                            email: '',
-                            role: '',
-                            property: '',
-                            createdAt: '',
-                            updatedAt: ''
-                        });
+                        setSuccess('updated');
                     }
                 }
             });
+        } else {
+            setError('You must select a resident.');
+        }
+    };
+
+    const deleteUserClick = event => {
+        event.preventDefault();
+        if(selectedUser._id) {
+            const confirmDelete = window.confirm('Are you sure you want to delete this resident? This process cannot be undone.');
+            if(confirmDelete) {
+                deleteUser(token, selectedUser).then((data, err) => {
+                    if(err || !data) {
+                        setError('Oops! Something went wrong.');
+                    } else {
+                        if(data.err) {
+                            setError(data.err);
+                        } else {
+                            getAllUsers();
+                            setSelectedUser({
+                                _id: '',
+                                first_name: '',
+                                last_name: '',
+                                email: '',
+                                phone: '',
+                                role: '',
+                                property: '',
+                                createdAt: '',
+                                updatedAt: ''
+                            });
+                            setSuccess('deleted');
+                        }
+                    }
+                });
+            }
+        } else {
+            setError('You must select a resident.');
         }
     }
 
@@ -210,7 +220,7 @@ const ManageResidents = () => {
                     <div className='col-auto'>
                         <select value={property ? property : selectedProperty._id} onChange={selectProperty && changeUserInfo('property')} className="form-control text-primary" id="selectProperty" >
                             <option value='-1'>Select Property (None)</option>
-                            {properties.map((property, i) => (
+                            {properties.map((property, i) => property.available === true && (
                                 <option value={property._id} key={i}>{property.address}, {property.city}, {property.state}, {property.zip}</option>
                             ))}
                         </select>

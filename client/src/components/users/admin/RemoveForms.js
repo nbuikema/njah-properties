@@ -82,25 +82,30 @@ const RemoveForms = () => {
 
     const deleteFormClick = event => {
         event.preventDefault();
-        const confirmDelete = window.confirm('Are you sure you want to delete this form? This process cannot be undone.');
-        if(confirmDelete) {
-            deleteForm(token, selectedForm).then((data, err) => {
-                if(!data || err) {
-                    setError('Oops! Something went wrong.');
-                } else {
-                    if(data.error) {
-                        setError(data.error);
+        setError('');
+        if(selectedForm._id) {
+            const confirmDelete = window.confirm('Are you sure you want to delete this form? This process cannot be undone.');
+            if(confirmDelete) {
+                deleteForm(token, selectedForm).then((data, err) => {
+                    if(!data || err) {
+                        setError('Oops! Something went wrong.');
                     } else {
-                        getAllForms();
-                        setSelectedForm({
-                            _id: '',
-                            name: '',
-                            file: ''
-                        });
-                        setSuccess(true);
+                        if(data.error) {
+                            setError(data.error);
+                        } else {
+                            getAllForms();
+                            setSelectedForm({
+                                _id: '',
+                                name: '',
+                                file: ''
+                            });
+                            setSuccess(true);
+                        }
                     }
-                }
-            });
+                });
+            }
+        } else {
+            setError('You must select a form.');
         }
     }
 

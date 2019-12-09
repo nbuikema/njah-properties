@@ -37,6 +37,7 @@ const AddProperties = () => {
 
     const changePropertyInfo = selected => event => {
         setError('');
+        setSuccess(false);
         let value = selected.includes('photos') ? event.target.files[0] : event.target.value;
         if(selected.includes('photos')) {
             let target = selected.split(' ')[1];

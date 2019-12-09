@@ -17,6 +17,7 @@ const Signup = () => {
     const onChange = selected => event => {
         setUser({...user, [selected]: event.target.value});
         setError('');
+        setSuccess(false);
     };
 
     const onSubmit = event => {
