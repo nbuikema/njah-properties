@@ -4,7 +4,7 @@ import {readAllUsers, updateUser, deleteUser} from '../apiUsers';
 import {readAllProperties} from '../../properties/apiProperties';
 import {isAuth} from '../../auth/apiAuth';
 
-const ManageResidents = ({op}) => {
+const ManageResidents = () => {
     const [users, setUsers] = useState([]);
     const [selectedUser, setSelectedUser] = useState({
         _id: '',
@@ -25,25 +25,37 @@ const ManageResidents = ({op}) => {
         state: '',
         zip: ''
     });
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState(false);
     const {_id, first_name, last_name, email, phone, property, createdAt, updatedAt} = selectedUser;
     const {token} = isAuth();
 
-    const getAllProperties = useCallback(() => {
-        readAllProperties().then(data => {
-            setProperties(data);
+    const getAllProperties = () => {
+        readAllProperties().then((data, err) => {
+            if(err || !data) {
+                setError('Oops! Something went wrong.');
+            } else {
+                setError('');
+                setProperties(data);
+            }
         });
-    }, []);
+    };
 
     const getAllUsers = useCallback(() => {
-        readAllUsers(token).then(data => {
-            setUsers(data);
+        readAllUsers(token).then((data, err) => {
+            if(err || !data) {
+                setError('Oops! Something went wrong.');
+            } else {
+                setError('');
+                setUsers(data);
+            }
         });
     }, [token]);
 
     useEffect(() => {
         getAllUsers();
         getAllProperties();
-    }, [getAllUsers, getAllProperties]);
+    }, [getAllUsers]);
 
     const selectProperty = event => {
         let selectedId = event.target.value;
@@ -72,6 +84,7 @@ const ManageResidents = ({op}) => {
 
     const selectUser = event => {
         let selectedId = event.target.value;
+        setSuccess(false);
         users.forEach((user) => {
             if(selectedId === '-1') {
                 setSelectedUser({
@@ -104,31 +117,55 @@ const ManageResidents = ({op}) => {
     };
 
     const changeUserInfo = selected => event => {
+        setError('');
+        setSuccess(false);
         setSelectedUser({...selectedUser, [selected]: event.target.value});
     };
     
     const updateUserClick = event => {
         event.preventDefault();
-        updateUser(token, selectedUser).then(() => {
-            getAllUsers();
+        setError('');
+        updateUser(token, selectedUser).then((data, err) => {
+            if(err || !data) {
+                setError('Oops! Something went wrong.');
+            } else {
+                if(data.err) {
+                    setError(data.err);
+                } else {
+                    getAllUsers();
+                    setSuccess('updated');
+                }
+            }
         });
-    }
+    };
 
     const deleteUserClick = event => {
         event.preventDefault();
-        deleteUser(token, selectedUser).then(() => {
-            getAllUsers();
-            setSelectedUser({
-                _id: '',
-                first_name: '',
-                last_name: '',
-                email: '',
-                role: '',
-                property: '',
-                createdAt: '',
-                updatedAt: ''
+        event.preventDefault();
+        const confirmDelete = window.confirm('Are you sure you want to delete this property? This process cannot be undone.');
+        if(confirmDelete) {
+            deleteUser(token, selectedUser).then((data, err) => {
+                if(err || !data) {
+                    setError('Oops! Something went wrong.');
+                } else {
+                    if(data.err) {
+                        setError(data.err);
+                    } else {
+                        getAllUsers();
+                        setSelectedUser({
+                            _id: '',
+                            first_name: '',
+                            last_name: '',
+                            email: '',
+                            role: '',
+                            property: '',
+                            createdAt: '',
+                            updatedAt: ''
+                        });
+                    }
+                }
             });
-        });
+        }
     }
 
     const showSelectedUserInfo = () => (
@@ -200,6 +237,18 @@ const ManageResidents = ({op}) => {
         </form>
     );
 
+    const showError = () => (
+        <div className='alert alert-danger' style={{display: error ? '' : 'none'}}>
+            {error}
+        </div>
+    );
+
+    const showSuccess = () => (
+        <div className='alert alert-success' style={{display: success ? '' : 'none'}}>
+            Resident was successfully {success}.
+        </div>
+    );
+
     return (
         <div className='my-4'>
             <div className='row'>
@@ -208,6 +257,8 @@ const ManageResidents = ({op}) => {
                 </div>
             </div>
             <hr />
+            {showError()}
+            {showSuccess()}
             {showSelectedUserInfo()}
         </div>
     );
