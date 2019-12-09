@@ -171,21 +171,21 @@ const Messages = ({role}) => {
                     {i !== 0 && <hr />}
                     <div className='row'>
                         <div className='col-6'>
-                            <h6><strong>Name:</strong> <em>{message.last_name}, {message.first_name}</em></h6>
-                            <h6><strong>Email:</strong> <em>{message.email}</em></h6>
-                            <h6><strong>Phone:</strong> <em>{message.phone}</em></h6>
-                            <h6><strong>Sent:</strong> <em>{moment(message.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</em></h6>
+                            <h6><strong>Name:</strong> {message.last_name}, {message.first_name}</h6>
+                            <h6><strong>Email:</strong> {message.email}</h6>
+                            <h6><strong>Phone:</strong> {message.phone}</h6>
+                            <h6><strong>Sent:</strong> {moment(message.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</h6>
                         </div>
                         <div className='col-6'>
-                            <h6><strong>Type:</strong> <em>{message.type}</em></h6>
-                            <h6><strong>Reason:</strong> <em>{message.reason}</em></h6>
+                            <h6><strong>Type:</strong> {message.type}</h6>
+                            <h6><strong>Reason:</strong> {message.reason}</h6>
                             {message.property && (
-                                <h6><strong>Property:</strong> <em>{message.property.address}, {message.property.city}, {message.property.state}, {message.property.zip}</em></h6>
+                                <h6><strong>Property:</strong> {message.property.address}, {message.property.city}, {message.property.state}, {message.property.zip}</h6>
                             )}
                             {message.application && (
-                                <h6><strong>Application:</strong> <em><a href={`${message.application.url}`} target='_blank' rel="noopener noreferrer">View Application</a></em></h6>
+                                <h6><strong>Application:</strong> <a href={`${message.application.url}`} target='_blank' rel="noopener noreferrer">View Application</a></h6>
                             )}
-                            <h6><strong>Message:</strong> <em>{message.message}</em></h6>
+                            <h6><strong>Message:</strong> {message.message}</h6>
                         </div>
                     </div>
                 </div>
@@ -198,7 +198,7 @@ const Messages = ({role}) => {
                             <h6><strong>Name:</strong> {message.last_name}, {message.first_name}</h6>
                             <h6><strong>Email:</strong> {message.email}</h6>
                             <h6><strong>Phone:</strong> {message.phone}</h6>
-                            <h6><strong>Sent:</strong> <em>{moment(message.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</em></h6>
+                            <h6><strong>Sent:</strong> {moment(message.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</h6>
                         </div>
                         <div className='col-6'>
                             <h6><strong>Type:</strong> {message.type}</h6>
