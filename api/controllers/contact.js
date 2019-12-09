@@ -81,6 +81,14 @@ exports.readMessagesWithQuery = (req, res) => {
 };
 
 exports.deleteContact = (req, res) => {
+    console.log(req.selectedContact);
+    if(req.selectedContact.application) {
+        cloudinary.v2.uploader.destroy(`${req.selectedContact.application.id}`, function(error, result) {
+            if(error) {
+                return res.status(400).json({error: 'Contact could not be deleted.'});
+            }
+        });
+    }
     Contact.findOneAndDelete(
         {_id: req.selectedContact._id},
         (err, contact) => {

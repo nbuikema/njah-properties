@@ -10,7 +10,6 @@ exports.contactValidator = (req, res, next) => {
     }
     if(req.body.reason === 'Property Application') {
         req.check('property', 'You must select a property.').notEmpty();
-        req.check('application', 'You must attach a property application.').notEmpty();
     }
     if(req.body.reason === 'Other') {
         req.check('message', 'You must include a message.').notEmpty();
