@@ -51,7 +51,7 @@ const ManageForms = () => {
             let inputIndex = document.getElementsByClassName('file')[i].value;
             return inputIndex.length > 0 ? true : false;
         }
-    }
+    };
 
     const contactForm = () => (
         <form encType="multipart/form-data">

@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useState, useEffect} from 'react';
 import {readAllProperties} from '../properties/apiProperties';
 import {sendContact, readAllForms} from './apiContact';
 
@@ -16,39 +16,46 @@ const Contact = () => {
         message: '',
         formData: new FormData()
     });
-    const [errors, setErrors] = useState({
-        loading: '',
-        input: ''
-    });
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState(false);
     const {first_name, last_name, email, phone, reason, property, message, formData} = contact;
 
-    const getAllProperties = useCallback(() => {
+    const getAllProperties = () => {
         readAllProperties().then((data, err) => {
             if(err || !data) {
-                setErrors({...errors, loading: 'Oops! Something went wrong.'});
+                setError('Oops! Something went wrong.');
             } else {
-                setProperties(data);
+                if(data.err) {
+                    setError(data.err);
+                } else {
+                    setProperties(data);
+                }
             }
         });
-    }, [errors]);
+    };
 
-    const getAllForms = useCallback(() => {
+    const getAllForms = () => {
         readAllForms().then((data, err) => {
             if(err || !data) {
-                setErrors({...errors, loading: 'Oops! Something went wrong.'});
+                setError('Oops! Something went wrong.');
             } else {
-                setForms(data);
+                if(data.err) {
+                    setError(data.err);
+                } else {
+                    setForms(data);
+                }
             }
         });
-    }, [errors]);
+    };
 
     useEffect(() => {
         getAllProperties();
         getAllForms();
-    }, [getAllProperties, getAllForms]);
+    }, []);
 
     const onChange = selected => event => {
-        setErrors({...errors, input: ''});
+        setError('');
+        setSuccess(false);
         let value = selected === 'application' ? event.target.files[0] : event.target.value;
         if(selected === 'reason') {
             formData.set(selected, value);
@@ -69,13 +76,19 @@ const Contact = () => {
     const onSubmit = event => {
         event.preventDefault();
         formData.set('type', 'General');
+        if(reason === 'Property Application' && !isApplicationSelected(0)) {
+            return setError('You must attach an application.');
+        }
         sendContact(formData).then(data => {
             if(!data) {
-                setErrors({...errors, input: 'Oops! Something went wrong.'});
+                setError('Oops! Something went wrong.');
             } else {
                 if(data.err) {
-                    setErrors({...errors, input: data.err});
+                    setError(data.err);
                 } else {
+                    if(reason === 'Property Application') {
+                        document.getElementById("application").value = null;
+                    }
                     setContact({
                         first_name: '',
                         last_name: '',
@@ -87,9 +100,18 @@ const Contact = () => {
                         message: '',
                         formData: new FormData()
                     });
+                    setError('');
+                    setSuccess(true);
                 }
             }
         });
+    };
+
+    const isApplicationSelected = i => {
+        if(document.getElementsByClassName('application')[i]) {
+            let inputIndex = document.getElementsByClassName('application')[i].value;
+            return inputIndex.length > 0 ? true : false;
+        }
     };
 
     const conditionalInput = () => {
@@ -126,7 +148,7 @@ const Contact = () => {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='application'>Upload Application&nbsp;</label>
-                                <input onChange={onChange('application')} type='file' accept='*' id='application' name='application' className='text-primary' />
+                                <input onChange={onChange('application')} type='file' accept='*' id='application' name='application' className='text-primary application' />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='message'>Anything Else We Should Know?</label>
@@ -187,19 +209,20 @@ const Contact = () => {
             </div>
             {conditionalInput()}
             <div className='text-center'>
-                <button onClick={onSubmit} type='submit' className='btn btn-primary'>Get In Touch</button>
+                <button onClick={onSubmit} type='submit' className='btn btn-primary'>Submit</button>
             </div>
         </form>
     );
 
     const showError = () => (
-        <div>
-            <div className='alert alert-danger' style={{display: errors.loading ? '' : 'none'}}>
-                {errors.loading}
-            </div>
-            <div className='alert alert-danger mt-1' style={{display: errors.input ? '' : 'none'}}>
-                {errors.input}
-            </div>
+        <div className='alert alert-danger' style={{display: error ? '' : 'none'}}>
+            {error}
+        </div>
+    );
+
+    const showSuccess = () => (
+        <div className='alert alert-success' style={{display: success ? '' : 'none'}}>
+            Thank you for contacting us! We will be in touch with you as soon as possible.
         </div>
     );
 
@@ -207,6 +230,7 @@ const Contact = () => {
         <div className='text-primary my-5'>
             <div className='container'>
                 {showError()}
+                {showSuccess()}
                 <div className='row'>
                     <div className='col-12 col-lg-8 order-1 order-lg-0'>
                         <div className='d-block d-lg-none'>
