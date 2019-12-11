@@ -1,4 +1,8 @@
+const sgMail = require('@sendgrid/mail');
+const moment = require('moment');
 const Contact = require('../models/contact');
+
+sgMail.setApiKey(process.env.SENDGRID_KEY);
 
 exports.contactById = (req, res, next, id) => {
     Contact.findById(id).exec((err, contact) => {
@@ -22,6 +26,23 @@ exports.contact = (req, res) => {
         if(err) {
             return res.status(400).json({error: 'Contact form could not be submitted.'});
         }
+        const emailData = {
+            to: 'nick.buikema@gmail.com',
+            from: 'noreply@njahproperties.com',
+            subject: `New Message Received`,
+            html: `
+                <p>A new message was received on ${moment(contact.createdAt).format('MMMM Do YYYY, h:mm:ss a')}.</p>
+                <p>Name: <strong>${contact.last_name}, ${contact.first_name}</strong></p>
+                <p>Email: <strong>${contact.email}</strong></p>
+                <p>Phone: <strong>${contact.phone}</strong></p>
+                <p>Type: <strong>${contact.type}</strong></p>
+                <p>Reason: <strong>${contact.reason}</strong></p>
+                ${contact.severity && `<p>Severity: <strong>${contact.severity}</strong></p>`}
+                <p>Message: <strong>${contact.message}</strong></p>
+                ${contact.application && `<p>Application: <a href="${contact.application.url}">View Application</a></p>`}
+            `
+        };
+        sgMail.send(emailData);
         return res.json({data});
     });
 };
