@@ -220,6 +220,7 @@ const Messages = ({role}) => {
                             <h6><strong>Email:</strong> {message.email}</h6>
                             <h6><strong>Phone:</strong> {message.phone}</h6>
                             <h6><strong>Sent:</strong> {moment(message.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</h6>
+                            {role === 1 && <button onClick={deleteMessage(message._id)} className='btn btn-danger btn-sm'>Delete Message</button>}
                         </div>
                         <div className='col-6'>
                             <h6><strong>Type:</strong> {message.type}</h6>
@@ -235,7 +236,6 @@ const Messages = ({role}) => {
                             )}
                             <h6><strong>Message:</strong> {message.message}</h6>
                         </div>
-                        <button onClick={deleteMessage(message._id)} className='btn'><i className="fas fa-times text-danger"></i></button>
                     </div>
                 </div>
             ))}
@@ -248,6 +248,7 @@ const Messages = ({role}) => {
                             <h6><strong>Email:</strong> {message.email}</h6>
                             <h6><strong>Phone:</strong> {message.phone}</h6>
                             <h6><strong>Sent:</strong> {moment(message.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</h6>
+                            {role === 1 && <button onClick={deleteMessage(message._id)} className='btn btn-danger btn-sm'>Delete Message</button>}
                         </div>
                         <div className='col-6'>
                             <h6><strong>Type:</strong> {message.type}</h6>
@@ -258,9 +259,11 @@ const Messages = ({role}) => {
                             {message.application && (
                                 <h6><strong>Application:</strong> <a href={`${message.application.url}`} target='_blank' rel="noopener noreferrer">View Application</a></h6>
                             )}
+                            {message.severity && (
+                                <h6><strong>Severity:</strong> {message.severity}</h6>
+                            )}
                             <h6><strong>Message:</strong> {message.message}</h6>
                         </div>
-                        <button onClick={deleteMessage(message._id)} className='btn'><i className="fas fa-times text-danger"></i></button>
                     </div>
                 </div>
             ))}
