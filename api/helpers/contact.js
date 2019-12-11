@@ -11,6 +11,9 @@ exports.contactValidator = (req, res, next) => {
     if(req.body.reason === 'Property Application') {
         req.check('property', 'You must select a property.').notEmpty();
     }
+    if(req.body.type === 'Maintenance') {
+        req.check('severity', 'You must select a severity level for the issue.').notEmpty();
+    }
     req.check('message', 'You must include a message.').notEmpty();
     const errors = req.validationErrors();
     if(errors) {

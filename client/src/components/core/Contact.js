@@ -79,8 +79,8 @@ const Contact = () => {
         if(reason === 'Property Application' && !isApplicationSelected(0)) {
             return setError('You must attach an application.');
         }
-        sendContact(formData).then(data => {
-            if(!data) {
+        sendContact(formData).then((data, err) => {
+            if(!data || err) {
                 setError('Oops! Something went wrong.');
             } else {
                 if(data.err) {

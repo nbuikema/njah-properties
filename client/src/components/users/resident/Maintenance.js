@@ -14,48 +14,55 @@ const Maintenance = ({user}) => {
         message: '',
         formData: new FormData()
     });
-    const {message, formData} = contact;
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState(false);
+    const {message, reason, severity, formData} = contact;
 
     const setUserFormInfo = useCallback(() => {
+        setError('');
         formData.set('user', user._id);
         formData.set('first_name', user.first_name);
         formData.set('last_name', user.last_name);
         formData.set('email', user.email);
         formData.set('phone', user.phone);
         formData.set('property', user.property._id);
-    }, [formData, user._id, user.first_name, user.last_name, user.email, user.phone, user.property._id]);
+    }, [formData, user]);
 
     useEffect(() => {
         setUserFormInfo();
     }, [setUserFormInfo]);
 
     const onChange = selected => event => {
+        setError('');
+        setSuccess(false);
         let value = event.target.value;
-        if(selected === 'reason') {
-            formData.set(selected, value);
-            setContact({
-                ...contact,
-                message: '',
-                severity: '',
-                reason: value
-            });
-        } else {
-            setContact({...contact, [selected]: value});
-            formData.set(selected, value);
-        }
+        setContact({...contact, [selected]: value});
+        formData.set(selected, value);
     };
 
     const onSubmit = event => {
         event.preventDefault();
         formData.set('type', 'Maintenance');
-        sendContact(formData).then(data => {
-            setContact({
-                ...contact,
-                reason: '',
-                severity: '',
-                message: '',
-                formData: new FormData()
-            });
+        setError('');
+        setSuccess(false);
+        sendContact(formData).then((data, err) => {
+            if(!data || err) {
+                setError('Oops! Something went wrong.');
+            } else {
+                if(data.err) {
+                    setError(data.err);
+                } else {
+                    setContact({
+                        ...contact,
+                        reason: '',
+                        severity: '',
+                        message: '',
+                        formData: new FormData()
+                    });
+                    setError('');
+                    setSuccess(true);
+                }
+            }
         });
     };
 
@@ -64,7 +71,7 @@ const Maintenance = ({user}) => {
             <div className='row mr-1'>
                 <div className="form-group col-12 row form-row">
                     <label htmlFor='reason'>Where Is The Issue?</label>
-                    <select onChange={onChange('reason')} className="form-control text-primary" id="reason" name="reason">
+                    <select value={reason} onChange={onChange('reason')} className="form-control text-primary" id="reason" name="reason">
                         <option value=''>Select One</option>
                         <option value='Bedroom'>Bedroom</option>
                         <option value='Bathroom'>Bathroom</option>
@@ -79,6 +86,16 @@ const Maintenance = ({user}) => {
                         <option value='Other'>Other</option>
                     </select>
                 </div>
+                <div className="form-group col-12 row form-row">
+                    <label htmlFor='severity'>How Severe Is The Issue?</label>
+                    <select value={severity} onChange={onChange('severity')} className="form-control text-primary" id="severity" name="severity">
+                        <option value=''>Select One</option>
+                        <option value='Low'>Low</option>
+                        <option value='Medium'>Medium</option>
+                        <option value='High'>High</option>
+                        <option value='Emergency'>Emergency</option>
+                    </select>
+                </div>
                 <div className='form-group col-12 row form-row'>
                     <label htmlFor='message'>Please Provide a Detailed Description of the Issue</label>
                     <textarea onChange={onChange('message')} value={message} rows='4' className='form-control text-primary' id='message' aria-describedby='message'></textarea>
@@ -90,6 +107,18 @@ const Maintenance = ({user}) => {
         </form>
     );
 
+    const showError = () => (
+        <div className='alert alert-danger' style={{display: error ? '' : 'none'}}>
+            {error}
+        </div>
+    );
+
+    const showSuccess = () => (
+        <div className='alert alert-success' style={{display: success ? '' : 'none'}}>
+            Thank you for contacting us! We will be in touch with you as soon as possible.
+        </div>
+    );
+
     return (
         <div className='my-4'>
             <div className='row'>
@@ -98,6 +127,8 @@ const Maintenance = ({user}) => {
                 </div>
             </div>
             <hr />
+            {showError()}
+            {showSuccess()}
             {contactForm()}
         </div>
     );

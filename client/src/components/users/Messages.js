@@ -230,6 +230,9 @@ const Messages = ({role}) => {
                             {message.application && (
                                 <h6><strong>Application:</strong> <a href={`${message.application.url}`} target='_blank' rel="noopener noreferrer">View Application</a></h6>
                             )}
+                            {message.severity && (
+                                <h6><strong>Severity:</strong> {message.severity}</h6>
+                            )}
                             <h6><strong>Message:</strong> {message.message}</h6>
                         </div>
                         <button onClick={deleteMessage(message._id)} className='btn'><i className="fas fa-times text-danger"></i></button>

@@ -45,6 +45,9 @@ const contactSchema = new mongoose.Schema(
         type: {
             type: String,
             required: true
+        },
+        severity: {
+            type: String
         }
     }, {timestamps: true}
 );

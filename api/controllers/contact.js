@@ -81,7 +81,6 @@ exports.readMessagesWithQuery = (req, res) => {
 };
 
 exports.deleteContact = (req, res) => {
-    console.log(req.selectedContact);
     if(req.selectedContact.application) {
         cloudinary.v2.uploader.destroy(`${req.selectedContact.application.id}`, function(error, result) {
             if(error) {
