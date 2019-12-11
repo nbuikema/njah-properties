@@ -10,11 +10,12 @@ const Maintenance = ({user}) => {
         phone: user.phone,
         property: user.property._id,
         reason: '',
-        severity: '',
         message: '',
         formData: new FormData()
     });
-    const {message, formData} = contact;
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState(false);
+    const {message, reason, formData} = contact;
 
     const setUserFormInfo = useCallback(() => {
         formData.set('user', user._id);
@@ -30,32 +31,35 @@ const Maintenance = ({user}) => {
     }, [setUserFormInfo]);
 
     const onChange = selected => event => {
+        setError('');
+        setSuccess(false);
         let value = event.target.value;
-        if(selected === 'reason') {
-            formData.set(selected, value);
-            setContact({
-                ...contact,
-                message: '',
-                severity: '',
-                reason: value
-            });
-        } else {
-            setContact({...contact, [selected]: value});
-            formData.set(selected, value);
-        }
+        setContact({...contact, [selected]: value});
+        formData.set(selected, value);
     };
 
     const onSubmit = event => {
         event.preventDefault();
         formData.set('type', 'Resident');
-        sendContact(formData).then(data => {
-            setContact({
-                ...contact,
-                reason: '',
-                severity: '',
-                message: '',
-                formData: new FormData()
-            });
+        setError('');
+        setSuccess(false);
+        sendContact(formData).then((data, err) => {
+            if(!data || err) {
+                setError('Oops! Something went wrong.');
+            } else {
+                if(data.err) {
+                    setError(data.err);
+                } else {
+                    setContact({
+                        ...contact,
+                        reason: '',
+                        message: '',
+                        formData: new FormData()
+                    });
+                    setError('');
+                    setSuccess(true);
+                }
+            }
         });
     };
 
@@ -64,7 +68,7 @@ const Maintenance = ({user}) => {
             <div className='row mr-1'>
                 <div className="form-group col-12 row form-row">
                     <label htmlFor='reason'>What Can We Help With?</label>
-                    <select onChange={onChange('reason')} className="form-control text-primary" id="reason" name="reason">
+                    <select value={reason} onChange={onChange('reason')} className="form-control text-primary" id="reason" name="reason">
                         <option value=''>Select One</option>
                         <option value='General Question'>General Question</option>
                         <option value='Payment'>Payment</option>
@@ -82,6 +86,18 @@ const Maintenance = ({user}) => {
         </form>
     );
 
+    const showError = () => (
+        <div className='alert alert-danger' style={{display: error ? '' : 'none'}}>
+            {error}
+        </div>
+    );
+
+    const showSuccess = () => (
+        <div className='alert alert-success' style={{display: success ? '' : 'none'}}>
+            Thank you for contacting us! We will be in touch with you as soon as possible.
+        </div>
+    );
+
     return (
         <div className='my-4'>
             <div className='row'>
@@ -90,6 +106,8 @@ const Maintenance = ({user}) => {
                 </div>
             </div>
             <hr />
+            {showError()}
+            {showSuccess()}
             {contactForm()}
         </div>
     );
