@@ -38,7 +38,9 @@ exports.readAllMessages = (req, res) => {
 };
 
 exports.readMyMessages = (req, res) => {
-    Contact.find({user: req.user._id}).populate('property', 'address city state zip').exec((err, contact) => {
+    const sortBy = 'createdAt';
+    const order = 'desc';
+    Contact.find({user: req.user._id}).populate('property', 'address city state zip').sort([[sortBy, order]]).exec((err, contact) => {
         if(err) {
             return res.status(400).json({error: 'Could not find messages.'});
         }
