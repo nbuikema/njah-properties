@@ -36,6 +36,9 @@ const Maintenance = ({user}) => {
         setError('');
         setSuccess(false);
         let value = event.target.value;
+        if(selected === 'severity' && value === 'Emergency') {
+            window.confirm('If this issue is a true emergency (fire, flood, life-threatening), please call 911 immediately.');
+        }
         setContact({...contact, [selected]: value});
         formData.set(selected, value);
     };
