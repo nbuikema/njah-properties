@@ -70,8 +70,10 @@ const Maintenance = ({user}) => {
                     <label htmlFor='reason'>What Can We Help With?</label>
                     <select value={reason} onChange={onChange('reason')} className="form-control text-primary" id="reason" name="reason">
                         <option value=''>Select One</option>
-                        <option value='General Question'>General Question</option>
-                        <option value='Payment'>Payment</option>
+                        <option value='Complaint'>Complaint</option>
+                        <option value='Financial'>Financial</option>
+                        <option value='Lease Renewal'>Lease Renewal</option>
+                        <option value='General'>General</option>
                         <option value='Other'>Other</option>
                     </select>
                 </div>
