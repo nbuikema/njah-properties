@@ -48,6 +48,7 @@ const UpdateSelf = ({user}) => {
                     if(data.err) {
                         setError(data.err);
                     } else {
+                        setUpdatedUser({...updatedUser, password: '', confirm_password: ''});
                         setSuccess(true);
                     }
                 }

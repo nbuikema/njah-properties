@@ -6,13 +6,11 @@ const Signup = () => {
         first_name: '',
         last_name: '',
         email: '',
-        phone: '',
-        password: '',
-        confirm_password: ''
+        phone: ''
     });
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
-    const {first_name, last_name, email, phone, password, confirm_password} = user;
+    const {first_name, last_name, email, phone} = user;
 
     const onChange = selected => event => {
         setUser({...user, [selected]: event.target.value});
@@ -23,29 +21,23 @@ const Signup = () => {
     const onSubmit = event => {
         event.preventDefault();
         setError('');
-        if(password !== confirm_password) {
-            setError('Passwords must match.');
-        } else {
-            signup({first_name, last_name, email, phone, password}).then((data, err) => {
-                if(!data || err) {
-                    setError('Oops! Something went wrong.');
+        signup({first_name, last_name, email, phone}).then((data, err) => {
+            if(!data || err) {
+                setError('Oops! Something went wrong.');
+            } else {
+                if(data.err) {
+                    setError(data.err);
                 } else {
-                    if(data.err) {
-                        setError(data.err);
-                    } else {
-                        setUser({
-                            first_name: '',
-                            last_name: '',
-                            email: '',
-                            phone: '',
-                            password: '',
-                            confirm_password: ''
-                        });
-                        setSuccess(true);
-                    }
+                    setUser({
+                        first_name: '',
+                        last_name: '',
+                        email: '',
+                        phone: ''
+                    });
+                    setSuccess(true);
                 }
-            });
-        }
+            }
+        });
     };
 
     const signupForm = () => (
@@ -73,18 +65,6 @@ const Signup = () => {
                     <label htmlFor="phone" className="col-sm-3 col-form-label"><strong>Phone</strong></label>
                     <div className="col-sm-9">
                         <input onChange={onChange('phone')} type="text" className="form-control text-primary" id="phone" value={phone} />
-                    </div>
-                </div>
-                <div className="form-group col-12 col-lg-6 row form-row">
-                    <label htmlFor="password" className="col-sm-3 col-form-label"><strong>Password</strong></label>
-                    <div className="col-sm-9">
-                        <input onChange={onChange('password')} autoComplete="new-password" type="password" className="form-control text-primary" id="password" value={password} />
-                    </div>
-                </div>
-                <div className="form-group col-12 col-lg-6 row form-row">
-                    <label htmlFor="confirm_password" className="col-sm-3 col-form-label"><strong>Confirm Password</strong></label>
-                    <div className="col-sm-9">
-                        <input onChange={onChange('confirm_password')} type="password" className="form-control text-primary" id="confirm_password" value={confirm_password} />
                     </div>
                 </div>
                 <div className='col-12 text-center'>

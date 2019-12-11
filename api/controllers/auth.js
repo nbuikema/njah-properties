@@ -2,7 +2,10 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const crs = require('crypto-random-string');
 const sgMail = require('@sendgrid/mail');
+const moment = require('moment');
 const User = require('../models/user');
+
+sgMail.setApiKey(process.env.SENDGRID_KEY);
 
 exports.signup = (req, res) => {
     User.find({email: req.body.email}).exec((err, foundUser) => {
@@ -10,12 +13,26 @@ exports.signup = (req, res) => {
             return res.status(400).json({error: 'Could not signup new user.'});
         } else {
             if(foundUser.length === 0) {
-                req.body.password = bcrypt.hashSync(req.body.password, 10);
+                const tempPassword = crs({length: 20});
+                req.body.password = bcrypt.hashSync(tempPassword, 10);
                 const user = new User(req.body);
                 user.save((err, user) => {
                     if(err) {
                         return res.status(400).json({error: 'Could not signup new user.'});
                     }
+                    const emailData = {
+                        to: 'nick.buikema@gmail.com',
+                        from: 'noreply@njahproperties.com',
+                        subject: `New Resident Account`,
+                        html: `
+                            <p>A new resident account was signed up on ${moment(user.createdAt).format('MMMM Do YYYY, h:mm:ss a')}.</p>
+                            <p>Email: <strong>${user.email}</strong></p>
+                            <p>Password: <strong>${tempPassword}</strong></p>
+                            <p>Please sign in and change your password under the <em>Update My Info</em> tab of your User Dashboard as soon as possible.<p>
+                            <p>We look forward to having you as a resident at our property!<p>
+                        `
+                    };
+                    sgMail.send(emailData);
                     user.password = undefined;
                     res.json({user: user});
                 });
@@ -95,7 +112,7 @@ exports.forgotPassword = (req, res) => {
                     <p>You have recently requested a new password.</p>
                     <p>To reset your password, sign in with the temporary password</p>
                     <p><strong>${tempPassword}</strong></p>
-                    <p>and visit Update Account to change your password.</p>
+                    <p>and visit Update My Info on your User Dashboard to change your password.</p>
                 `
             };
             sgMail.send(emailData);
