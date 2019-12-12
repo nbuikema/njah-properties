@@ -16,6 +16,7 @@ import ManageProperties from './admin/ManageProperties';
 import Messages from './Messages';
 import ResidentContact from './resident/ResidentContact';
 import Maintenance from './resident/Maintenance';
+import PayRent from './resident/PayRent';
 
 const UserDashboard = () => {
     const [section, setSection] = useState('info');
@@ -101,6 +102,8 @@ const UserDashboard = () => {
                 return <UpdateSelf user={user} />;
             case 'myDocuments':
                 return <UserDocuments user={user} />;
+            case 'payRent':
+                return <PayRent user={user} />;
             default: 
                 if(!error) {
                     return <UserInfo user={user} />;
@@ -163,6 +166,12 @@ const UserDashboard = () => {
                                     <button className={`nav-link dashboard-btn bg-light ${section === 'myDocuments' && 'active'}`} onClick={toggleSection('myDocuments')}>
                                         <i className="fas fa-file mr-3 text-primary fa-fw selector"></i>
                                         My Documents
+                                    </button>
+                                </li>
+                                <li className="nav-item">
+                                    <button className={`nav-link dashboard-btn bg-light ${section === 'payRent' && 'active'}`} onClick={toggleSection('payRent')}>
+                                        <i className="fas fa-money-check-alt mr-3 text-primary fa-fw selector"></i>
+                                        Pay Rent
                                     </button>
                                 </li>
                                 <li className="nav-item">
