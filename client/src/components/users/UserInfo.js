@@ -9,7 +9,7 @@ const UserInfo = ({user}) => {
         <div className='fix-info'>
             <div className='d-none d-lg-block'>
                 <div className='row'>
-                    <div className='col-6'>
+                    <div className='col-6 fix-heading'>
                         <h1 className='mt-4'>My Info</h1>
                     </div>
                     {property && (
@@ -18,7 +18,7 @@ const UserInfo = ({user}) => {
                         </div>
                     )}
                 </div>
-                <hr />
+                <hr className='fix-heading' />
                 <div className='row'>
                     <div className='col-6'>
                         <h6 className='form-group row'>

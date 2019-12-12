@@ -18,6 +18,10 @@ a.bg-light:focus, a.bg-light:hover, button.bg-light:focus, button.bg-light:hover
     margin-left: 5px;
 }
 
+.fix-heading {
+    margin-left: -5px;
+}
+
 .logo {
     transform: scale(.23);
     border-radius: 50%;
