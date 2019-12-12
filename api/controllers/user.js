@@ -75,3 +75,22 @@ exports.updateSelf = (req, res) => {
         return res.status(403).json({error: 'You do not have permission to do that.'});
     }
 };
+
+exports.uploadFile = (req, res) => {
+    let file = {};
+    file.url = req.file.url;
+    file.id = req.file.public_id;
+    file.name = req.body.name;
+    User.findOneAndUpdate(
+        {_id: req.selectedUser._id},
+        {$push: {files: file}},
+        {new: true},
+        (err, user) => {
+            if(err) {
+                return res.status(400).json({error: 'Your info could not be updated.'});
+            }
+            user.password = undefined;
+            return res.json(user);
+        }
+    );
+};

@@ -175,7 +175,7 @@ const ManageResidents = () => {
         } else {
             setError('You must select a resident.');
         }
-    }
+    };
 
     const showSelectedUserInfo = () => (
         <form>

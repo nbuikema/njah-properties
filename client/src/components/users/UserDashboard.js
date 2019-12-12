@@ -9,6 +9,7 @@ import AddForms from './admin/AddForms';
 import RemoveForms from './admin/RemoveForms';
 import AddResidents from './admin/AddResidents';
 import ManageResidents from './admin/ManageResidents';
+import ResidentDocuments from './admin/ResidentDocuments';
 import AddProperties from './admin/AddProperties';
 import ManageProperties from './admin/ManageProperties';
 import Messages from './Messages';
@@ -91,6 +92,8 @@ const UserDashboard = () => {
                 return <AddResidents />;
             case 'manageResidents':
                 return <ManageResidents />;
+            case 'residentDocuments':
+                return <ResidentDocuments />;
             case 'updateSelf':
                 return <UpdateSelf user={user} />;
             default: 
@@ -213,6 +216,12 @@ const UserDashboard = () => {
                                     <button className={`nav-link dashboard-btn bg-light ${section === 'manageResidents' && 'active'}`} onClick={toggleSection('manageResidents')}>
                                         <i className="fas fa-pencil-alt mr-3 text-primary fa-fw selector"></i>
                                         Manage Residents
+                                    </button>
+                                </li>
+                                <li className="nav-item">
+                                    <button className={`nav-link dashboard-btn bg-light ${section === 'residentDocuments' && 'active'}`} onClick={toggleSection('residentDocuments')}>
+                                        <i className="fas fa-pencil-alt mr-3 text-primary fa-fw selector"></i>
+                                        Resident Documents
                                     </button>
                                 </li>
                             </ul>

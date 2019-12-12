@@ -34,6 +34,9 @@ const userSchema = new mongoose.Schema(
         property: {
             type: ObjectId,
             ref: 'Property'
+        },
+        files: {
+            type: Array
         }
     }, {timestamps: true}
 );

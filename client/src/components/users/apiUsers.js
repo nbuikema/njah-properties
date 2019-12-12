@@ -214,3 +214,18 @@ export const updateSelf = (token, user) => {
         console.log(err)
     });
 };
+
+export const uploadFile = (token, userId, data) => {
+    return fetch(`${API}/user/upload/file/${userId}`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${token}`
+        },
+        body: data
+    }).then(response => {
+        return response.json();
+    }).catch(err => {
+        console.log(err);
+    });
+};
