@@ -143,13 +143,13 @@ const UserDashboard = () => {
                         </li>
                         <li className="nav-item">
                             <button className={`nav-link dashboard-btn bg-light ${section === 'updateSelf' && 'active'}`} onClick={toggleSection('updateSelf')}>
-                                <i className="fas fa-info-circle mr-3 text-primary fa-fw selector"></i>
+                                <i className="fas fa-pencil-alt mr-3 text-primary fa-fw selector"></i>
                                 Update My Info
                             </button>
                         </li>
                         <li className="nav-item">
                             <button className={`nav-link dashboard-btn bg-light ${section === 'messages' && 'active'}`} onClick={toggleSection('messages')}>
-                                <i className="fas fa-envelope mr-3 text-primary fa-fw selector"></i>
+                                <i className="fas fa-inbox mr-3 text-primary fa-fw selector"></i>
                                 View Messages
                             </button>
                         </li>
@@ -161,19 +161,19 @@ const UserDashboard = () => {
                             <ul className="nav flex-column bg-white mb-0">
                                 <li className="nav-item">
                                     <button className={`nav-link dashboard-btn bg-light ${section === 'myDocuments' && 'active'}`} onClick={toggleSection('myDocuments')}>
-                                        <i className="fas fa-info-circle mr-3 text-primary fa-fw selector"></i>
+                                        <i className="fas fa-file mr-3 text-primary fa-fw selector"></i>
                                         My Documents
                                     </button>
                                 </li>
                                 <li className="nav-item">
                                     <button className={`nav-link dashboard-btn bg-light ${section === 'maintenance' && 'active'}`} onClick={toggleSection('maintenance')}>
-                                        <i className="fa fa-th-large mr-3 text-primary fa-fw selector"></i>
+                                        <i className="fa fa-tools mr-3 text-primary fa-fw selector"></i>
                                         Maintenance
                                     </button>
                                 </li>
                                 <li className="nav-item">
                                     <button className={`nav-link dashboard-btn bg-light ${section === 'contact' && 'active'}`} onClick={toggleSection('contact')}>
-                                        <i className="fa fa-th-large mr-3 text-primary fa-fw selector"></i>
+                                        <i className="fa fa-envelope mr-3 text-primary fa-fw selector"></i>
                                         Contact Property
                                     </button>
                                 </li>
@@ -209,7 +209,7 @@ const UserDashboard = () => {
                                 </li>
                                 <li className="nav-item">
                                     <button className={`nav-link dashboard-btn bg-light ${section === 'manageProperties' && 'active'}`} onClick={toggleSection('manageProperties')}>
-                                        <i className="fas fa-pencil-alt mr-3 text-primary fa-fw selector"></i>
+                                        <i className="fas fa-edit mr-3 text-primary fa-fw selector"></i>
                                         Manage Properties
                                     </button>
                                 </li>
@@ -225,13 +225,13 @@ const UserDashboard = () => {
                                 </li>
                                 <li className="nav-item">
                                     <button className={`nav-link dashboard-btn bg-light ${section === 'manageResidents' && 'active'}`} onClick={toggleSection('manageResidents')}>
-                                        <i className="fas fa-pencil-alt mr-3 text-primary fa-fw selector"></i>
+                                        <i className="fas fa-user-edit mr-3 text-primary fa-fw selector"></i>
                                         Manage Residents
                                     </button>
                                 </li>
                                 <li className="nav-item">
                                     <button className={`nav-link dashboard-btn bg-light ${section === 'residentDocuments' && 'active'}`} onClick={toggleSection('residentDocuments')}>
-                                        <i className="fas fa-pencil-alt mr-3 text-primary fa-fw selector"></i>
+                                        <i className="fas fa-file-upload mr-3 text-primary fa-fw selector"></i>
                                         Upload Files
                                     </button>
                                 </li>
