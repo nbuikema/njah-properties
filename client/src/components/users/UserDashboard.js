@@ -147,14 +147,6 @@ const UserDashboard = () => {
                                 Update My Info
                             </button>
                         </li>
-                        {role === 0 && (
-                            <li className="nav-item">
-                                <button className={`nav-link dashboard-btn bg-light ${section === 'myDocuments' && 'active'}`} onClick={toggleSection('myDocuments')}>
-                                    <i className="fas fa-info-circle mr-3 text-primary fa-fw selector"></i>
-                                    My Documents
-                                </button>
-                            </li>
-                        )}
                         <li className="nav-item">
                             <button className={`nav-link dashboard-btn bg-light ${section === 'messages' && 'active'}`} onClick={toggleSection('messages')}>
                                 <i className="fas fa-envelope mr-3 text-primary fa-fw selector"></i>
@@ -167,6 +159,12 @@ const UserDashboard = () => {
                             <br />
                             <p className="font-weight-bold px-3 pb-1 mb-0">Residents</p>
                             <ul className="nav flex-column bg-white mb-0">
+                                <li className="nav-item">
+                                    <button className={`nav-link dashboard-btn bg-light ${section === 'myDocuments' && 'active'}`} onClick={toggleSection('myDocuments')}>
+                                        <i className="fas fa-info-circle mr-3 text-primary fa-fw selector"></i>
+                                        My Documents
+                                    </button>
+                                </li>
                                 <li className="nav-item">
                                     <button className={`nav-link dashboard-btn bg-light ${section === 'maintenance' && 'active'}`} onClick={toggleSection('maintenance')}>
                                         <i className="fa fa-th-large mr-3 text-primary fa-fw selector"></i>
