@@ -140,7 +140,7 @@ const ResidentDocuments = () => {
                     </div>
                 </div>
                 <div className='w-100 text-center'>
-                    <button onClick={onFileSubmit} type='submit' className='btn btn-primary'>Add Form</button>
+                    <button onClick={onFileSubmit} type='submit' className='btn btn-primary'>Upload File</button>
                 </div>
             </div>
         </form>
@@ -162,7 +162,7 @@ const ResidentDocuments = () => {
         <div className='my-4'>
             <div className='row'>
                 <div className='col-auto'>
-                    <h1>Manage Residents</h1>
+                    <h1>Upload Resident Files</h1>
                 </div>
             </div>
             <hr />
