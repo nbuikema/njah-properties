@@ -17,14 +17,14 @@ const parser = multer({ storage: storage });
 
 const {isAuth, isAdmin} = require('../controllers/auth');
 const {userById, readCurrentUser, readAllUsers, updateUser, deleteUser, updateSelf, uploadFile} = require('../controllers/user');
-const {updateUserValidator, updateSelfValidator} = require('../helpers/user');
+const {updateUserValidator, updateSelfValidator, uploadFileValidator} = require('../helpers/user');
 
 router.get('/read/current', isAuth, readCurrentUser);
 router.get('/read/all', isAuth, isAdmin, readAllUsers);
 router.put('/update/:userId', isAuth, isAdmin, updateUserValidator, updateUser);
 router.delete('/delete/:userId', isAuth, isAdmin, deleteUser);
 router.put('/update/self/:userId', isAuth, updateSelfValidator, updateSelf);
-router.put('/upload/file/:userId', isAuth, parser.single('file'), uploadFile);
+router.put('/upload/file/:userId', isAuth, parser.single('file'), uploadFileValidator, uploadFile);
 
 router.param('userId', userById);
 

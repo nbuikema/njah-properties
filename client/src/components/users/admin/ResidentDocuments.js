@@ -79,6 +79,9 @@ const ResidentDocuments = () => {
 
     const onFileSubmit = event => {
         event.preventDefault();
+        if(!selectedUser._id) {
+            return setError('You must select a resident.');
+        }
         if(!isFileSelected(0)) {
             return setError('You must attach a file.');
         }
@@ -151,7 +154,7 @@ const ResidentDocuments = () => {
 
     const showSuccess = () => (
         <div className='alert alert-success' style={{display: success ? '' : 'none'}}>
-            File was successfully uploaded to resident: {selectedUser.first_name} {selectedUser.last_name}.
+            File was successfully uploaded to resident {selectedUser.first_name} {selectedUser.last_name}.
         </div>
     );
 
