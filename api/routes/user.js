@@ -24,7 +24,7 @@ router.get('/read/all', isAuth, isAdmin, readAllUsers);
 router.put('/update/:userId', isAuth, isAdmin, updateUserValidator, updateUser);
 router.delete('/delete/:userId', isAuth, isAdmin, deleteUser);
 router.put('/update/self/:userId', isAuth, updateSelfValidator, updateSelf);
-router.put('/upload/file/:userId', isAuth, parser.single('file'), uploadFileValidator, uploadFile);
+router.put('/upload/file/:userId', isAuth, isAdmin, parser.single('file'), uploadFileValidator, uploadFile);
 
 router.param('userId', userById);
 

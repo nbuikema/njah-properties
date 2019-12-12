@@ -21,7 +21,7 @@ const {contactValidator} = require('../helpers/contact');
 
 router.post('/contact', parser.single('application'), contactValidator, contact);
 router.get('/read/all', isAuth, isAdmin, readAllMessages);
-router.get('/read/query', readMessagesWithQuery);
+router.get('/read/query', isAuth, isAdmin, readMessagesWithQuery);
 router.get('/read/current', isAuth, readMyMessages);
 router.delete('/delete/:contactId', isAuth, isAdmin, deleteContact);
 
