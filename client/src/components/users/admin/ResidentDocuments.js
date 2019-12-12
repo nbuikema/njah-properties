@@ -113,7 +113,7 @@ const ResidentDocuments = () => {
         <form encType="multipart/form-data">
             <div className='row mr-1'>
                 <div className="form-group col-12 row form-row">
-                    <label htmlFor="user" className="col-sm-auto col-form-label mr-2"><strong>Which resident would you like to manage?</strong></label>
+                    <label htmlFor="user" className="col-sm-auto col-form-label mr-2"><strong>Which resident would you like to upload a file for?</strong></label>
                     <div className="col-sm-auto">
                         <select value={_id} onChange={selectUser} className="form-control text-primary" id="selectUser">
                             <option value='-1'>Select Resident</option>
@@ -151,7 +151,7 @@ const ResidentDocuments = () => {
 
     const showSuccess = () => (
         <div className='alert alert-success' style={{display: success ? '' : 'none'}}>
-            Resident was successfully {success}.
+            File was successfully uploaded to resident: {selectedUser.first_name} {selectedUser.last_name}.
         </div>
     );
 

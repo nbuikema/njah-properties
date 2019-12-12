@@ -221,7 +221,7 @@ const UserDashboard = () => {
                                 <li className="nav-item">
                                     <button className={`nav-link dashboard-btn bg-light ${section === 'residentDocuments' && 'active'}`} onClick={toggleSection('residentDocuments')}>
                                         <i className="fas fa-pencil-alt mr-3 text-primary fa-fw selector"></i>
-                                        Resident Documents
+                                        Upload Files
                                     </button>
                                 </li>
                             </ul>
