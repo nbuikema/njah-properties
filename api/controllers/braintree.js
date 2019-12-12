@@ -1,4 +1,5 @@
 const braintree = require('braintree');
+const User = require('../models/user');
 require('dotenv').config();
 
 const gateway = braintree.connect({
@@ -21,6 +22,8 @@ exports.generateToken = (req, res) => {
 exports.processPayment = (req, res) => {
     let nonce = req.body.paymentMethodNonce;
     let amount = req.body.amount;
+    let date = Date.now();
+    let payment = {amount, date};
     let newTransaction = gateway.transaction.sale(
         {
             amount: amount,
@@ -32,7 +35,18 @@ exports.processPayment = (req, res) => {
             if(err) {
                 res.status(500).json(err);
             } else {
-                res.json(result);
+                User.findOneAndUpdate(
+                    {_id: req.selectedUser._id},
+                    {$push: {payments: payment}},
+                    {new: true},
+                    (err, user) => {
+                        if(err) {
+                            return res.status(400).json({error: 'Your info could not be updated.'});
+                        }
+                        user.password = undefined;
+                        return res.json(user);
+                    }
+                );
             }
         }
     );

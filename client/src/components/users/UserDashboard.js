@@ -30,6 +30,7 @@ const UserDashboard = () => {
         role: '',
         property: {},
         files: [],
+        payments: [],
         createdAt: '',
         updatedAt: ''
     });
@@ -58,6 +59,7 @@ const UserDashboard = () => {
                         role: data.user.role,
                         property: data.user.property,
                         files: data.user.files,
+                        payments: data.user.payments.reverse(),
                         createdAt: data.user.createdAt,
                         updatedAt: data.user.updatedAt
                     });

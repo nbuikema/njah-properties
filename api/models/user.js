@@ -37,6 +37,9 @@ const userSchema = new mongoose.Schema(
         },
         files: {
             type: Array
+        },
+        payments: {
+            type: Array
         }
     }, {timestamps: true}
 );

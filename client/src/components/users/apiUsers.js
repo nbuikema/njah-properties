@@ -245,8 +245,8 @@ export const getClientToken = (token) => {
     });
 };
 
-export const processPayment = (token, paymentData) => {
-    return fetch(`${API}/braintree/payment`, {
+export const processPayment = (token, userId, paymentData) => {
+    return fetch(`${API}/braintree/payment/${userId}`, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
