@@ -4,6 +4,7 @@ import {readCurrentUser} from './apiUsers';
 import {isAuth} from '../auth/apiAuth';
 
 import UserInfo from './UserInfo';
+import UserDocuments from './resident/UserDocuments';
 import UpdateSelf from './UpdateSelf';
 import AddForms from './admin/AddForms';
 import RemoveForms from './admin/RemoveForms';
@@ -27,6 +28,7 @@ const UserDashboard = () => {
         phone: '',
         role: '',
         property: {},
+        files: [],
         createdAt: '',
         updatedAt: ''
     });
@@ -54,6 +56,7 @@ const UserDashboard = () => {
                         phone: data.user.phone,
                         role: data.user.role,
                         property: data.user.property,
+                        files: data.user.files,
                         createdAt: data.user.createdAt,
                         updatedAt: data.user.updatedAt
                     });
@@ -96,6 +99,8 @@ const UserDashboard = () => {
                 return <ResidentDocuments />;
             case 'updateSelf':
                 return <UpdateSelf user={user} />;
+            case 'myDocuments':
+                return <UserDocuments user={user} />;
             default: 
                 if(!error) {
                     return <UserInfo user={user} />;
@@ -142,6 +147,14 @@ const UserDashboard = () => {
                                 Update My Info
                             </button>
                         </li>
+                        {role === 0 && (
+                            <li className="nav-item">
+                                <button className={`nav-link dashboard-btn bg-light ${section === 'myDocuments' && 'active'}`} onClick={toggleSection('myDocuments')}>
+                                    <i className="fas fa-info-circle mr-3 text-primary fa-fw selector"></i>
+                                    My Documents
+                                </button>
+                            </li>
+                        )}
                         <li className="nav-item">
                             <button className={`nav-link dashboard-btn bg-light ${section === 'messages' && 'active'}`} onClick={toggleSection('messages')}>
                                 <i className="fas fa-envelope mr-3 text-primary fa-fw selector"></i>
