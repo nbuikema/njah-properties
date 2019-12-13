@@ -1,5 +1,6 @@
 const braintree = require('braintree');
 const sgMail = require('@sendgrid/mail');
+const moment = require('moment');
 const User = require('../models/user');
 require('dotenv').config();
 
@@ -49,7 +50,7 @@ exports.processPayment = (req, res) => {
                             from: 'noreply@njahproperties.com',
                             subject: `Rent Payment Receipt`,
                             html: `
-                                <p>You successfully made a rental payment in the amount of $${payment.amount} on ${moment(payment.date).format('MMMM Do YYYY, h:mm:ss a')}.</p>
+                                <p>You successfully made a rental payment in the amount of $${parseFloat(Math.round((payment.amount * 1.03) * 100) / 100).toFixed(2)} on ${moment(payment.date).format('MMMM Do YYYY, h:mm:ss a')}.</p>
                             `
                         };
                         sgMail.send(emailData);
