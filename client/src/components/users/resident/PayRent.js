@@ -16,11 +16,15 @@ const PayRent = ({user}) => {
     const {token} = isAuth();
 
     const getToken = () => {
-        getClientToken(token).then(data => {
-            if(data.error) {
-                setError(data.error);
+        getClientToken(token).then((data, err) => {
+            if(!data || err) {
+                setError('Oops! Something went wrong.');
             } else {
-                setPayment({...payment, clientToken: data.clientToken});
+                if(data.error) {
+                    setError(data.error);
+                } else {
+                    setPayment({...payment, clientToken: data.clientToken});
+                }
             }
         });
     };
