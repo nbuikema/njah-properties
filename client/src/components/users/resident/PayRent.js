@@ -34,7 +34,7 @@ const PayRent = ({user}) => {
     }, []);
 
     const onClick = () => {
-        const confirmPayment = window.confirm(`Are you sure you want to make a payment in the amount of ${parseFloat(Math.round((property.rent * 1.03) * 100) / 100).toFixed(2)}? By selecting OK, you are agreeing to a convenience fee of 3%. This transaction is nonrefundable.`);
+        const confirmPayment = window.confirm(`Are you sure you want to make a payment in the amount of $${parseFloat(Math.round((property.rent * 1.03) * 100) / 100).toFixed(2)}? By selecting OK, you are agreeing to a convenience fee of 3%. This transaction is nonrefundable.`);
         if(confirmPayment) {
             let nonce;
             payment.instance.requestPaymentMethod().then(data => {
