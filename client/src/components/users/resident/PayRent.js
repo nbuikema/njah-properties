@@ -34,21 +34,24 @@ const PayRent = ({user}) => {
     }, []);
 
     const onClick = () => {
-        let nonce;
-        payment.instance.requestPaymentMethod().then(data => {
-            nonce = data.nonce;
-            const paymentData = {
-                paymentMethodNonce: nonce,
-                amount: (property.rent * 1.03)
-            };
-            processPayment(token, _id, paymentData).then(response => {
-                setSuccess(true);
+        const confirmPayment = window.confirm(`Are you sure you want to make a payment in the amount of ${parseFloat(Math.round((property.rent * 1.03) * 100) / 100).toFixed(2)}? By selecting OK, you are agreeing to a convenience fee of 3%. This transaction is nonrefundable.`);
+        if(confirmPayment) {
+            let nonce;
+            payment.instance.requestPaymentMethod().then(data => {
+                nonce = data.nonce;
+                const paymentData = {
+                    paymentMethodNonce: nonce,
+                    amount: (property.rent * 1.03)
+                };
+                processPayment(token, _id, paymentData).then(response => {
+                    setSuccess(true);
+                }).catch(error => {
+                    setError(error.message);
+                });
             }).catch(error => {
                 setError(error.message);
             });
-        }).catch(error => {
-            setError(error.message);
-        });
+        }
     };
 
     const showDropIn = () => (

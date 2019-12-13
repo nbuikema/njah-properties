@@ -1,4 +1,5 @@
 const braintree = require('braintree');
+const sgMail = require('@sendgrid/mail');
 const User = require('../models/user');
 require('dotenv').config();
 
@@ -43,6 +44,15 @@ exports.processPayment = (req, res) => {
                         if(err) {
                             return res.status(400).json({error: 'Your info could not be updated.'});
                         }
+                        const emailData = {
+                            to: user.email,
+                            from: 'noreply@njahproperties.com',
+                            subject: `Rent Payment Receipt`,
+                            html: `
+                                <p>You successfully made a rental payment in the amount of $${payment.amount} on ${moment(payment.date).format('MMMM Do YYYY, h:mm:ss a')}.</p>
+                            `
+                        };
+                        sgMail.send(emailData);
                         user.password = undefined;
                         return res.json(user);
                     }
