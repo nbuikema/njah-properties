@@ -257,13 +257,13 @@ const Contact = () => {
                             <h1>Contact Info</h1>
                             <hr />
                             <h6>Telephone</h6>
-                            <a href="tel:1234567890">123-456-7890</a>
+                            <a href="tel:1234567890">940-600-3821</a>
                             <hr />
                             <h6>Fax</h6>
-                            <a href="tel:1234567890">123-456-7890</a>
+                            <a href="tel:1234567890">940-591-9918</a>
                             <hr />
                             <h6>Email</h6>
-                            <a href="mailto:sample@email.com">sample@email.com</a>
+                            <a href="mailto:sample@email.com">NJAHProperties@gmail.com</a>
                         </div>
                     </div>
                 </div>
