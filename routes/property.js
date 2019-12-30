@@ -21,7 +21,7 @@ const {isAuth, isAdmin} = require('../controllers/auth');
 const {propertyById, createProperty, readAllProperties, readPropertiesWithQuery, readProperty, deleteProperty, updateProperty} = require('../controllers/property');
 const {propertyValidator, updatePropertyValidator} = require('../helpers/property');
 
-router.post('/create', isAuth, isAdmin, parser.array('photos', 10), propertyValidator, createProperty);
+router.post('/create', isAuth, isAdmin, parser.array('photos', 20), propertyValidator, createProperty);
 router.get('/read/all', readAllProperties);
 router.get('/read/query', readPropertiesWithQuery);
 router.get('/read/:propertyId', readProperty);
