@@ -27,7 +27,7 @@ exports.contact = (req, res) => {
             return res.status(400).json({error: 'Contact form could not be submitted.'});
         }
         const emailData = {
-            to: 'NJAHProperties@gmail.com',
+            to: ['NJAHProperties@gmail.com', 'Snallo@verizon.net'],
             from: 'noreply@njahproperties.com',
             subject: `New Message Received`,
             html: `
