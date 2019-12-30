@@ -21,7 +21,7 @@ exports.signup = (req, res) => {
                         return res.status(400).json({error: 'Could not signup new user.'});
                     }
                     const emailData = {
-                        to: ['NJAHProperties@gmail.com', 'Snallo@verizon.net'],
+                        to: 'NJAHProperties@gmail.com',
                         from: 'noreply@njahproperties.com',
                         subject: `New Resident Account`,
                         html: `

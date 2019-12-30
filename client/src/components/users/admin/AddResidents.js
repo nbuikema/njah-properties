@@ -22,7 +22,7 @@ const Signup = () => {
     const onSubmit = event => {
         event.preventDefault();
         setError('');
-        signup({first_name, last_name, email, phone}).then((data, err) => {
+        signup(token, {first_name, last_name, email, phone}).then((data, err) => {
             if(!data || err) {
                 setError('Oops! Something went wrong.');
             } else {
