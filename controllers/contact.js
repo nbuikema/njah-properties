@@ -27,7 +27,7 @@ exports.contact = (req, res) => {
             return res.status(400).json({error: 'Contact form could not be submitted.'});
         }
         const emailData = {
-            to: 'nick.buikema@gmail.com',
+            to: ['NJAHProperties@gmail.com', 'Snallo@verizon.net'],
             from: 'noreply@njahproperties.com',
             subject: `New Message Received`,
             html: `
@@ -37,9 +37,9 @@ exports.contact = (req, res) => {
                 <p>Phone: <strong>${contact.phone}</strong></p>
                 <p>Type: <strong>${contact.type}</strong></p>
                 <p>Reason: <strong>${contact.reason}</strong></p>
-                ${contact.severity && `<p>Severity: <strong>${contact.severity}</strong></p>`}
+                <p>Severity: <strong>${contact.severity && contact.severity.length > 0 ? contact.severity : 'N/A'}</strong></p>
                 <p>Message: <strong>${contact.message}</strong></p>
-                ${contact.application && `<p>Application: <a href="${contact.application.url}">View Application</a></p>`}
+                <p>Application: <a href="${contact.application.url && contact.application.url.length > 0 ? contact.application.url : 'N/A'}">View Application</a></p>
             `
         };
         sgMail.send(emailData);
