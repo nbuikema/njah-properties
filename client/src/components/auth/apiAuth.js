@@ -1,12 +1,13 @@
 const jwtDecode = require('jwt-decode');
 const API = process.env.REACT_APP_API_URL;
 
-export const signup = user => {
+export const signup = (token, user) => {
     return fetch(`${API}/auth/signup`, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
         },
         body: JSON.stringify(user)
     }).then(response => {
