@@ -4,8 +4,8 @@ import {readAllProperties, readPropertiesWithQuery} from './apiProperties';
 import ReactMapGL, {Marker} from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-const street = 'mapbox://styles/nbuikema/ck29yonjr2o4i1clek9xxypis';
-const satellite = 'mapbox://styles/nbuikema/ck29ykm355ffd1cqvb26q1fjv';
+const street = 'mapbox://styles/njahproperties/ck4swxwkybgmz1cp4b6bpdh40';
+const satellite = 'mapbox://styles/njahproperties/ck4swyh961s9z1cqpo0uk04t8';
 
 const Properties = () => {
     const [properties, setProperties] = useState([]);
