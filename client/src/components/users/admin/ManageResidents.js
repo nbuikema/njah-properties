@@ -220,7 +220,7 @@ const ManageResidents = () => {
                     <div className='col-auto'>
                         <select value={property ? property : selectedProperty._id} onChange={selectProperty && changeUserInfo('property')} className="form-control text-primary" id="selectProperty" >
                             <option value='-1'>Select Property (None)</option>
-                            {properties.map((property, i) => property.available === true && (
+                            {properties.map((property, i) => (
                                 <option value={property._id} key={i}>{property.address}, {property.city}, {property.state}, {property.zip}</option>
                             ))}
                         </select>
