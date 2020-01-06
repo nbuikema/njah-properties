@@ -66,27 +66,31 @@ const PayRent = ({user}) => {
     );
 
     const showPaymentInfo = () => {
-        property._id && property._id.length > 0 ? (
-            <div>
-                <h5><strong>My Rent:</strong> ${property.rent}</h5>
-                <h5><strong>Total to be Charged:</strong> ${parseFloat(Math.round((property.rent * 1.03) * 100) / 100).toFixed(2)}</h5>
-                <h5><small>* There is a 3% convenience fee charged for online rental payments.</small></h5>
-                {showDropIn()}
-                <div className='row'>
-                    <div className='mt-4 col-auto'>
-                        <h1>Payment History</h1>
+        if(property._id && property._id.length > 0) {
+            return (
+                <div>
+                    <h5><strong>My Rent:</strong> ${property.rent}</h5>
+                    <h5><strong>Total to be Charged:</strong> ${parseFloat(Math.round((property.rent * 1.03) * 100) / 100).toFixed(2)}</h5>
+                    <h5><small>* There is a 3% convenience fee charged for online rental payments.</small></h5>
+                    {showDropIn()}
+                    <div className='row'>
+                        <div className='mt-4 col-auto'>
+                            <h1>Payment History</h1>
+                        </div>
                     </div>
+                    <hr />
+                    {payments.map((payment, i) => (
+                        <div key={i}>
+                            <h6><strong>Amount:</strong> ${parseFloat(Math.round((payment.amount) * 100) / 100).toFixed(2)}</h6>
+                            <h6><strong>Date:</strong> {moment(payment.date).format('MMMM Do YYYY, h:mm:ss a')}</h6>
+                            <hr />
+                        </div>
+                    ))}
                 </div>
-                <hr />
-                {payments.map((payment, i) => (
-                    <div key={i}>
-                        <h6><strong>Amount:</strong> ${parseFloat(Math.round((payment.amount) * 100) / 100).toFixed(2)}</h6>
-                        <h6><strong>Date:</strong> {moment(payment.date).format('MMMM Do YYYY, h:mm:ss a')}</h6>
-                        <hr />
-                    </div>
-                ))}
-            </div>
-        ) : setError('You are not currently assigned to a property.');
+            )
+        } else {
+            setError('You are not currently assigned to a property.');
+        }
     }
 
     const showError = () => (
