@@ -30,7 +30,7 @@ const PayRent = ({user}) => {
     };
 
     const checkUserProperty = useCallback(() => {
-        if(user.property) {
+        if(property) {
             setError('');
         } else {
             setError('You are not currently assigned to a property.');
@@ -43,23 +43,27 @@ const PayRent = ({user}) => {
     }, []);
 
     const onClick = () => {
-        const confirmPayment = window.confirm(`Are you sure you want to make a payment in the amount of $${parseFloat(Math.round((property.rent * 1.03) * 100) / 100).toFixed(2)}? By selecting OK, you are agreeing to a convenience fee of 3%. This transaction is nonrefundable.`);
-        if(confirmPayment) {
-            let nonce;
-            payment.instance.requestPaymentMethod().then(data => {
-                nonce = data.nonce;
-                const paymentData = {
-                    paymentMethodNonce: nonce,
-                    amount: (property.rent * 1.03)
-                };
-                processPayment(token, _id, paymentData).then(response => {
-                    setSuccess(true);
+        if(property) {
+            const confirmPayment = window.confirm(`Are you sure you want to make a payment in the amount of $${parseFloat(Math.round((property.rent * 1.03) * 100) / 100).toFixed(2)}? By selecting OK, you are agreeing to a convenience fee of 3%. This transaction is nonrefundable.`);
+            if(confirmPayment) {
+                let nonce;
+                payment.instance.requestPaymentMethod().then(data => {
+                    nonce = data.nonce;
+                    const paymentData = {
+                        paymentMethodNonce: nonce,
+                        amount: (property.rent * 1.03)
+                    };
+                    processPayment(token, _id, paymentData).then(response => {
+                        setSuccess(true);
+                    }).catch(error => {
+                        setError(error.message);
+                    });
                 }).catch(error => {
                     setError(error.message);
                 });
-            }).catch(error => {
-                setError(error.message);
-            });
+            }
+        } else {
+            setError('You are not currently assigned to a property.');
         }
     };
 
@@ -74,7 +78,7 @@ const PayRent = ({user}) => {
         </div>
     );
 
-    const showPaymentInfo = () => (
+    const showPaymentInfo = () => property ? (
         <div>
             <h5><strong>My Rent:</strong> ${property.rent}</h5>
             <h5><strong>Total to be Charged:</strong> ${parseFloat(Math.round((property.rent * 1.03) * 100) / 100).toFixed(2)}</h5>
@@ -94,7 +98,7 @@ const PayRent = ({user}) => {
                 </div>
             ))}
         </div>
-    );
+    ) : setError('You are not currently assigned to a property.');
 
     const showError = () => (
         <div className='alert alert-danger' style={{display: error ? '' : 'none'}}>
