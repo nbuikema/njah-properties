@@ -16,7 +16,7 @@ const Maintenance = ({user}) => {
     });
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
-    const {message, reason, severity, formData} = contact;
+    const {message, reason, severity, formData, property} = contact;
 
     const setUserFormInfo = useCallback(() => {
         setError('');
@@ -69,46 +69,48 @@ const Maintenance = ({user}) => {
         });
     };
 
-    const contactForm = () => (
-        <form encType="multipart/form-data">
-            <div className='row mr-1'>
-                <div className="form-group col-12 row form-row">
-                    <label htmlFor='reason'>Where Is The Issue?</label>
-                    <select value={reason} onChange={onChange('reason')} className="form-control text-primary" id="reason" name="reason">
-                        <option value=''>Select One</option>
-                        <option value='Bedroom'>Bedroom</option>
-                        <option value='Bathroom'>Bathroom</option>
-                        <option value='Kitchen'>Kitchen</option>
-                        <option value='Living Room'>Living Room</option>
-                        <option value='Laundry Room'>Laundry Room</option>
-                        <option value='Hallway'>Hallway</option>
-                        <option value='Outside'>Outside</option>
-                        <option value='Garage'>Garage</option>
-                        <option value='Roof'>Roof</option>
-                        <option value='Property Wide'>Property Wide</option>
-                        <option value='Other'>Other</option>
-                    </select>
+    const contactForm = () => {
+        property && property.length > 0 ? (
+            <form encType="multipart/form-data">
+                <div className='row mr-1'>
+                    <div className="form-group col-12 row form-row">
+                        <label htmlFor='reason'>Where Is The Issue?</label>
+                        <select value={reason} onChange={onChange('reason')} className="form-control text-primary" id="reason" name="reason">
+                            <option value=''>Select One</option>
+                            <option value='Bedroom'>Bedroom</option>
+                            <option value='Bathroom'>Bathroom</option>
+                            <option value='Kitchen'>Kitchen</option>
+                            <option value='Living Room'>Living Room</option>
+                            <option value='Laundry Room'>Laundry Room</option>
+                            <option value='Hallway'>Hallway</option>
+                            <option value='Outside'>Outside</option>
+                            <option value='Garage'>Garage</option>
+                            <option value='Roof'>Roof</option>
+                            <option value='Property Wide'>Property Wide</option>
+                            <option value='Other'>Other</option>
+                        </select>
+                    </div>
+                    <div className="form-group col-12 row form-row">
+                        <label htmlFor='severity'>How Severe Is The Issue?</label>
+                        <select value={severity} onChange={onChange('severity')} className="form-control text-primary" id="severity" name="severity">
+                            <option value=''>Select One</option>
+                            <option value='Low'>Low</option>
+                            <option value='Medium'>Medium</option>
+                            <option value='High'>High</option>
+                            <option value='Emergency'>Emergency</option>
+                        </select>
+                    </div>
+                    <div className='form-group col-12 row form-row'>
+                        <label htmlFor='message'>Please Provide a Detailed Description of the Issue</label>
+                        <textarea onChange={onChange('message')} value={message} rows='4' className='form-control text-primary' id='message' aria-describedby='message'></textarea>
+                    </div>
+                    <div className='col-12 text-center'>
+                        <button onClick={onSubmit} type='submit' className='btn btn-primary'>Submit</button>
+                    </div>
                 </div>
-                <div className="form-group col-12 row form-row">
-                    <label htmlFor='severity'>How Severe Is The Issue?</label>
-                    <select value={severity} onChange={onChange('severity')} className="form-control text-primary" id="severity" name="severity">
-                        <option value=''>Select One</option>
-                        <option value='Low'>Low</option>
-                        <option value='Medium'>Medium</option>
-                        <option value='High'>High</option>
-                        <option value='Emergency'>Emergency</option>
-                    </select>
-                </div>
-                <div className='form-group col-12 row form-row'>
-                    <label htmlFor='message'>Please Provide a Detailed Description of the Issue</label>
-                    <textarea onChange={onChange('message')} value={message} rows='4' className='form-control text-primary' id='message' aria-describedby='message'></textarea>
-                </div>
-                <div className='col-12 text-center'>
-                    <button onClick={onSubmit} type='submit' className='btn btn-primary'>Submit</button>
-                </div>
-            </div>
-        </form>
-    );
+            </form>
+        ) : setError('You are not currently assigned to a property.');
+    };
 
     const showError = () => (
         <div className='alert alert-danger' style={{display: error ? '' : 'none'}}>

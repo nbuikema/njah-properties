@@ -201,7 +201,7 @@ const AddProperties = () => {
                     </div>
                 </div>
                 <div className="form-group col-12 row form-row">
-                    <label htmlFor='photos' className="col-12 col-form-label"><strong>Upload Images (Up To 10) - <small>The first image will be the property preview, so we recommend using the front of the property.</small></strong></label>
+                    <label htmlFor='photos' className="col-12 col-form-label"><strong>Upload Images (Up To 20) - <small>The first image will be the property preview, so we recommend using the front of the property.</small></strong></label>
                     <div className='col-auto'>
                         {isFileSelected(0) ? <i className="fas fa-check text-success mr-2"></i> : <i className="fas fa-times text-danger mr-2"></i>}
                         <input onChange={changePropertyInfo('photos 0')} type='file' accept='image/*' className='input-photos mt-1 text-primary' />
