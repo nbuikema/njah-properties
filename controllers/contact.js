@@ -39,7 +39,7 @@ exports.contact = (req, res) => {
                 <p>Reason: <strong>${contact.reason}</strong></p>
                 <p>Severity: <strong>${contact.severity && contact.severity.length > 0 ? contact.severity : 'N/A'}</strong></p>
                 <p>Message: <strong>${contact.message}</strong></p>
-                <p>Application: ${contact.application ? `<a href=${contact.application.url}>` : 'N/A'}">View Application</a></p>
+                <p>Application: ${contact.application ? `<a href=${contact.application.url}>View Application</a>` : 'N/A'}</p>
             `
         };
         sgMail.send(emailData);
