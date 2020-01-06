@@ -30,7 +30,7 @@ const PayRent = ({user}) => {
     };
 
     const checkUserProperty = useCallback(() => {
-        if(user.property._id && user.property._id.length > 0) {
+        if(user.property) {
             setError('');
         } else {
             setError('You are not currently assigned to a property.');

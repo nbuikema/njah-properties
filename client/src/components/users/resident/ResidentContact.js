@@ -18,7 +18,7 @@ const Maintenance = ({user}) => {
     const {message, reason, formData, property} = contact;
 
     const setUserFormInfo = useCallback(() => {
-        if(user.property._id && user.property._id.length > 0) {
+        if(user.property) {
             setError('');
             setContact({
                 ...contact,

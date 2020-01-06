@@ -16,10 +16,10 @@ const Maintenance = ({user}) => {
     });
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
-    const {message, reason, severity, formData, property} = contact;
+    const {message, reason, severity, formData} = contact;
 
     const setUserFormInfo = useCallback(() => {
-        if(user.property._id && user.property._id.length > 0) {
+        if(user.property) {
             setError('');
             setContact({
                 ...contact,
