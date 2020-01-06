@@ -98,7 +98,7 @@ const PayRent = ({user}) => {
                 </div>
             ))}
         </div>
-    ) : setError('You are not currently assigned to a property.');
+    ) : null;
 
     const showError = () => (
         <div className='alert alert-danger' style={{display: error ? '' : 'none'}}>
