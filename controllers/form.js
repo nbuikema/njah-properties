@@ -21,7 +21,7 @@ exports.createForm = (req, res) => {
     const form = new Form(req.body);
     if(req.file) {
         let file = {};
-        file.url = req.file.url;
+        file.url = req.file.secure_url;
         file.id = req.file.public_id;
         form.file = file;
     }

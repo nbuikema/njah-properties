@@ -18,7 +18,7 @@ exports.contact = (req, res) => {
     const contact = new Contact(req.body);
     if(req.file) {
         let app = {};
-        app.url = req.file.url;
+        app.url = req.file.secure_url;
         app.id = req.file.public_id;
         contact.application = app;
     }

@@ -78,7 +78,7 @@ exports.updateSelf = (req, res) => {
 
 exports.uploadFile = (req, res) => {
     let file = {};
-    file.url = req.file.url;
+    file.url = req.file.secure_url;
     file.id = req.file.public_id;
     file.name = req.body.name;
     User.findOneAndUpdate(

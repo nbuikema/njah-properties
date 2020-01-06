@@ -28,7 +28,7 @@ exports.createProperty = (req, res) => {
     const images = [];
     req.files.forEach(image => {
         let img = {};
-        img.url = image.url;
+        img.url = image.secure_url;
         img.id = image.public_id;
         images.push(img);
     });
