@@ -34,11 +34,11 @@ exports.createProperty = (req, res) => {
     });
     const property = new Property(req.body);
     property.images = images;
-    const {address, city, state, zip} = property;
+    const {address, address2, city, state, zip} = property;
     geocoder.geocode(`${address}, ${city}, ${state}, ${zip}`).then(response => {
         property.lat = response[0].latitude;
         property.long = response[0].longitude;
-        Property.find({lat: property.lat, long:property.long}).exec((err, foundProperty) => {
+        Property.find({address: address, address2: address2}).exec((err, foundProperty) => {
             if(err) {
                 return res.status(400).json({error: 'Property could not be created.'});
             } else {

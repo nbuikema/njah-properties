@@ -7,6 +7,11 @@ const propertySchema = new mongoose.Schema(
             trim: true,
             required: true
         },
+        address2: {
+            type: String,
+            trim: true,
+            required: false
+        },
         city: {
             type: String,
             trim: true,
