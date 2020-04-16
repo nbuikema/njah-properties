@@ -9,6 +9,7 @@ const ManageProperties = () => {
     const [selectedProperty, setSelectedProperty] = useState({
         _id: '',
         address: '',
+        address2: '',
         city: '',
         state: '',
         zip: '',
@@ -25,7 +26,7 @@ const ManageProperties = () => {
     });
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
-    const {_id, address, city, state, zip, rent, size, beds, baths, info, available, createdAt, updatedAt, long, lat} = selectedProperty;
+    const {_id, address, address2, city, state, zip, rent, size, beds, baths, info, available, createdAt, updatedAt, long, lat} = selectedProperty;
     const {token} = isAuth();
 
     const getAllProperties = () => {
@@ -52,6 +53,7 @@ const ManageProperties = () => {
                 setSelectedProperty({
                     _id: '',
                     address: '',
+                    address2: '',
                     city: '',
                     state: '',
                     zip: '',
@@ -71,6 +73,7 @@ const ManageProperties = () => {
                 setSelectedProperty({
                     _id: property._id,
                     address: property.address,
+                    address2: property.address2 ? property.address2 : '',
                     city: property.city,
                     state: property.state,
                     zip: property.zip,
@@ -141,6 +144,7 @@ const ManageProperties = () => {
                             setSelectedProperty({
                                 _id: '',
                                 address: '',
+                                address2: '',
                                 city: '',
                                 state: '',
                                 zip: '',
@@ -183,6 +187,12 @@ const ManageProperties = () => {
                     <label htmlFor="address" className="col-sm-3 col-form-label"><strong>Address</strong></label>
                     <div className="col-sm-9">
                         <input onChange={changePropertyInfo('address')} type="text" className="form-control text-primary" id="first_name" value={address} />
+                    </div>
+                </div>
+                <div className="form-group col-12 col-lg-6 row form-row">
+                    <label htmlFor="address2" className="col-sm-3 col-form-label"><strong>Address 2</strong></label>
+                    <div className="col-sm-9">
+                        <input onChange={changePropertyInfo('address2')} type="text" className="form-control text-primary" id="first_name" value={address2} />
                     </div>
                 </div>
                 <div className="form-group col-12 col-lg-6 row form-row">
