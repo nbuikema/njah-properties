@@ -124,7 +124,7 @@ const Contact = () => {
                             <select value={property} onChange={onChange('property')} className="form-control text-primary" id="property" name="property">
                                 <option value=''>Select One</option>
                                 {properties.length > 0 && properties.map((property, i) => property.available === true && (
-                                    <option key={i} value={property._id}>{property.address}, {property.city}, {property.state}, {property.zip}</option>
+                                    <option key={i} value={property._id} key={i}>{`${property.address}, ${property.address2 ? `${property.address2}, ` : ``} ${property.city}, ${property.state}, ${property.zip}`}</option>
                                 ))}
                             </select>
                         </div>
@@ -142,7 +142,7 @@ const Contact = () => {
                                 <select value={property} onChange={onChange('property')} className="form-control text-primary" id="property" name="property">
                                     <option value=''>Select One</option>
                                     {properties.length > 0 && properties.map((property, i) => property.available === true && (
-                                        <option key={i} value={property._id}>{property.address}, {property.city}, {property.state}, {property.zip}</option>
+                                        <option key={i} value={property._id} key={i}>{`${property.address}, ${property.address2 ? `${property.address2}, ` : ``} ${property.city}, ${property.state}, ${property.zip}`}</option>
                                     ))}
                                 </select>
                             </div>

@@ -178,7 +178,7 @@ const ManageProperties = () => {
                         <select value={_id} onChange={selectProperty} className="form-control text-primary" id="selectProperty">
                             <option value='-1'>Select Property</option>
                             {properties.map((property, i) => (
-                                <option value={property._id} key={i}>{property.address}, {property.city}, {property.state}, {property.zip}</option>
+                                <option value={property._id} key={i}>{`${property.address}, ${property.address2 ? `${property.address2}, ` : ``} ${property.city}, ${property.state}, ${property.zip}`}</option>
                             ))}
                         </select>
                     </div>
