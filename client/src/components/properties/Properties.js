@@ -310,7 +310,7 @@ const Properties = () => {
                                 <h5 className="card-title w-100 text-center mt-2"><strong>{property.address}{property.address2 ? `, ${property.address2}` : null}</strong></h5>
                                 <h6 className="card-title w-100 text-center mt-0"><strong>{property.city}, {property.state}, {property.zip}</strong></h6>
                                 <div className="col-6 col-sm-12 col-lg-7">
-                                    {property.images.length > 0 && <img src={`${property.images[0].url}`} className="card-img" alt={`${property.address}`} />}
+                                    <img src={property.images.length === 0 ? 'https://res.cloudinary.com/njah-properties/image/upload/v1587054014/njah_properties/comingsoon_q2hb1p.jpg' : property.images[0].url} className="card-img" alt={`${property.address}`} />
                                 </div>
                                 <div className="col-6 col-sm-12 col-lg-5 px-2 mt-2">
                                     <h6><strong>{property.available === true ? 'Available' : 'Not Available'}</strong></h6>
@@ -346,7 +346,7 @@ const Properties = () => {
                                 <h5 className="card-title w-100 text-center mt-2"><strong>{property.address}{property.address2 ? `, ${property.address2}` : null}</strong></h5>
                                 <h6 className="card-title w-100 text-center mt-0"><strong>{property.city}, {property.state}, {property.zip}</strong></h6>
                                 <div className="col-6 col-sm-12 col-lg-7">
-                                    {property.images.length > 0 && <img src={`${property.images[0].url}`} className="card-img" alt={`${property.address}`} />}
+                                    <img src={property.images.length === 0 ? 'https://res.cloudinary.com/njah-properties/image/upload/v1587054014/njah_properties/comingsoon_q2hb1p.jpg' : property.images[0].url} className="card-img" alt={`${property.address}`} />
                                 </div>
                                 <div className="col-6 col-sm-12 col-lg-5 px-2 mt-2">
                                     <h6><strong>{property.available === true ? 'Available' : 'Not Available'}</strong></h6>
@@ -384,7 +384,7 @@ const Properties = () => {
                                         <h5 className="card-title w-100 text-center mt-2"><strong>{property.address}{property.address2 ? `, ${property.address2}` : null}</strong></h5>
                                         <h6 className="card-title w-100 text-center mt-0"><strong>{property.city}, {property.state}, {property.zip}</strong></h6>
                                         <div className="col-6 col-sm-12 col-lg-7">
-                                            {property.images.length > 0 && <img src={`${property.images[0].url}`} className="card-img" alt={`${property.address}`} />}
+                                            <img src={property.images.length === 0 ? 'https://res.cloudinary.com/njah-properties/image/upload/v1587054014/njah_properties/comingsoon_q2hb1p.jpg' : property.images[0].url} className="card-img" alt={`${property.address}`} />
                                         </div>
                                         <div className="col-6 col-sm-12 col-lg-5 px-2 mt-2">
                                             <h6><strong>{property.available === true ? 'Available' : 'Not Available'}</strong></h6>

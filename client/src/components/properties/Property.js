@@ -23,7 +23,7 @@ const Property = ({match}) => {
     const showImages = () => (
         <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
             <div className="carousel-inner">
-                {property.images.map((image, i) => {
+                {property.images.length > 0 ? property.images.map((image, i) => {
                     return i === 0 ? (
                         <div key={i} className="carousel-item active no-border">
                             <img src={`${image.url}`} className="d-block w-100" alt="..." />
@@ -33,7 +33,11 @@ const Property = ({match}) => {
                             <img src={`${image.url}`} className="d-block w-100" alt="..." />
                         </div>
                     );
-                })}
+                }) : (
+                    <div className="carousel-item active no-border">
+                        <img src='https://res.cloudinary.com/njah-properties/image/upload/v1587054014/njah_properties/comingsoon_q2hb1p.jpg' className="d-block w-100" alt="..." />
+                    </div>
+                )}
                 <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                     <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span className="sr-only">Previous</span>
@@ -44,7 +48,7 @@ const Property = ({match}) => {
                 </a>
             </div>
             <ol className="carousel-indicators row">
-                {property.images.length > 0 ? property.images.map((image, i) => {
+                {property.images.length > 0 && property.images.map((image, i) => {
                     return i === 0 ? (
                         <li className='col-2 px-0 mb-0 active' key={i} data-target="#carouselExampleIndicators" data-slide-to={i}>
                             <img src={`${image.url}`} className="d-block w-100 h-100" alt="..." />
@@ -54,11 +58,7 @@ const Property = ({match}) => {
                             <img src={`${image.url}`} className="d-block w-100 h-100" alt="..." />
                         </li>
                     );
-                }) : (
-                    <div>
-                        This property does not currently have any images. Please check back later to see images of the property after it has been updated.
-                    </div>
-                )}
+                })}
             </ol>
         </div>
     );
