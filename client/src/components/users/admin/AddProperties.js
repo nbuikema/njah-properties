@@ -7,6 +7,7 @@ const AddProperties = () => {
     const [newProperty, setNewProperty] = useState({
         _id: '',
         address: '',
+        address2: '',
         city: '',
         state: '',
         zip: '',
@@ -24,7 +25,7 @@ const AddProperties = () => {
     });
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
-    const {address, city, state, zip, rent, size, beds, baths, info, available, formData} = newProperty;
+    const {address, address2, city, state, zip, rent, size, beds, baths, info, available, formData} = newProperty;
     const {token} = isAuth();
 
     const setInitialAvailability = useCallback(() => {
@@ -102,6 +103,7 @@ const AddProperties = () => {
                     setNewProperty({
                         _id: '',
                         address: '',
+                        address2: '',
                         city: '',
                         state: '',
                         zip: '',
@@ -136,7 +138,13 @@ const AddProperties = () => {
                 <div className="form-group col-12 col-lg-6 row form-row">
                     <label htmlFor="address" className="col-sm-3 col-form-label"><strong>Address</strong></label>
                     <div className="col-sm-9">
-                        <input onChange={changePropertyInfo('address')} type="text" className="form-control text-primary" id="first_name" value={address} />
+                        <input onChange={changePropertyInfo('address')} type="text" className="form-control text-primary" id="address" value={address} />
+                    </div>
+                </div>
+                <div className="form-group col-12 col-lg-6 row form-row">
+                    <label htmlFor="address2" className="col-sm-3 col-form-label"><strong>Address 2</strong></label>
+                    <div className="col-sm-9">
+                        <input onChange={changePropertyInfo('address2')} type="text" className="form-control text-primary" id="address2" value={address2} />
                     </div>
                 </div>
                 <div className="form-group col-12 col-lg-6 row form-row">
