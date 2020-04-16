@@ -80,7 +80,7 @@ const Property = ({match}) => {
                             {showImages()}
                         </div>
                         <div className='col-sm-12 col-lg-4 order-0 order-lg-1'>
-                            <h2><strong>{property.address}</strong></h2>
+                            <h2><strong>{property.address}{property.address2 ? `, ${property.address2}` : null}</strong></h2>
                             <h4><em>{property.city}, {property.state}, {property.zip}</em></h4>
                             <hr />
                             <h6><strong>{property.available === true ? 'Available' : 'Not Available'}</strong></h6>

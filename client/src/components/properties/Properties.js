@@ -307,7 +307,8 @@ const Properties = () => {
                     {!selected && filteredProperties.length === 0 && properties.map(property => (
                         <div key={property._id} className="card bg-light">
                             <div className="row no-gutters">
-                                <h5 className="card-title w-100 text-center mt-2"><strong>{property.address}, {property.city}, {property.state}, {property.zip}</strong></h5>
+                                <h5 className="card-title w-100 text-center mt-2"><strong>{property.address}{property.address2 ? `, ${property.address2}` : null}</strong></h5>
+                                <h6 className="card-title w-100 text-center mt-0"><strong>{property.city}, {property.state}, {property.zip}</strong></h6>
                                 <div className="col-6 col-sm-12 col-lg-7">
                                     {property.images.length > 0 && <img src={`${property.images[0].url}`} className="card-img" alt={`${property.address}`} />}
                                 </div>
@@ -342,7 +343,8 @@ const Properties = () => {
                     {!selected && filteredProperties.length > 0 && filteredProperties.map(property => (
                         <div key={property._id} className="card bg-light">
                             <div className="row no-gutters">
-                                <h5 className="card-title w-100 text-center mt-2"><strong>{property.address}, {property.city}, {property.state}, {property.zip}</strong></h5>
+                                <h5 className="card-title w-100 text-center mt-2"><strong>{property.address}{property.address2 ? `, ${property.address2}` : null}</strong></h5>
+                                <h6 className="card-title w-100 text-center mt-0"><strong>{property.city}, {property.state}, {property.zip}</strong></h6>
                                 <div className="col-6 col-sm-12 col-lg-7">
                                     {property.images.length > 0 && <img src={`${property.images[0].url}`} className="card-img" alt={`${property.address}`} />}
                                 </div>
@@ -379,7 +381,8 @@ const Properties = () => {
                             return (
                                 <div key={property._id} className="card bg-light">
                                     <div className="row no-gutters">
-                                        <h5 className="card-title w-100 text-center mt-2"><strong>{property.address}, {property.city}, {property.state}, {property.zip}</strong></h5>
+                                        <h5 className="card-title w-100 text-center mt-2"><strong>{property.address}{property.address2 ? `, ${property.address2}` : null}</strong></h5>
+                                        <h6 className="card-title w-100 text-center mt-0"><strong>{property.city}, {property.state}, {property.zip}</strong></h6>
                                         <div className="col-6 col-sm-12 col-lg-7">
                                             {property.images.length > 0 && <img src={`${property.images[0].url}`} className="card-img" alt={`${property.address}`} />}
                                         </div>
