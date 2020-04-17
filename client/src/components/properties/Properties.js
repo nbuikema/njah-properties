@@ -26,6 +26,11 @@ const Properties = () => {
         baths: '',
         sort: ''
     });
+    const [filterValues, setFilterValues] = useState({
+        rentFilter: [],
+        bedsFilter: [],
+        bathsFilter: []
+    });
     const [expandedFilters, setExpandedFilters] = useState(true);
     const [windowSize, setWindowSize] = useState([0, 0]);
     const [error, setError] = useState('');
@@ -57,6 +62,33 @@ const Properties = () => {
             } else {
                 setError('');
                 setProperties(data);
+                const maxRent = Math.max.apply(Math, data.map(property => {
+                    return property.rent;
+                }));
+                const maxBeds = Math.max.apply(Math, data.map(property => {
+                    return property.beds;
+                }));
+                const maxBaths = Math.max.apply(Math, data.map(property => {
+                    return property.baths;
+                }));
+                const rentArr = [];
+                for(let i = 100; i <= maxRent + 100; i += 100) {
+                    rentArr.push(i);
+                }
+                const bedsArr = [];
+                for(let i = 1; i <= maxBeds; i ++) {
+                    bedsArr.push(i);
+                }
+                const bathsArr = [];
+                for(let i = 1; i <= maxBaths; i ++) {
+                    bathsArr.push(i);
+                }
+                setFilterValues({
+                    ...filterValues,
+                    rentFilter: rentArr,
+                    bedsFilter: bedsArr,
+                    bathsFilter: bathsArr
+                });
             }
         });
     };
@@ -194,59 +226,39 @@ const Properties = () => {
                                     <div className="form-group col-12 mb-2">
                                         <select value={filters.rentMin} className="form-control text-primary" onChange={changeFilters('rentMin')} id="rentMin" name="rentMin">
                                             <option value=''>Min Rent</option>
-                                            <option value='100'>$100</option>
-                                            <option value='200'>$200</option>
-                                            <option value='300'>$300</option>
-                                            <option value='400'>$400</option>
-                                            <option value='500'>$500</option>
-                                            <option value='600'>$600</option>
-                                            <option value='700'>$700</option>
-                                            <option value='800'>$800</option>
-                                            <option value='900'>$900</option>
-                                            <option value='1000'>$1000</option>
-                                            <option value='1100'>$1100</option>
-                                            <option value='1200'>$1200</option>
-                                            <option value='1300'>$1300</option>
-                                            <option value='1400'>$1400</option>
-                                            <option value='1500'>$1500</option>
+                                            {filterValues.rentFilter.map((value, i, arr) => {
+                                                if(i === arr.length - 1) {
+                                                    return;
+                                                } else {
+                                                    return (
+                                                        <option key={value} value={value}>${value}</option>
+                                                    );
+                                                }
+                                            })}
                                         </select>
                                     </div>
                                     <div className="form-group col-12 mb-2">
                                         <select value={filters.rentMax} className="form-control text-primary" onChange={changeFilters('rentMax')} id="rentMax" name="rentMax">
                                             <option value=''>Max Rent</option>
-                                            <option value='100'>$100</option>
-                                            <option value='200'>$200</option>
-                                            <option value='300'>$300</option>
-                                            <option value='400'>$400</option>
-                                            <option value='500'>$500</option>
-                                            <option value='600'>$600</option>
-                                            <option value='700'>$700</option>
-                                            <option value='800'>$800</option>
-                                            <option value='900'>$900</option>
-                                            <option value='1000'>$1000</option>
-                                            <option value='1100'>$1100</option>
-                                            <option value='1200'>$1200</option>
-                                            <option value='1300'>$1300</option>
-                                            <option value='1400'>$1400</option>
-                                            <option value='1500'>$1500</option>
+                                            {filterValues.rentFilter.map(value => (
+                                                <option key={value} value={value}>${value}</option>
+                                            ))}
                                         </select>
                                     </div>
                                     <div className="form-group col-12 mb-2">
                                         <select value={filters.beds} className="form-control text-primary" onChange={changeFilters('beds')} id="beds" name="beds">
                                             <option value=''>Beds</option>
-                                            <option value='1'>1</option>
-                                            <option value='2'>2</option>
-                                            <option value='3'>3</option>
-                                            <option value='4'>4</option>
+                                            {filterValues.bedsFilter.map(value => (
+                                                <option key={value} value={value}>{value}</option>
+                                            ))}
                                         </select>
                                     </div>
                                     <div className="form-group col-12 mb-2">
                                         <select value={filters.baths} className="form-control text-primary" onChange={changeFilters('baths')} id="baths" name="baths">
                                             <option value=''>Baths</option>
-                                            <option value='1'>1</option>
-                                            <option value='2'>2</option>
-                                            <option value='3'>3</option>
-                                            <option value='4'>4</option>
+                                            {filterValues.bathsFilter.map(value => (
+                                                <option key={value} value={value}>{value}</option>
+                                            ))}
                                         </select>
                                     </div>
                                     <div className="form-group col-12 mb-2">
