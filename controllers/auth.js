@@ -8,7 +8,7 @@ const User = require('../models/user');
 sgMail.setApiKey(process.env.SENDGRID_KEY);
 
 exports.signup = (req, res) => {
-    User.find({email: req.body.email}).exec((err, foundUser) => {
+    User.find({email: req.body.email.toLowerCase()}).exec((err, foundUser) => {
         if(err) {
             return res.status(400).json({error: 'Could not signup new user.'});
         } else {
@@ -16,6 +16,7 @@ exports.signup = (req, res) => {
                 const tempPassword = crs({length: 20});
                 req.body.password = bcrypt.hashSync(tempPassword, 10);
                 const user = new User(req.body);
+                user.email = user.email.toLowerCase();
                 user.save((err, user) => {
                     if(err) {
                         return res.status(400).json({error: 'Could not signup new user.'});
@@ -45,6 +46,7 @@ exports.signup = (req, res) => {
 
 exports.signin = (req, res) => {
     const {email, password} = req.body;
+    email = email.toLowerCase();
     User.findOne({email}).populate('property', 'address city state zip rent size beds baths').exec((err, user) => {
         if(err || !user) {
             return res.status(400).json({error: 'User not found.'});

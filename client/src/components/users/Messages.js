@@ -226,7 +226,7 @@ const Messages = ({role}) => {
                             <h6><strong>Type:</strong> {message.type}</h6>
                             <h6><strong>Reason:</strong> {message.reason}</h6>
                             {message.property && (
-                                <h6><strong>Property:</strong> {message.property.address}, {message.property.city}, {message.property.state}, {message.property.zip}</h6>
+                                <h6><strong>Property:</strong> {message.property.address}{message.property.address2 ? `, ${message.property.address2}` : null}, {message.property.city}, {message.property.state}, {message.property.zip}</h6>
                             )}
                             {message.application && (
                                 <h6><strong>Application:</strong> <a href={`${message.application.url}`} target='_blank' rel="noopener noreferrer">View Application</a></h6>

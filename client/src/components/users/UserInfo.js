@@ -63,7 +63,7 @@ const UserInfo = ({user}) => {
                             <h6 className='form-group row'>
                                 <label className='col-sm-4 col-form-label'><strong>Address</strong></label>
                                 <div className='col-sm-8'>
-                                    <span className='form-control-plaintext text-primary'>{property.address}, {property.city}, {property.state}, {property.zip}</span>
+                                    <span className='form-control-plaintext text-primary'>{property.address}{property.address2 ? `, ${property.address2}` : null}, {property.city}, {property.state}, {property.zip}</span>
                                 </div>
                             </h6>
                             <h6 className='form-group row'>
