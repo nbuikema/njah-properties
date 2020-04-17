@@ -45,8 +45,8 @@ exports.signup = (req, res) => {
 };
 
 exports.signin = (req, res) => {
-    const {email, password} = req.body;
-    email = email.toLowerCase();
+    const email = req.body.email.toLowerCase();
+    const password = req.body.password;
     User.findOne({email}).populate('property', 'address city state zip rent size beds baths').exec((err, user) => {
         if(err || !user) {
             return res.status(400).json({error: 'User not found.'});
