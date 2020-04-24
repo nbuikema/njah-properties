@@ -25,7 +25,6 @@ exports.propertyById = (req, res, next, id) => {
 };
 
 exports.createProperty = (req, res) => {
-    console.log(req.body);
     const images = [];
     req.files.forEach(image => {
         let img = {};
