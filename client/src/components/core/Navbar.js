@@ -39,6 +39,11 @@ const Navbar = ({history}) => (
                                 Contact & Forms
                             </Link>
                         </li>
+                        <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
+                            <Link className={`nav-link ${isActive(history, '/about') && 'active'}`} to='/about'>
+                                About
+                            </Link>
+                        </li>
                     </ul>
                     <ul className="navbar-nav ml-auto">
                         {!isAuth() ? (
