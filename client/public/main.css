@@ -7,6 +7,7 @@ a.bg-light:focus, a.bg-light:hover, button.bg-light:focus, button.bg-light:hover
 
 * {
     font-family: 'ZCOOL XiaoWei', serif;
+    font-size: 1.05rem;
 }
 
 .about-imgs {
@@ -22,7 +23,7 @@ a.bg-light:focus, a.bg-light:hover, button.bg-light:focus, button.bg-light:hover
 }
 
 .nav-item {
-    min-height: 42px;
+    min-height: 44px;
 }
 
 .fix-info {
@@ -252,18 +253,16 @@ body {
     position: relative;
     margin-top: calc(25vh - 60px);
     font-size: 7rem;
-    opacity: 1;
-    background-color: transparent;
 }
 
-.home-header2 {
-    font-size: 4rem;
-    margin-top: 0;
+.home-header2 em {
+    position: relative;
+    font-size: 4.2rem;
 }
 
 #collapseExample {
     position: absolute;
-    top: 40px;
+    top: 42px;
     left: 0;
     z-index: 1;
     background-color: white;

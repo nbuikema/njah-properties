@@ -7,7 +7,7 @@ const Home = () => (
             <h1 className='home-header'>
                 NJAH Properties
             </h1>
-            <h2 className='home-header home-header2'>
+            <h2 className='home-header2'>
                 <em>Welcome Home</em>
             </h2>
         </div>
