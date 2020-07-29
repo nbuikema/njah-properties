@@ -26,8 +26,8 @@ const Signup = () => {
             if(!data || err) {
                 setError('Oops! Something went wrong.');
             } else {
-                if(data.err) {
-                    setError(data.err);
+                if(data.err || data.error) {
+                    setError(data.err || data.error);
                 } else {
                     setUser({
                         first_name: '',
