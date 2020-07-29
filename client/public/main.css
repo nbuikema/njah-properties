@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=ZCOOL+XiaoWei&display=swap');
 
-
 a.bg-light:focus, a.bg-light:hover, button.bg-light:focus, button.bg-light:hover {
     outline: 0!important;
     background-color: #f8f9fa!important;
@@ -8,6 +7,18 @@ a.bg-light:focus, a.bg-light:hover, button.bg-light:focus, button.bg-light:hover
 
 * {
     font-family: 'ZCOOL XiaoWei', serif;
+}
+
+.about-imgs {
+    width: 100%;
+}
+
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23073a70' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+}
+
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23073a70' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
 }
 
 .nav-item {
@@ -366,6 +377,7 @@ select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
     border: 1px solid #ced4da;
     -webkit-text-fill-color: rgb(7, 58, 112);
+    box-shadow: 0 0 0px 1000px white inset;
     -webkit-box-shadow: 0 0 0px 1000px white inset;
     transition: background-color 0s ease-in-out 0s;
 }
@@ -468,4 +480,10 @@ select:-webkit-autofill:focus {
         top: -130px;
         left: -125px;
     }
+}
+
+.carousel-inner .active {
+    border-bottom: none!important;
+    padding-bottom: 0;
+    margin-bottom: 0;
 }
