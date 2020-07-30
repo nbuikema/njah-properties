@@ -9,15 +9,17 @@ const About = () => (
             <h1 className='text-center'>About Us</h1>
             <hr />
             <div className='row'>
-                <div className='col-7 align-self-center'>
+                <div className='col-xs-12 col-sm-7 align-self-center'>
                     <h2>Who Are We?</h2>
+                    <br className='d-block d-sm-none' />
+                    <img className='d-block d-sm-none about-imgs' src={house} />
                     <br />
                     <p>
                         NJAH Properties is a privately owned group of properties offering comfortable, well-maintained accommodations to our tenants. We aim to provide quality living at an affordable, friendly environment. As a testament to this, most of our tenants have been with us for 2-15 years. Our team will work with you to provide you with the best living environment. We are a pet friendly property company. We look forward to working with you, if you find that one of our available properties will satisfy your housing needs.
                     </p>
                 </div>
-                <div className='col-5'>
-                    <img className='about-imgs' src={house} />
+                <div className='col-xs-12 col-sm-5'>
+                    <img className='d-none d-sm-block about-imgs' src={house} />
                 </div>
             </div>
             <br /><br />
@@ -28,12 +30,12 @@ const About = () => (
             </div>
             <br />
             <div className='row'>
-                <div className='col-6'>
+                <div className='col-xs-12 col-sm-6'>
                     <div className='row'>
-                        <div className='col-6'>
+                        <div className='col-xs-12 col-sm-6'>
                             <img className='about-imgs' src={allo} />
                         </div>
-                        <div className='col-6 text-right align-self-center'>
+                        <div className='col-xs-12 col-sm-6 text-right align-self-center'>
                             <h4 className='mb-0'>Dr. Simon Allo</h4>
                             <em>Owner</em>
                             <br /><br />
@@ -43,12 +45,12 @@ const About = () => (
                         </div>
                     </div>
                 </div>
-                <div className='col-6'>
+                <div className='col-xs-12 col-sm-6'>
                     <div className='row'>
-                        <div className='col-6'>
+                        <div className='col-xs-12 col-sm-6'>
                             <img className='about-imgs' src={allo} />
                         </div>
-                        <div className='col-6 text-right align-self-center'>
+                        <div className='col-xs-12 col-sm-6 text-right align-self-center'>
                             <h4 className='mb-0'>Dr. Simon Allo</h4>
                             <em>Owner</em>
                             <br /><br />
