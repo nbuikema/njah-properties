@@ -26,6 +26,10 @@ a.bg-light:focus, a.bg-light:hover, button.bg-light:focus, button.bg-light:hover
     min-height: 44px;
 }
 
+.navbar-nav .nav-item {
+    margin-top: 1rem;
+}
+
 .fix-info {
     margin-left: 5px;
 }
@@ -329,8 +333,8 @@ body {
     letter-spacing: 1px;
     text-transform: uppercase;
     color: rgb(7, 58, 112)!important;
-    padding-left: 0;
-    padding-right: 0;
+    padding: 0 0;
+    top: 10px;
 }
 
 .nav-link:after {

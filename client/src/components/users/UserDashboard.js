@@ -139,7 +139,7 @@ const UserDashboard = () => {
                         </div>
                     </div>
                     <p className="font-weight-bold px-3 pb-1 mt-4 mb-0">Main</p>
-                    <ul className="nav flex-column bg-white mb-0">
+                    <ul className="nav flex-column mb-0">
                         <li className="nav-item">
                             <button className={`nav-link dashboard-btn bg-light ${section === 'info' && 'active'}`} onClick={toggleSection('info')}>
                                 <i className="fas fa-info-circle mr-3 text-primary fa-fw selector"></i>
@@ -163,7 +163,7 @@ const UserDashboard = () => {
                         <div>
                             <br />
                             <p className="font-weight-bold px-3 pb-1 mb-0">Residents</p>
-                            <ul className="nav flex-column bg-white mb-0">
+                            <ul className="nav flex-column mb-0">
                                 <li className="nav-item">
                                     <button className={`nav-link dashboard-btn bg-light ${section === 'myDocuments' && 'active'}`} onClick={toggleSection('myDocuments')}>
                                         <i className="fas fa-file mr-3 text-primary fa-fw selector"></i>
@@ -195,7 +195,7 @@ const UserDashboard = () => {
                         <div>
                             <br />
                             <p className="font-weight-bold px-3 pb-1 mb-0">Forms</p>
-                            <ul className="nav flex-column bg-white mb-0">
+                            <ul className="nav flex-column mb-0">
                                 <li className="nav-item">
                                     <button className={`nav-link dashboard-btn bg-light ${section === 'addForm' && 'active'}`} onClick={toggleSection('addForm')}>
                                         <i className="fas fa-plus mr-3 text-primary fa-fw selector"></i>
@@ -211,7 +211,7 @@ const UserDashboard = () => {
                             </ul>
                             <br />
                             <p className="font-weight-bold px-3 pb-1 mb-0">Properties</p>
-                            <ul className="nav flex-column bg-white mb-0">
+                            <ul className="nav flex-column mb-0">
                                 <li className="nav-item">
                                     <button className={`nav-link dashboard-btn bg-light ${section === 'addProperty' && 'active'}`} onClick={toggleSection('addProperty')}>
                                         <i className="fas fa-plus mr-3 text-primary fa-fw selector"></i>
@@ -227,7 +227,7 @@ const UserDashboard = () => {
                             </ul>
                             <br />
                             <p className="font-weight-bold px-3 pb-1 mb-0">Residents</p>
-                            <ul className="nav flex-column bg-white mobile-mb">
+                            <ul className="nav flex-column mobile-mb">
                                 <li className="nav-item">
                                     <button className={`nav-link dashboard-btn bg-light ${section === 'addResident' && 'active'}`} onClick={toggleSection('addResident')}>
                                         <i className="fas fa-plus mr-3 text-primary fa-fw selector"></i>
