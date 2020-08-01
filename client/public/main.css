@@ -132,6 +132,18 @@ body {
     left: 4px;
 }
 
+.card-img {
+    display: block;
+    margin: auto;
+    max-height: 30vh;
+    width: auto;
+}
+
+.bg-black {
+    background: #000;
+    border-radius: calc(.25rem - 1px);
+}
+
 .btn-primary {
     border: 2px solid rgb(7, 58, 112);
     transition: all 250ms ease-in-out;
