@@ -198,7 +198,7 @@ const Properties = () => {
         }
     };
 
-    const changeVertImageWidth = i => {
+    const changeVertImageWidth = () => {
         let imgs = document.getElementsByClassName('card-img');
         for(let img of imgs) {
             if(img.height < img.width) {
@@ -331,7 +331,7 @@ const Properties = () => {
                             <div className="row no-gutters">
                                 <h5 className="card-title w-100 text-center mt-2"><strong>{property.address}{property.address2 ? `, ${property.address2}` : null}</strong></h5>
                                 <h6 className="card-title w-100 text-center mt-0"><strong>{property.city}, {property.state}, {property.zip}</strong></h6>
-                                <div className="col-6 col-sm-12 col-lg-7 bg-black">
+                                <div className="col-6 col-sm-12 col-lg-7">
                                     <img src={property.images.length === 0 ? 'https://res.cloudinary.com/njah-properties/image/upload/v1587054014/njah_properties/comingsoon_q2hb1p.jpg' : property.images[0].url} className="card-img" alt={`${property.address}`} />
                                 </div>
                                 <div className="col-6 col-sm-12 col-lg-5 px-2 mt-2">

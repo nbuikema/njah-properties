@@ -26,11 +26,11 @@ const Property = ({match}) => {
                 {property.images.length > 0 ? property.images.map((image, i) => {
                     return i === 0 ? (
                         <div key={i} className="carousel-item active no-border">
-                            <img src={`${image.url}`} className="d-block w-100" alt="..." />
+                            <img src={`${image.url}`} className="d-block m-auto" alt="..." />
                         </div>
                     ) : (
                         <div key={i} className="carousel-item no-border">
-                            <img src={`${image.url}`} className="d-block w-100" alt="..." />
+                            <img src={`${image.url}`} className="d-block m-auto" alt="..." />
                         </div>
                     );
                 }) : (
@@ -50,12 +50,12 @@ const Property = ({match}) => {
             <ol className="carousel-indicators row">
                 {property.images.length > 0 && property.images.map((image, i) => {
                     return i === 0 ? (
-                        <li className='col-2 px-0 mb-0 active' key={i} data-target="#carouselExampleIndicators" data-slide-to={i}>
-                            <img src={`${image.url}`} className="d-block w-100 h-100" alt="..." />
+                        <li className='car-imgs col-2 px-0 mb-0 active' key={i} data-target="#carouselExampleIndicators" data-slide-to={i}>
+                            <img src={`${image.url}`} className="d-block h-100 m-auto" alt="..." />
                         </li>
                     ) : (
-                        <li className='col-2 px-0 mb-0' key={i} data-target="#carouselExampleIndicators" data-slide-to={i}>
-                            <img src={`${image.url}`} className="d-block w-100 h-100" alt="..." />
+                        <li className='car-imgs col-2 px-0 mb-0' key={i} data-target="#carouselExampleIndicators" data-slide-to={i}>
+                            <img src={`${image.url}`} className="d-block h-100 m-auto" alt="..." />
                         </li>
                     );
                 })}
