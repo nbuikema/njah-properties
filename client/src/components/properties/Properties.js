@@ -329,37 +329,30 @@ const Properties = () => {
                     {!selected && filteredProperties.length === 0 && properties.map(property => (
                         <div key={property._id} className="card bg-light">
                             <div className="row no-gutters">
-                                <h5 className="card-title w-100 text-center mt-2"><strong>{property.address}{property.address2 ? `, ${property.address2}` : null}</strong></h5>
-                                <h6 className="card-title w-100 text-center mt-0"><strong>{property.city}, {property.state}, {property.zip}</strong></h6>
-                                <div className="col-6 col-sm-12 col-lg-7">
+                                <div className="row no-gutters w-100 mb-1 py-2 justify-content-between bg-secondary">
+                                    <h3 className="align-self-center ml-3 mb-0 text-white">{property.address}{property.address2 ? `, ${property.address2}` : null}</h3>
+                                    <h5 className="align-self-center text-right mb-0 mr-3 text-white">{property.city}, {property.state}, {property.zip}</h5>
+                                </div>
+                                <div className="col-6 col-sm-12 col-lg-7 px-2">
                                     <img src={property.images.length === 0 ? 'https://res.cloudinary.com/njah-properties/image/upload/v1587054014/njah_properties/comingsoon_q2hb1p.jpg' : property.images[0].url} className="card-img" alt={`${property.address}`} />
                                 </div>
-                                <div className="col-6 col-sm-12 col-lg-5 px-2 mt-2">
-                                    <h6><strong>{property.available === true ? 'Available' : 'Not Available'}</strong></h6>
-                                    <h6><strong>Rent: </strong>{property.available === true ? `$${property.rent}` : 'N/A'}</h6>
-                                    <h6><strong>Size: </strong>{property.size} Sq Ft</h6>
-                                    <h6><strong>Beds: </strong>{property.beds}</h6>
-                                    <h6><strong>Baths: </strong>{property.baths}</h6>
-                                    {windowSize[0] >= 1700 && (
-                                        <div className='xxl-btns'>
-                                            <Link className='btn btn-primary w-100 col-12' to={`/properties/${property._id}`}>More Info</Link>
-                                            <button className='markerbtn outline mt-2 w-100 col-12' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
-                                                <div className='marker'></div>
-                                                <div className='marker-card-text'>Locate</div>
-                                            </button>
-                                        </div>
-                                    )}
+                                <div className="row col-6 col-sm-12 col-lg-5 pl-4">
+                                    <div className="align-self-center">
+                                        <h6><strong>{property.available === true ? 'Available' : 'Not Available'}</strong></h6>
+                                        <h6><strong>Rent: </strong>{property.available === true ? `$${property.rent}` : 'N/A'}</h6>
+                                        <h6><strong>Size: </strong>{property.size} Sq Ft</h6>
+                                        <h6><strong>Beds: </strong>{property.beds}</h6>
+                                        <h6><strong>Baths: </strong>{property.baths}</h6>
+                                    </div>
                                 </div>
                             </div>
-                            {windowSize[0] < 1700 && (
-                                <div className='row form-row'>
-                                    <button className='markerbtn mt-1 outline w-100 col-6 col-sm-12 col-md-6 d-none d-sm-block' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
-                                        <div className='marker'></div>
-                                        <div className='marker-card-text'>Locate</div>
-                                    </button>
-                                    <Link className='btn btn-primary mt-1 w-100 col-12 col-md-6' to={`/properties/${property._id}`}>More Info</Link>   
-                                </div>
-                            )}
+                            <div className='row form-row'>
+                                <button className='markerbtn mt-1 outline w-100 col-6 col-sm-12 col-md-6 d-none d-sm-block' onClick={changeSelected(`${property._id}`, `${property.long}`, `${property.lat}`)}>
+                                    <div className='marker'></div>
+                                    <div className='marker-card-text'>Locate</div>
+                                </button>
+                                <Link className='btn btn-primary mt-1 w-100 col-12 col-md-6' to={`/properties/${property._id}`}>More Info</Link>   
+                            </div>
                         </div>
                     ))}
                     {!selected && filteredProperties.length > 0 && filteredProperties.map(property => (
