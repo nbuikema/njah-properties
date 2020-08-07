@@ -137,6 +137,7 @@ body {
     margin: auto;
     max-height: 25vh;
     width: auto;
+    max-width: 100%;
 }
 
 .bg-secondary {
@@ -242,6 +243,7 @@ body {
 
 .carousel-indicators {
     position: relative;
+    margin: 0;
 }
 
 .carousel-indicators li {
