@@ -25,11 +25,6 @@ const Navbar = ({history}) => (
                 <div className="navbar-collapse collapse" id="collapsingNavbar">
                     <ul className="navbar-nav">
                         <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
-                            <Link className={`nav-link ${isActive(history, '/') && 'active'}`} to='/'>
-                                Home
-                            </Link>
-                        </li>
-                        <li className='nav-item' data-toggle='collapse' data-target='.navbar-collapse.show'>
                             <Link className={`nav-link ${isActive(history, '/properties') && 'active'}`} to='/properties'>
                                 Properties
                             </Link>
