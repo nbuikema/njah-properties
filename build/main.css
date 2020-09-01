@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=ZCOOL+XiaoWei&display=swap');
 
-
 a.bg-light:focus, a.bg-light:hover, button.bg-light:focus, button.bg-light:hover {
     outline: 0!important;
     background-color: #f8f9fa!important;
@@ -8,10 +7,27 @@ a.bg-light:focus, a.bg-light:hover, button.bg-light:focus, button.bg-light:hover
 
 * {
     font-family: 'ZCOOL XiaoWei', serif;
+    font-size: 1.05rem;
+}
+
+.about-imgs {
+    width: 100%;
+}
+
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23073a70' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+}
+
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23073a70' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
 }
 
 .nav-item {
-    min-height: 42px;
+    min-height: 44px;
+}
+
+.navbar-nav .nav-item {
+    margin-top: 1rem;
 }
 
 .fix-info {
@@ -116,6 +132,39 @@ body {
     left: 4px;
 }
 
+.card-img {
+    display: block;
+    margin: auto;
+    max-height: 25vh;
+    width: auto;
+    max-width: 100%;
+}
+
+.testimonials {
+    margin-left: 70px;
+    margin-right: 70px;
+    height: 90px;
+}
+
+.testimonials-prev {
+    margin-left: -45px;
+    width: auto;
+}
+
+.testimonials-next {
+    margin-right: -45px;
+    width: auto;
+}
+
+.bg-secondary {
+    background-color: rgb(7, 58, 112)!important;
+}
+
+.bg-black {
+    background: #000;
+    border-radius: calc(.25rem - 1px);
+}
+
 .btn-primary {
     border: 2px solid rgb(7, 58, 112);
     transition: all 250ms ease-in-out;
@@ -210,6 +259,7 @@ body {
 
 .carousel-indicators {
     position: relative;
+    margin: 0;
 }
 
 .carousel-indicators li {
@@ -217,6 +267,8 @@ body {
     min-width: 80px;
     max-width: 80px;
     height: 50px;
+    border: none;
+    margin-top: 15px;
 }
 
 .no-border {
@@ -241,18 +293,16 @@ body {
     position: relative;
     margin-top: calc(25vh - 60px);
     font-size: 7rem;
-    opacity: 1;
-    background-color: transparent;
 }
 
-.home-header2 {
-    font-size: 4rem;
-    margin-top: 0;
+.home-header2 em {
+    position: relative;
+    font-size: 4.2rem;
 }
 
 #collapseExample {
     position: absolute;
-    top: 40px;
+    top: 42px;
     left: 0;
     z-index: 1;
     background-color: white;
@@ -319,8 +369,8 @@ body {
     letter-spacing: 1px;
     text-transform: uppercase;
     color: rgb(7, 58, 112)!important;
-    padding-left: 0;
-    padding-right: 0;
+    padding: 0 0;
+    top: 10px;
 }
 
 .nav-link:after {
@@ -366,6 +416,7 @@ select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
     border: 1px solid #ced4da;
     -webkit-text-fill-color: rgb(7, 58, 112);
+    box-shadow: 0 0 0px 1000px white inset;
     -webkit-box-shadow: 0 0 0px 1000px white inset;
     transition: background-color 0s ease-in-out 0s;
 }
@@ -379,7 +430,8 @@ select:-webkit-autofill:focus {
         font-size: 4.2rem;
     }
     
-    .home-header2 {
+    .home-header2 em {
+        top: 40px;
         font-size: 2.4rem;
     }
 
@@ -468,4 +520,10 @@ select:-webkit-autofill:focus {
         top: -130px;
         left: -125px;
     }
+}
+
+.carousel-inner .active {
+    border-bottom: none!important;
+    padding-bottom: 0;
+    margin-bottom: 0;
 }
