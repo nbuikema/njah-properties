@@ -170,12 +170,14 @@ const UserDashboard = () => {
                                         My Documents
                                     </button>
                                 </li>
+                                {/*
                                 <li className="nav-item">
                                     <button className={`nav-link dashboard-btn bg-light ${section === 'payRent' && 'active'}`} onClick={toggleSection('payRent')}>
                                         <i className="fas fa-money-check-alt mr-3 text-primary fa-fw selector"></i>
                                         Pay Rent
                                     </button>
                                 </li>
+                                */}
                                 <li className="nav-item">
                                     <button className={`nav-link dashboard-btn bg-light ${section === 'maintenance' && 'active'}`} onClick={toggleSection('maintenance')}>
                                         <i className="fa fa-tools mr-3 text-primary fa-fw selector"></i>

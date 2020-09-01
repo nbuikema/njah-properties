@@ -140,6 +140,22 @@ body {
     max-width: 100%;
 }
 
+.testimonials {
+    margin-left: 70px;
+    margin-right: 70px;
+    height: 90px;
+}
+
+.testimonials-prev {
+    margin-left: -45px;
+    width: auto;
+}
+
+.testimonials-next {
+    margin-right: -45px;
+    width: auto;
+}
+
 .bg-secondary {
     background-color: rgb(7, 58, 112)!important;
 }
